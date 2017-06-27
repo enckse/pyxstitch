@@ -10,11 +10,13 @@ def main():
 
 if __name__ == '__main__':
     main()"""
-code = """AAA  A
+code = """
+AAW AAAAAAA
+    AWAA
 
-    AAA  AAAA A
-AA
-A
+AA AAAAAAAA AA AAWWWWA!
+    AAAAAA
+    W
 """
 max_line = 0
 lines = code.split("\n")
@@ -29,4 +31,4 @@ for line in lines:
         padded = padded + " "
     spaced.append(padded)
 
-highlight("\n".join(spaced), PythonLexer(), fmt.CrossStitchFormatter(style='monokai'))
+highlight(code, PythonLexer(), fmt.CrossStitchFormatter(style='monokai'))

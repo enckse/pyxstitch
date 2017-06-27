@@ -36,6 +36,7 @@ class BadCharException(Exception):
 class Character(object):
     def __init__(self, width):
         self._pattern = _empty_grid(width)
+        self._whitespace = False
 
     def cells(self, height):
         wide = self._pattern[height]
@@ -79,11 +80,12 @@ def _parse(input_width, definition, use_enum, ch):
         height += 1
     return ch
 
-def _build_character(width, stitching, backstitching):
+def _build_character(width, stitching, backstitching, is_whitespace=False):
     """Build a character into an object definition."""
     ch = Character(width)
     ch._pattern = _parse(width, stitching, Stitch, ch._pattern)
     ch._pattern = _parse(width, backstitching, BackStitch, ch._pattern)
+    ch._whitespace = is_whitespace
     return ch
 
 def _initialize_characters():
@@ -110,6 +112,48 @@ def _initialize_characters():
 |  |  |  |
 |  |  |  |
 """)
+    objs['W'] = _build_character(5, """
+|1| | | |1|
+|1| | | |1|
+|1| | | |1|
+|1| |1| |1|
+|1| |1| |1|
+|1|1|1|1|1|
+| |1| |1| |
+| | | | | |
+| | | | | |
+""","""
+|13|  |  |  |13|
+|12|  |  |  |12|
+|12|  |  |  |12|
+|12|  |13|  |12|
+| 4|32|12|16| 8|
+| 4|  | 2|  | 8|
+|32|10|  |6|16|
+|  |  |  |  |  |
+|  |  |  |  |  |
+""")
+    objs['!'] = _build_character(1, """
+|1|
+|1|
+|1|
+|1|
+|1|
+| |
+|1|
+| |
+| |
+""", """
+|13|
+|12|
+|12|
+|12|
+|14|
+|  |
+|15|
+|  |
+|  |
+""")
     objs[' '] = _build_character(2, """
 | | |
 | | |
@@ -130,5 +174,5 @@ def _initialize_characters():
 | | |
 | | |
 | | |
-""")
+""", is_whitespace=True)
     return objs
