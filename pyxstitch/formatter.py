@@ -13,6 +13,7 @@ class CrossStitchFormatter(Formatter):
         Formatter.__init__(self, **options)
         self._hex = {x: int(x, 16) for x in
                      (y + z for y in self._HEX for z in self._HEX)}
+        self.font_factory = font.FontFactory()
         self.colors = {}
         # TODO: Styling selection should impact default color (or is a noop?)
         self.default = "000000"
@@ -57,15 +58,14 @@ class CrossStitchFormatter(Formatter):
         """Override to format."""
         # TODO: need to write to outfile...probably.
         print("""
-<html>
   <style> 
   table.grid {
     border-collapse:collapse;
-    font-size: 6px;
+    font-size: 20px;
     font-weight: bold;
   }
   .grid td {
-    border:solid 1px #888;
+    border:solid 0.25px #888;
   }
   .grid  {
     overflow: hidden;
@@ -73,7 +73,13 @@ class CrossStitchFormatter(Formatter):
     height: 6px;
     text-align: center;
   }
-  </style><body>""")
+  .bs-toplbotr {
+    background-color: #000;
+    transform: rotate(45deg);
+  }
+  .bs-botltopr {
+  }
+  </style>""")
         print("<table class='grid'>")
         print('<tr>')
         for ttype, value in tokensource:
@@ -88,12 +94,25 @@ class CrossStitchFormatter(Formatter):
                 print('<!--newline-->')
                 print('<tr>')
             else:
-                for ch in value:
-                    print('<td style="background-color: {}">'.format(rgb))
-                    if ch.isspace():
-                        print('<!--space-->')
-                    else:
-                        print('[]')
-                    print('</td>')
+                for height in range(font.SIZE):
+                    for ch in value:
+                        letter = self.font_factory.get(ch)
+                        for cell in letter.cells(height):
+                            color = "background-color: {}".format(rgb)
+                            classes = []
+                            #for stitch in cell:
+                                #if stitch == font.BackStitch.TopLeftBottomRight:
+                                  #  classes.append("bs-toplbotr")
+                            print('<td class="{}" style="{}">'.format(" ".join(classes), color))
+                            print('[]')
+                            print('</td>')
+                    print('</tr>')
+                    print('<tr>')
+#                    if ch.isspace():
+#                        print('<!--space-->')
+#                    else:
+#
+#                        print(ch)
+                    #print('</td>')
         print('</tr>')
-        print("</table></body></html>")
+        print("</table>")
