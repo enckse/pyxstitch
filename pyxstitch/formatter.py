@@ -93,47 +93,56 @@ class CrossStitchFormatter(Formatter):
   </style>""")
         print("<table cellspacing='1'>")
         print('<tr>')
+        entries = []
+        current = []
         for ttype, value in tokensource:
             while ttype not in self.colors:
                 if ttype.parent is not None:
                     ttype = ttype.parent
                 else:
                     break
-            color_name, rgb, printing = self._token_color(ttype)
+            styles = self._token_color(ttype)
             if value == "\n":
-                print('</tr>')
-                print('<!--newline-->')
-                print('<tr>')
+                entries.append(current)
+                current = []
             else:
-                for height in range(font.HEIGHT):
-                    for ch in value:
-                        letter = self.font_factory.get(ch)
-                        for cell in letter.cells(height):
-                            classes = []
-                            is_stitch = False
-                            styles = ["background-color: #e6e6e6"]
-                            for stitch in cell:
-                                if isinstance(stitch, font.Stitch):
-                                    if stitch == font.Stitch.CrossStitch:
-                                        is_stitch = True
-                                if isinstance(stitch, font.BackStitch):
-                                    if stitch == font.BackStitch.TopLeftBottomRight:
-                                        classes.append("tlbr-bs")
-                                    if stitch == font.BackStitch.BottomLeftTopRight:
-                                        classes.append("bltr-bs")
-                                    if stitch == font.BackStitch.Top:
-                                        styles.append("border-top: 1px solid black")
-                                    if stitch == font.BackStitch.Left:
-                                        styles.append("border-left: 1px solid black")
-                                    if stitch == font.BackStitch.Right:
-                                        styles.append("border-right: 1px solid black")
-                                    if stitch == font.BackStitch.Bottom:
-                                        styles.append("border-bottom: 1px solid black")
-                            print('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
-                            if is_stitch:
-                                print(printing)
-                            print('</td>')
-                    print('</tr>')
-                    print('<tr>')
+                for ch in value:
+                    current.append((self.font_factory.get(ch), styles))
+        if len(current) > 0:
+            entries.append(current)
+
+        for entry in entries:
+            for height in range(font.HEIGHT):
+                for cur, style in entry:
+                    for cell in cur.cells(height):
+                        classes = []
+                        is_stitch = False
+                        styles = ["background-color: #e6e6e6"]
+                        for stitch in cell:
+                            if isinstance(stitch, font.Stitch):
+                                if stitch == font.Stitch.CrossStitch:
+                                    is_stitch = True
+                            if isinstance(stitch, font.BackStitch):
+                                if stitch == font.BackStitch.TopLeftBottomRight:
+                                    classes.append("tlbr-bs")
+                                if stitch == font.BackStitch.BottomLeftTopRight:
+                                    classes.append("bltr-bs")
+                                if stitch == font.BackStitch.Top:
+                                    styles.append("border-top: 1px solid black")
+                                if stitch == font.BackStitch.Left:
+                                    styles.append("border-left: 1px solid black")
+                                if stitch == font.BackStitch.Right:
+                                    styles.append("border-right: 1px solid black")
+                                if stitch == font.BackStitch.Bottom:
+                                    styles.append("border-bottom: 1px solid black")
+                        print('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
+                        if is_stitch:
+                            print(style[2])
+                        print('</td>')
+                print('</tr>')
+                print('<tr>')
+            print('</tr>')
+            print('<!--newline-->')
+            print('<tr>')
         print('</tr>')
         print("</table>")
