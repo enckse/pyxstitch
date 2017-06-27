@@ -11,10 +11,10 @@ def main():
 if __name__ == '__main__':
     main()"""
 code = """
-AAW AAAAAAA
+deW AAAAAAA
     AWAA
 
-AA AAAAAAAA AA AAWWWWA!
+AA AAAAAAAA BA AAWWWWA!
     AAAAAA
     W
 """
