@@ -21,14 +21,15 @@ class BackStitch(IntFlag):
     BottomLeftTopRight = 16
     TopLeftBottomRight = 32
 
-SIZE = 5
+HEIGHT = 9
+WIDTH = 5
 
 class Grid(object):
     def __init__(self):
         self.stitches = []
 
 def _empty_grid():
-    return [[Grid() for x in range(SIZE)] for y in range(SIZE)]
+    return [[Grid() for x in range(WIDTH)] for y in range(HEIGHT)]
 
 class BadCharException(Exception):
     """Character is not defined or not fully defined."""
@@ -38,7 +39,7 @@ class Character(object):
         self._pattern = _empty_grid()
 
     def cells(self, height):
-        for width in range(SIZE):
+        for width in range(WIDTH):
             grid = self._pattern[height][width]
             yield grid.stitches
 
@@ -58,12 +59,12 @@ def _parse(definition, use_enum, ch):
     if len(stripped) == 0:
         raise BadCharException("Empty definition for character")
     parts = stripped.split("\n")
-    if len(parts) != SIZE:
+    if len(parts) != HEIGHT:
         raise BadCharException("Definition has an improper height")
     height = 0
     for part in parts:
         defined = [x for x in part.split("|") if x != '' ]
-        if len(defined) != SIZE:
+        if len(defined) != WIDTH:
             raise BadCharException("Definition has an improper width")
         width = 0
         for entry in defined:
@@ -91,14 +92,22 @@ def _initialize_characters():
 | |1| | | |
 |1| |1| | |
 |1| |1| | |
+|1|1|1| | |
 |1| |1| | |
 |1| |1| | |
+|1| |1| | |
+| | | | | |
+| | | | | |
 """, """
 |16| 3|32| | |
 |12|  |12| | |
-|14|14|14| | |
+|12|  |12| | |
+| 4| 3| 8| | |
+|12|  |12| | |
 |12|  |12| | |
 |14|  |14| | |
+|  |  |  | | |
+|  |  |  | | |
 """)
     objs['B'] = """
 |1|1| | | | |

@@ -1,7 +1,7 @@
 from pygments.formatter import Formatter
 import webcolors as wc
 import pyxstitch.font as font
-
+import string
 
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
@@ -17,9 +17,12 @@ class CrossStitchFormatter(Formatter):
         self.colors = {}
         # TODO: Styling selection should impact default color (or is a noop?)
         self.default = "000000"
+        self.keying = sorted(string.printable)
+        idx = 0
         for token, style in self.style:
             if style['color']:
-                self.colors[token] = style['color']
+                self.colors[token] = (style['color'], self.keying[idx])
+                idx += 1
 
     def _closest(self, rgb):
         """ We need to find a color approximation."""
@@ -52,35 +55,43 @@ class CrossStitchFormatter(Formatter):
         use_color = self.default
         if token in self.colors:
             use_color = self.colors[token]
-        return (self._get_color(self._to_hex(use_color)), "#" + use_color)
+        return (self._get_color(self._to_hex(use_color[0])), "#" + use_color[0], use_color[1])
 
     def format(self, tokensource, outfile):
         """Override to format."""
         # TODO: need to write to outfile...probably.
         print("""
   <style> 
-  table.grid {
-    border-collapse:collapse;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .grid td {
-    border:solid 0.25px #888;
-  }
-  .grid  {
-    overflow: hidden;
-    width: 6px;
-    height: 6px;
+  table {
     text-align: center;
   }
-  .bs-toplbotr {
-    background-color: #000;
-    transform: rotate(45deg);
+  tr {
   }
-  .bs-botltopr {
+  td {
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+  }
+
+  .bltr-bs:after{
+    content:"";
+    position:absolute;
+    border-top:1px solid black;
+    width:13px;
+    transform: rotate(135deg);
+    transform-origin: 3px -1px;
+  }
+
+  .tlbr-bs:after {
+    content:"";
+    position:absolute;
+    border-top:1px solid black;
+    width:13px;
+    transform: rotate(45deg);
+    transform-origin: 5px -7px;
   }
   </style>""")
-        print("<table class='grid'>")
+        print("<table cellspacing='1'>")
         print('<tr>')
         for ttype, value in tokensource:
             while ttype not in self.colors:
@@ -88,31 +99,42 @@ class CrossStitchFormatter(Formatter):
                     ttype = ttype.parent
                 else:
                     break
-            color_name, rgb = self._token_color(ttype)
+            color_name, rgb, printing = self._token_color(ttype)
             if value == "\n":
                 print('</tr>')
                 print('<!--newline-->')
                 print('<tr>')
             else:
-                for height in range(font.SIZE):
+                for height in range(font.HEIGHT):
                     for ch in value:
                         letter = self.font_factory.get(ch)
                         for cell in letter.cells(height):
-                            color = "background-color: {}".format(rgb)
                             classes = []
-                            #for stitch in cell:
-                                #if stitch == font.BackStitch.TopLeftBottomRight:
-                                  #  classes.append("bs-toplbotr")
-                            print('<td class="{}" style="{}">'.format(" ".join(classes), color))
-                            print('[]')
+                            is_stitch = False
+                            styles = ["background-color: #e6e6e6"]
+                            for stitch in cell:
+                                if isinstance(stitch, font.Stitch):
+                                    if stitch == font.Stitch.CrossStitch:
+                                        is_stitch = True
+                                if isinstance(stitch, font.BackStitch):
+                                    if stitch == font.BackStitch.TopLeftBottomRight:
+                                        classes.append("tlbr-bs")
+                                    if stitch == font.BackStitch.BottomLeftTopRight:
+                                        classes.append("bltr-bs")
+                                    if stitch == font.BackStitch.Top:
+                                        styles.append("border-top: 1px solid black")
+                                    if stitch == font.BackStitch.Left:
+                                        styles.append("border-left: 1px solid black")
+                                    if stitch == font.BackStitch.Right:
+                                        styles.append("border-right: 1px solid black")
+                                    if stitch == font.BackStitch.Bottom:
+                                        styles.append("border-bottom: 1px solid black")
+                                        
+                            print('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
+                            if is_stitch:
+                                print(printing)
                             print('</td>')
                     print('</tr>')
                     print('<tr>')
-#                    if ch.isspace():
-#                        print('<!--space-->')
-#                    else:
-#
-#                        print(ch)
-                    #print('</td>')
         print('</tr>')
         print("</table>")
