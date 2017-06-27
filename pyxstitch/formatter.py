@@ -66,6 +66,7 @@ class CrossStitchFormatter(Formatter):
     text-align: center;
   }
   tr {
+    padding: 0px 0px 0px 0px;
   }
   td {
     width: 10px;
@@ -111,6 +112,7 @@ class CrossStitchFormatter(Formatter):
         if len(current) > 0:
             entries.append(current)
 
+        output = []
         for entry in entries:
             for height in range(font.HEIGHT):
                 for cur, style in entry:
@@ -135,14 +137,18 @@ class CrossStitchFormatter(Formatter):
                                     styles.append("border-right: 1px solid black")
                                 if stitch == font.BackStitch.Bottom:
                                     styles.append("border-bottom: 1px solid black")
-                        print('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
+                        output.append('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
                         if is_stitch:
-                            print(style[2])
-                        print('</td>')
-                print('</tr>')
-                print('<tr>')
-            print('</tr>')
-            print('<!--newline-->')
-            print('<tr>')
+                            output.append(style[2])
+                        output.append('</td>')
+                output.append('</tr>')
+                output.append('<tr>')
+        last = None
+        for out in output:
+            if last is not None:
+                if last == "<tr>" and out == "</tr>" or out == "<tr>":
+                    continue
+            print(out)
+            last = out
         print('</tr>')
         print("</table>")
