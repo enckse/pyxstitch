@@ -10,5 +10,5 @@ def main():
 
 if __name__ == '__main__':
     main()"""
-code = "AAAA"
+code = "AAA  A"
 highlight(code, PythonLexer(), fmt.CrossStitchFormatter(style='monokai'))

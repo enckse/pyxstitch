@@ -22,26 +22,27 @@ class BackStitch(IntFlag):
     TopLeftBottomRight = 32
 
 HEIGHT = 9
-WIDTH = 5
 
 class Grid(object):
     def __init__(self):
         self.stitches = []
 
-def _empty_grid():
-    return [[Grid() for x in range(WIDTH)] for y in range(HEIGHT)]
+def _empty_grid(width):
+    return [[Grid() for x in range(width)] for y in range(HEIGHT)]
 
 class BadCharException(Exception):
     """Character is not defined or not fully defined."""
 
 class Character(object):
-    def __init__(self):
-        self._pattern = _empty_grid()
+    def __init__(self, width):
+        self._pattern = _empty_grid(width)
 
     def cells(self, height):
-        for width in range(WIDTH):
-            grid = self._pattern[height][width]
+        wide = self._pattern[height]
+        for width in range(len(wide)):
+            grid = wide[width]
             yield grid.stitches
+        yield []
 
 class FontFactory(object):
 
@@ -52,7 +53,7 @@ class FontFactory(object):
             return self._characters[character]
         raise BadCharException("Not font entry for charcter {}".format(character))
 
-def _parse(definition, use_enum, ch):
+def _parse(input_width, definition, use_enum, ch):
     if definition is None:
         raise BadCharException("Invalid character definition")
     stripped = definition.strip()
@@ -64,7 +65,7 @@ def _parse(definition, use_enum, ch):
     height = 0
     for part in parts:
         defined = [x for x in part.split("|") if x != '' ]
-        if len(defined) != WIDTH:
+        if len(defined) != input_width:
             raise BadCharException("Definition has an improper width")
         width = 0
         for entry in defined:
@@ -78,50 +79,56 @@ def _parse(definition, use_enum, ch):
         height += 1
     return ch
 
-def _build_character(stitching, backstitching):
+def _build_character(width, stitching, backstitching):
     """Build a character into an object definition."""
-    ch = Character()
-    ch._pattern = _parse(stitching, Stitch, ch._pattern)
-    ch._pattern = _parse(backstitching, BackStitch, ch._pattern)
+    ch = Character(width)
+    ch._pattern = _parse(width, stitching, Stitch, ch._pattern)
+    ch._pattern = _parse(width, backstitching, BackStitch, ch._pattern)
     return ch
 
 def _initialize_characters():
     objs = {}
         
-    objs['A'] = _build_character("""
-| |1| | | |
-|1| |1| | |
-|1| |1| | |
-|1|1|1| | |
-|1| |1| | |
-|1| |1| | |
-|1| |1| | |
-| | | | | |
-| | | | | |
+    objs['A'] = _build_character(3, """
+| |1| |
+|1| |1|
+|1| |1|
+|1|1|1|
+|1| |1|
+|1| |1|
+|1| |1|
+| | | |
+| | | |
 """, """
-|16| 3|32| | |
-|12|  |12| | |
-|12|  |12| | |
-| 4| 3| 8| | |
-|12|  |12| | |
-|12|  |12| | |
-|14|  |14| | |
-|  |  |  | | |
-|  |  |  | | |
+|16| 3|32|
+|12|  |12|
+|12|  |12|
+| 4| 3| 8|
+|12|  |12|
+|12|  |12|
+|14|  |14|
+|  |  |  |
+|  |  |  |
 """)
-    objs['B'] = """
-|1|1| | | | |
-|1| |1| | | |
-|1|1| | | |
-|1| |1| | | |
-|1|1| | | | |
-"""
-
-    objs['C'] = """
-|1|1|1| | | |
-|1| | | | | |
-|1| | | | |
-|1| | | | | |
-|1|1|1| | | |
-"""
+    objs[' '] = _build_character(2, """
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+""","""
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+""")
     return objs
