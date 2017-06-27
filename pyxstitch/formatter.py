@@ -93,7 +93,6 @@ class CrossStitchFormatter(Formatter):
   </style>""")
         print("<table cellspacing='1'>")
         print('<tr>')
-        outputs = []
         for ttype, value in tokensource:
             while ttype not in self.colors:
                 if ttype.parent is not None:
@@ -102,11 +101,9 @@ class CrossStitchFormatter(Formatter):
                     break
             color_name, rgb, printing = self._token_color(ttype)
             if value == "\n":
-                outputs.append("</tr>")
-                outputs.append("<tr>")
-                #print('</tr>')
-                #print('<!--newline-->')
-                #print('<tr>')
+                print('</tr>')
+                print('<!--newline-->')
+                print('<tr>')
             else:
                 for height in range(font.HEIGHT):
                     for ch in value:
@@ -132,13 +129,11 @@ class CrossStitchFormatter(Formatter):
                                         styles.append("border-right: 1px solid black")
                                     if stitch == font.BackStitch.Bottom:
                                         styles.append("border-bottom: 1px solid black")
-                            outputs.append('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
+                            print('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
                             if is_stitch:
-                                outputs.append(printing)
-                            outputs.append('</td>')
-                    #print('</tr>')
-                    #print('<tr>')
-        for output in outputs:
-            print(output)
+                                print(printing)
+                            print('</td>')
+                    print('</tr>')
+                    print('<tr>')
         print('</tr>')
         print("</table>")
