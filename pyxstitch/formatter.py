@@ -47,12 +47,12 @@ STYLE
 
 _BORDER = "border-{}: 1px solid black"
 
-_TR = "<tr>"
 _TABLE = "<table cellspacing='1'>"
 _TABLE_END = "</table>"
 _IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXv7+/v7+8tAJavAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAADElEQVQImWNgoC4AAABQAAGmLdqcAAAAAElFTkSuQmCC'
 _TD = '<td background="IMG" class="{}" style="{}">'.replace("IMG", _IMG)
 _TD_END = "</td>"
+_TR = "<tr>" + _TD.format("", "") + "{}" + _TD_END + _TD.format("", "") + _TD_END
 _TR_END = "</tr>"
 
 
@@ -124,9 +124,6 @@ class CrossStitchFormatter(Formatter):
 
     def format(self, tokensource, outfile):
         """Override to format."""
-        self._output(outfile, _HTML_STYLE)
-        self._output(outfile, _TABLE)
-        self._output(outfile, _TR)
         entries = []
         current = []
         for ttype, value in tokensource:
@@ -146,10 +143,13 @@ class CrossStitchFormatter(Formatter):
                     current.append(self._new_entry(ch, styles))
         if len(current) > 0:
             entries.append(current)
-
+        self._output(outfile, _HTML_STYLE)
+        self._output(outfile, _TABLE)
+        tr_idx = 1
+        self._output(outfile, _TR.format(tr_idx))
+        tr_idx += 1
         last = False
         max_width = 0
-        tot_height = 0
         for entry in entries:
             cur_width = 0
             for height in self.font_factory.height():
@@ -185,12 +185,13 @@ class CrossStitchFormatter(Formatter):
                         self._output(outfile, _TD_END)
                         last = False
                 if not last:
-                    tot_height += 1
                     self._output(outfile, _TR_END)
-                    self._output(outfile, _TR)
+                    self._output(outfile, _TR.format(tr_idx))
+                    tr_idx += 1
                     last = True
             if cur_width > max_width:
                 max_width = cur_width
+        for x in range(max_width):
+            self._output(outfile, _TD.format("", "") + str(x + 1) + _TD_END)
         self._output(outfile, _TR_END)
         self._output(outfile, _TABLE_END)
-        self._output(outfile, str(max_width) + " " + str(tot_height))
