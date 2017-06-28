@@ -10,6 +10,7 @@ import webcolors as wc
 import pyxstitch.font as ft
 import pyxstitch.symbols as sym
 from math import floor
+from enum import Enum
 
 _BLTR_BS = "bltr-bs"
 _TLBR_BS = "tlbr-bs"
@@ -62,6 +63,10 @@ _COLOR = "color: {}"
 _DEFAULT_COLOR = "000000"
 
 
+class Mode(Enum):
+    HTML = 1
+
+
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
 
@@ -78,6 +83,7 @@ class CrossStitchFormatter(Formatter):
         self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.DefaultFontFactory()
         self.colorize = False
+        self.mode = Mode.HTML
 
         for token, style in self.style:
             if style['color']:
@@ -120,10 +126,11 @@ class CrossStitchFormatter(Formatter):
     def _new_entry(self, ch, style):
         return (self.font_factory.get(ch), style)
 
-    def _output(self, out_file, value):
+    def _output(self, out_file, value, mode):
         """Perform output step."""
         # TODO: need to write to outfile...probably.
-        print(value)
+        if mode == self.mode:
+            print(value)
 
     def format(self, tokensource, outfile):
         """Override to format."""
@@ -146,10 +153,10 @@ class CrossStitchFormatter(Formatter):
                     current.append(self._new_entry(ch, styles))
         if len(current) > 0:
             entries.append(current)
-        self._output(outfile, _HTML_STYLE)
-        self._output(outfile, _TABLE)
+        self._output(outfile, _HTML_STYLE, Mode.HTML)
+        self._output(outfile, _TABLE, Mode.HTML)
         tr_idx = 1
-        self._output(outfile, _TR.format(tr_idx))
+        self._output(outfile, _TR.format(tr_idx), Mode.HTML)
         tr_idx += 1
         last = False
         max_width = 0
@@ -187,15 +194,15 @@ class CrossStitchFormatter(Formatter):
                                     styles.append(_BORDER.format("bottom"))
                         self._output(outfile,
                                      _TD.format(" ".join(classes),
-                                                ";".join(styles)))
+                                                ";".join(styles)), Mode.HTML)
                         if is_stitch:
                             legend.append(style)
-                            self._output(outfile, symb)
-                        self._output(outfile, _TD_END)
+                            self._output(outfile, symb, Mode.HTML)
+                        self._output(outfile, _TD_END, Mode.HTML)
                         last = False
                 if not last:
-                    self._output(outfile, _TR_END)
-                    self._output(outfile, _TR.format(tr_idx))
+                    self._output(outfile, _TR_END, Mode.HTML)
+                    self._output(outfile, _TR.format(tr_idx), Mode.HTML)
                     tr_idx += 1
                     last = True
             if cur_width > max_width:
@@ -205,8 +212,8 @@ class CrossStitchFormatter(Formatter):
             val = 'X'
             if mid != x:
                 val = str(x + 1)
-            self._output(outfile, _TD.format("", "") + val + _TD_END)
-        self._output(outfile, _TR_END)
-        self._output(outfile, _TABLE_END)
+            self._output(outfile, _TD.format("", "") + val + _TD_END, Mode.HTML)
+        self._output(outfile, _TR_END, Mode.HTML)
+        self._output(outfile, _TABLE_END, Mode.HTML)
         for l in sorted(set(legend)):
-            self._output(outfile, _LEGEND.format(l[1], l[0]))
+            self._output(outfile, _LEGEND.format(l[1], l[0]), Mode.HTML)
