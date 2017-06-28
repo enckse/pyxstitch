@@ -173,14 +173,16 @@ class CrossStitchFormatter(Formatter):
                                     styles.append(_BORDER.format("right"))
                                 if stitch == ft.BackStitch.Bottom:
                                     styles.append(_BORDER.format("bottom"))
-                        print(_TD.format(" ".join(classes), ";".join(styles)))
+                        self._output(outfile,
+                                     _TD.format(" ".join(classes),
+                                                ";".join(styles)))
                         if is_stitch:
-                            print(style[2])
-                        print(_TD_END)
+                            self._output(outfile, style[2])
+                        self._output(outfile, _TD_END)
                         last = False
                 if not last:
-                    print(_TR_END)
-                    print(_TR)
+                    self._output(outfile, _TR_END)
+                    self._output(outfile, _TR)
                     last = True
-        print(_TR_END)
-        print(_TABLE_END)
+        self._output(outfile, _TR_END)
+        self._output(outfile, _TABLE_END)
