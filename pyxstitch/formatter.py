@@ -28,6 +28,7 @@ _TLBR_BS_CSS = _BS_STYLE.replace("STYLE", _TLBR_BS).replace("ATTRS", """
     transform: rotate(45deg);
     transform-origin: 5px -7px;
 """)
+_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXv7+/v7+8tAJavAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAADElEQVQImWNgoC4AAABQAAGmLdqcAAAAAElFTkSuQmCC'
 _HTML_STYLE = """
 <style>
 table {
@@ -37,20 +38,20 @@ tr {
     padding: 0px 0px 0px 0px;
 }
 td {
+    background: url(IMG);
     width: 10px;
     height: 10px;
     font-size: 8px;
 }
 
 STYLE
-</style>""".replace("STYLE", _BLTR_BS_CSS + _TLBR_BS_CSS)
+</style>""".replace("STYLE", _BLTR_BS_CSS + _TLBR_BS_CSS).replace("IMG", _IMG)
 
 _BORDER = "border-{}: 1px solid black"
 
 _TABLE = "<table cellspacing='1'>"
 _TABLE_END = "</table>"
-_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXv7+/v7+8tAJavAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAADElEQVQImWNgoC4AAABQAAGmLdqcAAAAAElFTkSuQmCC'
-_TD = '<td background="IMG" class="{}" style="{}">'.replace("IMG", _IMG)
+_TD = '<td class="{}" style="{}">'
 _TD_END = "</td>"
 _TR = "<tr>" + _TD.format("", "") + "{}" + _TD_END + _TD.format("", "") + _TD_END
 _TR_END = "</tr>"
