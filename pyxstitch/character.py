@@ -41,7 +41,7 @@ class Character(object):
 
     def __init__(self, height, width):
         """Instance the character, creates an empty pattern grid."""
-        self._pattern = _empty_grid(height, width)
+        self._pattern = _empty_grid(width, height)
 
     def cells(self, height):
         """Get stitches for  a specied character and returns them for it."""
