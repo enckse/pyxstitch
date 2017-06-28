@@ -148,10 +148,15 @@ class CrossStitchFormatter(Formatter):
             entries.append(current)
 
         last = False
+        max_width = 0
+        tot_height = 0
         for entry in entries:
+            cur_width = 0
             for height in self.font_factory.height():
                 for cur, style in entry:
                     for cell in cur.cells(height):
+                        if height == 0:
+                            cur_width += 1
                         classes = []
                         is_stitch = False
                         styles = []
@@ -180,8 +185,12 @@ class CrossStitchFormatter(Formatter):
                         self._output(outfile, _TD_END)
                         last = False
                 if not last:
+                    tot_height += 1
                     self._output(outfile, _TR_END)
                     self._output(outfile, _TR)
                     last = True
+            if cur_width > max_width:
+                max_width = cur_width
         self._output(outfile, _TR_END)
         self._output(outfile, _TABLE_END)
+        self._output(outfile, str(max_width) + " " + str(tot_height))
