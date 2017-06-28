@@ -9,6 +9,7 @@ from pygments.formatter import Formatter
 import webcolors as wc
 import pyxstitch.font as ft
 import pyxstitch.symbols as sym
+from math import floor
 
 _BLTR_BS = "bltr-bs"
 _TLBR_BS = "tlbr-bs"
@@ -199,8 +200,12 @@ class CrossStitchFormatter(Formatter):
                     last = True
             if cur_width > max_width:
                 max_width = cur_width
+        mid = int(floor(max_width / 2))
         for x in range(max_width):
-            self._output(outfile, _TD.format("", "") + str(x + 1) + _TD_END)
+            val = 'X'
+            if mid != x:
+                val = str(x + 1)
+            self._output(outfile, _TD.format("", "") + val + _TD_END)
         self._output(outfile, _TR_END)
         self._output(outfile, _TABLE_END)
         for l in sorted(set(legend)):
