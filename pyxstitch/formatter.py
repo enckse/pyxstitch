@@ -46,7 +46,6 @@ STYLE
 </style>""".replace("STYLE", _BLTR_BS_CSS + _TLBR_BS_CSS)
 
 _BORDER = "border-{}: 1px solid black"
-_BACKGROUND = "background-color: #{}"
 
 _TR = "<tr>"
 _TABLE = "<table cellspacing='1'>"
@@ -71,7 +70,6 @@ class CrossStitchFormatter(Formatter):
 
         # TODO: these components should be set or defaulted
         self.default = "000000"
-        self.background = "e6e6e6"
         self.font_factory = ft.DefaultFontFactory()
         self.keying = sorted(string.printable)
 
@@ -156,7 +154,7 @@ class CrossStitchFormatter(Formatter):
                     for cell in cur.cells(height):
                         classes = []
                         is_stitch = False
-                        styles = [_BACKGROUND.format(self.background)]
+                        styles = []
                         for stitch in cell:
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
