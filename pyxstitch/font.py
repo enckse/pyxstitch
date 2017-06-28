@@ -12,6 +12,7 @@ class FontFactory(object):
         self._characters = self._initialize_characters()
 
     def height(self):
+        """get the font factory range of height for characters."""
         return range(9)
 
     def get(self, ch):
