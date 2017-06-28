@@ -2,6 +2,7 @@
 """Defines a character for formatting text -> cross stitch character."""
 from enum import IntFlag
 
+
 class BadCharException(Exception):
     """Character is not defined or not fully defined."""
 

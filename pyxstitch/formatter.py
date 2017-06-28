@@ -1,7 +1,60 @@
+#!/usr/bin/python
+"""
+A formatter implementation for pygments.
+
+Takes a text stream and converts to a cross stitch output (HTML).
+"""
+
 from pygments.formatter import Formatter
 import webcolors as wc
-import pyxstitch.font as font
+import pyxstitch.font as ft
 import string
+
+_BLTR_BS = "bltr-bs"
+_TLBR_BS = "tlbr-bs"
+_BS_STYLE = """
+.STYLE:after{
+    content:"";
+    position:absolute;
+    border-top:1px solid black;
+    width:13px;
+    ATTRS
+}"""
+_BLTR_BS_CSS = _BS_STYLE.replace("STYLE", _BLTR_BS).replace("ATTRS", """
+    transform: rotate(135deg);
+    transform-origin: 3px -1px;
+""")
+_TLBR_BS_CSS = _BS_STYLE.replace("STYLE", _TLBR_BS).replace("ATTRS", """
+    transform: rotate(45deg);
+    transform-origin: 5px -7px;
+""")
+_HTML_STYLE = """
+<style>
+table {
+    text-align: center;
+}
+tr {
+    padding: 0px 0px 0px 0px;
+}
+td {
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+}
+
+STYLE
+</style>""".replace("STYLE", _BLTR_BS_CSS + _TLBR_BS_CSS)
+
+_BORDER = "border-{}: 1px solid black"
+_BACKGROUND = "background-color: #{}"
+
+_TR = "<tr>"
+_TABLE = "<table cellspacing='1'>"
+_TABLE_END = "</table>"
+_TD = '<td class="{}" style="{}">'
+_TD_END = "</td>"
+_TR_END = "</tr>"
+
 
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
@@ -13,19 +66,22 @@ class CrossStitchFormatter(Formatter):
         Formatter.__init__(self, **options)
         self._hex = {x: int(x, 16) for x in
                      (y + z for y in self._HEX for z in self._HEX)}
-        self.font_factory = font.FontFactory()
-        self.colors = {}
-        # TODO: Styling selection should impact default color (or is a noop?)
+        self._colors = {}
+
+        # TODO: these components should be set or defaulted
         self.default = "000000"
+        self.background = "e6e6e6"
+        self.font_factory = ft.DefaultFontFactory()
         self.keying = sorted(string.printable)
+
         idx = 0
         for token, style in self.style:
             if style['color']:
-                self.colors[token] = (style['color'], self.keying[idx])
+                self._colors[token] = (style['color'], self.keying[idx])
                 idx += 1
 
     def _closest(self, rgb):
-        """ We need to find a color approximation."""
+        """We need to find a color approximation."""
         min_col = {}
         for key, name in wc.css3_hex_to_names.items():
             r, g, b = wc.hex_to_rgb(key)
@@ -53,51 +109,26 @@ class CrossStitchFormatter(Formatter):
     def _token_color(self, token):
         """We need to get the color for a token."""
         use_color = self.default
-        if token in self.colors:
-            use_color = self.colors[token]
-        return (self._get_color(self._to_hex(use_color[0])), "#" + use_color[0], use_color[1])
+        if token in self._colors:
+            use_color = self._colors[token]
+        return (self._get_color(self._to_hex(use_color[0])),
+                "#" + use_color[0],
+                use_color[1])
+
+    def _output(self, out_file, value):
+        """Perform output step."""
+        # TODO: need to write to outfile...probably.
+        print(value)
 
     def format(self, tokensource, outfile):
         """Override to format."""
-        # TODO: need to write to outfile...probably.
-        print("""
-  <style> 
-  table {
-    text-align: center;
-  }
-  tr {
-    padding: 0px 0px 0px 0px;
-  }
-  td {
-    width: 10px;
-    height: 10px;
-    font-size: 8px;
-  }
-
-  .bltr-bs:after{
-    content:"";
-    position:absolute;
-    border-top:1px solid black;
-    width:13px;
-    transform: rotate(135deg);
-    transform-origin: 3px -1px;
-  }
-
-  .tlbr-bs:after {
-    content:"";
-    position:absolute;
-    border-top:1px solid black;
-    width:13px;
-    transform: rotate(45deg);
-    transform-origin: 5px -7px;
-  }
-  </style>""")
-        print("<table cellspacing='1'>")
-        print('<tr>')
+        self._output(outfile, _HTML_STYLE)
+        self._output(outfile, _TABLE)
+        self._output(outfile, _TR)
         entries = []
         current = []
         for ttype, value in tokensource:
-            while ttype not in self.colors:
+            while ttype not in self._colors:
                 if ttype.parent is not None:
                     ttype = ttype.parent
                 else:
@@ -119,32 +150,32 @@ class CrossStitchFormatter(Formatter):
                     for cell in cur.cells(height):
                         classes = []
                         is_stitch = False
-                        styles = ["background-color: #e6e6e6"]
+                        styles = [_BACKGROUND.format(self.background)]
                         for stitch in cell:
-                            if isinstance(stitch, font.Stitch):
-                                if stitch == font.Stitch.CrossStitch:
+                            if isinstance(stitch, ft.Stitch):
+                                if stitch == ft.Stitch.CrossStitch:
                                     is_stitch = True
-                            if isinstance(stitch, font.BackStitch):
-                                if stitch == font.BackStitch.TopLeftBottomRight:
-                                    classes.append("tlbr-bs")
-                                if stitch == font.BackStitch.BottomLeftTopRight:
-                                    classes.append("bltr-bs")
-                                if stitch == font.BackStitch.Top:
-                                    styles.append("border-top: 1px solid black")
-                                if stitch == font.BackStitch.Left:
-                                    styles.append("border-left: 1px solid black")
-                                if stitch == font.BackStitch.Right:
-                                    styles.append("border-right: 1px solid black")
-                                if stitch == font.BackStitch.Bottom:
-                                    styles.append("border-bottom: 1px solid black")
-                        print('<td class="{}" style="{}">'.format(" ".join(classes), ";".join(styles)))
+                            if isinstance(stitch, ft.BackStitch):
+                                if stitch == ft.BackStitch.TopLeftBottomRight:
+                                    classes.append(_TLBR_BS)
+                                if stitch == ft.BackStitch.BottomLeftTopRight:
+                                    classes.append(_BLTR_BS)
+                                if stitch == ft.BackStitch.Top:
+                                    styles.append(_BORDER.format("top"))
+                                if stitch == ft.BackStitch.Left:
+                                    styles.append(_BORDER.format("left"))
+                                if stitch == ft.BackStitch.Right:
+                                    styles.append(_BORDER.format("right"))
+                                if stitch == ft.BackStitch.Bottom:
+                                    styles.append(_BORDER.format("bottom"))
+                        print(_TD.format(" ".join(classes), ";".join(styles)))
                         if is_stitch:
                             print(style[2])
-                        print('</td>')
+                        print(_TD_END)
                         last = False
                 if not last:
-                    print("</tr>")
-                    print("<tr>")
+                    print(_TR_END)
+                    print(_TR)
                     last = True
-        print('</tr>')
-        print("</table>")
+        print(_TR_END)
+        print(_TABLE_END)

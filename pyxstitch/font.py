@@ -2,7 +2,24 @@
 """Defines the default font functionality to get char -> stitch mappings."""
 from pyxstitch.character import Character, BackStitch, Stitch, Grid
 
+
+class FontException(Exception):
+    """Font exceptions."""
+
+
 class FontFactory(object):
+    """Character stitching font creator."""
+
+    def height(self):
+        """Get the height of the font."""
+        raise FontException("not implemented.")
+
+    def get(self, character):
+        """Get a character definition."""
+        raise FontException("not implemented.")
+
+
+class DefaultFontFactory(FontFactory):
     """Create characters of the default stitching font."""
 
     def __init__(self):
@@ -22,13 +39,14 @@ class FontFactory(object):
         raise BadCharException("Not font entry for charcter {}".format(ch))
 
     def _set_flags(self, val_str, enums, add_to):
-        """Check which enum flags are set - append them to a list of stitches."""
+        """Check which enum flags are set - append them to a list."""
         val = int(val_str)
         for e in enums:
             if e & val:
                 add_to.append(e)
 
     def _parse(self, definition, ch):
+        """Parse a character definition."""
         if definition is None:
             raise BadCharException("Invalid character definition")
         stripped = definition.strip()
@@ -39,7 +57,7 @@ class FontFactory(object):
             raise BadCharException("Definition has an improper height")
         height = 0
         for part in parts:
-            defined = [x for x in part.split("|") if x != '' ]
+            defined = [x for x in part.split("|") if x != '']
             if len(defined) != self._width:
                 raise BadCharException("Definition has an improper width")
             width = 0
@@ -61,7 +79,8 @@ class FontFactory(object):
         return ch
 
     def _initialize_characters(self):
-        objs = {} 
+        """Initialize default characters."""
+        objs = {}
         objs['A'] = self._build_character("""
 |    |0.16|1.03|0.32|    |
 |0.16|0.16|    |0.32|0.32|
