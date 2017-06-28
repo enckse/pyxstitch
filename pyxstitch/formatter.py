@@ -11,6 +11,7 @@ import pyxstitch.font as ft
 import pyxstitch.symbols as sym
 from math import floor
 from enum import Enum
+from PIL import Image, ImageFont, ImageDraw
 
 _BLTR_BS = "bltr-bs"
 _TLBR_BS = "tlbr-bs"
@@ -65,6 +66,7 @@ _DEFAULT_COLOR = "000000"
 
 class Mode(Enum):
     HTML = 1
+    Image = 2
 
 
 class CrossStitchFormatter(Formatter):
@@ -83,7 +85,7 @@ class CrossStitchFormatter(Formatter):
         self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.DefaultFontFactory()
         self.colorize = False
-        self.mode = Mode.HTML
+        self.mode = Mode.Image
 
         for token, style in self.style:
             if style['color']:
@@ -162,9 +164,12 @@ class CrossStitchFormatter(Formatter):
         last = False
         max_width = 0
         legend = []
+        total_height = 0
+        griding = []
         for entry in entries:
             cur_width = 0
             for height in self.font_factory.height():
+                grid = []
                 for cur, style in entry:
                     coloring = style[0]
                     symb = style[1]
@@ -196,6 +201,8 @@ class CrossStitchFormatter(Formatter):
                         self._output(outfile,
                                      _TD.format(" ".join(classes),
                                                 ";".join(styles)), Mode.HTML)
+#                        if len(classes) > 0 or is_stitch:
+                        grid.append((is_stitch, classes, coloring, symb))
                         if is_stitch:
                             legend.append(style)
                             self._output(outfile, symb, Mode.HTML)
@@ -206,9 +213,22 @@ class CrossStitchFormatter(Formatter):
                     self._output(outfile, _TR.format(tr_idx), Mode.HTML)
                     tr_idx += 1
                     last = True
+                    total_height += 1
+                    griding.append(grid)
             if cur_width > max_width:
                 max_width = cur_width
         mid = int(floor(max_width / 2))
+        im = Image.new('RGB', (max_width * 10, total_height * 10), (0, 0, 0))
+        dr = ImageDraw.Draw(im)
+        for y in range(len(griding)):
+            for x in range(len(griding[y])):
+                print((0+x*10, 0+y*10))
+                print(griding[y][x])
+                dr.rectangle([(0+x*10,0+y*10),(10+x*10,10+y*10)], fill=griding[y][x][2])
+                if griding[y][x][0]:
+                    dr.text((0+x*10,0+y*10), griding[y][x][3], (0, 0, 0))
+        im.save('test.png')
+
         for x in range(max_width):
             val = 'X'
             if mid != x:
