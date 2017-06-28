@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """Defines the default font functionality to get char -> stitch mappings."""
-from pyxstitch.character import Character, BackStitch, Stitch, Grid
+from pyxstitch.character import Character, BackStitch, Stitch, BadCharException
 
 
 class FontException(Exception):
@@ -24,13 +24,15 @@ class DefaultFontFactory(FontFactory):
 
     def __init__(self):
         """Initialize the factory."""
-        self._height = 9
+        self._height = 11
         self._width = 5
+        self._top_off = 1
+        self._bot_off = 1
         self._characters = self._initialize_characters()
 
     def height(self):
         """get the font factory range of height for characters."""
-        return range(9)
+        return range(self._height)
 
     def get(self, ch):
         """Lookup a character in the font."""
@@ -53,8 +55,15 @@ class DefaultFontFactory(FontFactory):
         if len(stripped) == 0:
             raise BadCharException("Empty definition for character")
         parts = stripped.split("\n")
-        if len(parts) != self._height:
-            raise BadCharException("Definition has an improper height")
+        has_height = len(parts)
+        if has_height != self._height:
+            if has_height != self._height - self._top_off - self._bot_off:
+                raise BadCharException("Definition has an improper height")
+            add_line = "|" + " | ".join(["" for x in range(self._width)]) + "|"
+            for x in range(self._top_off):
+                parts.insert(0, add_line)
+            for x in range(self._bot_off):
+                parts.append(add_line)
         height = 0
         for part in parts:
             defined = [x for x in part.split("|") if x != '']
