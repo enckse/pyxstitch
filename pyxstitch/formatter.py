@@ -114,7 +114,7 @@ class CrossStitchFormatter(Formatter):
 
         output = []
         for entry in entries:
-            for height in range(font.HEIGHT):
+            for height in range(self.font_factory._height):
                 for cur, style in entry:
                     for cell in cur.cells(height):
                         classes = []
