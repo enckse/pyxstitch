@@ -201,8 +201,7 @@ class CrossStitchFormatter(Formatter):
                         self._output(outfile,
                                      _TD.format(" ".join(classes),
                                                 ";".join(styles)), Mode.HTML)
-#                        if len(classes) > 0 or is_stitch:
-                        grid.append((is_stitch, classes, coloring, symb))
+                        grid.append((is_stitch, classes + styles, coloring, symb))
                         if is_stitch:
                             legend.append(style)
                             self._output(outfile, symb, Mode.HTML)
@@ -222,23 +221,16 @@ class CrossStitchFormatter(Formatter):
         dr = ImageDraw.Draw(im)
         for y in range(len(griding)):
             for x in range(len(griding[y])):
-                print((0+x*10, 0+y*10))
-                print(griding[y][x])
                 dr.rectangle([(0+x*10,0+y*10),(10+x*10,10+y*10)], fill=griding[y][x][2])
                 if griding[y][x][0]:
                     dr.text((0+x*10,0+y*10), griding[y][x][3], (0, 0, 0))
-                # \
-                dr.line((0+x*10,0+y*10,10+x*10,10+y*10), fill='black')
-                #|
-                dr.line((1+x*10,0+y,1+x*10,0+y*10), fill='black')
-                # |
-                dr.line((9+x*10,10+y,9+x*10,10+y*10), fill='black')
-                # _
-                dr.line((0+x*10,9+y*10,10+x*10,9+y*10), fill='black')
-                # /_
-                dr.line((0+x*10,10+y*10,10+x*10,0+y*10), fill='black')
-                #top
-                dr.line((0+x*10,1+y*10,10+x*10,1+y*10), fill='black')
+                if len(griding[y][x][1]) > 0:
+                    #dr.line((0+x*10,0+y*10,10+x*10,10+y*10), fill='black')
+                    #dr.line((1+x*10,0+y,1+x*10,0+y*10), fill='black')
+                    #dr.line((9+x*10,10+y,9+x*10,10+y*10), fill='black')
+                    #dr.line((0+x*10,9+y*10,10+x*10,9+y*10), fill='black')
+                    #dr.line((0+x*10,10+y*10,10+x*10,0+y*10), fill='black')
+                    dr.line((0+x*10,1+y*10,10+x*10,1+y*10), fill='black')
         im.save('test.png')
 
         for x in range(max_width):
