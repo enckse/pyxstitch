@@ -11,7 +11,7 @@ def main():
 if __name__ == '__main__':
     main()"""
 code = """
-def ABCDEFG
+def aABCDEFG
     HIJK
 
 LMNOPQRS
