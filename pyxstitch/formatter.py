@@ -8,7 +8,7 @@ Takes a text stream and converts to a cross stitch output (HTML).
 from pygments.formatter import Formatter
 import webcolors as wc
 import pyxstitch.font as ft
-import string
+import pyxstitch.symbols as sym
 
 _BLTR_BS = "bltr-bs"
 _TLBR_BS = "tlbr-bs"
@@ -70,14 +70,12 @@ class CrossStitchFormatter(Formatter):
 
         # TODO: these components should be set or defaulted
         self.default = "000000"
+        self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.DefaultFontFactory()
-        self.keying = sorted(string.printable)
 
-        idx = 0
         for token, style in self.style:
             if style['color']:
-                self._colors[token] = (style['color'], self.keying[idx])
-                idx += 1
+                self._colors[token] = style['color']
 
     def _closest(self, rgb):
         """We need to find a color approximation."""
@@ -110,8 +108,8 @@ class CrossStitchFormatter(Formatter):
         use_color = self.default
         if token in self._colors:
             use_color = self._colors[token]
-        return (self._get_color(self._to_hex(use_color[0])),
-                use_color[1])
+        return (self._get_color(self._to_hex(use_color)),
+                self.symbol_generator.next(use_color))
 
     def _new_entry(self, ch, style):
         return (self.font_factory.get(ch), style)
