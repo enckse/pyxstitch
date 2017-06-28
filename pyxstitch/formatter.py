@@ -115,6 +115,9 @@ class CrossStitchFormatter(Formatter):
                 "#" + use_color[0],
                 use_color[1])
 
+    def _new_entry(self, ch, style):
+        return (self.font_factory.get(ch), style)
+
     def _output(self, out_file, value):
         """Perform output step."""
         # TODO: need to write to outfile...probably.
@@ -136,10 +139,12 @@ class CrossStitchFormatter(Formatter):
             styles = self._token_color(ttype)
             if value == "\n":
                 entries.append(current)
+                if len(current) == 0:
+                    entries.append([self._new_entry(' ', styles)])
                 current = []
             else:
                 for ch in value:
-                    current.append((self.font_factory.get(ch), styles))
+                    current.append(self._new_entry(ch, styles))
         if len(current) > 0:
             entries.append(current)
 
