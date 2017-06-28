@@ -54,6 +54,7 @@ _TD = '<td background="IMG" class="{}" style="{}">'.replace("IMG", _IMG)
 _TD_END = "</td>"
 _TR = "<tr>" + _TD.format("", "") + "{}" + _TD_END + _TD.format("", "") + _TD_END
 _TR_END = "</tr>"
+_LEGEND = "<div class='legend'><p>{} => {}</p></div>"
 
 
 class CrossStitchFormatter(Formatter):
@@ -195,5 +196,5 @@ class CrossStitchFormatter(Formatter):
             self._output(outfile, _TD.format("", "") + str(x + 1) + _TD_END)
         self._output(outfile, _TR_END)
         self._output(outfile, _TABLE_END)
-        for l in set(legend):
-            print(l)
+        for l in sorted(set(legend)):
+            self._output(outfile, _LEGEND.format(l[1], l[0]))
