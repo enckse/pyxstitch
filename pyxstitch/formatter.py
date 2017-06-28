@@ -55,7 +55,7 @@ _TD_END = "</td>"
 _TR = "<tr>" + _TD.format("", "") + "{}" + _TD_END + _TD.format("", "") + _TD_END
 _TR_END = "</tr>"
 _LEGEND = "<div class='legend'><p>{} => {}</p></div>"
-
+_COLOR = "color: {}"
 
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
@@ -73,6 +73,7 @@ class CrossStitchFormatter(Formatter):
         self.default = "000000"
         self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.DefaultFontFactory()
+        self.colorize = False
 
         for token, style in self.style:
             if style['color']:
@@ -153,6 +154,7 @@ class CrossStitchFormatter(Formatter):
             cur_width = 0
             for height in self.font_factory.height():
                 for cur, style in entry:
+                    coloring = style[0]
                     symb = style[1]
                     for cell in cur.cells(height):
                         if height == 0:
@@ -164,6 +166,8 @@ class CrossStitchFormatter(Formatter):
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
                                     is_stitch = True
+                                    if self.colorize:
+                                        styles.append(_COLOR.format(coloring))
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch == ft.BackStitch.TopLeftBottomRight:
                                     classes.append(_TLBR_BS)
