@@ -111,7 +111,6 @@ class CrossStitchFormatter(Formatter):
         if token in self._colors:
             use_color = self._colors[token]
         return (self._get_color(self._to_hex(use_color[0])),
-                "#" + use_color[0],
                 use_color[1])
 
     def _new_entry(self, ch, style):
@@ -150,10 +149,12 @@ class CrossStitchFormatter(Formatter):
         tr_idx += 1
         last = False
         max_width = 0
+        legend = []
         for entry in entries:
             cur_width = 0
             for height in self.font_factory.height():
                 for cur, style in entry:
+                    symb = style[1]
                     for cell in cur.cells(height):
                         if height == 0:
                             cur_width += 1
@@ -181,7 +182,8 @@ class CrossStitchFormatter(Formatter):
                                      _TD.format(" ".join(classes),
                                                 ";".join(styles)))
                         if is_stitch:
-                            self._output(outfile, style[2])
+                            legend.append(style)
+                            self._output(outfile, symb)
                         self._output(outfile, _TD_END)
                         last = False
                 if not last:
@@ -195,3 +197,5 @@ class CrossStitchFormatter(Formatter):
             self._output(outfile, _TD.format("", "") + str(x + 1) + _TD_END)
         self._output(outfile, _TR_END)
         self._output(outfile, _TABLE_END)
+        for l in set(legend):
+            print(l)
