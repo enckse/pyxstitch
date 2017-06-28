@@ -124,6 +124,7 @@ class CrossStitchFormatter(Formatter):
                 self.symbol_generator.next(use_color))
 
     def _new_entry(self, ch, style):
+        """new entry to process."""
         return (self.font_factory.get(ch), style)
 
     def _output(self, out_file, value, mode):
