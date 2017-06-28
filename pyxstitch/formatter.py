@@ -51,7 +51,8 @@ _BACKGROUND = "background-color: #{}"
 _TR = "<tr>"
 _TABLE = "<table cellspacing='1'>"
 _TABLE_END = "</table>"
-_TD = '<td class="{}" style="{}">'
+_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXv7+/v7+8tAJavAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAADElEQVQImWNgoC4AAABQAAGmLdqcAAAAAElFTkSuQmCC'
+_TD = '<td background="IMG" class="{}" style="{}">'.replace("IMG", _IMG)
 _TD_END = "</td>"
 _TR_END = "</tr>"
 
