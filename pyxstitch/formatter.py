@@ -227,6 +227,18 @@ class CrossStitchFormatter(Formatter):
                 dr.rectangle([(0+x*10,0+y*10),(10+x*10,10+y*10)], fill=griding[y][x][2])
                 if griding[y][x][0]:
                     dr.text((0+x*10,0+y*10), griding[y][x][3], (0, 0, 0))
+                # \
+                dr.line((0+x*10,0+y*10,10+x*10,10+y*10), fill='black')
+                #|
+                dr.line((1+x*10,0+y,1+x*10,0+y*10), fill='black')
+                # |
+                dr.line((9+x*10,10+y,9+x*10,10+y*10), fill='black')
+                # _
+                dr.line((0+x*10,9+y*10,10+x*10,9+y*10), fill='black')
+                # /_
+                dr.line((0+x*10,10+y*10,10+x*10,0+y*10), fill='black')
+                #top
+                dr.line((0+x*10,1+y*10,10+x*10,1+y*10), fill='black')
         im.save('test.png')
 
         for x in range(max_width):
