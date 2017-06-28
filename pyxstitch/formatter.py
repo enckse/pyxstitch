@@ -57,6 +57,9 @@ _TR_END = "</tr>"
 _LEGEND = "<div class='legend'><p>{} => {}</p></div>"
 _COLOR = "color: {}"
 
+_DEFAULT_COLOR = "000000"
+
+
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
 
@@ -69,8 +72,7 @@ class CrossStitchFormatter(Formatter):
                      (y + z for y in self._HEX for z in self._HEX)}
         self._colors = {}
 
-        # TODO: these components should be set or defaulted
-        self.default = "000000"
+        self.default = _DEFAULT_COLOR
         self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.DefaultFontFactory()
         self.colorize = False
