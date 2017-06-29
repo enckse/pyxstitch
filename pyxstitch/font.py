@@ -46,6 +46,8 @@ class DefaultFontFactory(FontFactory):
         """Lookup a character in the font."""
         if ch in self._characters:
             return self._characters[ch]
+        if ch in self._replace:
+            raise FontException("Text was not preprocessed")
         raise FontException("No font entry for character {}".format(ch))
 
     def _set_flags(self, val_str, enums, add_to):
