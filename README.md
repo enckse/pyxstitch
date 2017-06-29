@@ -7,6 +7,20 @@ pyxstitch is an application (and associated library/compenents) that takes sourc
 
 # install
 
+* Clone this repository and run something to one of the following depending on system configuration:
+
+```
+python setup.py install
+```
+or
+```
+pip install .
+```
+or
+```
+pip install -e .
+```
+
 # usage
 
 to run
