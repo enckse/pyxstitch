@@ -26,6 +26,8 @@ by default a a png file is created matching the source code name (e.g. `hello.py
 pyxstitch --file program.py --output image.png
 ```
 
+# examples
+
 # customizing
 
 the library components of the CrossStitchFormatter can be changed to:
