@@ -1,8 +1,11 @@
-SRC=$(shell find . -type f -name "*.py" | grep -v "examples")
+SRC=$(shell find . -type f -name "*.py" | grep -v "examples" | grep -v "build")
 BIN=bin
 .PHONY:
 
-check: test example analyze
+check: install test example analyze
+
+install:
+	python setup.py install
 
 example: clean
 	go build -o $(BIN)/go_hw examples/hello_world.go

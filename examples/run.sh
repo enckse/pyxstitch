@@ -2,7 +2,7 @@
 ASCII="../bin/ascii.txt"
 export PYTHONPATH="../:$PYTHONPATH"
 for f in $(find . -type f | grep "^hello_world"); do
-    python ../main.py --file $f
+    pyxstitch --file $f
     if [ $? -ne 0 ]; then
         echo "processing error $f"
         exit 1
@@ -18,4 +18,4 @@ if [ $? -ne 0 ]; then
     echo "ascii test failed"
     exit
 fi
-python ../main.py --file $ASCII
+pyxstitch --file $ASCII
