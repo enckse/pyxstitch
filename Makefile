@@ -14,6 +14,7 @@ example: install clean
 	cd examples && ./run.sh
 
 analyze:
+	pip install pep8 pep257
 	pep8 $(SRC)
 	pep257 $(SRC)
 
