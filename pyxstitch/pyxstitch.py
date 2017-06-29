@@ -16,7 +16,9 @@ def main():
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--dark', action='store_true')
-    parser.add_argument('--style', default='monokai', choices=get_all_styles())
+    parser.add_argument('--style',
+                        default='monokai',
+                        choices=list(get_all_styles()))
     args = parser.parse_args()
     lexer = get_lexer_for_filename(args.file)
     with open(args.file, 'r') as f:
