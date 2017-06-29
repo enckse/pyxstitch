@@ -125,21 +125,27 @@ class CrossStitchFormatter(Formatter):
                         fill = None
                         if self.colorize and len(cell) > 0:
                             fill = coloring = style[0]
-                        dr.rectangle([(0+x*10,0+y*10),(10+x*10,10+y*10)], outline='lightgrey', fill=fill)
+                        x_start = 0 + x * 10
+                        y_start = 0 + y * 10
+                        x_end = 10 + x * 10
+                        y_end = 10 + y * 10
+                        dr.rectangle([(x_start, y_start),(x_end, y_end)],
+                                      outline='lightgrey',
+                                      fill=fill)
                         for stitch in cell:
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch == ft.BackStitch.TopLeftBottomRight:
-                                    lines.append((0+x*10,0+y*10,10+x*10,10+y*10))
+                                    lines.append((x_start,0+y*10,10+x*10,10+y*10))
                                 if stitch == ft.BackStitch.BottomLeftTopRight:
-                                    lines.append((0+x*10,10+y*10,10+x*10,0+y*10))
+                                    lines.append((x_start,10+y*10,10+x*10,0+y*10))
                                 if stitch == ft.BackStitch.Left:
-                                    lines.append((0+x*10,0+y*10,0+x*10,10+y*10))
+                                    lines.append((x_start,0+y*10,0+x*10,10+y*10))
                                 if stitch == ft.BackStitch.Right:
                                     lines.append((10+x*10,0+y*10,10+x*10,10+y*10))
                                 if stitch == ft.BackStitch.Top:
-                                    lines.append((0+x*10,0+y*10,10+x*10,0+y*10))
+                                    lines.append((x_start,0+y*10,10+x*10,0+y*10))
                                 if stitch == ft.BackStitch.Bottom:
-                                    lines.append((0+x*10,10+y*10,10+x*10,10+y*10))
+                                    lines.append((x_start,10+y*10,10+x*10,10+y*10))
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
                                     dr.text((1+x*10,1+y*10), symb, (0, 0, 0))
