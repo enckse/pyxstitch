@@ -29,6 +29,9 @@ class CrossStitchFormatter(Formatter):
         self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.DefaultFontFactory()
         self.colorize = False
+        self.dark = False
+        self._lines = 'lightgrey'
+        self._symbols = 'black'
 
         for token, style in self.style:
             if style['color']:
@@ -75,6 +78,9 @@ class CrossStitchFormatter(Formatter):
 
     def format(self, tokensource, outfile):
         """Override to format."""
+        if self.dark:
+            self._symbols = 'white'
+            self._default_color = '000000'
         entries = []
         current = []
         calc_height = 0
@@ -140,7 +146,7 @@ class CrossStitchFormatter(Formatter):
                         x_end = offset + offset + x * offset
                         y_end = offset + offset + y * offset
                         dr.rectangle([(x_start, y_start), (x_end, y_end)],
-                                     outline='lightgrey',
+                                     outline=self._lines,
                                      fill=fill)
                         for stitch in cell:
                             legends.append((coloring, symb))
@@ -179,13 +185,13 @@ class CrossStitchFormatter(Formatter):
                                 if stitch == ft.Stitch.CrossStitch:
                                     dr.text((offset + 2 + x * offset, y_start),
                                             symb,
-                                            'black')
+                                            self._symbols)
                         has = True
                 if not has:
                     y -= 1
         # NOTE: we draw backstitch lines LAST to prevent overwrite
         for l in lines:
-            dr.line(l, fill='black')
+            dr.line(l, fill=self._symbols)
         # add lables
         for h in range(calc_height):
             if h == 0:
@@ -196,17 +202,17 @@ class CrossStitchFormatter(Formatter):
                             char = "X"
                         dr.text((w * offset, 0),
                                 char,
-                                'black')
+                                self._symbols)
             if h % 10 == 0 or h == mid_height:
                 char = str(h)
                 if h == mid_height:
                     char = 'X'
                 dr.text((0, h * offset),
                         char,
-                        'black')
+                        self._symbols)
         # and legend
         str_leg = sorted(["{} => {}".format(x[0], x[1]) for x in set(legends)])
         dr.text((offset * 2, calc_height * (offset)),
                 " , ".join(str_leg),
-                'black')
+                self._symbols)
         im.save('test.png')
