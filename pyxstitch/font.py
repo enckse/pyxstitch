@@ -35,13 +35,14 @@ class DefaultFontFactory(FontFactory):
         return range(self._height)
 
     def width(self):
+        """get the font width."""
         return range(self._width)
 
     def get(self, ch):
         """Lookup a character in the font."""
         if ch in self._characters:
             return self._characters[ch]
-        raise BadCharException("Not font entry for charcter {}".format(ch))
+        raise FontException("No font entry for character {}".format(ch))
 
     def _set_flags(self, val_str, enums, add_to):
         """Check which enum flags are set - append them to a list."""

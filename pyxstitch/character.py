@@ -42,10 +42,13 @@ class Character(object):
 
     def __init__(self, height, width):
         """Instance the character, creates an empty pattern grid."""
+        self._height = height
         self._pattern = _empty_grid(width, height)
 
     def cells(self, height):
         """Get stitches for  a specied character and returns them for it."""
+        if height > self._height:
+            return None
         wide = self._pattern[height]
         for width in range(len(wide)):
             grid = wide[width]
