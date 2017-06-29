@@ -1,7 +1,7 @@
 #!/bin/bash
 ASCII="../bin/ascii.txt"
 export PYTHONPATH="../:$PYTHONPATH"
-for f in $(find . -type f | grep "^hello_world"); do
+for f in $(find . -type f | grep "hello_world"); do
     pyxstitch --file $f
     if [ $? -ne 0 ]; then
         echo "processing error $f"

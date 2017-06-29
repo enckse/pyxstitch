@@ -7,7 +7,7 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: clean
+example: install clean
 	go build -o $(BIN)/go_hw examples/hello_world.go
 	gcc examples/hello_world.c -o $(BIN)/c_hw
 	python examples/hello_world.py &>/dev/null
