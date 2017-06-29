@@ -105,11 +105,12 @@ class CrossStitchFormatter(Formatter):
         calc_width += 1
         calc_width = ((calc_width * 2) +
                       (calc_width * max(self.font_factory.width())))
-        mid = int(floor(calc_width / 2))
+        mid_width = int(floor(calc_width / 2))
         calc_height += 1
         calc_height = (calc_height +
                        (calc_height * max(self.font_factory.height())))
         default_rgb = self._to_hex(self._default_color)
+        mid_height = int(floor(calc_height / 2))
         offset = 10
         im = Image.new('RGB',
                        (calc_width * offset, calc_height * offset),
@@ -130,10 +131,10 @@ class CrossStitchFormatter(Formatter):
                         fill = None
                         if self.colorize and len(cell) > 0:
                             fill = coloring = style[0]
-                        x_start = 0 + x * offset
-                        y_start = 0 + y * offset
-                        x_end = offset + x * offset
-                        y_end = offset + y * offset
+                        x_start = offset + 0 + x * offset
+                        y_start = offset + 0 + y * offset
+                        x_end = offset + offset + x * offset
+                        y_end = offset + offset + y * offset
                         dr.rectangle([(x_start, y_start),(x_end, y_end)],
                                       outline='lightgrey',
                                       fill=fill)
@@ -171,7 +172,7 @@ class CrossStitchFormatter(Formatter):
                                                   y_end))
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
-                                    dr.text((2 + x * offset, y_start),
+                                    dr.text((offset + 2 + x * offset, y_start),
                                              symb,
                                              'black')
                         has = True
@@ -180,4 +181,23 @@ class CrossStitchFormatter(Formatter):
         # NOTE: we draw backstitch lines LAST to prevent overwrite
         for l in lines:
             dr.line(l, fill='black')
+        # add lables
+        for h in range(calc_height):
+            if h == 0:
+                for w in range(calc_width):
+                    if w % 10 == 0 or w == mid_width:
+                        char = str(w)
+                        if w == mid_width:
+                            char = "X"
+                        dr.text((w * offset, 0),
+                                 char,
+                                 'black')
+            if h % 10 == 0 or h == mid_height:
+                char = str(h)
+                if h == mid_height:
+                    char = 'X'
+                dr.text((0, h * offset),
+                        char,
+                        'black')
+
         im.save('test.png')
