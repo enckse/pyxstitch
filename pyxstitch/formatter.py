@@ -141,18 +141,17 @@ class CrossStitchFormatter(Formatter):
                 for cur, style in entry:
                     symb = style[1]
                     coloring = style[0]
+                    color = self._symbols
+                    if self.colorize:
+                        color = coloring
                     for cell in cur.cells(height):
                         x += 1
-                        fill = None
-                        if self.colorize and len(cell) > 0:
-                            fill = coloring
                         x_start = offset + 0 + x * offset
                         y_start = offset + 0 + y * offset
                         x_end = offset + offset + x * offset
                         y_end = offset + offset + y * offset
                         dr.rectangle([(x_start, y_start), (x_end, y_end)],
-                                     outline=self._lines,
-                                     fill=fill)
+                                     outline=self._lines)
                         for stitch in cell:
                             legends.append((coloring, symb))
                             if isinstance(stitch, ft.BackStitch):
@@ -160,43 +159,49 @@ class CrossStitchFormatter(Formatter):
                                     lines.append((x_start,
                                                   y_start,
                                                   x_end,
-                                                  y_end))
+                                                  y_end,
+                                                  color))
                                 if stitch == ft.BackStitch.BottomLeftTopRight:
                                     lines.append((x_start,
                                                   y_end,
                                                   x_end,
-                                                  y_start))
+                                                  y_start,
+                                                  color))
                                 if stitch == ft.BackStitch.Left:
                                     lines.append((x_start,
                                                   y_start,
                                                   x_start,
-                                                  y_end))
+                                                  y_end,
+                                                  color))
                                 if stitch == ft.BackStitch.Right:
                                     lines.append((x_end,
                                                   y_start,
                                                   x_end,
-                                                  y_end))
+                                                  y_end,
+                                                  color))
                                 if stitch == ft.BackStitch.Top:
                                     lines.append((x_start,
                                                   y_start,
                                                   x_end,
-                                                  y_start))
+                                                  y_start,
+                                                  color))
                                 if stitch == ft.BackStitch.Bottom:
                                     lines.append((x_start,
                                                   y_end,
                                                   x_end,
-                                                  y_end))
+                                                  y_end,
+                                                  color))
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
                                     dr.text((offset + 2 + x * offset, y_start),
                                             symb,
-                                            self._symbols)
+                                            color)
                         has = True
                 if not has:
                     y -= 1
         # NOTE: we draw backstitch lines LAST to prevent overwrite
         for l in lines:
-            dr.line(l, fill=self._symbols)
+            dr.line((l[0], l[1], l[2], l[3]), fill=l[4])
         # add lables
         for h in range(calc_height):
             if h == 0:
