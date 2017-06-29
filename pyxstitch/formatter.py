@@ -112,12 +112,15 @@ class CrossStitchFormatter(Formatter):
         default_rgb = self._to_hex(self._default_color)
         mid_height = int(floor(calc_height / 2))
         offset = 10
+        legend = 100 
         im = Image.new('RGB',
-                       (calc_width * offset, calc_height * offset),
+                       (calc_width * offset,
+                        (calc_height * offset) + legend),
                        default_rgb)
         dr = ImageDraw.Draw(im)
         y = -1
         lines = []
+        legends = []
         for entry in entries:
             for height in self.font_factory.height():
                 y += 1
@@ -126,11 +129,12 @@ class CrossStitchFormatter(Formatter):
                 has = False
                 for cur, style in entry:
                     symb = style[1]
+                    coloring = style[0]
                     for cell in cur.cells(height):
                         x += 1
                         fill = None
                         if self.colorize and len(cell) > 0:
-                            fill = coloring = style[0]
+                            fill = coloring
                         x_start = offset + 0 + x * offset
                         y_start = offset + 0 + y * offset
                         x_end = offset + offset + x * offset
@@ -139,6 +143,7 @@ class CrossStitchFormatter(Formatter):
                                       outline='lightgrey',
                                       fill=fill)
                         for stitch in cell:
+                            legends.append((coloring, symb))
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch == ft.BackStitch.TopLeftBottomRight:
                                     lines.append((x_start,
@@ -199,5 +204,7 @@ class CrossStitchFormatter(Formatter):
                 dr.text((0, h * offset),
                         char,
                         'black')
-
+        # and legend
+        str_leg = sorted(["{} => {}".format(x[0], x[1]) for x in set(legends)])
+        dr.text((offset * 2, calc_height * (offset)), " , ".join(str_leg), 'black')
         im.save('test.png')
