@@ -32,6 +32,7 @@ class CrossStitchFormatter(Formatter):
         self.dark = False
         self._lines = 'lightgrey'
         self._symbols = 'black'
+        self.file_name = None
 
         for token, style in self.style:
             if style['color']:
@@ -215,4 +216,4 @@ class CrossStitchFormatter(Formatter):
         dr.text((offset * 2, calc_height * (offset)),
                 " , ".join(str_leg),
                 self._symbols)
-        im.save('test.png')
+        im.save(self.file_name)
