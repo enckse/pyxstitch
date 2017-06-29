@@ -130,9 +130,11 @@ class CrossStitchFormatter(Formatter):
         mid_height = int(floor(calc_height / 2))
         offset = 10
         legend = 100
+        top_pad = 50
+        left_pad = 50
         im = Image.new('RGB',
-                       (calc_width * offset,
-                        (calc_height * offset) + legend),
+                       (calc_width * offset + left_pad,
+                        (calc_height * offset) + top_pad + legend),
                        default_rgb)
         dr = ImageDraw.Draw(im)
         y = -1
@@ -152,10 +154,10 @@ class CrossStitchFormatter(Formatter):
                         color = coloring
                     for cell in cur.cells(height):
                         x += 1
-                        x_start = offset + 0 + x * offset
-                        y_start = offset + 0 + y * offset
-                        x_end = offset + offset + x * offset
-                        y_end = offset + offset + y * offset
+                        x_start = left_pad + offset + 0 + x * offset
+                        y_start = top_pad + offset + 0 + y * offset
+                        x_end = left_pad + offset + offset + x * offset
+                        y_end = top_pad + offset + offset + y * offset
                         dr.rectangle([(x_start, y_start), (x_end, y_end)],
                                      outline=self._lines)
                         for stitch in cell:
@@ -199,7 +201,8 @@ class CrossStitchFormatter(Formatter):
                                                   color))
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
-                                    dr.text((offset + 2 + x * offset, y_start),
+                                    x_pos = left_pad + offset + 2 + x * offset
+                                    dr.text((x_pos, y_start),
                                             symb,
                                             color)
                         has = True
@@ -216,14 +219,14 @@ class CrossStitchFormatter(Formatter):
                         char = str(w)
                         if w == mid_width:
                             char = "X"
-                        dr.text((w * offset, 0),
+                        dr.text((left_pad + w * offset, top_pad - 5),
                                 char,
                                 self._symbols)
             if h % 10 == 0 or h == mid_height:
                 char = str(h)
                 if h == mid_height:
                     char = 'X'
-                dr.text((0, h * offset),
+                dr.text((left_pad - 5, top_pad + h * offset),
                         char,
                         self._symbols)
         # and legend
@@ -231,9 +234,9 @@ class CrossStitchFormatter(Formatter):
                       [("color", "symbol", "rgb"), ("---", "---", "---")] +
                       sorted(list(set(legends)))]
         chunk_idx = 0
+        leg_height = (calc_height * offset) - (legend / 4)
         for chunk in self._legend(legend_tab, 8):
-            dr.text((offset * 2 + (chunk_idx * 200),
-                     (calc_height * offset) - (5 * offset)),
+            dr.text((offset * 2 + (chunk_idx * 200), leg_height),
                     "\n".join(chunk),
                     self._symbols)
             chunk_idx += 1
