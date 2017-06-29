@@ -102,8 +102,10 @@ class CrossStitchFormatter(Formatter):
             if len(current) > calc_width:
                 calc_width = len(current)
             entries.append(current)
+        calc_width += 1
         calc_width = ((calc_width * 2) + (calc_width * max(self.font_factory.width())))
         mid = int(floor(calc_width / 2))
+        calc_height += 1
         calc_height = (calc_height + (calc_height * max(self.font_factory.height())))
         default_rgb = self._to_hex(self._default_color)
         im = Image.new('RGB', (calc_width * 10, calc_height * 10), default_rgb)
