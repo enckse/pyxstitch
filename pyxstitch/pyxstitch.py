@@ -24,9 +24,10 @@ def main():
         formatting.colorize = args.colorize
         formatting.dark = args.dark
         formatting.file_name = args.output
+        text = formatting.preprocess(f.read())
         if args.output is None:
             formatting.file_name = os.path.splitext(args.file)[0] + ".png"
-        highlight(f.read(), lexer, formatting)
+        highlight(text, lexer, formatting)
 
 if __name__ == '__main__':
     main()

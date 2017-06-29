@@ -18,6 +18,9 @@ class FontFactory(object):
         """Get a character definition."""
         raise FontException("not implemented.")
 
+    def process(self, string_value):
+        """Process a string before lexing."""
+        raise FontException("not implemented.")
 
 class DefaultFontFactory(FontFactory):
     """Create characters of the default stitching font."""
@@ -50,6 +53,10 @@ class DefaultFontFactory(FontFactory):
         for e in enums:
             if e & val:
                 add_to.append(e)
+
+    def process(self, value):
+        """Process before lexer."""
+        return value.replace('\t', '    ')
 
     def _parse(self, definition, ch):
         """Parse a character definition."""
@@ -424,6 +431,17 @@ class DefaultFontFactory(FontFactory):
 |    |    |    |    |    |
 |    |    |    |    |    |
 """)
+        objs['k'] = self._build_character("""
+|1.13|    |    |    |    |
+|1.12|    |    |    |    |
+|1.12|    |    |    |    |
+|1.12|    |0.16|0.17|    |
+|1.04|1.03|1.08|    |    |
+|1.12|    |0.32|0.32|    |
+|1.14|    |    |0.32|0.34|
+|    |    |    |    |    |
+|    |    |    |    |    |
+""")
         objs['h'] = self._build_character("""
 |1.13|    |    |    |    |
 |1.12|    |    |    |    |
@@ -564,6 +582,17 @@ class DefaultFontFactory(FontFactory):
 |1.12|0.32|1.03|0.16|1.12|
 |1.12|    |    |    |1.12|
 |1.14|    |    |    |1.14|
+|    |    |    |    |    |
+|    |    |    |    |    |
+""")
+        objs['w'] = self._build_character("""
+|    |    |    |    |    |
+|    |    |    |    |    |
+|    |    |    |    |    |
+|1.13|    |    |    |1.13|
+|1.12|    |    |    |1.12|
+|1.12|0.16|1.03|0.32|1.12|
+|1.06|0.16|    |0.32|1.10|
 |    |    |    |    |    |
 |    |    |    |    |    |
 """)

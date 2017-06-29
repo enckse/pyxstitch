@@ -38,6 +38,10 @@ class CrossStitchFormatter(Formatter):
             if style['color']:
                 self._colors[token] = style['color']
 
+    def preprocess(self, text):
+        """Process text before lexer."""
+        return self.font_factory.process(text)
+
     def _closest(self, rgb):
         """We need to find a color approximation."""
         min_col = {}

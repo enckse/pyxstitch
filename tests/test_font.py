@@ -30,3 +30,8 @@ class TestDefaultFont(unittest.TestCase):
         with self.assertRaises(ft.FontException) as cm:
             factory.get(None)
         self.assertEqual("No font entry for character None", str(cm.exception))
+
+    def test_preprocess(self):
+        """Test preprocess."""
+        factory = ft.DefaultFontFactory()
+        self.assertEquals("    ", factory.process('\t'))
