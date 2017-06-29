@@ -12,6 +12,8 @@ class TestDefaultFont(unittest.TestCase):
         """Validate all ascii printable."""
         factory = ft.DefaultFontFactory()
         for ch in string.printable:
+            if ch in ['\t', '\r', '\v', '\f', '\n']:
+                continue
             factory.get(ch)
 
     def test_height(self):
