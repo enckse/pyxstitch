@@ -31,6 +31,7 @@ class DefaultFontFactory(FontFactory):
         self._width = 5
         self._top_off = 1
         self._bot_off = 1
+        self._replace = {'\t': '    ', '\r': '\n', '\f': '\n', '\v': '\n'}
         self._characters = self._initialize_characters()
 
     def height(self):
@@ -56,7 +57,10 @@ class DefaultFontFactory(FontFactory):
 
     def process(self, value):
         """Process before lexer."""
-        return value.replace('\t', '    ')
+        val = value
+        for replacing in self._replace:
+            val = val.replace(replacing, self._replace[replacing])
+        return val
 
     def _parse(self, definition, ch):
         """Parse a character definition."""
