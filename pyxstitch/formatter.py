@@ -13,61 +13,6 @@ from math import floor
 from enum import Enum
 from PIL import Image, ImageFont, ImageDraw
 
-_BLTR_BS = "bltr-bs"
-_TLBR_BS = "tlbr-bs"
-_BS_STYLE = """
-.STYLE:after{
-    content:"";
-    position:absolute;
-    border-top:1px solid black;
-    width:13px;
-    ATTRS
-}"""
-_BLTR_BS_CSS = _BS_STYLE.replace("STYLE", _BLTR_BS).replace("ATTRS", """
-    transform: rotate(135deg);
-    transform-origin: 3px -1px;
-""")
-_TLBR_BS_CSS = _BS_STYLE.replace("STYLE", _TLBR_BS).replace("ATTRS", """
-    transform: rotate(45deg);
-    transform-origin: 5px -7px;
-""")
-_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXv7+/v7+8tAJavAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAADElEQVQImWNgoC4AAABQAAGmLdqcAAAAAElFTkSuQmCC'
-_HTML_STYLE = """
-<style>
-table {
-    text-align: center;
-}
-tr {
-    padding: 0px 0px 0px 0px;
-}
-td {
-    background: url(IMG);
-    width: 10px;
-    height: 10px;
-    font-size: 8px;
-}
-
-STYLE
-</style>""".replace("STYLE", _BLTR_BS_CSS + _TLBR_BS_CSS).replace("IMG", _IMG)
-
-_BORDER = "border-{}: 1px solid black"
-
-_TABLE = "<table cellspacing='1'>"
-_TABLE_END = "</table>"
-_TD = '<td class="{}" style="{}">'
-_TD_END = "</td>"
-_TR = "<tr>" + _TD.format("", "") + "{}" + _TD_END + _TD.format("", "") + _TD_END
-_TR_END = "</tr>"
-_LEGEND = "<div class='legend'><p>{} => {}</p></div>"
-_COLOR = "color: {}"
-
-_DEFAULT_COLOR = "000000"
-
-
-class Mode(Enum):
-    HTML = 1
-    Image = 2
-
 
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
@@ -80,12 +25,10 @@ class CrossStitchFormatter(Formatter):
         self._hex = {x: int(x, 16) for x in
                      (y + z for y in self._HEX for z in self._HEX)}
         self._colors = {}
-
-        self.default = _DEFAULT_COLOR
+        self._default_color = "ffffff"
         self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.DefaultFontFactory()
         self.colorize = False
-        self.mode = Mode.Image
 
         for token, style in self.style:
             if style['color']:
@@ -119,7 +62,7 @@ class CrossStitchFormatter(Formatter):
 
     def _token_color(self, token):
         """We need to get the color for a token."""
-        use_color = self.default
+        use_color = self._default_color
         if token in self._colors:
             use_color = self._colors[token]
         return (self._get_color(self._to_hex(use_color)),
@@ -127,18 +70,15 @@ class CrossStitchFormatter(Formatter):
 
     def _new_entry(self, ch, style):
         """new entry to process."""
-        return (self.font_factory.get(ch), style)
-
-    def _output(self, out_file, value, mode):
-        """Perform output step."""
-        # TODO: need to write to outfile...probably.
-        if mode == self.mode:
-            print(value)
+        char = self.font_factory.get(ch)
+        return (char, style)
 
     def format(self, tokensource, outfile):
         """Override to format."""
         entries = []
         current = []
+        calc_height = 0
+        calc_width = 0
         for ttype, value in tokensource:
             while ttype not in self._colors:
                 if ttype.parent is not None:
@@ -147,6 +87,9 @@ class CrossStitchFormatter(Formatter):
                     break
             styles = self._token_color(ttype)
             if value == "\n":
+                calc_height += 1
+                if len(current) > calc_width:
+                    calc_width = len(current)
                 entries.append(current)
                 if len(current) == 0:
                     entries.append([self._new_entry(' ', styles)])
@@ -155,90 +98,53 @@ class CrossStitchFormatter(Formatter):
                 for ch in value:
                     current.append(self._new_entry(ch, styles))
         if len(current) > 0:
+            calc_height += 1
+            if len(current) > calc_width:
+                calc_width = len(current)
             entries.append(current)
-        self._output(outfile, _HTML_STYLE, Mode.HTML)
-        self._output(outfile, _TABLE, Mode.HTML)
-        tr_idx = 1
-        self._output(outfile, _TR.format(tr_idx), Mode.HTML)
-        tr_idx += 1
-        last = False
-        max_width = 0
-        legend = []
-        total_height = 0
-        griding = []
+        calc_width = ((calc_width * 2) + (calc_width * max(self.font_factory.width())))
+        mid = int(floor(calc_width / 2))
+        calc_height = (calc_height + (calc_height * max(self.font_factory.height())))
+        default_rgb = self._to_hex(self._default_color)
+        im = Image.new('RGB', (calc_width * 10, calc_height * 10), default_rgb)
+        dr = ImageDraw.Draw(im)
+        y = -1
+        lines = []
         for entry in entries:
-            cur_width = 0
             for height in self.font_factory.height():
+                y += 1
+                x = -1
                 grid = []
+                has = False
                 for cur, style in entry:
-                    coloring = style[0]
                     symb = style[1]
                     for cell in cur.cells(height):
-                        if height == 0:
-                            cur_width += 1
-                        classes = []
-                        is_stitch = False
-                        styles = []
+                        x += 1
+                        fill = None
+                        if self.colorize and len(cell) > 0:
+                            fill = coloring = style[0]
+                        dr.rectangle([(0+x*10,0+y*10),(10+x*10,10+y*10)], outline='lightgrey', fill=fill)
                         for stitch in cell:
-                            if isinstance(stitch, ft.Stitch):
-                                if stitch == ft.Stitch.CrossStitch:
-                                    is_stitch = True
-                                    if self.colorize:
-                                        styles.append(_COLOR.format(coloring))
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch == ft.BackStitch.TopLeftBottomRight:
-                                    classes.append(_TLBR_BS)
+                                    lines.append((0+x*10,0+y*10,10+x*10,10+y*10))
                                 if stitch == ft.BackStitch.BottomLeftTopRight:
-                                    classes.append(_BLTR_BS)
-                                if stitch == ft.BackStitch.Top:
-                                    styles.append(_BORDER.format("top"))
+                                    lines.append((0+x*10,10+y*10,10+x*10,0+y*10))
                                 if stitch == ft.BackStitch.Left:
-                                    styles.append(_BORDER.format("left"))
+                                    lines.append((0+x*10,0+y*10,0+x*10,10+y*10))
                                 if stitch == ft.BackStitch.Right:
-                                    styles.append(_BORDER.format("right"))
+                                    lines.append((10+x*10,0+y*10,10+x*10,10+y*10))
+                                if stitch == ft.BackStitch.Top:
+                                    lines.append((0+x*10,0+y*10,10+x*10,0+y*10))
                                 if stitch == ft.BackStitch.Bottom:
-                                    styles.append(_BORDER.format("bottom"))
-                        self._output(outfile,
-                                     _TD.format(" ".join(classes),
-                                                ";".join(styles)), Mode.HTML)
-                        grid.append((is_stitch, classes + styles, coloring, symb))
-                        if is_stitch:
-                            legend.append(style)
-                            self._output(outfile, symb, Mode.HTML)
-                        self._output(outfile, _TD_END, Mode.HTML)
-                        last = False
-                if not last:
-                    self._output(outfile, _TR_END, Mode.HTML)
-                    self._output(outfile, _TR.format(tr_idx), Mode.HTML)
-                    tr_idx += 1
-                    last = True
-                    total_height += 1
-                    griding.append(grid)
-            if cur_width > max_width:
-                max_width = cur_width
-        mid = int(floor(max_width / 2))
-        im = Image.new('RGB', (max_width * 10, total_height * 10), (0, 0, 0))
-        dr = ImageDraw.Draw(im)
-        for y in range(len(griding)):
-            for x in range(len(griding[y])):
-                dr.rectangle([(0+x*10,0+y*10),(10+x*10,10+y*10)], fill=griding[y][x][2])
-                if griding[y][x][0]:
-                    dr.text((0+x*10,0+y*10), griding[y][x][3], (0, 0, 0))
-                if len(griding[y][x][1]) > 0:
-                    #dr.line((0+x*10,0+y*10,10+x*10,10+y*10), fill='black')
-                    #dr.line((1+x*10,0+y,1+x*10,0+y*10), fill='black')
-                    #dr.line((9+x*10,10+y,9+x*10,10+y*10), fill='black')
-                    #dr.line((0+x*10,9+y*10,10+x*10,9+y*10), fill='black')
-                    #dr.line((0+x*10,10+y*10,10+x*10,0+y*10), fill='black')
-                    dr.line((0+x*10,1+y*10,10+x*10,1+y*10), fill='black')
+                                    lines.append((0+x*10,10+y*10,10+x*10,10+y*10))
+                            if isinstance(stitch, ft.Stitch):
+                                if stitch == ft.Stitch.CrossStitch:
+                                    dr.text((1+x*10,1+y*10), symb, (0, 0, 0))
+                        has = True
+                if not has:
+                    y -= 1
+        # NOTE: we draw backstitch lines LAST to prevent overwrite
+        for l in lines:
+            dr.line(l, fill='black')
         im.save('test.png')
-
-        for x in range(max_width):
-            val = 'X'
-            if mid != x:
-                val = str(x + 1)
-            self._output(outfile, _TD.format("", "") + val + _TD_END, Mode.HTML)
-        self._output(outfile, _TR_END, Mode.HTML)
-        self._output(outfile, _TABLE_END, Mode.HTML)
-        for l in sorted(set(legend)):
-            self._output(outfile, _LEGEND.format(l[1], l[0]), Mode.HTML)

@@ -34,6 +34,9 @@ class DefaultFontFactory(FontFactory):
         """get the font factory range of height for characters."""
         return range(self._height)
 
+    def width(self):
+        return range(self._width)
+
     def get(self, ch):
         """Lookup a character in the font."""
         if ch in self._characters:

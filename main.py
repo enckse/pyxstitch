@@ -11,12 +11,10 @@ def main():
     parser.add_argument('--file', type=str, required=True)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--style', default='monokai', choices=get_all_styles())
-    parser.add_argument('--default-color', default=fmt._DEFAULT_COLOR)
     args = parser.parse_args()
     lexer = get_lexer_for_filename(args.file)
     with open(args.file, 'r') as f:
         formatting = fmt.CrossStitchFormatter(style=args.style)
-        formatting.default = args.default_color
         formatting.colorize = args.colorize
         highlight(f.read(), lexer, formatting)
 
