@@ -1,10 +1,12 @@
+#!/usr/bin/python
+"""Test symbol generator(s)."""
 import unittest
 import pyxstitch.symbols as symb
 import string
 
+
 class TestSymbols(unittest.TestCase):
     """Test symbols object."""
-
 
     def test_reuse(self):
         """Test reuse."""

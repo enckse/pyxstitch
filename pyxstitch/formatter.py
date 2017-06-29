@@ -112,7 +112,7 @@ class CrossStitchFormatter(Formatter):
         default_rgb = self._to_hex(self._default_color)
         mid_height = int(floor(calc_height / 2))
         offset = 10
-        legend = 100 
+        legend = 100
         im = Image.new('RGB',
                        (calc_width * offset,
                         (calc_height * offset) + legend),
@@ -139,9 +139,9 @@ class CrossStitchFormatter(Formatter):
                         y_start = offset + 0 + y * offset
                         x_end = offset + offset + x * offset
                         y_end = offset + offset + y * offset
-                        dr.rectangle([(x_start, y_start),(x_end, y_end)],
-                                      outline='lightgrey',
-                                      fill=fill)
+                        dr.rectangle([(x_start, y_start), (x_end, y_end)],
+                                     outline='lightgrey',
+                                     fill=fill)
                         for stitch in cell:
                             legends.append((coloring, symb))
                             if isinstance(stitch, ft.BackStitch):
@@ -178,8 +178,8 @@ class CrossStitchFormatter(Formatter):
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
                                     dr.text((offset + 2 + x * offset, y_start),
-                                             symb,
-                                             'black')
+                                            symb,
+                                            'black')
                         has = True
                 if not has:
                     y -= 1
@@ -195,8 +195,8 @@ class CrossStitchFormatter(Formatter):
                         if w == mid_width:
                             char = "X"
                         dr.text((w * offset, 0),
-                                 char,
-                                 'black')
+                                char,
+                                'black')
             if h % 10 == 0 or h == mid_height:
                 char = str(h)
                 if h == mid_height:
@@ -206,5 +206,7 @@ class CrossStitchFormatter(Formatter):
                         'black')
         # and legend
         str_leg = sorted(["{} => {}".format(x[0], x[1]) for x in set(legends)])
-        dr.text((offset * 2, calc_height * (offset)), " , ".join(str_leg), 'black')
+        dr.text((offset * 2, calc_height * (offset)),
+                " , ".join(str_leg),
+                'black')
         im.save('test.png')

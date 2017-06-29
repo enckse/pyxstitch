@@ -1,9 +1,11 @@
+#!/usr/bin/python
+"""Tests character object definitions."""
 import unittest
 import pyxstitch.character as ch
 
+
 class TestCharacter(unittest.TestCase):
     """Test character object."""
-
 
     def test_cells(self):
         """Cell data retrieval."""

@@ -1,10 +1,12 @@
+#!/usr/bin/python
+"""Test default font factory settings."""
 import unittest
 import pyxstitch.font as ft
 import string
 
+
 class TestDefaultFont(unittest.TestCase):
     """Test character object."""
-
 
     def test_ascii(self):
         """Validate all ascii printable."""
