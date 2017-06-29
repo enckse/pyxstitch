@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--dark', action='store_true')
+    parser.add_argument('--format', type=str, default="png",
+                        choices=["png", "pdf", "jpg"])
     parser.add_argument('--style',
                         default='monokai',
                         choices=list(get_all_styles()))
@@ -28,7 +30,8 @@ def main():
         formatting.file_name = args.output
         text = formatting.preprocess(f.read())
         if args.output is None:
-            formatting.file_name = os.path.splitext(args.file)[0] + ".png"
+            parts = os.path.splitext(args.file)
+            formatting.file_name = "{}.{}".format(parts[0], args.format)
         highlight(text, lexer, formatting)
 
 if __name__ == '__main__':
