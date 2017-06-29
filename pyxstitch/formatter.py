@@ -74,12 +74,18 @@ class CrossStitchFormatter(Formatter):
         if token in self._colors:
             use_color = self._colors[token]
         return (self._get_color(self._to_hex(use_color)),
-                self.symbol_generator.next(use_color))
+                self.symbol_generator.next(use_color),
+                use_color)
 
     def _new_entry(self, ch, style):
         """new entry to process."""
         char = self.font_factory.get(ch)
         return (char, style)
+
+    def _legend(self, items, size):
+        """Create legend chunk."""
+        for i in range(0, len(items), size):
+            yield items[i:i + size]
 
     def format(self, tokensource, outfile):
         """Override to format."""
@@ -153,7 +159,7 @@ class CrossStitchFormatter(Formatter):
                         dr.rectangle([(x_start, y_start), (x_end, y_end)],
                                      outline=self._lines)
                         for stitch in cell:
-                            legends.append((coloring, symb))
+                            legends.append((coloring, symb, style[2]))
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch == ft.BackStitch.TopLeftBottomRight:
                                     lines.append((x_start,
@@ -221,8 +227,14 @@ class CrossStitchFormatter(Formatter):
                         char,
                         self._symbols)
         # and legend
-        str_leg = sorted(["{} => {}".format(x[0], x[1]) for x in set(legends)])
-        dr.text((offset * 2, calc_height * (offset)),
-                " , ".join(str_leg),
-                self._symbols)
+        legend_tab = ["{: >15} {: >7} {: >9}".format(*x) for x in
+                      [("color", "symbol", "rgb"), ("---", "---", "---")] +
+                      sorted(list(set(legends)))]
+        chunk_idx = 0
+        for chunk in self._legend(legend_tab, 8):
+            dr.text((offset * 2 + (chunk_idx * 200),
+                     (calc_height * offset) - (5 * offset)),
+                    "\n".join(chunk),
+                    self._symbols)
+            chunk_idx += 1
         im.save(self.file_name)
