@@ -42,6 +42,8 @@ pyxstitch --file program.py --output image.png
 
 # examples
 
+there are example source code and corresponding output pngs in the `examples` folder
+
 # customizing
 
 the library components of the CrossStitchFormatter can be changed to:
