@@ -8,6 +8,7 @@ example: clean
 	go build -o $(BIN)/go_hw examples/hello_world.go
 	gcc examples/hello_world.c -o $(BIN)/c_hw
 	python examples/hello_world.py &>/dev/null
+	cd examples && ./run.sh
 
 analyze:
 	pep8 $(SRC)
