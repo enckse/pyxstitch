@@ -10,14 +10,16 @@ import os
 
 def main():
     """Main-entry point."""
+    _PNG = "png"
+    _RAW = "raw"
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', type=str, required=True)
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--dark', action='store_true')
-    parser.add_argument('--format', type=str, default="png",
-                        choices=["png", "pdf", "jpg"])
+    parser.add_argument('--format', type=str, default=_PNG,
+                        choices=[_PNG, "pdf", "jpg", _RAW])
     parser.add_argument('--style',
                         default='monokai',
                         choices=list(get_all_styles()))
@@ -28,6 +30,7 @@ def main():
         formatting.colorize = args.colorize
         formatting.dark = args.dark
         formatting.file_name = args.output
+        formatting.is_raw = args.format == _RAW
         text = formatting.preprocess(f.read())
         if args.output is None:
             parts = os.path.splitext(args.file)

@@ -1,0 +1,102 @@
+#!/usr/env/python
+"""Output formats."""
+from PIL import Image, ImageDraw
+from io import StringIO
+
+
+class FormatError(Exception):
+    """Format errors."""
+
+
+class Format(object):
+    """Base format output."""
+
+    def init(self, style, dims, color):
+        """init the instance."""
+        raise FormatError("not implemented.")
+
+    def rect(self, dims, outline=None):
+        """Create  rectangle (square)."""
+        raise FormatError("not implemented.")
+
+    def text(self, dims, symbol, color):
+        """Draw text."""
+        raise FormatError("not implemented.")
+
+    def line(self, dims, fill=None):
+        """Draw a line."""
+        raise FormatError("not implemented.")
+
+    def save(self, file_name):
+        """Save the output."""
+        raise FormatError("not implemented.")
+
+
+class PILFormat(Format):
+    """PIL/image format."""
+
+    def __init__(self):
+        """Init the output objects."""
+        self._im = None
+        self._dr = None
+
+    def init(self, style, dims, color):
+        """Init the image."""
+        self._im = Image.new(style, dims, color)
+        self._dr = ImageDraw.Draw(self._im)
+
+    def rect(self, dims, outline=None):
+        """Draw a rectangle."""
+        self._dr.rectangle(dims, outline=outline)
+
+    def text(self, dims, symbol, color):
+        """Draw text."""
+        self._dr.text(dims, symbol, color)
+
+    def line(self, dims, fill=None):
+        """Draw a line."""
+        self._dr.line(dims, fill=fill)
+
+    def save(self, file_name):
+        """Save the output image."""
+        self._im.save(file_name)
+
+
+class TextFormat(Format):
+    """Raw texst output."""
+
+    def __init__(self, dump=False):
+        """Init the instance."""
+        self._io = StringIO()
+        self._dump = dump
+
+    def init(self, style, dims, color):
+        """Init the instance."""
+        pass
+
+    def _write(self, obj_type, values):
+        """Write data."""
+        obj = {}
+        obj['type'] = obj_type
+        obj['data'] = values
+        self._io.write(json.dumps(obj) + "\n")
+
+    def rect(self, dims, outline=None):
+        """Write rectangle information."""
+        self._write("rect", [dims, outline])
+
+    def text(self, dims, symbol, color):
+        """Write text."""
+        self._write("text", [dims, symbol, color])
+
+    def line(self, dims, fill=None):
+        """Write a line."""
+        self._write('line', [dims, fill])
+
+    def save(self, file_name):
+        """Save outputs."""
+        contents = self._io.getvalue()
+        if self._dump:
+            return contents
+        with open(file_name, 'w') as f:
+            f.write(contents)

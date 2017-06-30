@@ -9,9 +9,9 @@ from pygments.formatter import Formatter
 import webcolors as wc
 import pyxstitch.font as ft
 import pyxstitch.symbols as sym
+from pyxstitch.output import PILFormat, TextFormat
 from math import floor
 from enum import Enum
-from PIL import Image, ImageFont, ImageDraw
 
 
 class CrossStitchFormatter(Formatter):
@@ -33,6 +33,8 @@ class CrossStitchFormatter(Formatter):
         self._lines = 'lightgrey'
         self._symbols = 'black'
         self.file_name = None
+        self.is_raw = False
+        self._writer = None
 
         for token, style in self.style:
             if style['color']:
@@ -87,11 +89,18 @@ class CrossStitchFormatter(Formatter):
         for i in range(0, len(items), size):
             yield items[i:i + size]
 
+    def _init_output(self, outfile):
+        """Init output."""
+
     def format(self, tokensource, outfile):
         """Override to format."""
         if self.dark:
             self._symbols = 'white'
             self._default_color = '000000'
+        if self.is_raw:
+            self._writer = TextFormat()
+        else:
+            self._writer = PILFormat()
         entries = []
         current = []
         calc_height = 0
@@ -132,11 +141,10 @@ class CrossStitchFormatter(Formatter):
         legend = 100
         top_pad = 50
         left_pad = 50
-        im = Image.new('RGB',
-                       (calc_width * offset + left_pad,
-                        (calc_height * offset) + top_pad + legend),
-                       default_rgb)
-        dr = ImageDraw.Draw(im)
+        self._writer.init('RGB',
+                          (calc_width * offset + left_pad,
+                           (calc_height * offset) + top_pad + legend),
+                          default_rgb)
         y = -1
         lines = []
         legends = []
@@ -159,8 +167,8 @@ class CrossStitchFormatter(Formatter):
                         y_start = top_pad + offset + 0 + y * offset
                         x_end = left_pad + offset + offset + x * offset
                         y_end = top_pad + offset + offset + y * offset
-                        dr.rectangle([(x_start, y_start), (x_end, y_end)],
-                                     outline=self._lines)
+                        self._writer.rect([(x_start, y_start), (x_end, y_end)],
+                                          outline=self._lines)
                         for stitch in cell:
                             if coloring not in stitches:
                                 stitches[coloring] = 0
@@ -207,15 +215,15 @@ class CrossStitchFormatter(Formatter):
                                 if stitch == ft.Stitch.CrossStitch:
                                     stitches[coloring] += 1
                                     x_pos = left_pad + offset + 2 + x * offset
-                                    dr.text((x_pos, y_start),
-                                            symb,
-                                            color)
+                                    self._writer.text((x_pos, y_start),
+                                                      symb,
+                                                      color)
                         has = True
                 if not has:
                     y -= 1
         # NOTE: we draw backstitch lines LAST to prevent overwrite
         for l in lines:
-            dr.line((l[0], l[1], l[2], l[3]), fill=l[4])
+            self._writer.line((l[0], l[1], l[2], l[3]), fill=l[4])
         # add lables
         for h in range(calc_height):
             if h == 0:
@@ -224,16 +232,16 @@ class CrossStitchFormatter(Formatter):
                         char = str(w)
                         if w == mid_width:
                             char = "X"
-                        dr.text((left_pad + w * offset, top_pad - 5),
-                                char,
-                                self._symbols)
+                        self._writer.text((left_pad + w * offset, top_pad - 5),
+                                          char,
+                                          self._symbols)
             if h % 10 == 0 or h == mid_height:
                 char = str(h)
                 if h == mid_height:
                     char = 'X'
-                dr.text((left_pad - 5, top_pad + h * offset),
-                        char,
-                        self._symbols)
+                self._writer.text((left_pad - 5, top_pad + h * offset),
+                                  char,
+                                  self._symbols)
         # and legend
         legend_tab = ["{: >15} {: >7} {: >9} {:>6}".format(x[0],
                                                            x[1],
@@ -246,8 +254,8 @@ class CrossStitchFormatter(Formatter):
         chunk_idx = 0
         leg_height = (calc_height * offset) - (legend / 4)
         for chunk in self._legend(legend_tab, 8):
-            dr.text((offset * 2 + (chunk_idx * 250), leg_height),
-                    "\n".join(chunk),
-                    self._symbols)
+            self._writer.text((offset * 2 + (chunk_idx * 250), leg_height),
+                              "\n".join(chunk),
+                              self._symbols)
             chunk_idx += 1
-        im.save(self.file_name)
+        self._writer.save(self.file_name)
