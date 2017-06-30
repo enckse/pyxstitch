@@ -82,7 +82,7 @@ class CrossStitchFormatter(Formatter):
     def _new_entry(self, ch, style):
         """new entry to process."""
         char = self.font_factory.get(ch)
-        return (char, style)
+        return (char, style, ch)
 
     def _legend(self, items, size):
         """Create legend chunk."""
@@ -155,10 +155,11 @@ class CrossStitchFormatter(Formatter):
                 x = -1
                 grid = []
                 has = False
-                for cur, style in entry:
+                for cur, style, ch in entry:
                     symb = style[1]
                     coloring = style[0]
                     color = self._symbols
+                    self._writer.meta(cur.metadata(), style, ch)
                     if self.colorize:
                         color = coloring
                     for cell in cur.cells(height):

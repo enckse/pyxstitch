@@ -12,3 +12,8 @@ class TestCharacter(unittest.TestCase):
         char = ch.Character(5, 3)
         self.assertEqual(4, len(list(char.cells(3))))
         self.assertEqual([], list(char.cells(100)))
+
+    def test_meta(self):
+        """Metadata test."""
+        char = ch.Character(1, 2)
+        self.assertEqual([1, 2], char.metadata())

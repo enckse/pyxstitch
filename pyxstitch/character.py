@@ -43,6 +43,7 @@ class Character(object):
     def __init__(self, height, width):
         """Instance the character, creates an empty pattern grid."""
         self._height = height
+        self._width = width
         self._pattern = _empty_grid(width, height)
 
     def cells(self, height):
@@ -54,3 +55,7 @@ class Character(object):
             grid = wide[width]
             yield grid.stitches
         yield []
+
+    def metadata(self):
+        """Character metadata."""
+        return [self._height, self._width]

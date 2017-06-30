@@ -32,6 +32,10 @@ class Format(object):
         """Save the output."""
         raise FormatError("not implemented.")
 
+    def meta(self, char_meta, style, char):
+        """Meta data."""
+        raise FormatError("not implemented")
+
 
 class PILFormat(Format):
     """PIL/image format."""
@@ -61,6 +65,10 @@ class PILFormat(Format):
     def save(self, file_name):
         """Save the output image."""
         self._im.save(file_name)
+
+    def meta(self, char_meta, style, char):
+        """Character metadata and style."""
+        pass
 
 
 class TextFormat(Format):
@@ -102,3 +110,7 @@ class TextFormat(Format):
             return contents
         with open(file_name, 'w') as f:
             f.write(contents)
+
+    def meta(self, char_meta, style, char):
+        """Character metadata."""
+        self._write("meta", [char_meta, style, char])
