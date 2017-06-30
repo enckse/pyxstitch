@@ -140,6 +140,7 @@ class CrossStitchFormatter(Formatter):
         y = -1
         lines = []
         legends = []
+        stitches = {}
         for entry in entries:
             for height in self.font_factory.height():
                 y += 1
@@ -161,6 +162,9 @@ class CrossStitchFormatter(Formatter):
                         dr.rectangle([(x_start, y_start), (x_end, y_end)],
                                      outline=self._lines)
                         for stitch in cell:
+                            if coloring not in stitches:
+                                stitches[coloring] = 0
+                            stitches[coloring] += 1
                             legends.append((coloring, symb, style[2]))
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch == ft.BackStitch.TopLeftBottomRight:
@@ -201,6 +205,7 @@ class CrossStitchFormatter(Formatter):
                                                   color))
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
+                                    stitches[coloring] += 1
                                     x_pos = left_pad + offset + 2 + x * offset
                                     dr.text((x_pos, y_start),
                                             symb,
@@ -230,13 +235,18 @@ class CrossStitchFormatter(Formatter):
                         char,
                         self._symbols)
         # and legend
-        legend_tab = ["{: >15} {: >7} {: >9}".format(*x) for x in
-                      [("color", "symbol", "rgb"), ("---", "---", "---")] +
-                      sorted(list(set(legends)))]
+        legend_tab = ["{: >15} {: >7} {: >9} {:>6}".format(x[0],
+                                                           x[1],
+                                                           x[2],
+                                                           x[3]) for x in
+                      [("color", "symbol", "rgb", "edges"),
+                       ("---", "---", "---", "---")] +
+                      [(y[0], y[1], y[2], stitches[y[0]]) for y in
+                       sorted(list(set(legends)))]]
         chunk_idx = 0
         leg_height = (calc_height * offset) - (legend / 4)
         for chunk in self._legend(legend_tab, 8):
-            dr.text((offset * 2 + (chunk_idx * 200), leg_height),
+            dr.text((offset * 2 + (chunk_idx * 250), leg_height),
                     "\n".join(chunk),
                     self._symbols)
             chunk_idx += 1

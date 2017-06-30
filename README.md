@@ -53,8 +53,6 @@ the library components of the CrossStitchFormatter can be changed to:
 # limitations
 
 this is a jumpstarter and lacks some useful features that could be added later:
-* The legend is lackluster (to say the least)
-* No thread/skein counts
 * Does not output DMC colors
 * Does not validate colors on the pattern/style/etc.
 * Many other things
