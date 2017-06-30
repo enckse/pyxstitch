@@ -2,6 +2,7 @@
 """Output formats."""
 from PIL import Image, ImageDraw
 from io import StringIO
+import json
 
 
 class FormatError(Exception):
@@ -72,7 +73,7 @@ class TextFormat(Format):
 
     def init(self, style, dims, color):
         """Init the instance."""
-        pass
+        self._write("init", [style, dims, color])
 
     def _write(self, obj_type, values):
         """Write data."""
@@ -95,6 +96,7 @@ class TextFormat(Format):
 
     def save(self, file_name):
         """Save outputs."""
+        self._write("save", [file_name])
         contents = self._io.getvalue()
         if self._dump:
             return contents

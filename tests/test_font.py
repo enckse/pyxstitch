@@ -36,7 +36,7 @@ class TestDefaultFont(unittest.TestCase):
     def test_preprocess(self):
         """Test preprocess."""
         factory = ft.DefaultFontFactory()
-        self.assertEquals("    ", factory.process('\t'))
-        self.assertEquals("\n", factory.process('\r'))
-        self.assertEquals("\n", factory.process('\v'))
-        self.assertEquals("\n", factory.process('\f'))
+        self.assertEqual("    ", factory.process('\t'))
+        self.assertEqual("\n", factory.process('\r'))
+        self.assertEqual("\n", factory.process('\v'))
+        self.assertEqual("\n", factory.process('\f'))
