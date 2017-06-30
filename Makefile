@@ -1,4 +1,4 @@
-SRC=$(shell find . -type f -name "*.py" | grep -v "examples" | grep -v "build")
+SRC=$(shell find . -type f -name "*.py" | grep -v "examples" | grep -v "build" | grep -v "bin")
 BIN=bin
 FORMAT=raw
 HW="hello_world."
@@ -16,6 +16,7 @@ example: install clean go c py ascii
 
 ascii:
 	$(call run-example,"ascii.txt")
+	cd examples && ./alphabet.sh
 
 go:
 	go build -o $(BIN)/go_hw examples/hello_world.go
