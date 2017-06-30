@@ -1,10 +1,10 @@
 SRC=$(shell find . -type f -name "*.py" | grep -v "examples" | grep -v "build")
 BIN=bin
-FORMAT=png
+FORMAT=raw
 HW="hello_world."
 .PHONY:
 
-run-example = pyxstitch --file examples/$(HW)$1 --output $(BIN)/$(HW)$1.$(FORMAT); \
+run-example = pyxstitch --file examples/$(HW)$1 --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT); \
 			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT)
 
 check: install test example analyze
