@@ -651,10 +651,10 @@ class DefaultFontFactory(FontFactory):
         objs[':'] = self._build_character("""
 |    |    |    |    |    |
 |    |    |    |    |    |
-|    |    |    |    |    |
 |    |    |1.15|    |    |
 |    |    |    |    |    |
 |    |    |1.15|    |    |
+|    |    |    |    |    |
 |    |    |    |    |    |
 |    |    |    |    |    |
 |    |    |    |    |    |
@@ -662,11 +662,11 @@ class DefaultFontFactory(FontFactory):
         objs[';'] = self._build_character("""
 |    |    |    |    |    |
 |    |    |    |    |    |
-|    |    |    |    |    |
 |    |    |1.15|    |    |
 |    |    |    |    |    |
 |    |    |1.13|    |    |
 |    |    |0.20|    |    |
+|    |    |    |    |    |
 |    |    |    |    |    |
 |    |    |    |    |    |
 """)
