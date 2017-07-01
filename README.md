@@ -98,7 +98,7 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    s | unknown  |
 |    t | unknown  |
 |    u | unknown  |
-|    v | unknown  |
+|    v | rework   |
 |    w | unknown  |
 |    x | unknown  |
 |    y | unknown  |

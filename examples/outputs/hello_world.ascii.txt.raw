@@ -4805,8 +4805,10 @@
 {"type": "meta", "data": [[11, 5], ["whitesmoke", "1", "f8f8f2"], "v"]}
 {"type": "rect", "data": [[[1920, 120], [1930, 130]], "lightgrey"]}
 {"type": "rect", "data": [[[1930, 120], [1940, 130]], "lightgrey"]}
+{"type": "text", "data": [[1932, 120], "1", "black"]}
 {"type": "rect", "data": [[[1940, 120], [1950, 130]], "lightgrey"]}
 {"type": "rect", "data": [[[1950, 120], [1960, 130]], "lightgrey"]}
+{"type": "text", "data": [[1952, 120], "1", "black"]}
 {"type": "rect", "data": [[[1960, 120], [1970, 130]], "lightgrey"]}
 {"type": "rect", "data": [[[1970, 120], [1980, 130]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["whitesmoke", "1", "f8f8f2"], "w"]}
@@ -9696,8 +9698,10 @@
 {"type": "line", "data": [[1890, 130, 1900, 120], "black"]}
 {"type": "line", "data": [[1910, 120, 1910, 130], "black"]}
 {"type": "line", "data": [[1920, 120, 1930, 130], "black"]}
-{"type": "line", "data": [[1930, 120, 1940, 130], "black"]}
-{"type": "line", "data": [[1950, 130, 1960, 120], "black"]}
+{"type": "line", "data": [[1930, 120, 1940, 120], "black"]}
+{"type": "line", "data": [[1940, 120, 1940, 130], "black"]}
+{"type": "line", "data": [[1950, 120, 1960, 120], "black"]}
+{"type": "line", "data": [[1950, 120, 1950, 130], "black"]}
 {"type": "line", "data": [[1960, 130, 1970, 120], "black"]}
 {"type": "line", "data": [[1980, 120, 1980, 130], "black"]}
 {"type": "line", "data": [[1990, 120, 1990, 130], "black"]}
@@ -10501,5 +10505,5 @@
 {"type": "text", "data": [[45, 150], "10", "black"]}
 {"type": "text", "data": [[45, 160], "X", "black"]}
 {"type": "text", "data": [[45, 250], "20", "black"]}
-{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     50\n          khaki       4    e6db74    387\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    124\n     whitesmoke       1    f8f8f2   2941", "black"]}
+{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     50\n          khaki       4    e6db74    387\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    124\n     whitesmoke       1    f8f8f2   2947", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.raw"]}
