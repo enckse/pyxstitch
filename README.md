@@ -158,6 +158,6 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    _ | unknown  |
 |    ` | unknown  |
 |    { | unknown  |
-|    | | unknown  |
+|    \|| unknown  |
 |    } | unknown  |
 |    ~ | unknown  |
