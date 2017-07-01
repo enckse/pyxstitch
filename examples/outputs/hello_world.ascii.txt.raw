@@ -9813,7 +9813,6 @@
 {"type": "line", "data": [[3970, 130, 3980, 130], "black"]}
 {"type": "line", "data": [[3970, 120, 3970, 130], "black"]}
 {"type": "line", "data": [[3980, 120, 3990, 120], "black"]}
-{"type": "line", "data": [[3980, 130, 3990, 130], "black"]}
 {"type": "line", "data": [[3990, 130, 4000, 120], "black"]}
 {"type": "line", "data": [[4030, 120, 4030, 130], "black"]}
 {"type": "line", "data": [[4030, 130, 4040, 120], "black"]}
@@ -10502,5 +10501,5 @@
 {"type": "text", "data": [[45, 150], "10", "black"]}
 {"type": "text", "data": [[45, 160], "X", "black"]}
 {"type": "text", "data": [[45, 250], "20", "black"]}
-{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     50\n          khaki       4    e6db74    387\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    125\n     whitesmoke       1    f8f8f2   2941", "black"]}
+{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     50\n          khaki       4    e6db74    387\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    124\n     whitesmoke       1    f8f8f2   2941", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.raw"]}
