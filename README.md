@@ -58,3 +58,106 @@ this is a jumpstarter and lacks some useful features that could be added later:
 * Many other things
 
 **Note:** Again - this is just a jump start to creating patterns for cross stitching from source code
+
+# Characters
+
+Characters may need re-design/rework/actual stitching to be verified. Generally something marked as 'verified' has been stitched and looks reasonable, all other labels should be self-explanatory
+
+## Default
+
+| Char | Status |
+| ---  | ---    |
+| 0 | verified |
+| 1 | verified |
+| 2 | unknown |
+} 3 | unknown |
+| 4 | unknown |
+| 5 | unknown |
+| 6 | unknown |
+| 7 | unknown |
+| 8 | unknown |
+| 9 | unknown |
+| a | unknown |
+| b | unknown |
+| c | unknown |
+| d | unknown |
+| e | unknown |
+| f | unknown |
+| g | unknown |
+| h | unknown |
+| i | unknown |
+| j | unknown |
+| k | unknown |
+| l | unknown |
+| m | unknown |
+| n | unknown |
+| o | verified |
+| p | unknown |
+| q | unknown |
+| r | unknown |
+| s | unknown |
+| t | unknown |
+| u | unknown |
+| v | unknown |
+| w | unknown |
+| x | unknown |
+| y | unknown |
+| z | unknown |
+| A | unknown |
+| B | unknown |
+| C | unknown |
+| D | unknown |
+| E | unknown |
+| F | unknown |
+| G | unknown |
+| H | unknown |
+| I | unknown |
+| J | unknown |
+| K | unknown |
+| L | unknown |
+| M | unknown |
+| N | unknown |
+| O | unknown |
+| P | unknown |
+| Q | unknown |
+| R | unknown |
+| S | unknown |
+| T | unknown |
+| U | unknown |
+| V | unknown |
+| W | unknown |
+| X | unknown |
+| Y | unknown |
+| Z | unknown |
+| ! | unknown |
+| " | unknown |
+| # | unknown |
+| $ | unknown |
+| % | unknown |
+| & | unknown |
+| ' | unknown |
+| ( | unknown |
+| ) | unknown |
+| * | unknown |
+| + | unknown |
+| , | unknown |
+| - | unknown |
+| . | unknown |
+| / | unknown |
+| : | unknown |
+| ; | unknown |
+| < | unknown |
+| = | unknown |
+| > | unknown |
+| ? | unknown |
+| @ | unknown |
+| [ | unknown |
+| \ | unknown |
+| ] | unknown |
+| ^ | unknown |
+| _ | unknown |
+| ` | unknown |
+| { | unknown |
+| | | unknown |
+| } | unknown |
+| ~ | unknown |
