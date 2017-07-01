@@ -124,7 +124,7 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    S | unknown  |
 |    T | verified |
 |    U | verified |
-|    V | unknown  |
+|    V | verified |
 |    W | unknown  |
 |    X | unknown  |
 |    Y | unknown  |
@@ -138,18 +138,18 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    ' | verified |
 |    ( | unknown  |
 |    ) | unknown  |
-|    * | unknown  |
-|    + | unknown  |
-|    , | unknown  |
+|    * | verified |
+|    + | verified |
+|    , | verified |
 |    - | verified |
 |    . | verified |
 |    / | unknown  |
 |    : | verified |
 |    ; | verified |
-|    < | unknown  |
-|    = | verified |
+|    < | verified |
+|    = | verified|
 |    > | unknown  |
-|    ? | unknown  |
+|    ? | verified |
 |    @ | unknown  |
 |    [ | verified |
 |    \ | unknown  |
