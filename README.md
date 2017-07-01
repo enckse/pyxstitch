@@ -136,28 +136,28 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    % | unknown  |
 |    & | unknown  |
 |    ' | verified |
-|    ( | verified  |
-|    ) | verified  |
+|    ( | verified |
+|    ) | verified |
 |    * | verified |
 |    + | verified |
 |    , | verified |
 |    - | verified |
 |    . | verified |
-|    / | verified  |
+|    / | verified |
 |    : | verified |
 |    ; | verified |
 |    < | verified |
-|    = | verified|
+|    = | verified |
 |    > | unknown  |
 |    ? | verified |
-|    @ | verified  |
+|    @ | verified |
 |    [ | verified |
-|    \ | verified  |
+|    \ | verified |
 |    ] | verified |
 |    ^ | unknown  |
 |    _ | verified |
 |    ` | unknown  |
-|    { | verified  |
+|    { | verified |
 |    \|| verified |
-|    } | verified  |
+|    } | verified |
 |    ~ | unknown  |
