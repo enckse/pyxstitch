@@ -35,6 +35,10 @@ analyze:
 	pep8 $(SRC)
 	pep257 $(SRC)
 
+unverified: install clean
+	$(shell cat README.md | grep "^|    " | grep -v "verified" | sed "s/|    //g;s/ | .*//g" | tr '\n' ' '| sed 's/ //g' | sed "s/'/\'/g" > $(BIN)/unverified.py)
+	pyxstitch --file $(BIN)/unverified.py --output $(BIN)/unverified.png
+
 test: clean
 	cd tests && ./run.sh
 
