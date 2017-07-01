@@ -1155,9 +1155,9 @@ class DefaultFontFactory(FontFactory):
 |    |    |    |    |    |
 """)
         objs['`'] = self._build_character("""
-|    |    |0.36|    |    |
-|    |    |0.32|0.34|    |
-|    |    |    |    |    |
+|    |1.15|    |    |    |
+|    |    |1.15|    |    |
+|    |    |    |1.15|    |
 |    |    |    |    |    |
 |    |    |    |    |    |
 |    |    |    |    |    |
