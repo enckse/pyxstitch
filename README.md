@@ -143,7 +143,7 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    , | verified |
 |    - | verified |
 |    . | verified |
-|    / | unknown  |
+|    / | verified  |
 |    : | verified |
 |    ; | verified |
 |    < | verified |
@@ -152,7 +152,7 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    ? | verified |
 |    @ | unknown  |
 |    [ | verified |
-|    \ | unknown  |
+|    \ | verified  |
 |    ] | verified |
 |    ^ | unknown  |
 |    _ | verified |
