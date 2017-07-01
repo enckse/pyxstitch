@@ -131,10 +131,10 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    Z | unknown  |
 |    ! | verified |
 |    " | verified |
-|    # | unknown  |
+|    # | verified |
 |    $ | verified |
-|    % | unknown  |
-|    & | unknown  |
+|    % | verified |
+|    & | verified |
 |    ' | verified |
 |    ( | verified |
 |    ) | verified |
@@ -148,16 +148,16 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    ; | verified |
 |    < | verified |
 |    = | verified |
-|    > | unknown  |
+|    > | verified |
 |    ? | verified |
 |    @ | verified |
 |    [ | verified |
 |    \ | verified |
 |    ] | verified |
-|    ^ | unknown  |
+|    ^ | verified |
 |    _ | verified |
-|    ` | unknown  |
+|    ` | verified |
 |    { | verified |
 |    \|| verified |
 |    } | verified |
-|    ~ | unknown  |
+|    ~ | verified |
