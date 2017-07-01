@@ -78,7 +78,7 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    8 | unknown  |
 |    9 | unknown  |
 |    a | verified |
-|    b | unknown  |
+|    b | verified |
 |    c | unknown  |
 |    d | verified |
 |    e | unknown  |
