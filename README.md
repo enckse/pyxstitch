@@ -132,7 +132,7 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    ! | verified |
 |    " | verified |
 |    # | unknown  |
-|    $ | unknown  |
+|    $ | verified |
 |    % | unknown  |
 |    & | unknown  |
 |    ' | verified |
