@@ -2148,8 +2148,10 @@
 {"type": "meta", "data": [[11, 5], ["purple", "2", "960050"], "^"]}
 {"type": "rect", "data": [[[5280, 80], [5290, 90]], "lightgrey"]}
 {"type": "rect", "data": [[[5290, 80], [5300, 90]], "lightgrey"]}
+{"type": "text", "data": [[5292, 80], "2", "black"]}
 {"type": "rect", "data": [[[5300, 80], [5310, 90]], "lightgrey"]}
 {"type": "rect", "data": [[[5310, 80], [5320, 90]], "lightgrey"]}
+{"type": "text", "data": [[5312, 80], "2", "black"]}
 {"type": "rect", "data": [[[5320, 80], [5330, 90]], "lightgrey"]}
 {"type": "rect", "data": [[[5330, 80], [5340, 90]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["whitesmoke", "1", "f8f8f2"], "_"]}
@@ -8516,10 +8518,10 @@
 {"type": "line", "data": [[5240, 80, 5250, 80], "black"]}
 {"type": "line", "data": [[5250, 70, 5260, 70], "black"]}
 {"type": "line", "data": [[5260, 70, 5260, 80], "black"]}
-{"type": "line", "data": [[5290, 80, 5300, 70], "black"]}
 {"type": "line", "data": [[5300, 70, 5310, 70], "black"]}
 {"type": "line", "data": [[5300, 80, 5310, 80], "black"]}
-{"type": "line", "data": [[5310, 70, 5320, 80], "black"]}
+{"type": "line", "data": [[5300, 70, 5300, 80], "black"]}
+{"type": "line", "data": [[5310, 70, 5310, 80], "black"]}
 {"type": "line", "data": [[5420, 70, 5420, 80], "black"]}
 {"type": "line", "data": [[5420, 70, 5430, 80], "black"]}
 {"type": "line", "data": [[5480, 80, 5490, 70], "black"]}
@@ -8723,10 +8725,14 @@
 {"type": "line", "data": [[5120, 80, 5120, 90], "black"]}
 {"type": "line", "data": [[5250, 80, 5250, 90], "black"]}
 {"type": "line", "data": [[5260, 80, 5260, 90], "black"]}
+{"type": "line", "data": [[5290, 80, 5300, 80], "black"]}
+{"type": "line", "data": [[5290, 90, 5300, 90], "black"]}
 {"type": "line", "data": [[5290, 80, 5290, 90], "black"]}
-{"type": "line", "data": [[5290, 90, 5300, 80], "black"]}
+{"type": "line", "data": [[5300, 80, 5300, 90], "black"]}
+{"type": "line", "data": [[5310, 80, 5320, 80], "black"]}
+{"type": "line", "data": [[5310, 90, 5320, 90], "black"]}
+{"type": "line", "data": [[5310, 80, 5310, 90], "black"]}
 {"type": "line", "data": [[5320, 80, 5320, 90], "black"]}
-{"type": "line", "data": [[5310, 80, 5320, 90], "black"]}
 {"type": "line", "data": [[5420, 80, 5430, 90], "black"]}
 {"type": "line", "data": [[5430, 90, 5440, 90], "black"]}
 {"type": "line", "data": [[5430, 80, 5440, 90], "black"]}
@@ -9750,12 +9756,14 @@
 {"type": "line", "data": [[1870, 120, 1870, 130], "black"]}
 {"type": "line", "data": [[1890, 130, 1900, 120], "black"]}
 {"type": "line", "data": [[1910, 120, 1910, 130], "black"]}
-{"type": "line", "data": [[1920, 120, 1930, 130], "black"]}
 {"type": "line", "data": [[1930, 120, 1940, 120], "black"]}
+{"type": "line", "data": [[1930, 130, 1940, 130], "black"]}
+{"type": "line", "data": [[1930, 120, 1930, 130], "black"]}
 {"type": "line", "data": [[1940, 120, 1940, 130], "black"]}
 {"type": "line", "data": [[1950, 120, 1960, 120], "black"]}
+{"type": "line", "data": [[1950, 130, 1960, 130], "black"]}
 {"type": "line", "data": [[1950, 120, 1950, 130], "black"]}
-{"type": "line", "data": [[1960, 130, 1970, 120], "black"]}
+{"type": "line", "data": [[1960, 120, 1960, 130], "black"]}
 {"type": "line", "data": [[1980, 120, 1980, 130], "black"]}
 {"type": "line", "data": [[1990, 120, 1990, 130], "black"]}
 {"type": "line", "data": [[1990, 130, 2000, 120], "black"]}
@@ -9849,12 +9857,14 @@
 {"type": "line", "data": [[3430, 120, 3430, 130], "black"]}
 {"type": "line", "data": [[3460, 120, 3460, 130], "black"]}
 {"type": "line", "data": [[3470, 120, 3470, 130], "black"]}
-{"type": "line", "data": [[3480, 120, 3490, 130], "black"]}
 {"type": "line", "data": [[3490, 120, 3500, 120], "black"]}
+{"type": "line", "data": [[3490, 130, 3500, 130], "black"]}
+{"type": "line", "data": [[3490, 120, 3490, 130], "black"]}
 {"type": "line", "data": [[3500, 120, 3500, 130], "black"]}
 {"type": "line", "data": [[3510, 120, 3520, 120], "black"]}
+{"type": "line", "data": [[3510, 130, 3520, 130], "black"]}
 {"type": "line", "data": [[3510, 120, 3510, 130], "black"]}
-{"type": "line", "data": [[3520, 130, 3530, 120], "black"]}
+{"type": "line", "data": [[3520, 120, 3520, 130], "black"]}
 {"type": "line", "data": [[3540, 120, 3540, 130], "black"]}
 {"type": "line", "data": [[3560, 130, 3570, 130], "black"]}
 {"type": "line", "data": [[3590, 120, 3590, 130], "black"]}
@@ -10149,10 +10159,10 @@
 {"type": "line", "data": [[1900, 140, 1910, 140], "black"]}
 {"type": "line", "data": [[1900, 130, 1900, 140], "black"]}
 {"type": "line", "data": [[1910, 130, 1910, 140], "black"]}
-{"type": "line", "data": [[1930, 130, 1940, 140], "black"]}
 {"type": "line", "data": [[1940, 130, 1950, 130], "black"]}
 {"type": "line", "data": [[1940, 140, 1950, 140], "black"]}
-{"type": "line", "data": [[1950, 140, 1960, 130], "black"]}
+{"type": "line", "data": [[1940, 130, 1940, 140], "black"]}
+{"type": "line", "data": [[1950, 130, 1950, 140], "black"]}
 {"type": "line", "data": [[1980, 140, 1990, 140], "black"]}
 {"type": "line", "data": [[1980, 130, 1980, 140], "black"]}
 {"type": "line", "data": [[1990, 140, 2000, 130], "black"]}
@@ -10339,10 +10349,10 @@
 {"type": "line", "data": [[3450, 130, 3460, 130], "black"]}
 {"type": "line", "data": [[3450, 140, 3460, 140], "black"]}
 {"type": "line", "data": [[3460, 140, 3470, 130], "black"]}
-{"type": "line", "data": [[3490, 130, 3500, 140], "black"]}
 {"type": "line", "data": [[3500, 130, 3510, 130], "black"]}
 {"type": "line", "data": [[3500, 140, 3510, 140], "black"]}
-{"type": "line", "data": [[3510, 140, 3520, 130], "black"]}
+{"type": "line", "data": [[3500, 130, 3500, 140], "black"]}
+{"type": "line", "data": [[3510, 130, 3510, 140], "black"]}
 {"type": "line", "data": [[3540, 140, 3550, 140], "black"]}
 {"type": "line", "data": [[3540, 130, 3540, 140], "black"]}
 {"type": "line", "data": [[3550, 140, 3560, 130], "black"]}
@@ -10543,5 +10553,5 @@
 {"type": "text", "data": [[45, 150], "10", "black"]}
 {"type": "text", "data": [[45, 160], "X", "black"]}
 {"type": "text", "data": [[45, 250], "20", "black"]}
-{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     50\n          khaki       4    e6db74    427\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    130\n     whitesmoke       1    f8f8f2   2953", "black"]}
+{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     50\n          khaki       4    e6db74    427\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    138\n     whitesmoke       1    f8f8f2   2957", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.raw"]}
