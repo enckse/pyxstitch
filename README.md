@@ -136,8 +136,8 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    % | unknown  |
 |    & | unknown  |
 |    ' | verified |
-|    ( | unknown  |
-|    ) | unknown  |
+|    ( | verified  |
+|    ) | verified  |
 |    * | verified |
 |    + | verified |
 |    , | verified |
@@ -157,7 +157,7 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    ^ | unknown  |
 |    _ | verified |
 |    ` | unknown  |
-|    { | unknown  |
+|    { | verified  |
 |    \|| verified |
-|    } | unknown  |
+|    } | verified  |
 |    ~ | unknown  |
