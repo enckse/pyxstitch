@@ -5,14 +5,15 @@ HW="hello_world."
 .PHONY:
 
 run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT); \
-			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT)
+			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT); \
+			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png
 
 check: install test example analyze
 
 install:
 	python setup.py install
 
-example: install clean go c py ascii
+example: install clean go c py ascii raw
 
 ascii:
 	$(call run-example,"ascii.txt")
@@ -29,6 +30,9 @@ c:
 py:
 	python examples/hello_world.py &>/dev/null
 	$(call run-example,"py")
+
+raw:
+	pyxstitch --file examples/hw.py.pyxstitch --output $(BIN)/hw.py.png
 
 analyze:
 	pip install pep8 pep257

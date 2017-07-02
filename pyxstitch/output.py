@@ -2,6 +2,7 @@
 """Output formats."""
 from PIL import Image, ImageDraw
 from io import StringIO
+import pyxstitch.config as cfg
 import json
 import os
 
@@ -172,7 +173,9 @@ class TextFormat(Format):
                         self._log_replay("warning",
                                          "Version: file {}, current {}",
                                          [vers, self._version])
-                    datum = datum[1:]
+                    conf = cfg.Config.load(datum[len(datum) - 1])
+                    datum = datum[1:len(datum) - 1]
+                    datum.append(conf)
                 passing = self._unpack(datum)
                 attr = getattr(pil, cmd)
                 attr(*passing)

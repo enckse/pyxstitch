@@ -16,6 +16,21 @@ class Config(object):
         """Save to disk."""
         return [self.page_height, self.page_width, self.page_pad]
 
+    @staticmethod
+    def _create_input(key, value):
+        """create an input."""
+        return "{}={}".format(key, value)
+
+    @staticmethod
+    def load(values):
+        """load config from saved type."""
+        inputs = []
+        if len(values) == 3:
+            inputs.append(Config._create_input("page_height", values[0]))
+            inputs.append(Config._create_input("page_width", values[1]))
+            inputs.append(Config._create_input("page_pad", values[2]))
+        return Config(inputs)
+
     def _parse(self, inputs):
         """parse inputs."""
         if inputs is None:

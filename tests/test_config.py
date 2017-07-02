@@ -36,3 +36,11 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(600, conf.page_height)
         self.assertEqual(2, conf.page_width)
         self.assertEqual(1, conf.page_pad)
+
+    def test_save_load(self):
+        """Save and load config."""
+        cg = cfg.Config(["page_pad=1", "page_width=2", "page_height=-100"])
+        conf = cfg.Config.load(cg.save())
+        self.assertEqual(600, conf.page_height)
+        self.assertEqual(2, conf.page_width)
+        self.assertEqual(1, conf.page_pad)
