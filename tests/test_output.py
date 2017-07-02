@@ -2,6 +2,7 @@
 """Test output definition."""
 import unittest
 import pyxstitch.output as out
+import pyxstitch.config as cfg
 
 
 class TestTextFormat(unittest.TestCase):
@@ -10,12 +11,13 @@ class TestTextFormat(unittest.TestCase):
     def test_init(self):
         """Test dump of init object."""
         txt = out.TextFormat(dump=True)
-        txt.init("a", (1,), "b", False)
+        txt.init("a", (1,), "b", False, cfg.Config(None))
         vals = txt.save("blah")
         parts = vals.split("\n")
         self.assertEqual(3, len(parts))
         expect = """
-        {\"type\": \"init\", \"data\": [\"0.1\", \"a\", [1], \"b\", false]}"""
+{\"type\": \"init\",
+ \"data\": [\"0.1\", \"a\", [1], \"b\", false, [600, 1000, 50]]}"""
         self.assertEqual(expect.replace("\n", "").strip(), parts[0])
         self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
                          parts[1])

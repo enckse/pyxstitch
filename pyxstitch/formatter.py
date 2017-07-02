@@ -10,6 +10,7 @@ import webcolors as wc
 import pyxstitch.font as ft
 import pyxstitch.symbols as sym
 from pyxstitch.output import PILFormat, TextFormat
+from pyxstitch.config import Config
 from math import floor
 from enum import Enum
 
@@ -36,7 +37,7 @@ class CrossStitchFormatter(Formatter):
         self.is_raw = False
         self._writer = None
         self.is_multipage = None
-
+        self.config = Config(None)
         for token, style in self.style:
             if style['color']:
                 self._colors[token] = style['color']
@@ -146,7 +147,8 @@ class CrossStitchFormatter(Formatter):
                           (calc_width * offset + left_pad,
                            (calc_height * offset) + top_pad + legend),
                           default_rgb,
-                          self.is_multipage)
+                          self.is_multipage,
+                          self.config)
         y = -1
         lines = []
         legends = []

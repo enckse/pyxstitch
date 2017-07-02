@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--dark', action='store_true')
+    parser.add_argument('--kv', metavar='N', type=str, nargs='+')
     parser.add_argument('--multipage', type=str,
                         default=out_fmt.MULTI_PAGE_AUTO,
                         choices=[out_fmt.MULTI_PAGE_AUTO,

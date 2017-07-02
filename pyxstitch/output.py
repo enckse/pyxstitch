@@ -19,7 +19,7 @@ class FormatError(Exception):
 class Format(object):
     """Base format output."""
 
-    def init(self, style, dims, color, multipage):
+    def init(self, style, dims, color, multipage, config):
         """init the instance."""
         raise FormatError("not implemented.")
 
@@ -47,10 +47,6 @@ class Format(object):
 class PILFormat(Format):
     """PIL/image format."""
 
-    _PAGE_HEIGHT = 600
-    _PAGE_WIDTH = 1000
-    _PADDING = 50
-
     def __init__(self):
         """Init the output objects."""
         self._im = None
@@ -58,16 +54,18 @@ class PILFormat(Format):
         self._img_dims = None
         self._is_multi = False
         self._img_color = None
+        self._cfg = None
 
-    def init(self, style, dims, color, multipage):
+    def init(self, style, dims, color, multipage, config):
         """Init the image."""
         self._img_dims = dims
         self._img_color = color
+        self._cfg = config
         if multipage == MULTI_PAGE_ON:
             self._is_multi = True
         elif multipage == MULTI_PAGE_AUTO:
-            self._is_multi = self._img_dims[0] > self._PAGE_WIDTH or \
-                             self._img_dims[1] > self._PAGE_HEIGHT
+            self._is_multi = self._img_dims[0] > self._cfg.page_width or \
+                             self._img_dims[1] > self._cfg.page_height
         self._im = Image.new(style, dims, color)
         self._dr = ImageDraw.Draw(self._im)
 
@@ -94,8 +92,9 @@ class PILFormat(Format):
             page = 1
             width = self._img_dims[0]
             height = self._img_dims[1]
-            use_height = min(height, self._PAGE_HEIGHT)
-            use_width = min(width, self._PAGE_WIDTH)
+            use_height = min(height, self._cfg.page_height)
+            use_width = min(width, self._cfg.page_width)
+            use_offset = self._cfg.page_pad
             for h in range(0, height, use_height):
                 for w in range(0, width, use_width):
                     w_end = w + use_width
@@ -111,10 +110,10 @@ class PILFormat(Format):
                                              str(page).rjust(3, '0'),
                                              file_parts[1])
                     im = Image.new('RGB',
-                                   (self._PAGE_WIDTH + self._PADDING * 2,
-                                    self._PAGE_HEIGHT + self._PADDING * 2),
+                                   (self._cfg.page_width + use_offset * 2,
+                                    self._cfg.page_height + use_offset * 2),
                                    self._img_color)
-                    im.paste(cropped, (self._PADDING, self._PADDING))
+                    im.paste(cropped, (use_offset, use_offset))
                     self._save(im, paged)
                     page += 1
         else:
@@ -184,9 +183,14 @@ class TextFormat(Format):
                 break
             line_idx += 1
 
-    def init(self, style, dims, color, multipage):
+    def init(self, style, dims, color, multipage, config):
         """Init the instance."""
-        self._write(self._INIT, [self._version, style, dims, color, multipage])
+        self._write(self._INIT, [self._version,
+                                 style,
+                                 dims,
+                                 color,
+                                 multipage,
+                                 config.save()])
 
     def _write(self, obj_type, values):
         """Write data."""
