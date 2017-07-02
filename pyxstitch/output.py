@@ -108,7 +108,7 @@ class PILFormat(Format):
                     cropped = self._im.crop(box)
                     file_parts = os.path.splitext(file_name)
                     paged = "{}_{}{}".format(file_parts[0],
-                                             page,
+                                             str(page).rjust(3, '0'),
                                              file_parts[1])
                     im = Image.new('RGB',
                                    (self._PAGE_WIDTH + self._PADDING * 2,
