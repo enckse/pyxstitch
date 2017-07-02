@@ -61,14 +61,12 @@ this is a jumpstarter and lacks some useful features that could be added later:
 
 # Characters
 
-Characters may need re-design/rework/actual stitching to be verified. Generally something marked as 'verified' has been stitched and looks reasonable, all other labels should be self-explanatory
+The following sections highlight any font characters that are incomplete
 
 ## Default
 
 | Char | Status   |
 | ---  | ---      |
-|    0 | verified |
-|    1 | verified |
 |    2 | unknown  |
 |    3 | unknown  |
 |    4 | unknown  |
@@ -77,87 +75,20 @@ Characters may need re-design/rework/actual stitching to be verified. Generally 
 |    7 | unknown  |
 |    8 | unknown  |
 |    9 | unknown  |
-|    a | verified |
-|    b | verified |
-|    c | verified |
-|    d | verified |
-|    e | verified |
-|    f | verified |
-|    g | verified |
-|    h | verified |
-|    i | verified |
-|    j | verified |
 |    k | unknown  |
-|    l | verified |
-|    m | verified |
-|    n | verified |
-|    o | verified |
-|    p | verified |
-|    q | verified |
-|    r | verified |
-|    s | verified |
-|    t | verified |
-|    u | verified |
-|    v | verified |
-|    w | verfieid |
-|    x | verified |
-|    y | verified |
-|    z | verified |
 |    A | unknown  |
 |    B | unknown  |
 |    C | unknown  |
 |    D | unknown  |
-|    E | verified |
-|    F | verified |
 |    G | unknown  |
-|    H | verified |
-|    I | verified |
 |    J | unknown  |
 |    K | unknown  |
-|    L | verified |
 |    M | unknown  |
 |    N | unknown  |
-|    O | verified |
-|    P | verified |
 |    Q | unknown  |
 |    R | unknown  |
 |    S | unknown  |
-|    T | verified |
-|    U | verified |
-|    V | verified |
 |    W | unknown  |
 |    X | unknown  |
 |    Y | unknown  |
 |    Z | unknown  |
-|    ! | verified |
-|    " | verified |
-|    # | verified |
-|    $ | verified |
-|    % | verified |
-|    & | verified |
-|    ' | verified |
-|    ( | verified |
-|    ) | verified |
-|    * | verified |
-|    + | verified |
-|    , | verified |
-|    - | verified |
-|    . | verified |
-|    / | verified |
-|    : | verified |
-|    ; | verified |
-|    < | verified |
-|    = | verified |
-|    > | verified |
-|    ? | verified |
-|    @ | verified |
-|    [ | verified |
-|    \ | verified |
-|    ] | verified |
-|    ^ | verified |
-|    _ | verified |
-|    ` | verified |
-|    { | verified |
-|    \|| verified |
-|    } | verified |
-|    ~ | verified |
