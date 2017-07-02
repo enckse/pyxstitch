@@ -68,6 +68,4 @@ The following sections highlight any font characters that are incomplete
 | Char | Status   |
 | ---  | ---      |
 |    2 | unknown  |
-|    M | unknown  |
 |    Q | unknown  |
-|    W | unknown  |
