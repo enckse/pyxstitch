@@ -91,7 +91,9 @@ class PILFormat(Format):
                     box = (w, h, w_end, h_end)
                     cropped = self._im.crop(box)
                     file_parts = os.path.splitext(file_name)
-                    paged = "{}_{}{}".format(file_parts[0], page, file_parts[1])
+                    paged = "{}_{}{}".format(file_parts[0],
+                                             page,
+                                             file_parts[1])
                     print(paged)
                     cropped.save(paged)
                     page += 1
