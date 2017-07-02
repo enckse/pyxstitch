@@ -7,6 +7,10 @@ import os
 
 RAW_FORMAT = "pyxstitch"
 
+MULTI_PAGE_ON = "on"
+MULTI_PAGE_OFF = "off"
+MULTI_PAGE_AUTO = "auto"
+
 
 class FormatError(Exception):
     """Format errors."""
@@ -59,7 +63,11 @@ class PILFormat(Format):
         """Init the image."""
         self._img_dims = dims
         self._img_color = color
-        self._is_multi = multipage
+        if multipage == MULTI_PAGE_ON:
+            self._is_multi = True
+        elif multipage == MULTI_PAGE_AUTO:
+            self._is_multi = self._img_dims[0] > self._PAGE_WIDTH or \
+                             self._img_dims[1] > self._PAGE_HEIGHT
         self._im = Image.new(style, dims, color)
         self._dr = ImageDraw.Draw(self._im)
 

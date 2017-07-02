@@ -35,7 +35,7 @@ class CrossStitchFormatter(Formatter):
         self.file_name = None
         self.is_raw = False
         self._writer = None
-        self.is_multipage = False
+        self.is_multipage = None
 
         for token, style in self.style:
             if style['color']:

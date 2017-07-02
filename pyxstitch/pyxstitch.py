@@ -27,7 +27,11 @@ def main():
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--dark', action='store_true')
-    parser.add_argument('--multipage', action='store_true')
+    parser.add_argument('--multipage', type=str,
+                        default=out_fmt.MULTI_PAGE_AUTO,
+                        choices=[out_fmt.MULTI_PAGE_AUTO,
+                                 out_fmt.MULTI_PAGE_ON,
+                                 out_fmt.MULTI_PAGE_OFF])
     parser.add_argument('--format', type=str, default=_PNG,
                         choices=[_PNG, _PDF, "jpg", _RAW])
     parser.add_argument('--style',
