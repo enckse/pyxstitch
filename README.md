@@ -58,14 +58,3 @@ this is a jumpstarter and lacks some useful features that could be added later:
 * Many other things
 
 **Note:** Again - this is just a jump start to creating patterns for cross stitching from source code
-
-# Characters
-
-The following sections highlight any font characters that are incomplete
-
-## Default
-
-| Char | Status   |
-| ---  | ---      |
-|    2 | unknown  |
-|    Q | unknown  |
