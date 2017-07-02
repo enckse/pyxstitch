@@ -75,6 +75,8 @@ def main():
     formatting.file_name = args.output
     formatting.is_multipage = args.multipage
     formatting.is_raw = args.format == _RAW
+    if args.kv is not None and len(args.kv) > 0:
+        formatting.config = args.kv
     text = formatting.preprocess(content)
     if args.output is None:
         formatting.file_name = _create_file_name(file_name, args)
