@@ -1018,7 +1018,7 @@ class DefaultFontFactory(FontFactory):
 |    |    |1.15|    |    |
 |    |1.15|    |    |    |
 |1.15|    |    |1.05|1.09|
-|    |    |    |1.06|1.10|
+|    |    |    |    |1.10|
 |    |    |    |    |    |
 |    |    |    |    |    |
 """)
@@ -1091,7 +1091,7 @@ class DefaultFontFactory(FontFactory):
         objs['^'] = self._build_character("""
 |    |    |1.15|    |    |
 |    |1.15|    |1.15|    |
-|    |    |    |    |    |
+|1.15|    |    |    |1.15|
 |    |    |    |    |    |
 |    |    |    |    |    |
 |    |    |    |    |    |
