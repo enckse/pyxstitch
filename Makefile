@@ -1,6 +1,6 @@
 SRC=$(shell find . -type f -name "*.py" | grep -v "examples" | grep -v "build" | grep -v "bin")
 BIN=bin
-FORMAT=raw
+FORMAT=pyxstitch
 HW="hello_world."
 .PHONY:
 

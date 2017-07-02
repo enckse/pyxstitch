@@ -5989,4 +5989,4 @@
 {"type": "text", "data": [[45, 650], "60", "black"]}
 {"type": "text", "data": [[45, 750], "70", "black"]}
 {"type": "text", "data": [[20, 745.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n        dimgrey       0    75715e    763\n          khaki       4    e6db74    527\n        skyblue       2    66d9ef    133\n     whitesmoke       1    f8f8f2    508\n    yellowgreen       3    a6e22e    186", "black"]}
-{"type": "save", "data": ["bin/hello_world.c.raw"]}
+{"type": "save", "data": ["bin/hello_world.c.pyxstitch"]}

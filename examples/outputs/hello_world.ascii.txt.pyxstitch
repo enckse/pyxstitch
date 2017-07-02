@@ -10926,4 +10926,4 @@
 {"type": "text", "data": [[45, 160], "X", "black"]}
 {"type": "text", "data": [[45, 250], "20", "black"]}
 {"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     88\n          khaki       4    e6db74    576\n   mediumpurple       0    ae81ff    672\n         purple       2    960050    294\n     whitesmoke       1    f8f8f2   3028", "black"]}
-{"type": "save", "data": ["bin/hello_world.ascii.txt.raw"]}
+{"type": "save", "data": ["bin/hello_world.ascii.txt.pyxstitch"]}

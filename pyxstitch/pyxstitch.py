@@ -4,6 +4,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_for_filename
 from pygments.styles import get_all_styles
 import pyxstitch.formatter as fmt
+import pyxstitch.output as out_fmt
 import argparse
 import os
 import sys
@@ -12,7 +13,7 @@ import sys
 def main():
     """Main-entry point."""
     _PNG = "png"
-    _RAW = "raw"
+    _RAW = out_fmt.RAW_FORMAT
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', type=str, required=True)

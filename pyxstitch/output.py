@@ -4,6 +4,8 @@ from PIL import Image, ImageDraw
 from io import StringIO
 import json
 
+RAW_FORMAT = "pyxstitch"
+
 
 class FormatError(Exception):
     """Format errors."""
