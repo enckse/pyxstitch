@@ -40,8 +40,8 @@ def main():
     args = parser.parse_args()
     content = None
     file_name = None
+    file_ext = os.path.splitext(args.file)
     if os.path.exists(args.file):
-        file_ext = os.path.splitext(args.file)
         file_name = file_ext[0]
         if file_ext[1] == "." + _RAW:
             if args.format == _RAW:
@@ -62,6 +62,10 @@ def main():
         with open(args.file, 'r') as f:
             content = f.read()
     else:
+        print(file_ext)
+        if file_ext[1] is not None and len(file_ext[1]) > 1:
+            print("file not found, pass extension for stdin or valid file")
+            exit(1)
         file_name = "output"
         content = "".join(sys.stdin.readlines())
     formatting = fmt.CrossStitchFormatter(style=args.style)
