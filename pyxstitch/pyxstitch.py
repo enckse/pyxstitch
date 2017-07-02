@@ -10,10 +10,16 @@ import os
 import sys
 
 
+def _create_file_name(file_name, args):
+    """Create output file names."""
+    return "{}.{}".format(file_name, args.format)
+
+
 def main():
     """Main-entry point."""
     _PNG = "png"
     _RAW = out_fmt.RAW_FORMAT
+    _DEF_STYLE = "monokai"
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', type=str, required=True)
@@ -23,14 +29,30 @@ def main():
     parser.add_argument('--format', type=str, default=_PNG,
                         choices=[_PNG, "pdf", "jpg", _RAW])
     parser.add_argument('--style',
-                        default='monokai',
+                        default=_DEF_STYLE,
                         choices=list(get_all_styles()))
     args = parser.parse_args()
-    lexer = get_lexer_for_filename(args.file)
     content = None
     file_name = None
     if os.path.exists(args.file):
-        file_name = os.path.splitext(args.file)[0]
+        file_ext = os.path.splitext(args.file)
+        file_name = file_ext[0]
+        if file_ext[1] == "." + _RAW:
+            if args.format == _RAW:
+                print("can not replay raw to raw")
+                exit(1)
+            if args.colorize or args.dark or args.style != _DEF_STYLE:
+                print('style, colorize, and dark ignored during replay')
+            out = args.output
+            if args.output is None:
+                out = _create_file_name(file_name, args)
+            if not os.path.exists(args.file):
+                print('unable to find file')
+                exit(1)
+            playback = out_fmt.TextFormat()
+            with open(args.file, 'r') as f:
+                playback.replay(f.read(), out)
+            return
         with open(args.file, 'r') as f:
             content = f.read()
     else:
@@ -43,7 +65,8 @@ def main():
     formatting.is_raw = args.format == _RAW
     text = formatting.preprocess(content)
     if args.output is None:
-        formatting.file_name = "{}.{}".format(file_name, args.format)
+        formatting.file_name = _create_file_name(file_name, args)
+    lexer = get_lexer_for_filename(args.file)
     highlight(text, lexer, formatting)
 
 if __name__ == '__main__':

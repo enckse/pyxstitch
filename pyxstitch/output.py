@@ -76,21 +76,71 @@ class PILFormat(Format):
 class TextFormat(Format):
     """Raw texst output."""
 
+    _TYPE = "type"
+    _DATA = "data"
+    _INIT = "init"
+    _SAVE = "save"
+
     def __init__(self, dump=False):
         """Init the instance."""
         self._io = StringIO()
         self._dump = dump
         self._version = "0.1"
 
+    def _unpack(self, args):
+        """Unpack lists back to tuples (due to json)."""
+        unpacked = []
+        for arg in args:
+            if isinstance(arg, list):
+                unpacked.append(tuple(self._unpack(arg)))
+            else:
+                unpacked.append(arg)
+        return unpacked
+
+    def _log_replay(self, level, fmt, args):
+        """log replay messages."""
+        print("{} -> {}".format(level, fmt.format(*args)))
+
+    def replay(self, content, out_file_name):
+        """Replay a file into another format."""
+        line_idx = 1
+        pil = PILFormat()
+        for line in content.split("\n"):
+            if len(line.strip()) == 0:
+                continue
+            try:
+                obj = json.loads(line)
+                cmd = obj[self._TYPE]
+                datum = obj[self._DATA]
+                if cmd == self._SAVE:
+                    pil.save(out_file_name)
+                    continue
+                if cmd == self._INIT:
+                    vers = datum[0]
+                    if vers != self._version:
+                        self._log_replay("warning",
+                                         "Version: file {}, current {}",
+                                         [vers, self._version])
+                    datum = datum[1:]
+                passing = self._unpack(datum)
+                attr = getattr(pil, cmd)
+                attr(*passing)
+            except Exception as e:
+                self._log_replay("error",
+                                 "line number {}: {}",
+                                 [line_idx, e])
+                break
+            line_idx += 1
+
     def init(self, style, dims, color):
         """Init the instance."""
-        self._write("init", [style, dims, color])
+        self._write(self._INIT, [self._version, style, dims, color])
 
     def _write(self, obj_type, values):
         """Write data."""
         obj = {}
-        obj['type'] = obj_type
-        obj['data'] = values
+        obj[self._TYPE] = obj_type
+        obj[self._DATA] = values
         self._io.write(json.dumps(obj) + "\n")
 
     def rect(self, dims, outline=None):
@@ -107,7 +157,7 @@ class TextFormat(Format):
 
     def save(self, file_name):
         """Save outputs."""
-        self._write("save", [file_name])
+        self._write(self._SAVE, [file_name])
         contents = self._io.getvalue()
         if self._dump:
             return contents
@@ -116,4 +166,4 @@ class TextFormat(Format):
 
     def meta(self, char_meta, style, char):
         """Character metadata."""
-        self._write("meta", [char_meta, style, char, self._version])
+        self._write("meta", [char_meta, style, char])
