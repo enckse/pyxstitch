@@ -69,11 +69,7 @@ The following sections highlight any font characters that are incomplete
 | ---  | ---      |
 |    2 | unknown  |
 |    5 | unknown  |
-|    G | unknown  |
 |    M | unknown  |
 |    Q | unknown  |
 |    S | unknown  |
 |    W | unknown  |
-|    \ | revisit  |
-|    / | revisit  |
-|    @ | revisit  |
