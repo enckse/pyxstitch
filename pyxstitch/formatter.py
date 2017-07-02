@@ -176,17 +176,41 @@ class CrossStitchFormatter(Formatter):
                             stitches[coloring] += 1
                             legends.append((coloring, symb, style[2]))
                             if isinstance(stitch, ft.BackStitch):
-                                if stitch == ft.BackStitch.TopLeftBottomRight:
-                                    lines.append((x_start,
-                                                  y_start,
-                                                  x_end,
-                                                  y_end,
+                                if stitch in [ft.BackStitch.TopLeftBottomRight,
+                                              ft.BackStitch.TopLeft,
+                                              ft.BackStitch.BottomRight]:
+                                    x_st = x_start
+                                    y_st = y_start
+                                    x_en = x_end
+                                    y_en = y_end
+                                    if stitch == ft.BackStitch.TopLeft:
+                                        y_en = y_en - (offset / 2)
+                                        x_en = x_en - (offset / 2)
+                                    if stitch == ft.BackStitch.BottomRight:
+                                        y_st = y_st + (offset / 2)
+                                        x_st = x_st + (offset / 2)
+                                    lines.append((x_st,
+                                                  y_st,
+                                                  x_en,
+                                                  y_en,
                                                   color))
-                                if stitch == ft.BackStitch.BottomLeftTopRight:
-                                    lines.append((x_start,
-                                                  y_end,
-                                                  x_end,
-                                                  y_start,
+                                if stitch in [ft.BackStitch.BottomLeftTopRight,
+                                              ft.BackStitch.BottomLeft,
+                                              ft.BackStitch.TopRight]:
+                                    x_st = x_start
+                                    y_st = y_start
+                                    x_en = x_end
+                                    y_en = y_end
+                                    if stitch == ft.BackStitch.BottomLeft:
+                                        y_st = y_st + (offset / 2)
+                                        x_en = x_en - (offset / 2)
+                                    if stitch == ft.BackStitch.TopRight:
+                                        y_en = y_en - (offset / 2)
+                                        x_st = x_st + (offset / 2)
+                                    lines.append((x_st,
+                                                  y_en,
+                                                  x_en,
+                                                  y_st,
                                                   color))
                                 if stitch == ft.BackStitch.Left:
                                     lines.append((x_start,

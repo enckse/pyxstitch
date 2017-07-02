@@ -56,7 +56,8 @@ class DefaultFontFactory(FontFactory):
         val = int(val_str)
         for e in enums:
             if e & val:
-                add_to.append(e)
+                for item in self._translate(e):
+                    add_to.append(item)
 
     def process(self, value):
         """Process before lexer."""
@@ -64,6 +65,19 @@ class DefaultFontFactory(FontFactory):
         for replacing in self._replace:
             val = val.replace(replacing, self._replace[replacing])
         return val
+
+    def _translate(self, enum_item):
+        """Translate stitching types."""
+        if isinstance(enum_item, Stitch):
+            if enum_item == Stitch.BottomRight:
+                return [BackStitch.BottomRight, BackStitch.BottomLeftTopRight]
+            elif enum_item == Stitch.BottomLeft:
+                return [BackStitch.BottomLeft, BackStitch.TopLeftBottomRight]
+            elif enum_item == Stitch.TopLeft:
+                return [BackStitch.TopLeft, BackStitch.BottomLeftTopRight]
+            elif enum_item == Stitch.TopRight:
+                return [BackStitch.TopRight, BackStitch.TopLeftBottomRight]
+        return [enum_item]
 
     def _parse(self, definition, ch):
         """Parse a character definition."""

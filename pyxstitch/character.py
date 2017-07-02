@@ -11,6 +11,10 @@ class Stitch(IntFlag):
     """Types of stitching."""
 
     CrossStitch = 1
+    BottomLeft = 2
+    BottomRight = 4
+    TopLeft = 8
+    TopRight = 16
 
 
 class BackStitch(IntFlag):
@@ -22,6 +26,10 @@ class BackStitch(IntFlag):
     Right = 8
     BottomLeftTopRight = 16
     TopLeftBottomRight = 32
+    BottomLeft = 64
+    BottomRight = 128
+    TopLeft = 256
+    TopRight = 512
 
 
 class Grid(object):
