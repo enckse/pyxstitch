@@ -89,4 +89,3 @@ The following sections highlight any font characters that are incomplete
 |    # | revisit  |
 |    @ | revisit  |
 |    ^ | revisit  |
-|    % | revisit  |
