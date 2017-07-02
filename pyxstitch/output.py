@@ -43,19 +43,22 @@ class Format(object):
 class PILFormat(Format):
     """PIL/image format."""
 
-    _PAGE_HEIGHT = 1050
-    _PAGE_WIDTH = 800
+    _PAGE_HEIGHT = 970
+    _PAGE_WIDTH = 720
+    _PADDING = 25
 
     def __init__(self):
         """Init the output objects."""
         self._im = None
         self._dr = None
-        self._dims = None
+        self._img_dims = None
         self._is_multi = False
+        self._img_color = None
 
     def init(self, style, dims, color, multipage):
         """Init the image."""
-        self._dims = dims
+        self._img_dims = dims
+        self._img_color = color
         self._is_multi = multipage
         self._im = Image.new(style, dims, color)
         self._dr = ImageDraw.Draw(self._im)
@@ -72,12 +75,17 @@ class PILFormat(Format):
         """Draw a line."""
         self._dr.line(dims, fill=fill)
 
+    def _save(self, im, file_name):
+        """Save an image."""
+        print("saving {}".format(file_name))
+        im.save(file_name)
+
     def save(self, file_name):
         """Save the output image."""
         if self._is_multi:
             page = 1
-            width = self._dims[0]
-            height = self._dims[1]
+            width = self._img_dims[0]
+            height = self._img_dims[1]
             use_height = min(height, self._PAGE_HEIGHT)
             use_width = min(width, self._PAGE_WIDTH)
             for h in range(0, height, use_height):
@@ -94,12 +102,15 @@ class PILFormat(Format):
                     paged = "{}_{}{}".format(file_parts[0],
                                              page,
                                              file_parts[1])
-                    print(paged)
-                    cropped.save(paged)
+                    im = Image.new('RGB',
+                                   (self._PAGE_WIDTH + self._PADDING * 2,
+                                    self._PAGE_HEIGHT + self._PADDING * 2),
+                                   self._img_color)
+                    im.paste(cropped, (self._PADDING, self._PADDING))
+                    self._save(im, paged)
                     page += 1
         else:
-            print(file_name)
-            self._im.save(file_name)
+            self._save(self._im, file_name)
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
