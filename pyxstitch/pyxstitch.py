@@ -6,6 +6,7 @@ from pygments.styles import get_all_styles
 import pyxstitch.formatter as fmt
 import argparse
 import os
+import sys
 
 
 def main():
@@ -25,17 +26,24 @@ def main():
                         choices=list(get_all_styles()))
     args = parser.parse_args()
     lexer = get_lexer_for_filename(args.file)
-    with open(args.file, 'r') as f:
-        formatting = fmt.CrossStitchFormatter(style=args.style)
-        formatting.colorize = args.colorize
-        formatting.dark = args.dark
-        formatting.file_name = args.output
-        formatting.is_raw = args.format == _RAW
-        text = formatting.preprocess(f.read())
-        if args.output is None:
-            parts = os.path.splitext(args.file)
-            formatting.file_name = "{}.{}".format(parts[0], args.format)
-        highlight(text, lexer, formatting)
+    content = None
+    file_name = None
+    if os.path.exists(args.file):
+        file_name = os.path.splitext(args.file)[0]
+        with open(args.file, 'r') as f:
+            content = f.read()
+    else:
+        file_name = "output"
+        content = "".join(sys.stdin.readlines())
+    formatting = fmt.CrossStitchFormatter(style=args.style)
+    formatting.colorize = args.colorize
+    formatting.dark = args.dark
+    formatting.file_name = args.output
+    formatting.is_raw = args.format == _RAW
+    text = formatting.preprocess(content)
+    if args.output is None:
+        formatting.file_name = "{}.{}".format(file_name, args.format)
+    highlight(text, lexer, formatting)
 
 if __name__ == '__main__':
     main()

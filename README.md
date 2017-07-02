@@ -40,6 +40,11 @@ by default a a png file is created matching the source code name (e.g. `hello.py
 pyxstitch --file program.py --output image.png
 ```
 
+or just pass a file type and type/cat into pyxstitch
+```
+cat test.py | pyxstitch --file .py --output myimage.png
+```
+
 # examples
 
 there are example source code and corresponding output pngs in the `examples` folder
