@@ -375,6 +375,7 @@
 {"type": "text", "data": [[242, 100], "0", "black"]}
 {"type": "rect", "data": [[[250, 100], [260, 110]], "lightgrey"]}
 {"type": "rect", "data": [[[260, 100], [270, 110]], "lightgrey"]}
+{"type": "text", "data": [[262, 100], "0", "black"]}
 {"type": "rect", "data": [[[270, 100], [280, 110]], "lightgrey"]}
 {"type": "text", "data": [[272, 100], "0", "black"]}
 {"type": "rect", "data": [[[280, 100], [290, 110]], "lightgrey"]}
@@ -486,7 +487,6 @@
 {"type": "rect", "data": [[[250, 110], [260, 120]], "lightgrey"]}
 {"type": "text", "data": [[252, 110], "0", "black"]}
 {"type": "rect", "data": [[[260, 110], [270, 120]], "lightgrey"]}
-{"type": "text", "data": [[262, 110], "0", "black"]}
 {"type": "rect", "data": [[[270, 110], [280, 120]], "lightgrey"]}
 {"type": "rect", "data": [[[280, 110], [290, 120]], "lightgrey"]}
 {"type": "rect", "data": [[[290, 110], [300, 120]], "lightgrey"]}
@@ -6002,7 +6002,9 @@
 {"type": "line", "data": [[220, 100, 230, 110], "black"]}
 {"type": "line", "data": [[240, 100, 240, 110], "black"]}
 {"type": "line", "data": [[250, 100, 250, 110], "black"]}
-{"type": "line", "data": [[260, 110, 270, 100], "black"]}
+{"type": "line", "data": [[260, 100, 270, 100], "black"]}
+{"type": "line", "data": [[260, 110, 270, 110], "black"]}
+{"type": "line", "data": [[260, 100, 260, 110], "black"]}
 {"type": "line", "data": [[270, 100, 280, 100], "black"]}
 {"type": "line", "data": [[270, 110, 280, 110], "black"]}
 {"type": "line", "data": [[280, 100, 280, 110], "black"]}
@@ -6073,7 +6075,7 @@
 {"type": "line", "data": [[240, 110, 240, 120], "black"]}
 {"type": "line", "data": [[250, 110, 260, 110], "black"]}
 {"type": "line", "data": [[250, 120, 260, 120], "black"]}
-{"type": "line", "data": [[270, 110, 280, 120], "black"]}
+{"type": "line", "data": [[260, 110, 270, 120], "black"]}
 {"type": "line", "data": [[300, 110, 300, 120], "black"]}
 {"type": "line", "data": [[310, 110, 310, 120], "black"]}
 {"type": "line", "data": [[340, 110, 340, 120], "black"]}
@@ -6124,7 +6126,9 @@
 {"type": "line", "data": [[240, 120, 240, 130], "black"]}
 {"type": "line", "data": [[250, 120, 250, 130], "black"]}
 {"type": "line", "data": [[260, 120, 270, 130], "black"]}
-{"type": "line", "data": [[280, 120, 290, 130], "black"]}
+{"type": "line", "data": [[270, 120, 280, 120], "black"]}
+{"type": "line", "data": [[270, 130, 280, 130], "black"]}
+{"type": "line", "data": [[280, 120, 280, 130], "black"]}
 {"type": "line", "data": [[300, 120, 300, 130], "black"]}
 {"type": "line", "data": [[310, 120, 310, 130], "black"]}
 {"type": "line", "data": [[330, 120, 340, 120], "black"]}
@@ -6184,8 +6188,9 @@
 {"type": "line", "data": [[240, 140, 250, 140], "black"]}
 {"type": "line", "data": [[240, 130, 240, 140], "black"]}
 {"type": "line", "data": [[250, 130, 250, 140], "black"]}
-{"type": "line", "data": [[270, 130, 280, 140], "black"]}
+{"type": "line", "data": [[280, 130, 290, 130], "black"]}
 {"type": "line", "data": [[280, 140, 290, 140], "black"]}
+{"type": "line", "data": [[280, 130, 280, 140], "black"]}
 {"type": "line", "data": [[290, 130, 290, 140], "black"]}
 {"type": "line", "data": [[300, 130, 310, 140], "black"]}
 {"type": "line", "data": [[310, 130, 320, 130], "black"]}
@@ -7429,5 +7434,5 @@
 {"type": "text", "data": [[45, 650], "60", "black"]}
 {"type": "text", "data": [[45, 750], "70", "black"]}
 {"type": "text", "data": [[45, 850], "80", "black"]}
-{"type": "text", "data": [[20, 855.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       0    f92672    627\n          khaki       3    e6db74    714\n        skyblue       4    66d9ef    179\n     whitesmoke       1    f8f8f2    226\n    yellowgreen       2    a6e22e    838", "black"]}
+{"type": "text", "data": [[20, 855.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       0    f92672    632\n          khaki       3    e6db74    714\n        skyblue       4    66d9ef    179\n     whitesmoke       1    f8f8f2    226\n    yellowgreen       2    a6e22e    838", "black"]}
 {"type": "save", "data": ["bin/hello_world.go.raw"]}
