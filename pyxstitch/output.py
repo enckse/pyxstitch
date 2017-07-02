@@ -14,7 +14,7 @@ class FormatError(Exception):
 class Format(object):
     """Base format output."""
 
-    def init(self, style, dims, color):
+    def init(self, style, dims, color, multipage):
         """init the instance."""
         raise FormatError("not implemented.")
 
@@ -46,8 +46,9 @@ class PILFormat(Format):
         """Init the output objects."""
         self._im = None
         self._dr = None
+        self._is_multi = False
 
-    def init(self, style, dims, color):
+    def init(self, style, dims, color, multipage):
         """Init the image."""
         self._im = Image.new(style, dims, color)
         self._dr = ImageDraw.Draw(self._im)
@@ -132,9 +133,9 @@ class TextFormat(Format):
                 break
             line_idx += 1
 
-    def init(self, style, dims, color):
+    def init(self, style, dims, color, multipage):
         """Init the instance."""
-        self._write(self._INIT, [self._version, style, dims, color])
+        self._write(self._INIT, [self._version, style, dims, color, multipage])
 
     def _write(self, obj_type, values):
         """Write data."""

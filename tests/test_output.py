@@ -10,12 +10,13 @@ class TestTextFormat(unittest.TestCase):
     def test_init(self):
         """Test dump of init object."""
         txt = out.TextFormat(dump=True)
-        txt.init("a", (1,), "b")
+        txt.init("a", (1,), "b", False)
         vals = txt.save("blah")
         parts = vals.split("\n")
         self.assertEqual(3, len(parts))
-        expect = "{\"type\": \"init\", \"data\": [\"0.1\", \"a\", [1], \"b\"]}"
-        self.assertEqual(expect, parts[0])
+        expect = """
+        {\"type\": \"init\", \"data\": [\"0.1\", \"a\", [1], \"b\", false]}"""
+        self.assertEqual(expect.replace("\n", "").strip(), parts[0])
         self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
                          parts[1])
         self.assertEqual("", parts[2])

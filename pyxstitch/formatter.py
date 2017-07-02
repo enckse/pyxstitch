@@ -35,6 +35,7 @@ class CrossStitchFormatter(Formatter):
         self.file_name = None
         self.is_raw = False
         self._writer = None
+        self.is_multipage = False
 
         for token, style in self.style:
             if style['color']:
@@ -144,7 +145,8 @@ class CrossStitchFormatter(Formatter):
         self._writer.init('RGB',
                           (calc_width * offset + left_pad,
                            (calc_height * offset) + top_pad + legend),
-                          default_rgb)
+                          default_rgb,
+                          self.is_multipage)
         y = -1
         lines = []
         legends = []

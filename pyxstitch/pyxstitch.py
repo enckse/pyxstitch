@@ -20,14 +20,16 @@ def main():
     _PNG = "png"
     _RAW = out_fmt.RAW_FORMAT
     _DEF_STYLE = "monokai"
+    _PDF = "pdf"
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', type=str, required=True)
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--dark', action='store_true')
+    parser.add_argument('--multipage', action='store_true')
     parser.add_argument('--format', type=str, default=_PNG,
-                        choices=[_PNG, "pdf", "jpg", _RAW])
+                        choices=[_PNG, _PDF, "jpg", _RAW])
     parser.add_argument('--style',
                         default=_DEF_STYLE,
                         choices=list(get_all_styles()))
@@ -51,7 +53,7 @@ def main():
                 exit(1)
             playback = out_fmt.TextFormat()
             with open(args.file, 'r') as f:
-                playback.replay(f.read(), out)
+                playback.replay(f.read(), out, args.multipage)
             return
         with open(args.file, 'r') as f:
             content = f.read()
@@ -62,6 +64,7 @@ def main():
     formatting.colorize = args.colorize
     formatting.dark = args.dark
     formatting.file_name = args.output
+    formatting.is_multipage = args.multipage
     formatting.is_raw = args.format == _RAW
     text = formatting.preprocess(content)
     if args.output is None:
