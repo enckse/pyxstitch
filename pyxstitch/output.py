@@ -48,8 +48,8 @@ class PILFormat(Format):
     """PIL/image format."""
 
     _PAGE_HEIGHT = 970
-    _PAGE_WIDTH = 720
-    _PADDING = 25
+    _PAGE_WIDTH = 600
+    _PADDING = 100
 
     def __init__(self):
         """Init the output objects."""
