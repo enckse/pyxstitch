@@ -45,6 +45,15 @@ or just pass a file type and type/cat into pyxstitch
 cat test.py | pyxstitch --file .py --output myimage.png
 ```
 
+by default, pyxstitch will attempt to create multiple pages for easier reading of large patterns, this can be modified via `--multipage`.
+
+**Note:** When producing multiple pdfs, using ghostscript a single pdf can be merged from the results of pyxstitch
+
+```
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf file_001.pdf file_002.pdf
+```
+
+
 # examples
 
 there are example source code and corresponding output pngs in the `examples` folder
