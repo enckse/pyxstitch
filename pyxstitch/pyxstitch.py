@@ -53,7 +53,7 @@ def main():
                 exit(1)
             playback = out_fmt.TextFormat()
             with open(args.file, 'r') as f:
-                playback.replay(f.read(), out, args.multipage)
+                playback.replay(f.read(), out)
             return
         with open(args.file, 'r') as f:
             content = f.read()

@@ -3,6 +3,7 @@
 from PIL import Image, ImageDraw
 from io import StringIO
 import json
+import os
 
 RAW_FORMAT = "pyxstitch"
 
@@ -42,14 +43,20 @@ class Format(object):
 class PILFormat(Format):
     """PIL/image format."""
 
+    _PAGE_HEIGHT = 1050
+    _PAGE_WIDTH = 800
+
     def __init__(self):
         """Init the output objects."""
         self._im = None
         self._dr = None
+        self._dims = None
         self._is_multi = False
 
     def init(self, style, dims, color, multipage):
         """Init the image."""
+        self._dims = dims
+        self._is_multi = multipage
         self._im = Image.new(style, dims, color)
         self._dr = ImageDraw.Draw(self._im)
 
@@ -67,7 +74,30 @@ class PILFormat(Format):
 
     def save(self, file_name):
         """Save the output image."""
-        self._im.save(file_name)
+        if self._is_multi:
+            page = 1
+            width = self._dims[0]
+            height = self._dims[1]
+            use_height = min(height, self._PAGE_HEIGHT)
+            use_width = min(width, self._PAGE_WIDTH)
+            for h in range(0, height, use_height):
+                for w in range(0, width, use_width):
+                    w_end = w + use_width
+                    h_end = h + use_height
+                    if w_end > width:
+                        w_end = width
+                    if h_end > height:
+                        h_end = height
+                    box = (w, h, w_end, h_end)
+                    cropped = self._im.crop(box)
+                    file_parts = os.path.splitext(file_name)
+                    paged = "{}_{}{}".format(file_parts[0], page, file_parts[1])
+                    print(paged)
+                    cropped.save(paged)
+                    page += 1
+        else:
+            print(file_name)
+            self._im.save(file_name)
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
