@@ -45,6 +45,20 @@ or just pass a file type and type/cat into pyxstitch
 cat test.py | pyxstitch --file .py --output myimage.png
 ```
 
+by default it will use just a text (no syntax) if piped/stdin is used, that can be changed, so
+```
+cat test.py | pyxstich
+```
+
+produces no highlighting but
+```
+cat test.py | pyxstitch --file .py
+# or
+cat test.py | pyxstitch --guess
+```
+
+will chcek the syntax of the file (or attempt to)
+
 by default, pyxstitch will attempt to create multiple pages for easier reading of large patterns, this can be modified via `--multipage`.
 
 **Note:** When producing multiple pdfs, using ghostscript a single pdf can be merged from the results of pyxstitch
