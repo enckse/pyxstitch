@@ -78,6 +78,7 @@ class TextFormat(Format):
         """Init the instance."""
         self._io = StringIO()
         self._dump = dump
+        self._version = "0.1"
 
     def init(self, style, dims, color):
         """Init the instance."""
@@ -113,4 +114,4 @@ class TextFormat(Format):
 
     def meta(self, char_meta, style, char):
         """Character metadata."""
-        self._write("meta", [char_meta, style, char])
+        self._write("meta", [char_meta, style, char, self._version])

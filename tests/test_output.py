@@ -49,12 +49,12 @@ class TestTextFormat(unittest.TestCase):
     def test_meta(self):
         """Test dump of text object."""
         txt = out.TextFormat(dump=True)
-        txt.text([1], [], 'a')
+        txt.meta([], [], '')
         vals = txt.save("blah")
         parts = vals.split("\n")
         self.assertEqual(3, len(parts))
-        self.assertEqual("{\"type\": \"text\", \"data\": [[1], [], \"a\"]}",
-                         parts[0])
+        expect = "{\"type\": \"meta\", \"data\": [[], [], \"\", \"0.1\"]}"
+        self.assertEqual(expect, parts[0])
         self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
                          parts[1])
         self.assertEqual("", parts[2])
