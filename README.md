@@ -71,11 +71,9 @@ The following sections highlight any font characters that are incomplete
 |    5 | unknown  |
 |    G | unknown  |
 |    M | unknown  |
-|    N | unknown  |
 |    Q | unknown  |
 |    S | unknown  |
 |    W | unknown  |
-|    Z | unknown  |
 |    \ | revisit  |
 |    / | revisit  |
 |    @ | revisit  |
