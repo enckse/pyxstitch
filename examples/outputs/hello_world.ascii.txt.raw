@@ -6202,6 +6202,7 @@
 {"type": "rect", "data": [[[5330, 130], [5340, 140]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["whitesmoke", "1", "f8f8f2"], "_"]}
 {"type": "rect", "data": [[[5340, 130], [5350, 140]], "lightgrey"]}
+{"type": "text", "data": [[5342, 130], "1", "black"]}
 {"type": "rect", "data": [[[5350, 130], [5360, 140]], "lightgrey"]}
 {"type": "text", "data": [[5352, 130], "1", "black"]}
 {"type": "rect", "data": [[[5360, 130], [5370, 140]], "lightgrey"]}
@@ -6209,6 +6210,7 @@
 {"type": "rect", "data": [[[5370, 130], [5380, 140]], "lightgrey"]}
 {"type": "text", "data": [[5372, 130], "1", "black"]}
 {"type": "rect", "data": [[[5380, 130], [5390, 140]], "lightgrey"]}
+{"type": "text", "data": [[5382, 130], "1", "black"]}
 {"type": "rect", "data": [[[5390, 130], [5400, 140]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["purple", "2", "960050"], "`"]}
 {"type": "rect", "data": [[[5400, 130], [5410, 140]], "lightgrey"]}
@@ -10652,14 +10654,18 @@
 {"type": "line", "data": [[5240, 140, 5250, 140], "black"]}
 {"type": "line", "data": [[5250, 140, 5260, 140], "black"]}
 {"type": "line", "data": [[5260, 130, 5260, 140], "black"]}
+{"type": "line", "data": [[5340, 130, 5350, 130], "black"]}
+{"type": "line", "data": [[5340, 140, 5350, 140], "black"]}
+{"type": "line", "data": [[5340, 130, 5340, 140], "black"]}
 {"type": "line", "data": [[5350, 130, 5360, 130], "black"]}
 {"type": "line", "data": [[5350, 140, 5360, 140], "black"]}
-{"type": "line", "data": [[5350, 130, 5350, 140], "black"]}
 {"type": "line", "data": [[5360, 130, 5370, 130], "black"]}
 {"type": "line", "data": [[5360, 140, 5370, 140], "black"]}
 {"type": "line", "data": [[5370, 130, 5380, 130], "black"]}
 {"type": "line", "data": [[5370, 140, 5380, 140], "black"]}
-{"type": "line", "data": [[5380, 130, 5380, 140], "black"]}
+{"type": "line", "data": [[5380, 130, 5390, 130], "black"]}
+{"type": "line", "data": [[5380, 140, 5390, 140], "black"]}
+{"type": "line", "data": [[5390, 130, 5390, 140], "black"]}
 {"type": "line", "data": [[5480, 140, 5490, 140], "black"]}
 {"type": "line", "data": [[5480, 130, 5480, 140], "black"]}
 {"type": "line", "data": [[5490, 130, 5500, 130], "black"]}
@@ -10782,5 +10788,5 @@
 {"type": "text", "data": [[45, 150], "10", "black"]}
 {"type": "text", "data": [[45, 160], "X", "black"]}
 {"type": "text", "data": [[45, 250], "20", "black"]}
-{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     72\n          khaki       4    e6db74    574\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    250\n     whitesmoke       1    f8f8f2   2972", "black"]}
+{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     72\n          khaki       4    e6db74    574\n   mediumpurple       0    ae81ff    618\n         purple       2    960050    250\n     whitesmoke       1    f8f8f2   2980", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.raw"]}
