@@ -47,9 +47,9 @@ class Format(object):
 class PILFormat(Format):
     """PIL/image format."""
 
-    _PAGE_HEIGHT = 970
-    _PAGE_WIDTH = 600
-    _PADDING = 100
+    _PAGE_HEIGHT = 600
+    _PAGE_WIDTH = 1000
+    _PADDING = 50
 
     def __init__(self):
         """Init the output objects."""
@@ -86,7 +86,7 @@ class PILFormat(Format):
     def _save(self, im, file_name):
         """Save an image."""
         print("saving {}".format(file_name))
-        im.save(file_name)
+        im.save(file_name, quality=100)
 
     def save(self, file_name):
         """Save the output image."""
