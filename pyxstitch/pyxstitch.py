@@ -15,6 +15,7 @@ _RAW = out_fmt.RAW_FORMAT
 _DEF_STYLE = "monokai"
 _PDF = "pdf"
 _TXT = ".txt"
+_AUTODETECT = "autodetect"
 
 
 def _create_file_name(file_name, args):
@@ -42,7 +43,6 @@ def main():
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', type=str, default=_TXT)
-    parser.add_argument('--guess', action='store_true')
     parser.add_argument('--lexer', type=str)
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
@@ -68,10 +68,14 @@ def main():
             is_raw = True
             break
     default_lexer = get_lexer_by_name("text")
+    use_lexer = args.lexer
+    is_auto = use_lexer == _AUTODETECT
+    if is_auto:
+        use_lexer = None
     if not is_raw:
-        if args.lexer or args.file == _TXT:
-            if args.lexer:
-                lexer = get_lexer_by_name(args.lexer)
+        if use_lexer or args.file == _TXT:
+            if use_lexer:
+                lexer = get_lexer_by_name(use_lexer)
             else:
                 lexer = default_lexer
         else:
@@ -80,23 +84,22 @@ def main():
         file_name = file_ext[0]
         with open(args.file, 'r') as f:
             content = f.read()
-        if is_raw:
-            _replay(args, file_name, content)
     else:
         if file_ext[1] is not None and len(file_ext[1]) > 1:
             print("file not found, pass extension for stdin or valid file")
             exit(1)
         file_name = "output"
         content = "".join(sys.stdin.readlines())
-        if is_raw:
-            _replay(args, file_name, content)
-        if args.guess:
-            try:
-                lexer = guess_lexer(content)
-                print('using {} lexer'.format(lexer.name))
-            except:
-                print('unable to guess a lexer...defaulting to text')
-                lexer = default_lexer
+    if is_raw:
+        _replay(args, file_name, content)
+    if is_auto:
+        print(content)
+        try:
+            lexer = guess_lexer(content)
+            print('using {} lexer'.format(lexer.name))
+        except:
+            print('unable to guess a lexer...defaulting to text')
+            lexer = default_lexer
     formatting = fmt.CrossStitchFormatter(style=args.style)
     formatting.colorize = args.colorize
     formatting.dark = args.dark
