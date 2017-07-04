@@ -16,7 +16,6 @@ class Floss(object):
         self._colors = {}
         self._calcs = {}
         self._load()
-        self._cached = {}
 
     def lookup(self, code, rgb):
         """Lookup a code."""
@@ -25,20 +24,18 @@ class Floss(object):
             return self._colors[lowered]
         # try harder...
         close = None
-        if lowered in self._cached:
-            close = self._cached[lowered]
-        else:
-            closest = -1
-            for tries in self._calcs.keys():
-                t = self._calcs[tries]
-                check = self._close(rgb[0], rgb[1], rgb[2], t[0], t[1], t[2])
-                if closest == -1 or check < closest:
-                    closest = check
-                    close = tries
-            self._cached[lowered] = close
-        return self._colors[close]
+        closest = -1
+        for tries in self._calcs.keys():
+            t = self._calcs[tries]
+            check = self._close(rgb[0], rgb[1], rgb[2], t[0], t[1], t[2])
+            if closest == -1 or check < closest:
+                closest = check
+                close = self._colors[tries]
+        self._colors[lowered] = close
+        return self._colors[lowered]
 
     def _close(self, r1, g1, b1, r2, g2, b2):
+        """Closest rgb check."""
         return math.sqrt(pow((r1 - r2) * 0.299, 2) +
                          pow((g1 - g2) * 0.587, 2) +
                          pow((b1 - b2) * 0.114, 2))

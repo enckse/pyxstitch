@@ -254,8 +254,6 @@ class CrossStitchFormatter(Formatter):
                         for stitch in cell:
                             lgd.add_raw_stitch(coloring)
                             dmc = floss.lookup(style.color, style.hex)
-                            if dmc is None:
-                                dmc = ("", coloring)
                             lgd.add(dmc, coloring, style)
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
