@@ -114,7 +114,7 @@ class CrossStitchFormatter(Formatter):
                 else:
                     break
             styles = self._token_color(ttype)
-            if value == "\n":
+            if value is not None and '\n' in value and len(value.strip()) == 0:
                 calc_height += 1
                 if len(current) > calc_width:
                     calc_width = len(current)
