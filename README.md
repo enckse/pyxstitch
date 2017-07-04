@@ -55,7 +55,7 @@ produces no highlighting but
 cat test.py | pyxstitch --file .py
 # or
 cat test.py | pyxstitch --guess
-# or tell it which pygments parser to use
+# or tell it which pygments lexer to use
 cat test.py | pyxstitch --lexer python
 ```
 
