@@ -96,6 +96,7 @@ class CrossStitchFormatter(Formatter):
         self.file_name = None
         self.is_raw = False
         self._writer = None
+        self.as_dmc = True
         self.is_multipage = None
         self.config = None
         for token, style in self.style:
@@ -252,6 +253,8 @@ class CrossStitchFormatter(Formatter):
                         for stitch in cell:
                             lgd.add_raw_stitch(coloring)
                             dmc = floss.lookup(style.color, style.hex)
+                            if self.colorize and self.as_dmc:
+                                color = '#' + dmc.rgb
                             lgd.add(dmc, coloring, style)
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,

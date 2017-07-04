@@ -28,7 +28,7 @@ to run
 pyxstitch --file program.py
 ```
 
-to see actual highlight colors on the pattern use `--theme light-full` and if using a high-contrast style you may want to toggle `--theme dark` (or `--theme dark-full` for colors on dark)
+to see actual highlight colors on the pattern use `--theme light-dmc` and if using a high-contrast style you may want to toggle `--theme dark` (or `--theme dark-dmc` for colors on dark (to use non-DMC specify `--theme dark-generic` or `--theme light-generic)
 
 the coloring styles are available as part of the pygments project but can be passed like
 ```
