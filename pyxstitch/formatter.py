@@ -11,6 +11,7 @@ import pyxstitch.font as ft
 import pyxstitch.symbols as sym
 from pyxstitch.output import PILFormat, TextFormat
 from pyxstitch.config import Config
+from pyxstitch.floss import Floss
 from math import floor
 from enum import Enum
 
@@ -167,6 +168,7 @@ class CrossStitchFormatter(Formatter):
         lines = []
         legends = []
         stitches = {}
+        floss = Floss()
         for entry in entries:
             for height in self.font_factory.height():
                 y += 1
@@ -192,7 +194,10 @@ class CrossStitchFormatter(Formatter):
                             if coloring not in stitches:
                                 stitches[coloring] = 0
                             stitches[coloring] += 1
-                            legends.append((coloring, symb, style[2]))
+                            dmc = floss.lookup(style[2])
+                            if dmc is None:
+                                dmc = ("", coloring)
+                            legends.append((dmc[1], symb, style[2], dmc[0]))
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
                                               ft.BackStitch.TopLeft,
@@ -286,18 +291,19 @@ class CrossStitchFormatter(Formatter):
                                   char,
                                   self._symbols)
         # and legend
-        legend_tab = ["{: >15} {: >7} {: >9} {:>6}".format(x[0],
+        legend_tab = ["{: >15} {: >7} {: >9} {:>6} {:>8}".format(x[0],
                                                            x[1],
                                                            x[2],
-                                                           x[3]) for x in
-                      [("color", "symbol", "rgb", "edges"),
-                       ("---", "---", "---", "---")] +
-                      [(y[0], y[1], y[2], stitches[y[0]]) for y in
+                                                           x[3],
+                                                           x[4]) for x in
+                      [("color", "symbol", "rgb", "edges", "dmc"),
+                       ("---", "---", "---", "---", "---")] +
+                      [(y[0], y[1], y[2], stitches[y[0]], y[3]) for y in
                        sorted(list(set(legends)))]]
         chunk_idx = 0
         leg_height = (calc_height * offset) - (legend / 4)
         for chunk in self._legend(legend_tab, 8):
-            self._writer.text((offset * 2 + (chunk_idx * 250), leg_height),
+            self._writer.text((offset * 2 + (chunk_idx * 275), leg_height),
                               "\n".join(chunk),
                               self._symbols)
             chunk_idx += 1
