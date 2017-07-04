@@ -107,6 +107,17 @@ class CrossStitchFormatter(Formatter):
         current = []
         calc_height = 0
         calc_width = 0
+
+        def _line(cur_height, cur_width, cur, entries):
+            """Create a new line."""
+            use_width = cur_width
+            if len(cur) > use_width:
+                use_width = len(cur)
+            entries.append(cur)
+            if len(cur) == 0:
+                entries.append([self._new_entry(' ', styles)])
+            return (cur_height + 1, use_width, [])
+
         for ttype, value in tokensource:
             while ttype not in self._colors:
                 if ttype.parent is not None:
@@ -115,16 +126,19 @@ class CrossStitchFormatter(Formatter):
                     break
             styles = self._token_color(ttype)
             if value is not None and '\n' in value and len(value.strip()) == 0:
-                calc_height += 1
-                if len(current) > calc_width:
-                    calc_width = len(current)
-                entries.append(current)
-                if len(current) == 0:
-                    entries.append([self._new_entry(' ', styles)])
-                current = []
+                calc_height, calc_width, current = _line(calc_height,
+                                                         calc_width,
+                                                         current,
+                                                         entries)
             else:
                 for ch in value:
-                    current.append(self._new_entry(ch, styles))
+                    if ch == '\n':
+                        calc_height, calc_width, current = _line(calc_height,
+                                                                 calc_width,
+                                                                 current,
+                                                                 entries)
+                    else:
+                        current.append(self._new_entry(ch, styles))
         if len(current) > 0:
             calc_height += 1
             if len(current) > calc_width:
