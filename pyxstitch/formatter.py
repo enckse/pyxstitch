@@ -292,10 +292,10 @@ class CrossStitchFormatter(Formatter):
                                   self._symbols)
         # and legend
         legend_tab = ["{: >15} {: >7} {: >9} {:>6} {:>8}".format(x[0],
-                                                           x[1],
-                                                           x[2],
-                                                           x[3],
-                                                           x[4]) for x in
+                                                                 x[1],
+                                                                 x[2],
+                                                                 x[3],
+                                                                 x[4]) for x in
                       [("color", "symbol", "rgb", "edges", "dmc"),
                        ("---", "---", "---", "---", "---")] +
                       [(y[0], y[1], y[2], stitches[y[0]], y[3]) for y in

@@ -4848,5 +4848,5 @@
 {"type": "text", "data": [[45, 550], "50", "black"]}
 {"type": "text", "data": [[45, 650], "60", "black"]}
 {"type": "text", "data": [[45, 750], "70", "black"]}
-{"type": "text", "data": [[20, 745.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n        dimgrey       0    75715e    360\n          khaki       4    e6db74    249\n        skyblue       2    66d9ef     64\n     whitesmoke       1    f8f8f2    230\n    yellowgreen       3    a6e22e     82", "black"]}
+{"type": "text", "data": [[20, 745.0], "          color  symbol       rgb  edges      dmc\n            ---     ---       ---    ---      ---\n        dimgrey       0    75715e    360         \n          khaki       4    e6db74    249         \n        skyblue       2    66d9ef     64         \n     whitesmoke       1    f8f8f2    230         \n    yellowgreen       3    a6e22e     82         ", "black"]}
 {"type": "save", "data": ["bin/hello_world.c.pyxstitch"]}
