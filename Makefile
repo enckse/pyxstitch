@@ -34,12 +34,16 @@ py:
 raw:
 	pyxstitch --file examples/hw.py.pyxstitch --output $(BIN)/hw.py.png
 
+text:
+	cat tests/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
+	diff $(BIN)/text.test.$(FORMAT) tests/text.test.$(FORMAT)
+
 analyze:
 	pip install pep8 pep257
 	pep8 $(SRC)
 	pep257 $(SRC)
 
-test: clean
+test: clean text
 	cd tests && ./run.sh
 
 clean:
