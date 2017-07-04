@@ -2,6 +2,7 @@
 """App for pyxstitch."""
 from pygments import highlight
 from pygments.lexers import get_lexer_for_filename, guess_lexer
+from pygments.lexers import get_lexer_by_name
 from pygments.styles import get_all_styles
 import pyxstitch.formatter as fmt
 import pyxstitch.output as out_fmt
@@ -42,6 +43,7 @@ def main():
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', type=str, default=_TXT)
     parser.add_argument('--guess', action='store_true')
+    parser.add_argument('--lexer', type=str)
     parser.add_argument('--output', type=str)
     parser.add_argument('--colorize', action='store_true')
     parser.add_argument('--dark', action='store_true')
@@ -65,8 +67,15 @@ def main():
         if item == "." + _RAW:
             is_raw = True
             break
+    default_lexer = get_lexer_by_name("text")
     if not is_raw:
-        lexer = get_lexer_for_filename(args.file)
+        if args.lexer or args.file == _TXT:
+            if args.lexer:
+                lexer = get_lexer_by_name(args.lexer)
+            else:
+                lexer = default_lexer
+        else:
+            lexer = get_lexer_for_filename(args.file)
     if os.path.exists(args.file):
         file_name = file_ext[0]
         with open(args.file, 'r') as f:
@@ -87,7 +96,7 @@ def main():
                 print('using {} lexer'.format(lexer.name))
             except:
                 print('unable to guess a lexer...defaulting to text')
-                lexer = get_lexer_for_filename(_TXT)
+                lexer = default_lexer
     formatting = fmt.CrossStitchFormatter(style=args.style)
     formatting.colorize = args.colorize
     formatting.dark = args.dark
