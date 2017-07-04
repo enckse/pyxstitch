@@ -3695,6 +3695,7 @@
 {"type": "rect", "data": [[[770, 420], [780, 430]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["deeppink", "4", "f92672"], "="]}
 {"type": "rect", "data": [[[780, 420], [790, 430]], "lightgrey"]}
+{"type": "text", "data": [[782, 420], "4", "black"]}
 {"type": "rect", "data": [[[790, 420], [800, 430]], "lightgrey"]}
 {"type": "text", "data": [[792, 420], "4", "black"]}
 {"type": "rect", "data": [[[800, 420], [810, 430]], "lightgrey"]}
@@ -3702,9 +3703,11 @@
 {"type": "rect", "data": [[[810, 420], [820, 430]], "lightgrey"]}
 {"type": "text", "data": [[812, 420], "4", "black"]}
 {"type": "rect", "data": [[[820, 420], [830, 430]], "lightgrey"]}
+{"type": "text", "data": [[822, 420], "4", "black"]}
 {"type": "rect", "data": [[[830, 420], [840, 430]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["deeppink", "4", "f92672"], "="]}
 {"type": "rect", "data": [[[840, 420], [850, 430]], "lightgrey"]}
+{"type": "text", "data": [[842, 420], "4", "black"]}
 {"type": "rect", "data": [[[850, 420], [860, 430]], "lightgrey"]}
 {"type": "text", "data": [[852, 420], "4", "black"]}
 {"type": "rect", "data": [[[860, 420], [870, 430]], "lightgrey"]}
@@ -3712,6 +3715,7 @@
 {"type": "rect", "data": [[[870, 420], [880, 430]], "lightgrey"]}
 {"type": "text", "data": [[872, 420], "4", "black"]}
 {"type": "rect", "data": [[[880, 420], [890, 430]], "lightgrey"]}
+{"type": "text", "data": [[882, 420], "4", "black"]}
 {"type": "rect", "data": [[[890, 420], [900, 430]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["whitesmoke", "1", "f8f8f2"], " "]}
 {"type": "rect", "data": [[[900, 420], [910, 430]], "lightgrey"]}
@@ -4106,6 +4110,7 @@
 {"type": "rect", "data": [[[770, 440], [780, 450]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["deeppink", "4", "f92672"], "="]}
 {"type": "rect", "data": [[[780, 440], [790, 450]], "lightgrey"]}
+{"type": "text", "data": [[782, 440], "4", "black"]}
 {"type": "rect", "data": [[[790, 440], [800, 450]], "lightgrey"]}
 {"type": "text", "data": [[792, 440], "4", "black"]}
 {"type": "rect", "data": [[[800, 440], [810, 450]], "lightgrey"]}
@@ -4113,9 +4118,11 @@
 {"type": "rect", "data": [[[810, 440], [820, 450]], "lightgrey"]}
 {"type": "text", "data": [[812, 440], "4", "black"]}
 {"type": "rect", "data": [[[820, 440], [830, 450]], "lightgrey"]}
+{"type": "text", "data": [[822, 440], "4", "black"]}
 {"type": "rect", "data": [[[830, 440], [840, 450]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["deeppink", "4", "f92672"], "="]}
 {"type": "rect", "data": [[[840, 440], [850, 450]], "lightgrey"]}
+{"type": "text", "data": [[842, 440], "4", "black"]}
 {"type": "rect", "data": [[[850, 440], [860, 450]], "lightgrey"]}
 {"type": "text", "data": [[852, 440], "4", "black"]}
 {"type": "rect", "data": [[[860, 440], [870, 450]], "lightgrey"]}
@@ -4123,6 +4130,7 @@
 {"type": "rect", "data": [[[870, 440], [880, 450]], "lightgrey"]}
 {"type": "text", "data": [[872, 440], "4", "black"]}
 {"type": "rect", "data": [[[880, 440], [890, 450]], "lightgrey"]}
+{"type": "text", "data": [[882, 440], "4", "black"]}
 {"type": "rect", "data": [[[890, 440], [900, 450]], "lightgrey"]}
 {"type": "meta", "data": [[11, 5], ["whitesmoke", "1", "f8f8f2"], " "]}
 {"type": "rect", "data": [[[900, 440], [910, 450]], "lightgrey"]}
@@ -6096,5 +6104,5 @@
 {"type": "text", "data": [[45, 450], "40", "black"]}
 {"type": "text", "data": [[45, 550], "50", "black"]}
 {"type": "text", "data": [[45, 650], "60", "black"]}
-{"type": "text", "data": [[20, 635.0], "                                     dmc                color  symbol       rgb  edges  floss\n                                     ---                  ---     ---       ---    ---    ---\n                       Chartreuse Bright          yellowgreen       2    a6e22e     82    704\n                      Cyclamen Pink Dark             deeppink       4    f92672     24   3804\n                           Sea Green Med              skyblue       0    66d9ef    227    959\n                             Straw Light                khaki       3    e6db74    395   3822\n                            Winter White           whitesmoke       1    f8f8f2    297   3865", "black"]}
+{"type": "text", "data": [[20, 635.0], "                                     dmc                color  symbol       rgb  edges  floss\n                                     ---                  ---     ---       ---    ---    ---\n                       Chartreuse Bright          yellowgreen       2    a6e22e     82    704\n                      Cyclamen Pink Dark             deeppink       4    f92672     40   3804\n                           Sea Green Med              skyblue       0    66d9ef    227    959\n                             Straw Light                khaki       3    e6db74    395   3822\n                            Winter White           whitesmoke       1    f8f8f2    297   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.py.pyxstitch"]}
