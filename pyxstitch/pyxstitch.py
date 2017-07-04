@@ -16,6 +16,11 @@ _DEF_STYLE = "monokai"
 _PDF = "pdf"
 _TXT = ".txt"
 _AUTODETECT = "autodetect"
+_LIGHT = "light"
+_DARK = "dark"
+_FULL = "-full"
+_LIGHT_FULL = _LIGHT + _FULL
+_DARK_FULL = _DARK + _FULL
 
 
 def _create_file_name(file_name, args):
@@ -28,8 +33,8 @@ def _replay(args, file_name, content):
     if args.format == _RAW:
         print("can not replay raw to raw")
         exit(1)
-    if args.colorize or args.dark or args.style != _DEF_STYLE:
-        print('style, colorize, and dark ignored during replay')
+    if args.theme != _LIGHT or args.style != _DEF_STYLE:
+        print('style and theme ignored during replay')
     out = args.output
     if args.output is None:
         out = _create_file_name(file_name, args)
@@ -45,8 +50,10 @@ def main():
     parser.add_argument('--file', type=str, default=_TXT)
     parser.add_argument('--lexer', type=str)
     parser.add_argument('--output', type=str)
-    parser.add_argument('--colorize', action='store_true')
-    parser.add_argument('--dark', action='store_true')
+    parser.add_argument('--theme',
+                        type=str,
+                        default=_LIGHT,
+                        choices=[_DARK, _LIGHT, _DARK_FULL, _LIGHT_FULL])
     parser.add_argument('--kv', metavar='N', type=str, nargs='+')
     parser.add_argument('--multipage', type=str,
                         default=out_fmt.MULTI_PAGE_AUTO,
@@ -101,8 +108,8 @@ def main():
             print('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
     formatting = fmt.CrossStitchFormatter(style=args.style)
-    formatting.colorize = args.colorize
-    formatting.dark = args.dark
+    formatting.colorize = args.theme.endswith(_FULL)
+    formatting.dark = args.theme.startswith(_DARK)
     formatting.file_name = args.output
     formatting.is_multipage = args.multipage
     formatting.is_raw = args.format == _RAW
