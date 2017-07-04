@@ -1,5 +1,10 @@
 #!/usr/env/python
-"""DMC floss mapping."""
+"""
+DMC floss mapping.
+
+Sourced from csv:
+    https://github.com/adrianj/CrossStitchCreator
+"""
 import math
 
 
