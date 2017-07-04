@@ -1,7 +1,9 @@
 pyxstitch
 ===
 
-pyxstitch is an application (and associated library/compenents) that takes source code files and produces syntax-highlighted patterns for cross stitching
+pyxstitch is an application (and associated library/compenents) that takes source code files and produces syntax-highlighted patterns for cross stitching.
+
+See an example and completed cross stitch pattern [here!](https://enckse.github.io/pyxstitch/)
 
 [![Build Status](https://travis-ci.org/enckse/pyxstitch.svg?branch=master)](https://travis-ci.org/enckse/pyxstitch)
 
