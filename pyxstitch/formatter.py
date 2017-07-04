@@ -194,10 +194,15 @@ class CrossStitchFormatter(Formatter):
                             if coloring not in stitches:
                                 stitches[coloring] = 0
                             stitches[coloring] += 1
-                            dmc = floss.lookup(style[2])
+                            cur_rgb = style[2]
+                            dmc = floss.lookup(cur_rgb, self._to_hex(cur_rgb))
                             if dmc is None:
                                 dmc = ("", coloring)
-                            legends.append((dmc[1], symb, style[2], dmc[0]))
+                            legends.append((dmc[1],
+                                            symb,
+                                            cur_rgb,
+                                            dmc[0],
+                                            coloring))
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
                                               ft.BackStitch.TopLeft,
@@ -291,14 +296,16 @@ class CrossStitchFormatter(Formatter):
                                   char,
                                   self._symbols)
         # and legend
-        legend_tab = ["{: >15} {: >7} {: >9} {:>6} {:>8}".format(x[0],
-                                                                 x[1],
-                                                                 x[2],
-                                                                 x[3],
-                                                                 x[4]) for x in
-                      [("color", "symbol", "rgb", "edges", "dmc"),
-                       ("---", "---", "---", "---", "---")] +
-                      [(y[0], y[1], y[2], stitches[y[0]], y[3]) for y in
+        legend_tab = ["{:>40} {:>20} {:>7} {:>9} {:>6} {:>6}".format(x[0],
+                                                                     x[1],
+                                                                     x[2],
+                                                                     x[3],
+                                                                     x[4],
+                                                                     x[5])
+                      for x in
+                      [("dmc", "color", "symbol", "rgb", "edges", "floss"),
+                       ("---", "---", "---", "---", "---", "---")] +
+                      [(y[0], y[4], y[1], y[2], stitches[y[4]], y[3]) for y in
                        sorted(list(set(legends)))]]
         chunk_idx = 0
         leg_height = (calc_height * offset) - (legend / 4)

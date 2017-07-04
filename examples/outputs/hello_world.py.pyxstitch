@@ -6096,5 +6096,5 @@
 {"type": "text", "data": [[45, 450], "40", "black"]}
 {"type": "text", "data": [[45, 550], "50", "black"]}
 {"type": "text", "data": [[45, 650], "60", "black"]}
-{"type": "text", "data": [[20, 635.0], "          color  symbol       rgb  edges      dmc\n            ---     ---       ---    ---      ---\n       deeppink       4    f92672     24         \n          khaki       3    e6db74    395         \n        skyblue       0    66d9ef    227         \n     whitesmoke       1    f8f8f2    297         \n    yellowgreen       2    a6e22e     82         ", "black"]}
+{"type": "text", "data": [[20, 635.0], "                                     dmc                color  symbol       rgb  edges  floss\n                                     ---                  ---     ---       ---    ---    ---\n                       Chartreuse Bright          yellowgreen       2    a6e22e     82    704\n                      Cyclamen Pink Dark             deeppink       4    f92672     24   3804\n                           Sea Green Med              skyblue       0    66d9ef    227    959\n                             Straw Light                khaki       3    e6db74    395   3822\n                            Winter White           whitesmoke       1    f8f8f2    297   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.py.pyxstitch"]}

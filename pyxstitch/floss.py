@@ -1,5 +1,6 @@
 #!/usr/env/python
 """DMC floss mapping."""
+import math
 
 
 class Floss(object):
@@ -8,18 +9,40 @@ class Floss(object):
     def __init__(self):
         """Init the instance."""
         self._colors = {}
+        self._calcs = {}
         self._load()
+        self._cached = {}
 
-    def lookup(self, code):
+    def lookup(self, code, rgb):
         """Lookup a code."""
         lowered = code.lower()
         if lowered in self._colors:
             return self._colors[lowered]
-        return None
+        # try harder...
+        close = None
+        if lowered in self._cached:
+            close = self._cached[lowered]
+        else:
+            closest = -1
+            for tries in self._calcs.keys():
+                t = self._calcs[tries]
+                check = self._close(rgb[0], rgb[1], rgb[2], t[0], t[1], t[2])
+                if closest == -1 or check < closest:
+                    closest = check
+                    close = tries
+            self._cached[lowered] = close
+        return self._colors[close]
+
+    def _close(self, r1, g1, b1, r2, g2, b2):
+        return math.sqrt(pow((r1 - r2) * 0.299, 2) +
+                         pow((g1 - g2) * 0.587, 2) +
+                         pow((b1 - b2) * 0.114, 2))
 
     def _add(self, number, desc, red, green, blue, code, row):
         """Add a color."""
-        self._colors[code.lower()] = (number, desc)
+        low = code.lower()
+        self._colors[low] = (number, desc)
+        self._calcs[low] = (red, green, blue)
 
     def _load(self):
         """Load all colors."""
