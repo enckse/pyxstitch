@@ -52,7 +52,7 @@ class Legend(object):
     def build(self):
         """Build output legend."""
         headers = []
-        cols = ("dmc", "color", "symbol", "rgb", "edges", "floss")
+        cols = ("dmc", "color", "symbol", "edges", "floss")
         delim = []
         for col in cols:
             delim.append("---")
@@ -62,18 +62,16 @@ class Legend(object):
         for item in self._entries:
             raw = item[1]
             dmc = item[0]
-            output.append((dmc.name,
-                           raw,
+            output.append(("{} ({})".format(dmc.name, dmc.rgb),
+                           "{} ({})".format(raw, item[3]),
                            item[2],
-                           item[3],
                            self._stitches[raw],
                            dmc.floss_number))
-        return ["{:>40} {:>20} {:>7} {:>9} {:>6} {:>6}".format(x[0],
-                                                               x[1],
-                                                               x[2],
-                                                               x[3],
-                                                               x[4],
-                                                               x[5])
+        return ["{:>40} {:>20} {:>7} {:>6} {:>6}".format(x[0],
+                                                         x[1],
+                                                         x[2],
+                                                         x[3],
+                                                         x[4])
                 for x in headers + sorted(set(output))]
 
 
