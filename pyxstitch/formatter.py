@@ -31,6 +31,52 @@ class Style(object):
         return [self.name, self.symbol, self.color]
 
 
+class Legend(object):
+    """Legend object."""
+
+    def __init__(self):
+        """Init the instance."""
+        self._stitches = {}
+        self._entries = []
+
+    def add_raw_stitch(self, raw_color):
+        """Add raw stitch edge."""
+        if raw_color not in self._stitches:
+            self._stitches[raw_color] = 0
+        self._stitches[raw_color] += 1
+
+    def add(self, dmc, raw_color, style):
+        """New legend entry."""
+        self._entries.append((dmc, raw_color, style.symbol, style.color))
+
+    def build(self):
+        """Build output legend."""
+        headers = []
+        cols = ("dmc", "color", "symbol", "rgb", "edges", "floss")
+        delim = []
+        for col in cols:
+            delim.append("---")
+        headers.append(cols)
+        headers.append(tuple(delim))
+        output = []
+        for item in set(self._entries):
+            raw = item[1]
+            dmc = item[0]
+            output.append((dmc[1],
+                           raw,
+                           item[2],
+                           item[3],
+                           self._stitches[raw],
+                           dmc[0]))
+        return ["{:>40} {:>20} {:>7} {:>9} {:>6} {:>6}".format(x[0],
+                                                               x[1],
+                                                               x[2],
+                                                               x[3],
+                                                               x[4],
+                                                               x[5])
+                for x in headers + sorted(output)]
+
+
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
 
@@ -183,8 +229,7 @@ class CrossStitchFormatter(Formatter):
                           Config(self.config))
         y = -1
         lines = []
-        legends = []
-        stitches = {}
+        lgd = Legend()
         floss = Floss()
         for entry in entries:
             for height in self.font_factory.height():
@@ -207,17 +252,11 @@ class CrossStitchFormatter(Formatter):
                         self._writer.rect([(x_start, y_start), (x_end, y_end)],
                                           outline=self._lines)
                         for stitch in cell:
-                            if coloring not in stitches:
-                                stitches[coloring] = 0
-                            stitches[coloring] += 1
+                            lgd.add_raw_stitch(coloring)
                             dmc = floss.lookup(style.color, style.hex)
                             if dmc is None:
                                 dmc = ("", coloring)
-                            legends.append((dmc[1],
-                                            style.symbol,
-                                            style.color,
-                                            dmc[0],
-                                            coloring))
+                            lgd.add(dmc, coloring, style)
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
                                               ft.BackStitch.TopLeft,
@@ -281,7 +320,7 @@ class CrossStitchFormatter(Formatter):
                                                   color))
                             if isinstance(stitch, ft.Stitch):
                                 if stitch == ft.Stitch.CrossStitch:
-                                    stitches[coloring] += 1
+                                    lgd.add_raw_stitch(coloring)
                                     x_pos = left_pad + offset + 2 + x * offset
                                     self._writer.text((x_pos, y_start),
                                                       style.symbol,
@@ -310,19 +349,8 @@ class CrossStitchFormatter(Formatter):
                 self._writer.text((left_pad - 5, top_pad + h * offset),
                                   char,
                                   self._symbols)
-        # and legend
-        legend_tab = ["{:>40} {:>20} {:>7} {:>9} {:>6} {:>6}".format(x[0],
-                                                                     x[1],
-                                                                     x[2],
-                                                                     x[3],
-                                                                     x[4],
-                                                                     x[5])
-                      for x in
-                      [("dmc", "color", "symbol", "rgb", "edges", "floss"),
-                       ("---", "---", "---", "---", "---", "---")] +
-                      [(y[0], y[4], y[1], y[2], stitches[y[4]], y[3]) for y in
-                       sorted(list(set(legends)))]]
         chunk_idx = 0
+        legend_tab = lgd.build()
         leg_height = (calc_height * offset) - (legend / 4)
         for chunk in self._legend(legend_tab, 8):
             self._writer.text((offset * 2 + (chunk_idx * 275), leg_height),
