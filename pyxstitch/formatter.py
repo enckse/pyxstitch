@@ -16,6 +16,21 @@ from math import floor
 from enum import Enum
 
 
+class Style(object):
+    """Output/legend formatting."""
+
+    def __init__(self, name, symbol, color, hex_vals):
+        """Init the instance."""
+        self.name = name
+        self.symbol = symbol
+        self.color = color
+        self.hex = hex_vals
+
+    def save(self):
+        """Save to metadata format."""
+        return [self.name, self.symbol, self.color]
+
+
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
 
@@ -78,9 +93,11 @@ class CrossStitchFormatter(Formatter):
         use_color = self._default_color
         if token in self._colors:
             use_color = self._colors[token]
-        return (self._get_color(self._to_hex(use_color)),
-                self.symbol_generator.next(use_color),
-                use_color)
+        use_hex = self._to_hex(use_color)
+        return Style(self._get_color(use_hex),
+                     self.symbol_generator.next(use_color),
+                     use_color,
+                     use_hex)
 
     def _new_entry(self, ch, style):
         """new entry to process."""
@@ -176,10 +193,9 @@ class CrossStitchFormatter(Formatter):
                 grid = []
                 has = False
                 for cur, style, ch in entry:
-                    symb = style[1]
-                    coloring = style[0]
+                    coloring = style.name
                     color = self._symbols
-                    self._writer.meta(cur.metadata(), style, ch)
+                    self._writer.meta(cur.metadata(), style.save(), ch)
                     if self.colorize:
                         color = coloring
                     for cell in cur.cells(height):
@@ -194,13 +210,12 @@ class CrossStitchFormatter(Formatter):
                             if coloring not in stitches:
                                 stitches[coloring] = 0
                             stitches[coloring] += 1
-                            cur_rgb = style[2]
-                            dmc = floss.lookup(cur_rgb, self._to_hex(cur_rgb))
+                            dmc = floss.lookup(style.color, style.hex)
                             if dmc is None:
                                 dmc = ("", coloring)
                             legends.append((dmc[1],
-                                            symb,
-                                            cur_rgb,
+                                            style.symbol,
+                                            style.color,
                                             dmc[0],
                                             coloring))
                             if isinstance(stitch, ft.BackStitch):
@@ -269,7 +284,7 @@ class CrossStitchFormatter(Formatter):
                                     stitches[coloring] += 1
                                     x_pos = left_pad + offset + 2 + x * offset
                                     self._writer.text((x_pos, y_start),
-                                                      symb,
+                                                      style.symbol,
                                                       color)
                         has = True
                 if not has:
