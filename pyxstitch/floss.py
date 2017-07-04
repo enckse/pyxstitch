@@ -8,31 +8,40 @@ Sourced from csv:
 import math
 
 
+class FlossType(object):
+    """Floss type."""
+
+    def __init__(self, dmc):
+        """Init the instance."""
+        self.floss_number = dmc[0]
+        self.name = dmc[1]
+        self.rgb = ('%02x%02x%02x' % dmc[2]).lower()
+
+
 class Floss(object):
     """Floss definitions."""
 
     def __init__(self):
         """Init the instance."""
         self._colors = {}
-        self._calcs = {}
         self._load()
 
     def lookup(self, code, rgb):
         """Lookup a code."""
         lowered = code.lower()
         if lowered in self._colors:
-            return self._colors[lowered]
+            return FlossType(self._colors[lowered])
         # try harder...
         close = None
         closest = -1
-        for tries in self._calcs.keys():
-            t = self._calcs[tries]
+        for tries in self._colors.keys():
+            t = self._colors[tries][2]
             check = self._close(rgb[0], rgb[1], rgb[2], t[0], t[1], t[2])
             if closest == -1 or check < closest:
                 closest = check
                 close = self._colors[tries]
         self._colors[lowered] = close
-        return self._colors[lowered]
+        return FlossType(close)
 
     def _close(self, r1, g1, b1, r2, g2, b2):
         """Closest rgb check."""
@@ -42,9 +51,8 @@ class Floss(object):
 
     def _add(self, number, desc, red, green, blue, code, row):
         """Add a color."""
-        low = code.lower()
-        self._colors[low] = (number, desc)
-        self._calcs[low] = (red, green, blue)
+        rgb = (red, green, blue)
+        self._colors[code.lower()] = (number, desc, rgb)
 
     def _load(self):
         """Load all colors."""

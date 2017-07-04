@@ -59,22 +59,22 @@ class Legend(object):
         headers.append(cols)
         headers.append(tuple(delim))
         output = []
-        for item in set(self._entries):
+        for item in self._entries:
             raw = item[1]
             dmc = item[0]
-            output.append((dmc[1],
+            output.append((dmc.name,
                            raw,
                            item[2],
                            item[3],
                            self._stitches[raw],
-                           dmc[0]))
+                           dmc.floss_number))
         return ["{:>40} {:>20} {:>7} {:>9} {:>6} {:>6}".format(x[0],
                                                                x[1],
                                                                x[2],
                                                                x[3],
                                                                x[4],
                                                                x[5])
-                for x in headers + sorted(output)]
+                for x in headers + sorted(set(output))]
 
 
 class CrossStitchFormatter(Formatter):

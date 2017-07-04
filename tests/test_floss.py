@@ -11,12 +11,14 @@ class TestFloss(unittest.TestCase):
         """Floss lookup."""
         fl = floss.Floss()
         look = fl.lookup("______", (169, 226, 216))
-        self.assertEqual("964", look[0])
-        self.assertEqual("Sea Green Light", look[1])
+        self.assertEqual("Sea Green Light", look.name)
+        self.assertEqual("964", look.floss_number)
+        self.assertEqual("a9e2d8", look.rgb)
 
     def test_lookup_code(self):
         """Floss lookup."""
         fl = floss.Floss()
         look = fl.lookup("A9E2D8", None)
-        self.assertEqual("964", look[0])
-        self.assertEqual("Sea Green Light", look[1])
+        self.assertEqual("964", look.floss_number)
+        self.assertEqual("Sea Green Light", look.name)
+        self.assertEqual("a9e2d8", look.rgb)
