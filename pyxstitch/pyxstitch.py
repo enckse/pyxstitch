@@ -108,6 +108,7 @@ def main():
     text = formatting.preprocess(content)
     if args.output is None:
         formatting.file_name = _create_file_name(file_name, args)
+    print("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 
 if __name__ == '__main__':
