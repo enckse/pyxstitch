@@ -6060,6 +6060,7 @@
 {"type": "rect", "data": [[[4030, 130], [4040, 140]], "lightgrey"]}
 {"type": "rect", "data": [[[4040, 130], [4050, 140]], "lightgrey"]}
 {"type": "rect", "data": [[[4050, 130], [4060, 140]], "lightgrey"]}
+{"type": "text", "data": [[4052, 130], "3", "black"]}
 {"type": "rect", "data": [[[4060, 130], [4070, 140]], "lightgrey"]}
 {"type": "text", "data": [[4062, 130], "3", "black"]}
 {"type": "rect", "data": [[[4070, 130], [4080, 140]], "lightgrey"]}
@@ -10733,6 +10734,8 @@
 {"type": "line", "data": [[3980, 140, 3990, 140], "black"]}
 {"type": "line", "data": [[3980, 130, 3980, 140], "black"]}
 {"type": "line", "data": [[3990, 130, 3990, 140], "black"]}
+{"type": "line", "data": [[4050, 140, 4060, 140], "black"]}
+{"type": "line", "data": [[4050, 130, 4050, 140], "black"]}
 {"type": "line", "data": [[4060, 140, 4070, 140], "black"]}
 {"type": "line", "data": [[4070, 130, 4070, 140], "black"]}
 {"type": "line", "data": [[4080, 130, 4090, 140], "black"]}
@@ -10925,5 +10928,5 @@
 {"type": "text", "data": [[45, 150], "10", "black"]}
 {"type": "text", "data": [[45, 160], "X", "black"]}
 {"type": "text", "data": [[45, 250], "20", "black"]}
-{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     88\n          khaki       4    e6db74    576\n   mediumpurple       0    ae81ff    672\n         purple       2    960050    294\n     whitesmoke       1    f8f8f2   3028", "black"]}
+{"type": "text", "data": [[20, 195.0], "          color  symbol       rgb  edges\n            ---     ---       ---    ---\n       deeppink       3    f92672     92\n          khaki       4    e6db74    576\n   mediumpurple       0    ae81ff    672\n         purple       2    960050    294\n     whitesmoke       1    f8f8f2   3028", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.pyxstitch"]}
