@@ -79,12 +79,3 @@ there are example source code and corresponding output pngs in the `examples` fo
 the library components of the CrossStitchFormatter can be changed to:
 * Adjust how symbols for various colors are chosen (replace `DefaultSymbolGenerator` on the formatter)
 * Change the ascii-driven `DefaultFontFactory` by changing the formatter property
-
-# limitations
-
-this is a jumpstarter and lacks some useful features that could be added later:
-* Does not output DMC colors
-* Does not validate colors on the pattern/style/etc.
-* Many other things
-
-**Note:** Again - this is just a jump start to creating patterns for cross stitching from source code
