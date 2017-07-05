@@ -48,6 +48,8 @@ class Format(object):
 class PILFormat(Format):
     """PIL/image format."""
 
+    _HTML = "<html><body>{}</body></html>"
+
     def __init__(self):
         """Init the output objects."""
         self._im = None
@@ -96,6 +98,8 @@ class PILFormat(Format):
             use_height = min(height, self._cfg.page_height)
             use_width = min(width, self._cfg.page_width)
             use_offset = self._cfg.page_pad
+            file_name_outputs = []
+            file_parts = os.path.splitext(file_name)
             for h in range(0, height, use_height):
                 for w in range(0, width, use_width):
                     w_end = w + use_width
@@ -106,7 +110,6 @@ class PILFormat(Format):
                         h_end = height
                     box = (w, h, w_end, h_end)
                     cropped = self._im.crop(box)
-                    file_parts = os.path.splitext(file_name)
                     paged = "{}_{}{}".format(file_parts[0],
                                              str(page).rjust(3, '0'),
                                              file_parts[1])
@@ -116,7 +119,15 @@ class PILFormat(Format):
                                    self._img_color)
                     im.paste(cropped, (use_offset, use_offset))
                     self._save(im, paged)
+                    file_name_outputs.append(paged)
                     page += 1
+            if self._cfg.page_no_index == 0:
+                index_page = "{}-index.html".format(file_parts[0])
+                print("producing index page {}".format(index_page))
+                with open(index_page, 'w') as f:
+                    output_img = "".join(["<img src='{}' />".format(x)
+                                         for x in file_name_outputs])
+                    f.write(self._HTML.format(output_img))
         else:
             self._save(self._im, file_name)
 

@@ -19,7 +19,7 @@ class Config(object):
         """Save to disk."""
         return [self.page_height,
                 self.page_width,
-                self.page_pad, 
+                self.page_pad,
                 self.page_no_index]
 
     @staticmethod
