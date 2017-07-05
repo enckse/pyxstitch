@@ -119,7 +119,7 @@ class PILFormat(Format):
                                    self._img_color)
                     im.paste(cropped, (use_offset, use_offset))
                     self._save(im, paged)
-                    file_name_outputs.append(paged)
+                    file_name_outputs.append(os.path.basename(paged))
                     page += 1
             if self._cfg.page_no_index == 0:
                 index_page = "{}-index.html".format(file_parts[0])
