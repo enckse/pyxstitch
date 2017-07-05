@@ -90,3 +90,4 @@ ENV/
 
 bin*
 *.png
+*.html
