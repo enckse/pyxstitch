@@ -1,6 +1,8 @@
 #!/usr/env/python
 """pyxstitch operating configuration settings."""
 
+_PAGE = "page_"
+
 
 class Config(object):
     """Configuration definition."""
@@ -10,25 +12,30 @@ class Config(object):
         self.page_height = 600
         self.page_width = 1000
         self.page_pad = 50
+        self.page_no_index = 0
         self._parse(inputs)
 
     def save(self):
         """Save to disk."""
-        return [self.page_height, self.page_width, self.page_pad]
+        return [self.page_height,
+                self.page_width,
+                self.page_pad, 
+                self.page_no_index]
 
     @staticmethod
     def _create_input(key, value):
         """create an input."""
-        return "{}={}".format(key, value)
+        return "{}{}={}".format(_PAGE, key, value)
 
     @staticmethod
     def load(values):
         """load config from saved type."""
         inputs = []
-        if len(values) == 3:
-            inputs.append(Config._create_input("page_height", values[0]))
-            inputs.append(Config._create_input("page_width", values[1]))
-            inputs.append(Config._create_input("page_pad", values[2]))
+        if len(values) == 4:
+            inputs.append(Config._create_input("height", values[0]))
+            inputs.append(Config._create_input("width", values[1]))
+            inputs.append(Config._create_input("pad", values[2]))
+            inputs.append(Config._create_input("no_index", values[3]))
         return Config(inputs)
 
     def _parse(self, inputs):
@@ -44,7 +51,7 @@ class Config(object):
                 continue
             key = parts[0]
             val = parts[1]
-            if key.startswith("page_"):
+            if key.startswith(_PAGE):
                 if key in dir(self):
                     try:
                         int_val = int(val)

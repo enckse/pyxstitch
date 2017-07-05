@@ -17,7 +17,7 @@ class TestTextFormat(unittest.TestCase):
         self.assertEqual(3, len(parts))
         expect = """
 {\"type\": \"init\",
- \"data\": [\"0.1\", \"a\", [1], \"b\", false, [600, 1000, 50]]}"""
+ \"data\": [\"0.1\", \"a\", [1], \"b\", false, [600, 1000, 50, 0]]}"""
         self.assertEqual(expect.replace("\n", "").strip(), parts[0])
         self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
                          parts[1])
