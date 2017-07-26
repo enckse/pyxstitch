@@ -330,7 +330,7 @@ class CrossStitchFormatter(Formatter):
         # NOTE: we draw backstitch lines LAST to prevent overwrite
         for l in lines:
             self._writer.line((l[0], l[1], l[2], l[3]), fill=l[4])
-        # add lables
+        # add labels
         for h in range(calc_height):
             if h == 0:
                 for w in range(calc_width):
