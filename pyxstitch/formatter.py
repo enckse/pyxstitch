@@ -188,7 +188,7 @@ class CrossStitchFormatter(Formatter):
                 else:
                     break
             styles = self._token_color(ttype)
-            if value is not None and '\n' in value and len(value.strip()) == 0:
+            if value is not None and '\n' in value and len(value) == 0:
                 calc_height, calc_width, current = _line(calc_height,
                                                          calc_width,
                                                          current,
