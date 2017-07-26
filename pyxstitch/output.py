@@ -44,6 +44,10 @@ class Format(object):
         """Meta data."""
         raise FormatError("not implemented")
 
+    def legend(self, pos, legend, symbols):
+        """Legend output."""
+        raise FormatError("not implemented")
+
 
 class PILFormat(Format):
     """PIL/image format."""
@@ -58,6 +62,7 @@ class PILFormat(Format):
         self._is_multi = False
         self._img_color = None
         self._cfg = None
+        self._legends = []
 
     def init(self, style, dims, color, multipage, config):
         """Init the image."""
@@ -89,6 +94,13 @@ class PILFormat(Format):
         print("saving {}".format(file_name))
         im.save(file_name, quality=100)
 
+    def _new_image(self, use_offset):
+        """New output image."""
+        return Image.new('RGB',
+                         (self._cfg.page_width + use_offset * 2,
+                          self._cfg.page_height + use_offset * 2),
+                         self._img_color)
+
     def save(self, file_name):
         """Save the output image."""
         if self._is_multi:
@@ -113,14 +125,14 @@ class PILFormat(Format):
                     paged = "{}_{}{}".format(file_parts[0],
                                              str(page).rjust(3, '0'),
                                              file_parts[1])
-                    im = Image.new('RGB',
-                                   (self._cfg.page_width + use_offset * 2,
-                                    self._cfg.page_height + use_offset * 2),
-                                   self._img_color)
+                    im = self._new_image(use_offset)
                     im.paste(cropped, (use_offset, use_offset))
                     self._save(im, paged)
                     file_name_outputs.append(os.path.basename(paged))
                     page += 1
+            lgd_im = self._new_image(use_offset)
+            lgd_dr = ImageDraw.Draw(lgd_im)
+            self._legendize(lgd_dr)
             if self._cfg.page_no_index == 0:
                 index_page = "{}-index.html".format(file_parts[0])
                 print("producing index page {}".format(index_page))
@@ -129,11 +141,20 @@ class PILFormat(Format):
                                          for x in file_name_outputs])
                     f.write(self._HTML.format(output_img))
         else:
+            self._legendize(self._dr)
             self._save(self._im, file_name)
+
+    def _legendize(self, draw):
+        for l in self._legends:
+            draw.text(l[0], l[1], l[2])
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
         pass
+
+    def legend(self, pos, legend, symbols):
+        """Save legend information."""
+        self._legends.append((pos, legend, symbols))
 
 
 class TextFormat(Format):
@@ -148,7 +169,7 @@ class TextFormat(Format):
         """Init the instance."""
         self._io = StringIO()
         self._dump = dump
-        self._version = "0.1"
+        self._version = "0.2"
 
     def _unpack(self, args):
         """Unpack lists back to tuples (due to json)."""
@@ -212,6 +233,10 @@ class TextFormat(Format):
         obj[self._TYPE] = obj_type
         obj[self._DATA] = values
         self._io.write(json.dumps(obj) + "\n")
+
+    def legend(self, pos, legend, symbols):
+        """Legend output."""
+        self._write("legend", [pos, legend, symbols])
 
     def rect(self, dims, outline=None):
         """Write rectangle information."""

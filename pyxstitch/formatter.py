@@ -9,7 +9,7 @@ from pygments.formatter import Formatter
 import webcolors as wc
 import pyxstitch.font as ft
 import pyxstitch.symbols as sym
-from pyxstitch.output import PILFormat, TextFormat
+from pyxstitch.output import PILFormat, TextFormat, MULTI_PAGE_OFF
 from pyxstitch.config import Config
 from pyxstitch.floss import Floss
 from math import floor
@@ -351,9 +351,12 @@ class CrossStitchFormatter(Formatter):
         chunk_idx = 0
         legend_tab = lgd.build()
         leg_height = (calc_height * offset) - (legend / 4)
-        for chunk in self._legend(legend_tab, 8):
-            self._writer.text((offset * 2 + (chunk_idx * 275), leg_height),
-                              "\n".join(chunk),
-                              self._symbols)
+        chunks = 8
+        if self.is_multipage != MULTI_PAGE_OFF:
+            chunks = 100
+        for chunk in self._legend(legend_tab, chunks):
+            self._writer.legend((offset * 2 + (chunk_idx * 500), leg_height),
+                                "\n".join(chunk),
+                                self._symbols)
             chunk_idx += 1
         self._writer.save(self.file_name)

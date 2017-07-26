@@ -1,4 +1,4 @@
-{"type": "init", "data": ["0.1", "RGB", [1670, 920], [255, 255, 255], "off", [600, 1000, 50, 0]]}
+{"type": "init", "data": ["0.2", "RGB", [1670, 920], [255, 255, 255], "off", [600, 1000, 50, 0]]}
 {"type": "meta", "data": [[11, 5], ["dimgrey", "0", "75715e"], "#"]}
 {"type": "rect", "data": [[[60, 60], [70, 70]], "lightgrey"]}
 {"type": "rect", "data": [[[70, 60], [80, 70]], "lightgrey"]}
@@ -4848,5 +4848,5 @@
 {"type": "text", "data": [[45, 550], "50", "black"]}
 {"type": "text", "data": [[45, 650], "60", "black"]}
 {"type": "text", "data": [[45, 750], "70", "black"]}
-{"type": "text", "data": [[20, 745.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n              Chartreuse Bright (9ecf34) yellowgreen (a6e22e)       3     82    704\n                    Pewter Gray (6c6c6c)     dimgrey (75715e)       0    360    317\n                  Sea Green Med (59c7b4)     skyblue (66d9ef)       2     64    959\n                    Straw Light (f6dc98)       khaki (e6db74)       4    249   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    230   3865", "black"]}
+{"type": "legend", "data": [[20, 745.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n              Chartreuse Bright (9ecf34) yellowgreen (a6e22e)       3     82    704\n                    Pewter Gray (6c6c6c)     dimgrey (75715e)       0    360    317\n                  Sea Green Med (59c7b4)     skyblue (66d9ef)       2     64    959\n                    Straw Light (f6dc98)       khaki (e6db74)       4    249   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    230   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.c.pyxstitch"]}

@@ -1,4 +1,4 @@
-{"type": "init", "data": ["0.1", "RGB", [2150, 1910], [255, 255, 255], "off", [600, 1000, 50, 0]]}
+{"type": "init", "data": ["0.2", "RGB", [2150, 1910], [255, 255, 255], "off", [600, 1000, 50, 0]]}
 {"type": "meta", "data": [[11, 5], ["dimgrey", "0", "75715e"], "#"]}
 {"type": "rect", "data": [[[60, 60], [70, 70]], "lightgrey"]}
 {"type": "rect", "data": [[[70, 60], [80, 70]], "lightgrey"]}
@@ -19250,5 +19250,5 @@
 {"type": "text", "data": [[45, 1550], "150", "black"]}
 {"type": "text", "data": [[45, 1650], "160", "black"]}
 {"type": "text", "data": [[45, 1750], "170", "black"]}
-{"type": "text", "data": [[20, 1735.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       4    244   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       3    268    209\n                    Pewter Gray (6c6c6c)     dimgrey (75715e)       0    251    317\n                  Sea Green Med (59c7b4)     skyblue (66d9ef)       1   1021    959\n                    Straw Light (f6dc98)       khaki (e6db74)       5    312   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       2    761   3865", "black"]}
+{"type": "legend", "data": [[20, 1735.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       4    244   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       3    268    209\n                    Pewter Gray (6c6c6c)     dimgrey (75715e)       0    251    317\n                  Sea Green Med (59c7b4)     skyblue (66d9ef)       1   1021    959\n                    Straw Light (f6dc98)       khaki (e6db74)       5    312   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       2    761   3865", "black"]}
 {"type": "save", "data": ["bin/fb.bash.pyxstitch"]}

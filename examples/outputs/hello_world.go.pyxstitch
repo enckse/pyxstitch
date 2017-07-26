@@ -1,4 +1,4 @@
-{"type": "init", "data": ["0.1", "RGB", [1910, 1030], [255, 255, 255], "off", [600, 1000, 50, 0]]}
+{"type": "init", "data": ["0.2", "RGB", [1910, 1030], [255, 255, 255], "off", [600, 1000, 50, 0]]}
 {"type": "meta", "data": [[11, 5], ["deeppink", "0", "f92672"], "p"]}
 {"type": "rect", "data": [[[60, 60], [70, 70]], "lightgrey"]}
 {"type": "rect", "data": [[[70, 60], [80, 70]], "lightgrey"]}
@@ -6039,5 +6039,5 @@
 {"type": "text", "data": [[45, 650], "60", "black"]}
 {"type": "text", "data": [[45, 750], "70", "black"]}
 {"type": "text", "data": [[45, 850], "80", "black"]}
-{"type": "text", "data": [[20, 855.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n              Chartreuse Bright (9ecf34) yellowgreen (a6e22e)       2    386    704\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       0    297   3804\n                  Sea Green Med (59c7b4)     skyblue (66d9ef)       4     84    959\n                    Straw Light (f6dc98)       khaki (e6db74)       3    341   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1     94   3865", "black"]}
+{"type": "legend", "data": [[20, 855.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n              Chartreuse Bright (9ecf34) yellowgreen (a6e22e)       2    386    704\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       0    297   3804\n                  Sea Green Med (59c7b4)     skyblue (66d9ef)       4     84    959\n                    Straw Light (f6dc98)       khaki (e6db74)       3    341   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1     94   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.go.pyxstitch"]}
