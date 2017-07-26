@@ -63,6 +63,7 @@ class PILFormat(Format):
         self._img_color = None
         self._cfg = None
         self._legends = []
+        self._legend_start = None
 
     def init(self, style, dims, color, multipage, config):
         """Init the image."""
@@ -101,6 +102,14 @@ class PILFormat(Format):
                           self._cfg.page_height + use_offset * 2),
                          self._img_color)
 
+    def _new_page(self, file_parts, page, report_out):
+        """Create a new page name for file output."""
+        paged = "{}_{}{}".format(file_parts[0],
+                                 str(page).rjust(3, '0'),
+                                 file_parts[1])
+        report_out.append(os.path.basename(paged))
+        return paged
+
     def save(self, file_name):
         """Save the output image."""
         if self._is_multi:
@@ -113,6 +122,8 @@ class PILFormat(Format):
             file_name_outputs = []
             file_parts = os.path.splitext(file_name)
             for h in range(0, height, use_height):
+                if h > self._legend_start:
+                    continue
                 for w in range(0, width, use_width):
                     w_end = w + use_width
                     h_end = h + use_height
@@ -122,17 +133,18 @@ class PILFormat(Format):
                         h_end = height
                     box = (w, h, w_end, h_end)
                     cropped = self._im.crop(box)
-                    paged = "{}_{}{}".format(file_parts[0],
-                                             str(page).rjust(3, '0'),
-                                             file_parts[1])
                     im = self._new_image(use_offset)
                     im.paste(cropped, (use_offset, use_offset))
+                    paged = self._new_page(file_parts, page, file_name_outputs)
                     self._save(im, paged)
-                    file_name_outputs.append(os.path.basename(paged))
                     page += 1
             lgd_im = self._new_image(use_offset)
             lgd_dr = ImageDraw.Draw(lgd_im)
-            self._legendize(lgd_dr)
+            use_lgd_pos = (use_offset, use_offset)
+            self._legendize(lgd_dr, position=use_lgd_pos)
+            self._save(lgd_im, self._new_page(file_parts,
+                                              page,
+                                              file_name_outputs))
             if self._cfg.page_no_index == 0:
                 index_page = "{}-index.html".format(file_parts[0])
                 print("producing index page {}".format(index_page))
@@ -144,9 +156,13 @@ class PILFormat(Format):
             self._legendize(self._dr)
             self._save(self._im, file_name)
 
-    def _legendize(self, draw):
+    def _legendize(self, draw, position=None):
+        """Create a legend on a drawing."""
         for l in self._legends:
-            draw.text(l[0], l[1], l[2])
+            use_pos = position
+            if use_pos is None:
+                use_pos = l[0]
+            draw.text(use_pos, l[1], l[2])
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
@@ -154,6 +170,8 @@ class PILFormat(Format):
 
     def legend(self, pos, legend, symbols):
         """Save legend information."""
+        if self._legend_start is None or pos[1] < self._legend_start:
+            self._legend_start = pos[1]
         self._legends.append((pos, legend, symbols))
 
 
