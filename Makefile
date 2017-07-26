@@ -13,7 +13,7 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: install clean go c py ascii raw
+example: install clean go c py ascii raw bash
 
 ascii:
 	$(call run-example,"ascii.txt")
@@ -33,6 +33,10 @@ py:
 
 raw:
 	pyxstitch --file examples/hw.py.pyxstitch --output $(BIN)/hw.py.png
+
+bash:
+	pyxstitch --file examples/fizzbuzz.bash --multipage off --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
+	diff $(BIN)/fb.bash.$(FORMAT) examples/outputs/fb.bash.$(FORMAT)
 
 text:
 	cat tests/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
