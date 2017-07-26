@@ -2,6 +2,8 @@
 """pyxstitch operating configuration settings."""
 
 _PAGE = "page_"
+_NO_IDX = "no_index"
+_BOOLS = [_PAGE + _NO_IDX]
 
 
 class Config(object):
@@ -35,7 +37,7 @@ class Config(object):
             inputs.append(Config._create_input("height", values[0]))
             inputs.append(Config._create_input("width", values[1]))
             inputs.append(Config._create_input("pad", values[2]))
-            inputs.append(Config._create_input("no_index", values[3]))
+            inputs.append(Config._create_input(_NO_IDX, values[3]))
         return Config(inputs)
 
     def _parse(self, inputs):
@@ -55,7 +57,7 @@ class Config(object):
                 if key in dir(self):
                     try:
                         int_val = int(val)
-                        if int_val > 0:
+                        if int_val > 0 or (int_val >= 0 and key in _BOOLS):
                             setattr(self, key, int_val)
                             continue
                     except:
