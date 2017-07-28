@@ -221,9 +221,10 @@ class CrossStitchFormatter(Formatter):
         legend_min = 500
         top_pad = 50
         left_pad = 50
+        legend_req = legend_min + left_pad
         width_size = (calc_width * offset + left_pad)
-        if width_size < legend_min:
-            width_size = legend_min
+        if width_size < legend_req:
+            width_size = legend_req
         self._writer.init('RGB',
                           (width_size,
                            (calc_height * offset) + top_pad + legend),
