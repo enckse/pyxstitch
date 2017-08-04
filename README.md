@@ -65,12 +65,6 @@ will chcek the syntax of the file (or attempt to)
 
 by default, pyxstitch will attempt to create multiple pages for easier reading of large patterns, this can be modified via `--multipage`.
 
-**Note:** When producing multiple pdfs, using ghostscript a single pdf can be merged from the results of pyxstitch
-
-```
-gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf file_001.pdf file_002.pdf
-```
-
 
 # examples
 
