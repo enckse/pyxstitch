@@ -8313,8 +8313,8 @@
 {"type": "line", "data": [[820, 100, 830, 110], "black"]}
 {"type": "line", "data": [[1720, 110, 1730, 110], "black"]}
 {"type": "line", "data": [[1720, 100, 1730, 110], "black"]}
-{"type": "line", "data": [[2050, 100, 2060, 110], "black"]}
-{"type": "line", "data": [[2070, 110, 2080, 100], "black"]}
+{"type": "line", "data": [[2050, 110, 2060, 110], "black"]}
+{"type": "line", "data": [[2070, 110, 2080, 110], "black"]}
 {"type": "line", "data": [[910, 120, 920, 120], "black"]}
 {"type": "line", "data": [[920, 120, 930, 120], "black"]}
 {"type": "line", "data": [[930, 120, 940, 120], "black"]}
@@ -8322,8 +8322,6 @@
 {"type": "line", "data": [[1750, 120, 1760, 120], "black"]}
 {"type": "line", "data": [[1760, 120, 1770, 120], "black"]}
 {"type": "line", "data": [[1770, 120, 1780, 120], "black"]}
-{"type": "line", "data": [[2050, 110, 2060, 120], "black"]}
-{"type": "line", "data": [[2070, 120, 2080, 110], "black"]}
 {"type": "line", "data": [[2170, 120, 2180, 120], "black"]}
 {"type": "line", "data": [[2180, 120, 2190, 120], "black"]}
 {"type": "line", "data": [[2180, 120, 2190, 110], "black"]}
@@ -8412,5 +8410,5 @@
 {"type": "text", "data": [[45, 150], "10", "black"]}
 {"type": "text", "data": [[45, 160], "X", "black"]}
 {"type": "text", "data": [[45, 250], "20", "black"]}
-{"type": "legend", "data": [[20, 195.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     40   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    314    209\n                      Plum Dark (820043)      purple (960050)       2    128    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4    278   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1   1411   3865", "black"]}
+{"type": "legend", "data": [[20, 195.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     40   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    314    209\n                      Plum Dark (820043)      purple (960050)       2    128    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4    278   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1   1409   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.pyxstitch"]}

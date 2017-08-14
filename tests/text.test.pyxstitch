@@ -3624,20 +3624,16 @@
 {"type": "line", "data": [[370, 230, 380, 230], "black"]}
 {"type": "line", "data": [[380, 230, 390, 230], "black"]}
 {"type": "line", "data": [[390, 230, 400, 230], "black"]}
-{"type": "line", "data": [[670, 430, 680, 440], "black"]}
-{"type": "line", "data": [[690, 440, 700, 430], "black"]}
+{"type": "line", "data": [[670, 440, 680, 440], "black"]}
+{"type": "line", "data": [[690, 440, 700, 440], "black"]}
 {"type": "line", "data": [[610, 450, 620, 450], "black"]}
 {"type": "line", "data": [[620, 450, 630, 450], "black"]}
 {"type": "line", "data": [[630, 450, 640, 450], "black"]}
-{"type": "line", "data": [[670, 440, 680, 450], "black"]}
-{"type": "line", "data": [[690, 450, 700, 440], "black"]}
-{"type": "line", "data": [[370, 540, 380, 550], "black"]}
-{"type": "line", "data": [[390, 550, 400, 540], "black"]}
+{"type": "line", "data": [[370, 550, 380, 550], "black"]}
+{"type": "line", "data": [[390, 550, 400, 550], "black"]}
 {"type": "line", "data": [[310, 560, 320, 560], "black"]}
 {"type": "line", "data": [[320, 560, 330, 560], "black"]}
 {"type": "line", "data": [[330, 560, 340, 560], "black"]}
-{"type": "line", "data": [[370, 550, 380, 560], "black"]}
-{"type": "line", "data": [[390, 560, 400, 550], "black"]}
 {"type": "line", "data": [[670, 560, 680, 560], "black"]}
 {"type": "line", "data": [[680, 560, 690, 560], "black"]}
 {"type": "line", "data": [[690, 560, 700, 560], "black"]}
@@ -3664,5 +3660,5 @@
 {"type": "text", "data": [[45, 750], "70", "black"]}
 {"type": "text", "data": [[45, 850], "80", "black"]}
 {"type": "text", "data": [[45, 950], "90", "black"]}
-{"type": "legend", "data": [[20, 965.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       0    488   3865", "black"]}
+{"type": "legend", "data": [[20, 965.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       0    484   3865", "black"]}
 {"type": "save", "data": ["bin/text.test.pyxstitch"]}
