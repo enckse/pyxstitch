@@ -135,6 +135,9 @@ class PILFormat(Format):
                     cropped = self._im.crop(box)
                     im = self._new_image(use_offset)
                     im.paste(cropped, (use_offset, use_offset))
+                    extrema = im.convert("L").getextrema()
+                    if extrema[0] == extrema[1]:
+                        continue
                     paged = self._new_page(file_parts, page, file_name_outputs)
                     self._save(im, paged)
                     page += 1
