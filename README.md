@@ -11,6 +11,8 @@ See an example and completed cross stitch pattern [here!](https://enckse.github.
 
 # install
 
+## source
+
 * Clone this repository and run something to one of the following depending on system configuration:
 
 ```
@@ -24,6 +26,14 @@ or
 ```
 pip install -e .
 ```
+
+## os
+
+available via
+
+| os | link |
+| -- | ---- |
+| arch linux | [aur](https://aur.archlinux.org/packages/python-pyxstitch/) |
 
 # usage
 
