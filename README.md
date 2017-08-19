@@ -29,8 +29,6 @@ pip install -e .
 
 ## os
 
-available via
-
 | os | link |
 | -- | ---- |
 | arch linux | [aur](https://aur.archlinux.org/packages/python-pyxstitch/) |
