@@ -1,7 +1,7 @@
 pyxstitch
 ===
 
-![Screenshot](images/pyxstitch.jpg)
+![Screenshot](images/pyxstitch.png)
 
 pyxstitch is an application (and associated library/compenents) that takes source code files and produces syntax-highlighted patterns for cross stitching.
 
