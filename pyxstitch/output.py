@@ -168,7 +168,11 @@ class PILFormat(Format):
                     use_pos = l[0]
                 draw.text(use_pos, l[1], l[2])
             else:
-                print(l)
+                print()
+                print("legend")
+                print("======")
+                print(l[1])
+                print()
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
