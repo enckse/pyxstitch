@@ -1,5 +1,7 @@
 #!/usr/env/python
 """pyxstitch operating configuration settings."""
+import os
+from pathlib import Path
 
 _PAGE = "page_"
 _NO_IDX = "no_index"
@@ -16,7 +18,10 @@ class Config(object):
         self.page_pad = 50
         self.page_no_index = 0
         self.page_legend = 0
-        self._parse(inputs)
+        if inputs is None or len(inputs) == 0:
+            self._parse_config(inputs)
+        else:
+            self._parse(inputs)
 
     def save(self):
         """Save to disk."""
@@ -43,12 +48,23 @@ class Config(object):
             inputs.append(Config._create_input("legend", values[4]))
         return Config(inputs)
 
+    def _parse_config(self, inputs):
+        """Parse and load the config file."""
+        home = str(Path.home())
+        conf = os.path.join(home, ".pyxstitch.config")
+        if os.path.exists(conf):
+            config_input = []
+            with open(conf, 'r') as f:
+                for l in f:
+                    line = l.strip()
+                    if line.startswith("#") or len(line) == 0:
+                        continue
+                    config_input.append(line)
+            if len(config_input) > 0:
+                self._parse(config_input)
+
     def _parse(self, inputs):
         """parse inputs."""
-        if inputs is None:
-            return
-        if len(inputs) == 0:
-            return
         for item in inputs:
             parts = item.split("=")
             if len(parts) != 2:
