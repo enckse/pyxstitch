@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyxstitch',
-    version="0.1.2",
+    version="1.1.0",
     description='Convert source code to cross stitch patterns',
     url='https://github.com/enckse/pyxstitch',
     license='MIT',
