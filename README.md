@@ -75,6 +75,11 @@ will chcek the syntax of the file (or attempt to)
 
 by default, pyxstitch will attempt to create multiple pages for easier reading of large patterns, this can be modified via `--multipage`.
 
+to select a different font (from available)
+```
+pyxstitch --font <type-charset-size>
+```
+
 ## advanced
 
 some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed)
