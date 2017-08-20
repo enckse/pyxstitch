@@ -862,7 +862,7 @@ class ThreeBySeven(BaseFontFactory):
 """)
         objs['`'] = self._build_character("""
 |1.00|1.00|    |
-|    |    |1.00|
+|    |    |0.32|
 |    |    |    |
 |    |    |    |
 |    |    |    |
