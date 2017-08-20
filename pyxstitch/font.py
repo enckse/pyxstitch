@@ -144,16 +144,19 @@ class Font(object):
         from pyxstitch.font_five_by_nine import FiveByNine
         from pyxstitch.font_three_by_seven import ThreeBySeven
         self._supported_types = [FiveByNine, ThreeBySeven]
+        self._names = {}
+        self._names["monospace-ascii-5x9"] = 0
+        self._names["monospace-ascii-3x7"] = 1
 
     def get_names(self):
         """Get font names."""
-        return [x.__name__ for x in self._supported_types]
+        return self._names.keys()
 
     def new_font_by_name(self, font_name):
         """Get a font by name."""
-        matched = [x for x in self._supported_types if font_name == x.__name__]
-        if len(matched) == 1:
-            return self.new_font_object(matched[0])
+        if font_name in self._names:
+            typed = self._supported_types[self._names[font_name]]
+            return self.new_font_object(typed)
         else:
             raise FontException("unknown font name: {}".format(font_name))
 
