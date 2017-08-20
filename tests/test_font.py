@@ -3,6 +3,8 @@
 import unittest
 import pyxstitch.font as ft
 import string
+import pyxstitch.font_five_by_nine as fbn
+import pyxstitch.font_three_by_seven as tbs
 
 
 class TestDefaultFont(unittest.TestCase):
@@ -10,7 +12,14 @@ class TestDefaultFont(unittest.TestCase):
 
     def test_ascii(self):
         """Validate all ascii printable."""
-        factory = ft.Font().new_font_object()
+        f = ft.Font()
+        factory = f.new_font_object()
+        self._check_font(factory)
+        for fonts in [fbn.FiveByNine, tbs.ThreeBySeven]:
+            self._check_font(f.new_font_object(fonts))
+
+    def _check_font(self, factory):
+        """Check font factory."""
         for ch in string.printable:
             if ch in ['\t', '\r', '\v', '\f', '\n']:
                 continue
@@ -43,7 +52,6 @@ class TestDefaultFont(unittest.TestCase):
 
     def test_by_type(self):
         """Passing a tyep into construction."""
-        import pyxstitch.font_five_by_nine as fbn
         f = ft.Font()
         f.new_font_object()
         f.new_font_object(fbn.FiveByNine)

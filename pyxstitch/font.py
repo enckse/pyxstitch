@@ -28,12 +28,16 @@ class BaseFontFactory(FontFactory):
 
     def __init__(self):
         """Initialize the factory."""
-        self._height = 11
-        self._width = 5
+        hw = self._height_width()
+        self._height = hw[0] + 2
+        self._width = hw[1]
         self._top_off = 1
         self._bot_off = 1
         self._replace = {'\t': '    ', '\r': '\n', '\f': '\n', '\v': '\n'}
         self._characters = self._initialize_characters()
+
+    def _height_width(self):
+        raise FontException("does not declare font height/width")
 
     def height(self):
         """get the font factory range of height for characters."""
@@ -116,7 +120,10 @@ class BaseFontFactory(FontFactory):
     def _build_character(self, stitching):
         """Build a character into an object definition."""
         ch = Character(self._height, self._width)
-        ch._pattern = self._parse(stitching, ch._pattern)
+        try:
+            ch._pattern = self._parse(stitching, ch._pattern)
+        except BadCharException as e:
+            raise BadCharException("{} -> {}".format(str(e), stitching))
         return ch
 
     def _initialize_characters(self):
@@ -130,7 +137,8 @@ class Font(object):
     def __init__(self):
         """Init the font creation object."""
         from pyxstitch.font_five_by_nine import FiveByNine
-        self.supported_types = [FiveByNine]
+        from pyxstitch.font_three_by_seven import ThreeBySeven
+        self.supported_types = [FiveByNine, ThreeBySeven]
 
     def new_font_object(self, font_type=None):
         """Create a new font object."""
