@@ -77,7 +77,15 @@ by default, pyxstitch will attempt to create multiple pages for easier reading o
 
 ## advanced
 
-some configuration options are available via the `--kv` input settings
+some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed)
+
+```
+vim $HOME/.pyxstitch.config
+---
+# comments will be ignored
+page_height=400
+page_width=300
+```
 
 ### height
 
