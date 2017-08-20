@@ -75,6 +75,44 @@ will chcek the syntax of the file (or attempt to)
 
 by default, pyxstitch will attempt to create multiple pages for easier reading of large patterns, this can be modified via `--multipage`.
 
+## advanced
+
+some configuration options are available via the `--kv` input settings
+
+### height
+
+sets the default page height (600 default)
+```
+--kv page_height=500
+```
+
+### width
+
+sets the default page width (1000 default)
+```
+--kv page_width=900
+```
+
+### padding
+
+page padding (margins) which defaults to 50
+```
+--kv page_pad=100
+```
+
+### index
+
+on multipage will produce an html file (by default of 0) to group images into a patter
+```
+--kv page_no_index=1
+```
+
+### legend
+
+default is 0, will print the legend to console (instead of to output image) when set to 1
+```
+--kv page_legend=1
+```
 
 # examples
 
