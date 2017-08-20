@@ -122,8 +122,8 @@ class ThreeBySeven(BaseFontFactory):
 |    |    |    |
 """)
         objs['M'] = self._build_character("""
-|1.00|0.3072|1.00|
 |1.00|    |1.00|
+|1.00|0.3072|1.00|
 |1.00|    |1.00|
 |1.00|    |1.00|
 |1.00|    |1.00|

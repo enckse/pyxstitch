@@ -298,6 +298,18 @@ class CrossStitchFormatter(Formatter):
                                                   x_en,
                                                   y_st,
                                                   color))
+                                if stitch == ft.BackStitch.TopLeftMid:
+                                    lines.append((x_start,
+                                                  y_start,
+                                                  x_start + (offset / 2),
+                                                  y_end,
+                                                  color))
+                                if stitch == ft.BackStitch.TopRightMid:
+                                    lines.append((x_end,
+                                                  y_start,
+                                                  x_end - (offset / 2),
+                                                  y_end,
+                                                  color))
                                 if stitch == ft.BackStitch.Left:
                                     lines.append((x_start,
                                                   y_start,
