@@ -6,7 +6,7 @@ HW="hello_world."
 
 run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT) $2; \
 			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png $2; \
-			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT);
+			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT)$3;
 
 check: install test example analyze
 
@@ -17,7 +17,7 @@ example: install clean go c py ascii raw bash
 
 ascii:
 	$(call run-example,"ascii.txt")
-	$(call run-example,"ascii.txt",--font ThreeBySeven)
+	$(call run-example,"ascii.txt",--font ThreeBySeven,".3x7")
 	cd examples && ./alphabet.sh
 
 go:
