@@ -135,4 +135,4 @@ there are example source code and corresponding output pngs in the `examples` fo
 
 the library components of the CrossStitchFormatter can be changed to:
 * Adjust how symbols for various colors are chosen (replace `DefaultSymbolGenerator` on the formatter)
-* Change the ascii-driven `DefaultFontFactory` by changing the formatter property
+* Define a new font for Font creation method by adjusting `Font`
