@@ -313,11 +313,15 @@ class CrossStitchFormatter(Formatter):
                                                   y_end,
                                                   color))
                                 if stitch in [ft.BackStitch.Right,
-                                              ft.BackStitch.TopRightMid]:
+                                              ft.BackStitch.TopRightMid,
+                                              ft.BackStitch.BottomRightMid]:
                                     x_en = x_end
+                                    x_st = x_end
                                     if stitch == ft.BackStitch.TopRightMid:
                                         x_en = x_en - (offset / 2)
-                                    lines.append((x_end,
+                                    if stitch == ft.BackStitch.BottomRightMid:
+                                        x_st = x_st - (offset / 2)
+                                    lines.append((x_st,
                                                   y_start,
                                                   x_en,
                                                   y_end,
