@@ -15,6 +15,7 @@ class Config(object):
         self.page_width = 1000
         self.page_pad = 50
         self.page_no_index = 0
+        self.page_legend = 0
         self._parse(inputs)
 
     def save(self):
@@ -22,7 +23,8 @@ class Config(object):
         return [self.page_height,
                 self.page_width,
                 self.page_pad,
-                self.page_no_index]
+                self.page_no_index,
+                self.page_legend]
 
     @staticmethod
     def _create_input(key, value):
@@ -33,11 +35,12 @@ class Config(object):
     def load(values):
         """load config from saved type."""
         inputs = []
-        if len(values) == 4:
+        if len(values) == 5:
             inputs.append(Config._create_input("height", values[0]))
             inputs.append(Config._create_input("width", values[1]))
             inputs.append(Config._create_input("pad", values[2]))
             inputs.append(Config._create_input(_NO_IDX, values[3]))
+            inputs.append(Config._create_input("legend", values[4]))
         return Config(inputs)
 
     def _parse(self, inputs):

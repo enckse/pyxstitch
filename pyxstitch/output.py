@@ -162,10 +162,13 @@ class PILFormat(Format):
     def _legendize(self, draw, position=None):
         """Create a legend on a drawing."""
         for l in self._legends:
-            use_pos = position
-            if use_pos is None:
-                use_pos = l[0]
-            draw.text(use_pos, l[1], l[2])
+            if self._cfg.page_legend == 0:
+                use_pos = position
+                if use_pos is None:
+                    use_pos = l[0]
+                draw.text(use_pos, l[1], l[2])
+            else:
+                print(l)
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
@@ -190,7 +193,7 @@ class TextFormat(Format):
         """Init the instance."""
         self._io = StringIO()
         self._dump = dump
-        self._version = "0.2"
+        self._version = "0.3"
 
     def _unpack(self, args):
         """Unpack lists back to tuples (due to json)."""
