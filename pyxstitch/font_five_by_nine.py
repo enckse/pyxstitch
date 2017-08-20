@@ -1,8 +1,10 @@
 #!/usr/bin/python
+"""An ASCII 5x9 (monospace) pattern."""
 from pyxstitch.font import BaseFontFactory
 
 
 class FiveByNine(BaseFontFactory):
+    """Font factory definition."""
 
     def _initialize_characters(self):
         """Initialize default characters."""
