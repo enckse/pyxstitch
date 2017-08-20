@@ -131,6 +131,11 @@ class BaseFontFactory(FontFactory):
         raise FontException("characeter set not defined")
 
 
+def get_all_fonts():
+    """Get all fonts."""
+    return Font().get_names()
+
+
 class Font(object):
     """Create font instance."""
 
@@ -138,14 +143,26 @@ class Font(object):
         """Init the font creation object."""
         from pyxstitch.font_five_by_nine import FiveByNine
         from pyxstitch.font_three_by_seven import ThreeBySeven
-        self.supported_types = [FiveByNine, ThreeBySeven]
+        self._supported_types = [FiveByNine, ThreeBySeven]
+
+    def get_names(self):
+        """Get font names."""
+        return [x.__name__ for x in self._supported_types]
+
+    def new_font_by_name(self, font_name):
+        """Get a font by name."""
+        matched = [x for x in self._supported_types if font_name == x.__name__]
+        if len(matched) == 1:
+            return self.new_font_object(matched[0])
+        else:
+            raise FontException("unknown font name: {}".format(font_name))
 
     def new_font_object(self, font_type=None):
         """Create a new font object."""
         use_type = None
         if font_type is None:
-            use_type = self.supported_types[0]
-        if font_type in self.supported_types:
+            use_type = self._supported_types[0]
+        if font_type in self._supported_types:
             use_type = font_type
         if use_type is None:
             raise FontException("unknown font type: {}".format(font_type))

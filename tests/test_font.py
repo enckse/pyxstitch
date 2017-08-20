@@ -15,8 +15,8 @@ class TestDefaultFont(unittest.TestCase):
         f = ft.Font()
         factory = f.new_font_object()
         self._check_font(factory)
-        for fonts in [fbn.FiveByNine, tbs.ThreeBySeven]:
-            self._check_font(f.new_font_object(fonts))
+        for fonts in f.get_names():
+            self._check_font(f.new_font_by_name(fonts))
 
     def _check_font(self, factory):
         """Check font factory."""
@@ -58,3 +58,6 @@ class TestDefaultFont(unittest.TestCase):
         with self.assertRaises(ft.FontException) as cm:
             f.new_font_object(str)
         self.assertEqual("unknown font type: <class 'str'>", str(cm.exception))
+        with self.assertRaises(ft.FontException) as cm:
+            f.new_font_by_name("test")
+        self.assertEqual("unknown font name: test", str(cm.exception))

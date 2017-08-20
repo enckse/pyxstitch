@@ -6,6 +6,7 @@ from pygments.lexers import get_lexer_by_name
 from pygments.styles import get_all_styles
 import pyxstitch.formatter as fmt
 import pyxstitch.output as out_fmt
+import pyxstitch.font as fnt
 import argparse
 import os
 import sys
@@ -73,6 +74,9 @@ def main():
     parser.add_argument('--style',
                         default=_DEF_STYLE,
                         choices=list(get_all_styles()))
+    parser.add_argument('--font',
+                        default=None,
+                        choices=fnt.get_all_fonts())
     args = parser.parse_args()
     content = None
     file_name = None
@@ -128,6 +132,8 @@ def main():
     text = formatting.preprocess(content)
     if args.output is None:
         formatting.file_name = _create_file_name(file_name, args)
+    if args.font is not None:
+        formatting.font_factory = fnt.Font().new_font_by_name(args.font)
     print("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 

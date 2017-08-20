@@ -4,8 +4,8 @@ FORMAT=pyxstitch
 HW="hello_world."
 .PHONY:
 
-run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT); \
-			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png; \
+run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT) $2; \
+			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png $2; \
 			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT);
 
 check: install test example analyze
@@ -17,6 +17,7 @@ example: install clean go c py ascii raw bash
 
 ascii:
 	$(call run-example,"ascii.txt")
+	$(call run-example,"ascii.txt",--font ThreeBySeven)
 	cd examples && ./alphabet.sh
 
 go:
