@@ -88,7 +88,7 @@ class CrossStitchFormatter(Formatter):
         self._colors = {}
         self._default_color = "ffffff"
         self.symbol_generator = sym.DefaultSymbolGenerator()
-        self.font_factory = ft.DefaultFontFactory()
+        self.font_factory = ft.Font().new_font_object()
         self.colorize = False
         self.dark = False
         self._lines = 'lightgrey'

@@ -10,7 +10,7 @@ class TestDefaultFont(unittest.TestCase):
 
     def test_ascii(self):
         """Validate all ascii printable."""
-        factory = ft.DefaultFontFactory()
+        factory = ft.Font().new_font_object()
         for ch in string.printable:
             if ch in ['\t', '\r', '\v', '\f', '\n']:
                 continue
@@ -18,25 +18,35 @@ class TestDefaultFont(unittest.TestCase):
 
     def test_height(self):
         """Get height."""
-        factory = ft.DefaultFontFactory()
+        factory = ft.Font().new_font_object()
         self.assertEqual(10, max(factory.height()))
 
     def test_width(self):
         """Get width."""
-        factory = ft.DefaultFontFactory()
+        factory = ft.Font().new_font_object()
         self.assertEqual(4, max(factory.width()))
 
     def test_get_error(self):
         """Get non-character."""
-        factory = ft.DefaultFontFactory()
+        factory = ft.Font().new_font_object()
         with self.assertRaises(ft.FontException) as cm:
             factory.get(None)
         self.assertEqual("No font entry for character None", str(cm.exception))
 
     def test_preprocess(self):
         """Test preprocess."""
-        factory = ft.DefaultFontFactory()
+        factory = ft.Font().new_font_object()
         self.assertEqual("    ", factory.process('\t'))
         self.assertEqual("\n", factory.process('\r'))
         self.assertEqual("\n", factory.process('\v'))
         self.assertEqual("\n", factory.process('\f'))
+
+    def test_by_type(self):
+        """Passing a tyep into construction."""
+        import pyxstitch.font_five_by_nine as fbn
+        f = ft.Font()
+        f.new_font_object()
+        f.new_font_object(fbn.FiveByNine)
+        with self.assertRaises(ft.FontException) as cm:
+            f.new_font_object(str)
+        self.assertEqual("unknown font type: <class 'str'>", str(cm.exception))
