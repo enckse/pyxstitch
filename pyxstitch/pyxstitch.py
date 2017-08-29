@@ -7,6 +7,7 @@ from pygments.styles import get_all_styles
 import pyxstitch.formatter as fmt
 import pyxstitch.output as out_fmt
 import pyxstitch.font as fnt
+import pyxstitch.version as vers
 import argparse
 import os
 import sys
@@ -77,7 +78,11 @@ def main():
     parser.add_argument('--font',
                         default=None,
                         choices=fnt.get_all_fonts())
+    parser.add_argument('--version', action="store_true")
     args = parser.parse_args()
+    if args.version:
+        print(vers.__version__)
+        exit(0)
     content = None
     file_name = None
     file_ext = os.path.splitext(args.file)

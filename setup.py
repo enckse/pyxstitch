@@ -6,13 +6,12 @@ from setuptools import setup, find_packages
 import os
 
 __pkg_name__ = "pyxstitch"
-version = ''
-with open(os.path.join(__pkg_name__, 'VERSION')) as v_file:
-    version = v_file.read().strip()
+with open(os.path.join(__pkg_name__, "version.py")) as v_file:
+    exec(v_file.read())
 
 setup(
     name=__pkg_name__,
-    version=version,
+    version=__version__,
     description='Convert source code to cross stitch patterns',
     url='https://github.com/enckse/pyxstitch',
     license='MIT',
