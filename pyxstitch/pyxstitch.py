@@ -120,6 +120,8 @@ def main():
         file_name = "output"
         content = "".join(sys.stdin.readlines())
     if is_raw:
+        if args.command:
+            print("command settings invalid for raw/replay mode")
         _replay(args, file_name, content)
     if is_auto:
         print(content)
