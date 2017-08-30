@@ -318,45 +318,45 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 """)
         objs['l'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|    |0.04|
+|    |0.04|
+|    |0.04|
+|0.10|0.02|
 |    |    |
 """)
         objs['i'] = self._build_character("""
 |    |    |
+|    |0.04|
 |    |    |
-|    |    |
-|    |    |
+|0.10|0.02|
 |    |    |
 """)
         objs['n'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.05|0.32|
+|0.04|0.08|
 |    |    |
 """)
         objs['m'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.36|0.24|
+|0.04|0.08|
 |    |    |
 """)
         objs['w'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.04|0.08|
+|0.20|0.40|
 |    |    |
 """)
         objs['o'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.16|0.32|
+|0.32|0.16|
 |    |    |
 """)
         objs['p'] = self._build_character("""
@@ -544,51 +544,51 @@ class TwoByFive(BaseFontFactory):
 """)
         objs['j'] = self._build_character("""
 |    |    |
+|    |0.08|
 |    |    |
-|    |    |
-|    |    |
-|    |    |
+|    |0.08|
+|0.32|0.16|
 """)
         objs['v'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.1024|0.2048|
+|0.8192|0.4096|
 |    |    |
 """)
         objs['x'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.32|0.16|
+|0.16|0.32|
 |    |    |
 """)
         objs['y'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.04|0.08|
+|0.32|0.10|
+|0.02|0.16|
 """)
         objs['Z'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.01|0.2049|
+|    |0.4096|
+|0.2049|0.01|
+|0.4098|0.02|
 |    |    |
 """)
         objs['z'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.01|0.17|
+|0.18|0.02|
 |    |    |
 """)
         objs['b'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.04|    |
+|0.06|    |
+|0.04|0.32|
+|0.06|0.16|
 |    |    |
 """)
         objs['%'] = self._build_character("""
