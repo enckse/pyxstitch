@@ -119,6 +119,8 @@ def main():
             exit(1)
         file_name = "output"
         content = "".join(sys.stdin.readlines())
+    if not args.command and args.shell:
+        print("shell setting ignored without command settings")
     if is_raw:
         if args.command:
             print("command settings invalid for raw/replay mode")
@@ -161,9 +163,6 @@ def main():
                 exit(1)
         else:
             print("cannot use command settings when using stdin")
-    else:
-        if args.shell:
-            print("shell argument ignored without command settings")
     print("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 
