@@ -4,7 +4,7 @@ FORMAT=pyxstitch
 HW="hello_world."
 .PHONY:
 
-run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT) $2; \
+run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT) $2 $4 $5 $6; \
 			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png $2; \
 			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT)$3;
 
@@ -21,16 +21,13 @@ ascii:
 	cd examples && ./alphabet.sh
 
 go:
-	go build -o $(BIN)/go_hw examples/hello_world.go
-	$(call run-example,"go")
+	$(call run-example,"go",,,--command,"go build -o $(BIN)/go_hw examples/hello_world.go",--shell)
 
 c:
-	gcc examples/hello_world.c -o $(BIN)/c_hw
-	$(call run-example,"c")
+	$(call run-example,"c",,,--command,"gcc examples/hello_world.c -o $(BIN)/c_hw",--shell)
 
 py:
-	python examples/hello_world.py &>/dev/null
-	$(call run-example,"py")
+	$(call run-example,"py",,,--command,"python examples/hello_world.py",--shell)
 
 logo: install
 	pyxstitch --file examples/logo.txt --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output images/logo.png

@@ -11,6 +11,7 @@ import pyxstitch.version as vers
 import argparse
 import os
 import sys
+import subprocess
 
 _PNG = "png"
 _RAW = out_fmt.RAW_FORMAT
@@ -65,6 +66,8 @@ def main():
                                  _LIGHT_GEN,
                                  _DARK_GEN])
     parser.add_argument('--kv', metavar='N', type=str, nargs='+')
+    parser.add_argument('--command', type=str)
+    parser.add_argument('--shell', action="store_true")
     parser.add_argument('--multipage', type=str,
                         default=out_fmt.MULTI_PAGE_AUTO,
                         choices=[out_fmt.MULTI_PAGE_AUTO,
@@ -139,6 +142,18 @@ def main():
         formatting.file_name = _create_file_name(file_name, args)
     if args.font is not None:
         formatting.font_factory = fnt.Font().new_font_by_name(args.font)
+    if args.command:
+        try:
+            print("Running command: {} (shell: {})".format(args.command,
+                                                           args.shell))
+            result = subprocess.check_call(args.command, shell=args.shell)
+            if result != 0:
+                print("command exited with non-zero code: {}".format(result))
+                exit(result)
+        except Exception as e:
+            print("command execution failed")
+            print(str(e))
+            exit(1)
     print("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 
