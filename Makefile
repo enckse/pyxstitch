@@ -18,6 +18,7 @@ example: install clean go c py ascii raw bash
 ascii:
 	$(call run-example,"ascii.txt")
 	$(call run-example,"ascii.txt",--font monospace-ascii-3x7,".3x7")
+	$(call run-example,"ascii.txt",--font monospace-ascii-2x5,".2x5")
 	cd examples && ./alphabet.sh
 
 go:
