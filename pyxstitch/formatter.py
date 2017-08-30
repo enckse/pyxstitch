@@ -300,12 +300,15 @@ class CrossStitchFormatter(Formatter):
                                                   color))
                                 if stitch in [ft.BackStitch.Left,
                                               ft.BackStitch.TopLeftMid,
-                                              ft.BackStitch.BottomLeftMid]:
+                                              ft.BackStitch.BottomLeftMid,
+                                              ft.BackStitch.TopBottomMid]:
                                     x_en = x_start
                                     x_st = x_start
-                                    if stitch == ft.BackStitch.TopLeftMid:
+                                    if stitch in [ft.BackStitch.TopLeftMid,
+                                                  ft.BackStitch.TopBottomMid]:
                                         x_en = x_en + (offset / 2)
-                                    if stitch == ft.BackStitch.BottomLeftMid:
+                                    if stitch in [ft.BackStitch.BottomLeftMid,
+                                                  ft.BackStitch.TopBottomMid]:
                                         x_st = x_st + (offset / 2)
                                     lines.append((x_st,
                                                   y_start,
