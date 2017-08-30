@@ -107,7 +107,9 @@ def main():
                 lexer = default_lexer
         else:
             lexer = get_lexer_for_filename(args.file)
+    can_command = False
     if os.path.exists(args.file):
+        can_command = True
         file_name = file_ext[0]
         with open(args.file, 'r') as f:
             content = f.read()
@@ -143,17 +145,23 @@ def main():
     if args.font is not None:
         formatting.font_factory = fnt.Font().new_font_by_name(args.font)
     if args.command:
-        try:
-            print("Running command: {} (shell: {})".format(args.command,
-                                                           args.shell))
-            result = subprocess.check_call(args.command, shell=args.shell)
-            if result != 0:
-                print("command exited with non-zero code: {}".format(result))
-                exit(result)
-        except Exception as e:
-            print("command execution failed")
-            print(str(e))
-            exit(1)
+        if can_command:
+            try:
+                print("Running command: {} (shell: {})".format(args.command,
+                                                               args.shell))
+                result = subprocess.check_call(args.command, shell=args.shell)
+                if result != 0:
+                    print("non-zero command return code: {}".format(result))
+                    exit(result)
+            except Exception as e:
+                print("command execution failed")
+                print(str(e))
+                exit(1)
+        else:
+            print("cannot use command settings when using stdin")
+    else:
+        if args.shell:
+            print("shell argument ignored without command settings")
     print("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 
