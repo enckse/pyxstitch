@@ -308,12 +308,8 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs["'"] = self._build_character("""
-|    |    |
-|    |    |
 |    |    |
 |    |    |
 |    |    |
@@ -326,12 +322,8 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs['l'] = self._build_character("""
-|    |    |
-|    |    |
 |    |    |
 |    |    |
 |    |    |
@@ -344,12 +336,8 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs['n'] = self._build_character("""
-|    |    |
-|    |    |
 |    |    |
 |    |    |
 |    |    |
@@ -362,12 +350,8 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs['w'] = self._build_character("""
-|    |    |
-|    |    |
 |    |    |
 |    |    |
 |    |    |
@@ -380,12 +364,8 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs['p'] = self._build_character("""
-|    |    |
-|    |    |
 |    |    |
 |    |    |
 |    |    |
@@ -399,12 +379,8 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs[';'] = self._build_character("""
-|    |    |
-|    |    |
 |    |    |
 |    |    |
 |    |    |
@@ -433,65 +409,65 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 """)
         objs['>'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.32|    |
+|    |0.32|
+|    |0.16|
+|0.16|    |
 |    |    |
 """)
         objs['<'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|    |0.16|
+|0.16|    |
+|0.32|    |
+|    |0.32|
 |    |    |
 """)
         objs['{'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|    |0.05|
+|0.02|0.04|
+|    |0.04|
+|    |0.06|
 |    |    |
 """)
         objs['('] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.16|0.01|
+|0.04|    |
+|0.04|    |
+|0.32|0.02|
 |    |    |
 """)
         objs['r'] = self._build_character("""
 |    |    |
-|    |    |
-|    |    |
-|    |    |
+|    |0.02|
+|0.16|    |
+|0.04|    |
 |    |    |
 """)
         objs['!'] = self._build_character("""
+|0.08|    |
+|0.08|    |
 |    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.08|    |
 |    |    |
 """)
         objs['4'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.04|0.08|
+|0.06|0.10|
+|    |0.08|
+|    |0.08|
 |    |    |
 """)
         objs[','] = self._build_character("""
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
+|0.08|    |
+|0.08|    |
 """)
         objs['_'] = self._build_character("""
 |    |    |
 |    |    |
-|    |    |
+|0.02|0.02|
 |    |    |
 |    |    |
 """)
@@ -559,10 +535,10 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 """)
         objs['|'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.08|    |
+|0.08|    |
+|0.08|    |
+|0.08|    |
 |    |    |
 """)
         objs['q'] = self._build_character("""
