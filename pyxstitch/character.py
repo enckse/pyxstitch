@@ -34,6 +34,7 @@ class BackStitch(IntFlag):
     TopRightMid = 2048
     BottomLeftMid = 4096
     BottomRightMid = 8192
+    TopBottomMid = 16384
 
 
 class Grid(object):

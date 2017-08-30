@@ -281,8 +281,6 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs['t'] = self._build_character("""
 |    |    |
@@ -290,27 +288,23 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
-|    |    |
 """)
         objs['#'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.2048|0.2048|
+|0.16385|0.16385|
+|0.16386|0.16386|
+|0.2048|0.2048|
 |    |    |
 """)
         objs['"'] = self._build_character("""
-|    |    |
+|0.04|0.08|
 |    |    |
 |    |    |
 |    |    |
 |    |    |
 """)
         objs["'"] = self._build_character("""
-|    |    |
+|0.08|    |
 |    |    |
 |    |    |
 |    |    |
