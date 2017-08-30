@@ -388,17 +388,17 @@ class TwoByFive(BaseFontFactory):
 |0.08|    |
 """)
         objs['}'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.09|    |
+|0.08|0.02|
+|0.08|    |
+|0.10|    |
 |    |    |
 """)
         objs[')'] = self._build_character("""
-|0.01|0.32|
-|    |0.08|
-|    |0.08|
-|0.02|0.16|
+|0.01|0.1024|
+|    |0.8192|
+|    |0.2048|
+|0.02|0.4096|
 |    |    |
 """)
         objs['s'] = self._build_character("""
@@ -430,10 +430,10 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 """)
         objs['('] = self._build_character("""
-|0.16|0.01|
-|0.04|    |
-|0.04|    |
-|0.32|0.02|
+|0.2048|0.01|
+|0.4096|    |
+|0.1024|    |
+|0.8192|0.02|
 |    |    |
 """)
         objs['r'] = self._build_character("""
@@ -486,17 +486,17 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 """)
         objs[']'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.01|0.09|
+|    |0.08|
+|    |0.08|
+|0.02|0.10|
 |    |    |
 """)
         objs['['] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.05|0.01|
+|0.04|    |
+|0.04|    |
+|0.06|0.02|
 |    |    |
 """)
         objs['6'] = self._build_character("""
@@ -531,7 +531,7 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 |    |    |
 |    |    |
-|    |    |
+|0.08|    |
 |    |    |
 """)
         objs['|'] = self._build_character("""
@@ -598,30 +598,30 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 """)
         objs['%'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|1.00|    |
+|    |0.16|
+|0.16|    |
+|    |1.00|
 |    |    |
 """)
         objs['$'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.24|0.32|
+|0.40|    |
+|0.08|0.32|
+|0.40|0.16|
 |    |    |
 """)
         objs['@'] = self._build_character("""
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+|0.16|0.32|
+|0.04|0.08|
+|0.04|0.40|
+|0.32|0.02|
 |    |    |
 """)
         objs['*'] = self._build_character("""
 |    |    |
-|    |    |
-|    |    |
+|0.42|0.18|
+|0.24|0.32|
 |    |    |
 |    |    |
 """)
