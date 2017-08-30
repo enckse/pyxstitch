@@ -80,6 +80,11 @@ to select a different font (from available)
 pyxstitch --font <type-charset-size>
 ```
 
+pyxstitch is **NOT** a build tool but you can run a subprocess command to make pyxstitch validate input (e.g. call gcc) before executing
+```
+pyxstitch --file test.c --command "gcc test.c" --shell
+```
+
 ## advanced
 
 some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed)
