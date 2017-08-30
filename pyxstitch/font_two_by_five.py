@@ -8,11 +8,11 @@ class TwoByFive(BaseFontFactory):
 
     def _height_width(self):
         """Height and width of font."""
-        return(5,2)
+        return (5, 2)
 
     def _initialize_characters(self):
         """Initializedefaultcharacters"""
-        objs={}
+        objs = {}
         objs['A'] = self._build_character("""
 |0.16|0.32|
 |0.06|0.10|
