@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""An ASCII 2x5 (monospace) backstitch pattern"""
+"""An ASCII 2x5 (monospace) backstitch pattern."""
 from pyxstitch.font import BaseFontFactory
 
 
@@ -11,7 +11,7 @@ class TwoByFive(BaseFontFactory):
         return (5, 2)
 
     def _initialize_characters(self):
-        """Initializedefaultcharacters"""
+        """Initialize default characters."""
         objs = {}
         objs['A'] = self._build_character("""
 |0.16|0.32|
