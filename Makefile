@@ -8,6 +8,8 @@ run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMA
 			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png $2; \
 			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT)$3;
 
+gen-font = pyxstitch --file examples/$(HW)"ascii.txt" --lexer "Text" --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font monospace-ascii-$1;
+
 check: install test example analyze
 
 install:
@@ -20,6 +22,11 @@ ascii:
 	$(call run-example,"ascii.txt",--font monospace-ascii-3x7,".3x7")
 	$(call run-example,"ascii.txt",--font monospace-ascii-2x5,".2x5")
 	cd examples && ./alphabet.sh
+
+fonts:
+	$(call gen-font,"5x9")
+	$(call gen-font,"3x7")
+	$(call gen-font,"2x5")
 
 go:
 	$(call run-example,"go",,,--command,"go build -o $(BIN)/go_hw examples/hello_world.go",--shell)
