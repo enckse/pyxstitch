@@ -15,7 +15,7 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: install clean go c py ascii raw bash
+example: install clean go c py ascii raw bash fonts
 
 ascii:
 	$(call run-example,"ascii.txt")
