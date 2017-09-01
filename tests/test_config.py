@@ -38,18 +38,26 @@ class TestConfig(unittest.TestCase):
                            "page_width=2",
                            "page_height=-100",
                            "page_no_index=1",
-                           "page_legend=1"])
+                           "page_legend=1",
+                           "page_legend_hoff=1000",
+                           "page_legend_woff=10"])
         self.assertEqual(600, conf.page_height)
         self.assertEqual(2, conf.page_width)
         self.assertEqual(1, conf.page_pad)
         self.assertEqual(1, conf.page_no_index)
         self.assertEqual(1, conf.page_legend)
+        self.assertEqual(1000, conf.page_legend_hoff)
+        self.assertEqual(10, conf.page_legend_woff)
         conf = cfg.Config(["page_no_index=0"])
         self.assertEqual(0, conf.page_no_index)
         conf = cfg.Config(["page_no_index=-1"])
         self.assertEqual(0, conf.page_no_index)
         conf = cfg.Config(["page_no_index=1"])
         self.assertEqual(1, conf.page_no_index)
+        conf = cfg.Config(["page_legend_hoff=-100"])
+        self.assertEqual(-100, conf.page_legend_hoff)
+        conf = cfg.Config(["page_legend_woff=-20"])
+        self.assertEqual(-20, conf.page_legend_woff)
 
     def test_save_load(self):
         """Save and load config."""

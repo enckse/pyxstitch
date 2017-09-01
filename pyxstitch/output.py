@@ -197,7 +197,7 @@ class TextFormat(Format):
         """Init the instance."""
         self._io = StringIO()
         self._dump = dump
-        self._version = "0.3"
+        self._version = "0.4"
 
     def _unpack(self, args):
         """Unpack lists back to tuples (due to json)."""

@@ -219,6 +219,7 @@ class CrossStitchFormatter(Formatter):
         default_rgb = self._to_hex(self._default_color)
         mid_height = int(floor(calc_height / 2))
         offset = 10
+        cfg = Config(self.config)
         legend = 100
         legend_min = 500
         top_pad = 50
@@ -232,7 +233,7 @@ class CrossStitchFormatter(Formatter):
                            (calc_height * offset) + top_pad + legend),
                           default_rgb,
                           self.is_multipage,
-                          Config(self.config))
+                          cfg)
         y = -1
         lines = []
         lgd = Legend()
@@ -382,11 +383,13 @@ class CrossStitchFormatter(Formatter):
         chunk_idx = 0
         legend_tab = lgd.build()
         leg_height = (calc_height * offset) - (legend / 4)
+        leg_height = leg_height + cfg.page_legend_hoff
         chunks = 8
         if self.is_multipage != MULTI_PAGE_OFF:
             chunks = 100
         for chunk in self._legend(legend_tab, chunks):
-            self._writer.legend((offset * 2 + (chunk_idx * legend_min),
+            leg_width = offset * 2 + (chunk_idx * legend_min)
+            self._writer.legend((leg_width + cfg.page_legend_woff,
                                  leg_height),
                                 "\n".join(chunk),
                                 self._symbols)
