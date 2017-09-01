@@ -236,6 +236,7 @@ class CrossStitchFormatter(Formatter):
                           default_rgb,
                           self.is_multipage,
                           cfg)
+        self._writer.extras(cfg.dump())
         y = -1
         lines = []
         lgd = Legend()

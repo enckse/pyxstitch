@@ -1,11 +1,15 @@
 SRC=$(shell find . -type f -name "*.py" | grep -v "examples" | grep -v "build" | grep -v "bin")
+VERS=$(shell cat pyxstitch/version.py | grep "__version__" | cut -d "=" -f 2 | sed "s/ //g")
 BIN=bin
 FORMAT=pyxstitch
 HW="hello_world."
 .PHONY:
 
+handle-version = sed -i "s/$(VERS)/__VERSION__/g" $1
+
 run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT) $2 $4 $5 $6; \
 			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png $2; \
+			  $(call handle-version,$(BIN)/$(HW)$1.$(FORMAT)); \
 			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT)$3;
 
 gen-font = pyxstitch --file examples/$(HW)"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font monospace-ascii-$1;
@@ -46,10 +50,12 @@ raw:
 
 bash:
 	pyxstitch --file examples/fizzbuzz.bash --multipage off --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
+	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
 	diff $(BIN)/fb.bash.$(FORMAT) examples/outputs/fb.bash.$(FORMAT)
 
 text:
 	cat tests/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
+	$(call handle-version,$(BIN)/text.test.$(FORMAT))
 	diff $(BIN)/text.test.$(FORMAT) tests/text.test.$(FORMAT)
 
 analyze:
