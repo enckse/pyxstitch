@@ -6,6 +6,11 @@ from pyxstitch.font import BaseFontFactory
 class TwoByFive(BaseFontFactory):
     """Font factory definition."""
 
+    def __init__(self):
+        """Init the instance."""
+        super(TwoByFive, self).__init__()
+        self.is_backstitched = True
+
     def _height_width(self):
         """Height and width of font."""
         return (5, 2)
@@ -129,7 +134,7 @@ class TwoByFive(BaseFontFactory):
 |0.16|0.32|
 |0.04|0.08|
 |0.04|0.08|
-|0.32|1.00|
+|0.32|0.48|
 |    |    |
 """)
         objs['R'] = self._build_character("""
@@ -582,10 +587,10 @@ class TwoByFive(BaseFontFactory):
 |    |    |
 """)
         objs['%'] = self._build_character("""
-|1.00|    |
+|0.63|    |
 |    |0.16|
 |0.16|    |
-|    |1.00|
+|    |0.63|
 |    |    |
 """)
         objs['$'] = self._build_character("""

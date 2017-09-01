@@ -93,6 +93,7 @@ class CrossStitchFormatter(Formatter):
         self.dark = False
         self._lines = 'lightgrey'
         self._symbols = 'black'
+        self._light_symbol = 'lightgrey'
         self.file_name = None
         self.is_raw = False
         self._writer = None
@@ -162,6 +163,7 @@ class CrossStitchFormatter(Formatter):
         if self.dark:
             self._symbols = 'white'
             self._default_color = '000000'
+            self._light_symbol = 'darkgrey'
         if self.is_raw:
             self._writer = TextFormat()
         else:
@@ -341,13 +343,18 @@ class CrossStitchFormatter(Formatter):
                                                   x_end,
                                                   y_end,
                                                   color))
-                            if isinstance(stitch, ft.Stitch):
-                                if stitch == ft.Stitch.CrossStitch:
+                            if isinstance(stitch, ft.Stitch) or \
+                               self.font_factory.is_backstitched:
+                                if stitch == ft.Stitch.CrossStitch or \
+                                   self.font_factory.is_backstitched:
+                                    stitch_color = color
+                                    if self.font_factory.is_backstitched:
+                                        stitch_color = self._light_symbol
                                     lgd.add_raw_stitch(coloring)
                                     x_pos = left_pad + offset + 2 + x * offset
                                     self._writer.text((x_pos, y_start),
                                                       style.symbol,
-                                                      color)
+                                                      stitch_color)
                         has = True
                 if not has:
                     y -= 1

@@ -33,6 +33,7 @@ class BaseFontFactory(FontFactory):
         self._width = hw[1]
         self._top_off = 1
         self._bot_off = 1
+        self.is_backstitched = False
         self._replace = {'\t': '    ', '\r': '\n', '\f': '\n', '\v': '\n'}
         self._characters = self._initialize_characters()
 
