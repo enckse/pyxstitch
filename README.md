@@ -136,14 +136,14 @@ default is 0, will print the legend to console (instead of to output image) when
 
 default is 0, will change legend height placement on an image
 ```
---kv page_legend_hoff=10
+--kv legend_hoff=10
 ```
 
 #### width offset
 
 default is 0, will change legend width placement on an image
 ```
---kv page_legend_woff=-5
+--kv legend_woff=-5
 ```
 
 # examples
