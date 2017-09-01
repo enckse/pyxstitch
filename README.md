@@ -132,6 +132,20 @@ default is 0, will print the legend to console (instead of to output image) when
 --kv page_legend=1
 ```
 
+#### height offset
+
+default is 0, will change legend height placement on an image
+```
+--kv page_legend_hoff=10
+```
+
+#### width offset
+
+default is 0, will change legend width placement on an image
+```
+--kv page_legend_woff=-5
+```
+
 # examples
 
 there are example source code and corresponding output pngs in the `examples` folder
