@@ -27,6 +27,7 @@ _LIGHT_GEN = _LIGHT + _GEN
 _DARK_GEN = _DARK + _GEN
 _LIGHT_DMC = _LIGHT + _DMC
 _DARK_DMC = _DARK + _DMC
+_B_AND_W = "bw"
 
 
 def _create_file_name(file_name, args):
@@ -64,7 +65,8 @@ def main():
                                  _DARK_DMC,
                                  _LIGHT_DMC,
                                  _LIGHT_GEN,
-                                 _DARK_GEN])
+                                 _DARK_GEN,
+                                 _B_AND_W])
     parser.add_argument('--kv', metavar='N', type=str, nargs='+')
     parser.add_argument('--command', type=str)
     parser.add_argument('--shell', action="store_true")
@@ -96,6 +98,15 @@ def main():
             break
     default_lexer = get_lexer_by_name("text")
     use_lexer = args.lexer
+    use_style = args.style
+    # Shortcut to black and white is to just use a Text lexer
+    if args.theme == _B_AND_W:
+        if use_lexer is not None:
+            print("black & white overrides lexer input")
+        if use_style != _DEF_STYLE:
+            print("black & white overrides style")
+        use_lexer = "Text"
+        use_style = _B_AND_W
     is_auto = use_lexer == _AUTODETECT
     if is_auto:
         use_lexer = None
@@ -133,7 +144,7 @@ def main():
         except:
             print('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
-    formatting = fmt.CrossStitchFormatter(style=args.style)
+    formatting = fmt.CrossStitchFormatter(style=use_style)
     is_dmc = args.theme.endswith(_DMC)
     formatting.colorize = args.theme.endswith(_GEN) or is_dmc
     formatting.as_dmc = is_dmc

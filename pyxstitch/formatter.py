@@ -100,6 +100,8 @@ class CrossStitchFormatter(Formatter):
         self.as_dmc = True
         self.is_multipage = None
         self.config = None
+        if str(self.style) == "<class 'pygments.styles.bw.BlackWhiteStyle'>":
+            self._default_color = '000000'
         for token, style in self.style:
             if style['color']:
                 self._colors[token] = style['color']
