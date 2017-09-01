@@ -3,6 +3,7 @@
 from PIL import Image, ImageDraw
 from io import StringIO
 import pyxstitch.config as cfg
+import pyxstitch.version as vers
 import json
 import os
 
@@ -46,6 +47,10 @@ class Format(object):
 
     def legend(self, pos, legend, symbols):
         """Legend output."""
+        raise FormatError("not implemented")
+
+    def extras(self, config_values):
+        """Save extra information, not replayed."""
         raise FormatError("not implemented")
 
 
@@ -95,6 +100,10 @@ class PILFormat(Format):
         print("saving {}".format(file_name))
         im.save(file_name, quality=100)
 
+    def extras(self, config_values):
+        """Ignore extras on PIL."""
+        pass
+
     def _new_image(self, use_offset):
         """New output image."""
         return Image.new('RGB',
@@ -120,6 +129,7 @@ class PILFormat(Format):
             use_width = min(width, self._cfg.page_width)
             use_offset = self._cfg.page_pad
             file_name_outputs = []
+
             file_parts = os.path.splitext(file_name)
             for h in range(0, height, use_height):
                 if h > self._legend_start:
@@ -286,6 +296,10 @@ class TextFormat(Format):
             return contents
         with open(file_name, 'w') as f:
             f.write(contents)
+
+    def extras(self, config_values):
+        """Store extra information."""
+        self._write("extras", [vers.__version__, config_values])
 
     def meta(self, char_meta, style, char):
         """Character metadata."""

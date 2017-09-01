@@ -9,7 +9,8 @@ _BOOLS = [_PAGE + _NO_IDX]
 _LEGEND_ATTR = "legend_"
 _LGD_HOFF = _LEGEND_ATTR + "hoff"
 _LGD_WOFF = _LEGEND_ATTR + "woff"
-_OFFSET = [_PAGE + _LGD_HOFF, _PAGE + _LGD_WOFF]
+_OFFSET = [_LGD_HOFF, _LGD_WOFF]
+_DELIMIT = "="
 
 
 class Config(object):
@@ -22,8 +23,8 @@ class Config(object):
         self.page_pad = 50
         self.page_no_index = 0
         self.page_legend = 0
-        self.page_legend_hoff = 0
-        self.page_legend_woff = 0
+        self.legend_hoff = 0
+        self.legend_woff = 0
         if inputs is None or len(inputs) == 0:
             self._parse_config(inputs)
         else:
@@ -35,27 +36,27 @@ class Config(object):
                 self.page_width,
                 self.page_pad,
                 self.page_no_index,
-                self.page_legend,
-                self.page_legend_hoff,
-                self.page_legend_woff]
+                self.page_legend]
+
+    def dump(self):
+        """dump extraneous settings passed in."""
+        return [self.legend_hoff, self.legend_woff]
 
     @staticmethod
-    def _create_input(key, value):
+    def _create_page_input(key, value):
         """create an input."""
-        return "{}{}={}".format(_PAGE, key, value)
+        return "{}{}{}{}".format(_PAGE, key, _DELIMIT, value)
 
     @staticmethod
     def load(values):
         """load config from saved type."""
         inputs = []
-        if len(values) == 7:
-            inputs.append(Config._create_input("height", values[0]))
-            inputs.append(Config._create_input("width", values[1]))
-            inputs.append(Config._create_input("pad", values[2]))
-            inputs.append(Config._create_input(_NO_IDX, values[3]))
-            inputs.append(Config._create_input("legend", values[4]))
-            inputs.append(Config._create_input(_LGD_HOFF, values[5]))
-            inputs.append(Config._create_input(_LGD_WOFF, values[5]))
+        if len(values) == 5:
+            inputs.append(Config._create_page_input("height", values[0]))
+            inputs.append(Config._create_page_input("width", values[1]))
+            inputs.append(Config._create_page_input("pad", values[2]))
+            inputs.append(Config._create_page_input(_NO_IDX, values[3]))
+            inputs.append(Config._create_page_input("legend", values[4]))
         return Config(inputs)
 
     def _parse_config(self, inputs):
@@ -76,13 +77,13 @@ class Config(object):
     def _parse(self, inputs):
         """parse inputs."""
         for item in inputs:
-            parts = item.split("=")
+            parts = item.split(_DELIMIT)
             if len(parts) != 2:
                 print('unable to parse config input: {}'.format(item))
                 continue
             key = parts[0]
             val = parts[1]
-            if key.startswith(_PAGE):
+            if key.startswith(_PAGE) or key.startswith(_LEGEND_ATTR):
                 if key in dir(self):
                     try:
                         int_val = int(val)

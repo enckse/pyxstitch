@@ -17,7 +17,21 @@ class TestTextFormat(unittest.TestCase):
         self.assertEqual(3, len(parts))
         expect = """
 {\"type\": \"init\",
- \"data\": [\"0.4\", \"a\", [1], \"b\", false, [600, 1000, 50, 0, 0, 0, 0]]}"""
+ \"data\": [\"0.4\", \"a\", [1], \"b\", false, [600, 1000, 50, 0, 0]]}"""
+        self.assertEqual(expect.replace("\n", "").strip(), parts[0])
+        self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
+                         parts[1])
+        self.assertEqual("", parts[2])
+
+    def test_extra(self):
+        """Test dump of extra config items."""
+        txt = out.TextFormat(dump=True)
+        txt.extras(cfg.Config(None).dump())
+        vals = txt.save("blah")
+        parts = vals.split("\n")
+        self.assertEqual(3, len(parts))
+        expect = """
+{\"type\": \"extras\", \"data\": [\"1.3.0\", [0, 0]]}"""
         self.assertEqual(expect.replace("\n", "").strip(), parts[0])
         self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
                          parts[1])

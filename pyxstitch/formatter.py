@@ -385,13 +385,13 @@ class CrossStitchFormatter(Formatter):
         chunk_idx = 0
         legend_tab = lgd.build()
         leg_height = (calc_height * offset) - (legend / 4)
-        leg_height = leg_height + cfg.page_legend_hoff
+        leg_height = leg_height + cfg.legend_hoff
         chunks = 8
         if self.is_multipage != MULTI_PAGE_OFF:
             chunks = 100
         for chunk in self._legend(legend_tab, chunks):
             leg_width = offset * 2 + (chunk_idx * legend_min)
-            self._writer.legend((leg_width + cfg.page_legend_woff,
+            self._writer.legend((leg_width + cfg.legend_woff,
                                  leg_height),
                                 "\n".join(chunk),
                                 self._symbols)
