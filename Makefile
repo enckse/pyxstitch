@@ -8,7 +8,7 @@ run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMA
 			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png $2; \
 			  diff $(BIN)/$(HW)$1.$(FORMAT) examples/outputs/$(HW)$1.$(FORMAT)$3;
 
-gen-font = pyxstitch --file examples/$(HW)"ascii.txt" --lexer "Text" --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font monospace-ascii-$1;
+gen-font = pyxstitch --file examples/$(HW)"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font monospace-ascii-$1;
 
 check: install test example analyze
 
