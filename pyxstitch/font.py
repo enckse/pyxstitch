@@ -146,18 +146,15 @@ class Font(object):
         from pyxstitch.font_three_by_five import ThreeByFive
         from pyxstitch.font_three_by_seven import ThreeBySeven
         from pyxstitch.font_two_by_five import TwoByFive
-        from pyxstitch.font_four_by_six import FourBySix
         self._supported_types = [FiveByNine,
                                  ThreeBySeven,
                                  TwoByFive,
-                                 ThreeByFive,
-                                 FourBySix]
+                                 ThreeByFive]
         self._names = {}
         self._names["monospace-ascii-5x9"] = 0
         self._names["monospace-ascii-3x7"] = 1
         self._names["monospace-ascii-2x5"] = 2
         self._names["monospace-ascii-3x5"] = 3
-        self._names["monospace-ascii-4x6"] = 4
 
     def get_names(self):
         """Get font names."""
