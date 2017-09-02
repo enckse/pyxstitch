@@ -36,7 +36,13 @@ class ThreeByFive(BaseFontFactory):
                          'e',
                          'f',
                          't',
+                         'b',
+                         'z',
                          'l',
+                         's',
+                         'r',
+                         'v',
+                         'x',
                          'm',
                          'w',
                          'p',
@@ -53,6 +59,8 @@ class ThreeByFive(BaseFontFactory):
                          'I',
                          'J',
                          '(',
+                         '[',
+                         ']',
                          ')',
                          'K',
                          'L',
@@ -156,13 +164,6 @@ class ThreeByFive(BaseFontFactory):
 |1.00|1.00|    |
 |    |    |    |
 """)
-        objs['s'] = self._build_character("""
-|    |    |    |
-|    |1.00|1.00|
-|    |1.00|    |
-|1.00|1.00|    |
-|    |    |    |
-""")
         objs['>'] = self._build_character("""
 |1.00|0.32|    |
 |    |0.32|0.32|
@@ -182,27 +183,6 @@ class ThreeByFive(BaseFontFactory):
 |0.02|1.00|    |
 |    |1.00|    |
 |    |1.00|1.00|
-|    |    |    |
-""")
-        objs['r'] = self._build_character("""
-|    |    |    |
-|    |1.00|1.00|
-|1.00|    |    |
-|1.00|    |    |
-|    |    |    |
-""")
-        objs[']'] = self._build_character("""
-|1.00|1.00|1.00|
-|    |    |1.00|
-|    |    |1.00|
-|1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['['] = self._build_character("""
-|1.00|1.00|1.00|
-|1.00|    |    |
-|1.00|    |    |
-|1.00|1.00|1.00|
 |    |    |    |
 """)
         objs['3'] = self._build_character("""
@@ -261,20 +241,6 @@ class ThreeByFive(BaseFontFactory):
 |    |    |1.00|
 |1.00|1.00|    |
 """)
-        objs['v'] = self._build_character("""
-|    |    |    |
-|1.00|    |1.00|
-|1.00|    |1.00|
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['x'] = self._build_character("""
-|    |    |    |
-|1.00|    |1.00|
-|    |1.00|    |
-|1.00|    |1.00|
-|    |    |    |
-""")
         objs['y'] = self._build_character("""
 |    |    |    |
 |1.00|    |1.00|
@@ -287,20 +253,6 @@ class ThreeByFive(BaseFontFactory):
 |    |0.2050|  |
 |    |0.4096|    |
 |1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['z'] = self._build_character("""
-|    |    |    |
-|1.00|1.00|1.00|
-|    |0.16|    |
-|1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['b'] = self._build_character("""
-|1.00|    |    |
-|1.00|1.00|    |
-|1.00|    |1.00|
-|1.00|1.00|    |
 |    |    |    |
 """)
         objs['%'] = self._build_character("""
