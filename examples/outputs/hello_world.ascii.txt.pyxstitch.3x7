@@ -849,7 +849,6 @@
 {"type": "rect", "data": [[[170, 200], [180, 210]], "lightgrey"]}
 {"type": "meta", "data": [[9, 3], ["whitesmoke", "1", "f8f8f2"], "d"]}
 {"type": "rect", "data": [[[180, 200], [190, 210]], "lightgrey"]}
-{"type": "text", "data": [[182, 200], "1", "black"]}
 {"type": "rect", "data": [[[190, 200], [200, 210]], "lightgrey"]}
 {"type": "text", "data": [[192, 200], "1", "black"]}
 {"type": "rect", "data": [[[200, 200], [210, 210]], "lightgrey"]}
@@ -4939,5 +4938,5 @@
 {"type": "text", "data": [[45, 750], "70", "black"]}
 {"type": "text", "data": [[45, 850], "80", "black"]}
 {"type": "text", "data": [[45, 950], "90", "black"]}
-{"type": "legend", "data": [[20, 965.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     80   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    180    209\n                      Plum Dark (820043)      purple (960050)       2     76    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4    110   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    848   3865", "black"]}
+{"type": "legend", "data": [[20, 965.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     80   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    180    209\n                      Plum Dark (820043)      purple (960050)       2     76    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4    110   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    846   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.pyxstitch"]}
