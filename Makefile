@@ -33,6 +33,7 @@ fonts:
 	$(call gen-font,"5x9")
 	$(call gen-font,"3x7")
 	$(call gen-font,"2x5")
+	$(call gen-font,"3x5")
 
 go:
 	$(call run-example,"go",,,--command,"go build -o $(BIN)/go_hw examples/hello_world.go",--shell)
