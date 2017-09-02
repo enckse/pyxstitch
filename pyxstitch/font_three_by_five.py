@@ -7,16 +7,16 @@ from pyxstitch.font_three_by_seven import ThreeBySeven
 class ThreeByFive(BaseFontFactory):
     """Font factory definition."""
 
-    def _set_drops(self, chars, size, write_to):
+    def _set_drops(self, chars, size, write_to, secondary=8):
         for c in chars:
-            write_to[c] = size
+            write_to[c] = [size, secondary]
 
     def _height_width(self):
         """Height and width of font."""
         return (5, 3)
 
-    def _downsize(self, write_to, ch, chars, mid):
-        self._drop_lines(write_to, ch, chars, [mid, 8])
+    def _downsize(self, write_to, ch, chars, spaces):
+        self._drop_lines(write_to, ch, chars, spaces)
 
     def _initialize_characters(self):
         """Initialize default characters."""
@@ -24,8 +24,9 @@ class ThreeByFive(BaseFontFactory):
         basis = ThreeBySeven()._initialize_characters()
         # drop lines
         drops = {}
-        self._set_drops(['A', 'P', 'R', ' '], 5, drops)
+        self._set_drops(['A', 'P', 'R', ' ', '`', '^'], 5, drops)
         self._set_drops(['G', 'V'], 3, drops)
+        self._set_drops(['+', '-', '=', '*'], 7, drops)
         self._set_drops(['a',
                          'c',
                          'h',
@@ -44,7 +45,10 @@ class ThreeByFive(BaseFontFactory):
                          'i',
                          '_',
                          '.',
-                         ','], 2, drops)
+                         ',',
+                         '|',
+                         '!',
+                         '~'], 2, drops)
         self._set_drops(['D',
                          'I',
                          'J',
@@ -213,20 +217,6 @@ class ThreeByFive(BaseFontFactory):
 |1.00|    |    |
 |    |    |    |
 """)
-        objs['!'] = self._build_character("""
-|    |1.00|    |
-|    |1.00|    |
-|    |    |    |
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['='] = self._build_character("""
-|    |    |    |
-|1.00|1.00|1.00|
-|    |    |    |
-|1.00|1.00|1.00|
-|    |    |    |
-""")
         objs[']'] = self._build_character("""
 |1.00|1.00|1.00|
 |    |    |1.00|
@@ -374,27 +364,6 @@ class ThreeByFive(BaseFontFactory):
 |0.32|0.16|0.32|
 |    |    |    |
 """)
-        objs['+'] = self._build_character("""
-|    |    |    |
-|    |1.00|    |
-|1.00|1.00|1.00|
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['-'] = self._build_character("""
-|    |    |    |
-|    |    |    |
-|1.00|1.00|1.00|
-|    |    |    |
-|    |    |    |
-""")
-        objs['^'] = self._build_character("""
-|    |1.00|    |
-|1.00|    |1.00|
-|    |    |    |
-|    |    |    |
-|    |    |    |
-""")
         objs['?'] = self._build_character("""
 |1.00|1.00|    |
 |    |0.02|1.00|
@@ -414,27 +383,6 @@ class ThreeByFive(BaseFontFactory):
 |    |1.00|    |
 |    |1.00|    |
 |1.00|    |    |
-|    |    |    |
-""")
-        objs['|'] = self._build_character("""
-|    |1.00|    |
-|    |1.00|    |
-|    |1.00|    |
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['~'] = self._build_character("""
-|    |    |    |
-|1.00|    |1.00|
-|    |1.00|    |
-|    |    |    |
-|    |    |    |
-""")
-        objs['`'] = self._build_character("""
-|1.00|1.00|    |
-|    |    |0.32|
-|    |    |    |
-|    |    |    |
 |    |    |    |
 """)
         return objs
