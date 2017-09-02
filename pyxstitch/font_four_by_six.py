@@ -1,14 +1,14 @@
 #!/usr/bin/python
-"""An ASCII 4x7 (monospace) pattern."""
+"""An ASCII 4x6 (monospace) pattern."""
 from pyxstitch.font import BaseFontFactory
 
 
-class FourBySeven(BaseFontFactory):
+class FourBySix(BaseFontFactory):
     """Font factory definition."""
 
     def _height_width(self):
         """Font height and width."""
-        return (7, 4)
+        return (6, 4)
 
     def _initialize_characters(self):
         """Initialize default characters."""
@@ -20,7 +20,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |1.00|
 |1.00|    |    |1.00|
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['B'] = self._build_character("""
 |1.00|1.00|1.00|    |
@@ -28,7 +27,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|1.00|1.00|    |
 |1.00|    |    |1.00|
 |1.00|1.00|1.00|    |
-|    |    |    |    |
 |    |    |    |    |
 """)
         objs['C'] = self._build_character("""
@@ -38,7 +36,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |1.00|
 |    |1.00|1.00|    |
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['D'] = self._build_character("""
 |1.00|1.00|1.00|    |
@@ -46,7 +43,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |1.00|
 |1.00|    |    |1.00|
 |1.00|1.00|1.00|    |
-|    |    |    |    |
 |    |    |    |    |
 """)
         objs['E'] = self._build_character("""
@@ -56,7 +52,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |    |
 |1.00|1.00|1.00|1.00|
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['F'] = self._build_character("""
 |1.00|1.00|1.00|1.00|
@@ -64,7 +59,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|1.00|1.00|1.00|
 |1.00|    |    |    |
 |1.00|    |    |    |
-|    |    |    |    |
 |    |    |    |    |
 """)
         objs['G'] = self._build_character("""
@@ -74,7 +68,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |1.00|
 |    |1.00|1.00|    |
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['H'] = self._build_character("""
 |1.00|    |    |1.00|
@@ -82,7 +75,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|1.00|1.00|1.00|
 |1.00|    |    |1.00|
 |1.00|    |    |1.00|
-|    |    |    |    |
 |    |    |    |    |
 """)
         objs['I'] = self._build_character("""
@@ -92,7 +84,6 @@ class FourBySeven(BaseFontFactory):
 |    |    |0.04|    |
 |1.00|1.00|1.00|1.00|
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['J'] = self._build_character("""
 |    |    |    |1.00|
@@ -100,7 +91,6 @@ class FourBySeven(BaseFontFactory):
 |    |    |    |1.00|
 |1.00|    |    |1.00|
 |    |1.00|1.00|    |
-|    |    |    |    |
 |    |    |    |    |
 """)
         objs['K'] = self._build_character("""
@@ -110,7 +100,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |1.00|    |
 |1.00|    |    |1.00|
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['L'] = self._build_character("""
 |1.00|    |    |    |
@@ -118,7 +107,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |    |
 |1.00|    |    |    |
 |1.00|1.00|1.00|1.00|
-|    |    |    |    |
 |    |    |    |    |
 """)
         objs['M'] = self._build_character("""
@@ -128,7 +116,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |1.00|
 |1.00|    |    |1.00|
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['N'] = self._build_character("""
 |1.00|    |    |1.00|
@@ -136,7 +123,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|0.32|0.32|1.00|
 |1.00|    |0.32|1.00|
 |1.00|    |    |1.00|
-|    |    |    |    |
 |    |    |    |    |
 """)
         objs['O'] = self._build_character("""
@@ -146,7 +132,6 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |1.00|
 |    |1.00|1.00|    |
 |    |    |    |    |
-|    |    |    |    |
 """)
         objs['P'] = self._build_character("""
 |1.00|1.00|1.00|    |
@@ -155,13 +140,11 @@ class FourBySeven(BaseFontFactory):
 |1.00|    |    |    |
 |1.00|    |    |    |
 |    |    |    |    |
-|    |    |    |    |
 """)
         import string
         for i in string.printable:
             if i not in objs:
                 objs[i] = self._build_character("""
-|    |    |    |    |
 |    |    |    |    |
 |    |    |    |    |
 |    |    |    |    |
