@@ -1,5 +1,5 @@
 {"type": "init", "data": ["0.4", "RGB", [1910, 1030], [255, 255, 255], "off", [600, 1000, 50, 0, 0]]}
-{"type": "extras", "data": ["__VERSION__", [0, 0]]}
+{"type": "extras", "data": [["__VERSION__", [0, 0]]]}
 {"type": "meta", "data": [[11, 5], ["deeppink", "0", "f92672"], "p"]}
 {"type": "rect", "data": [[[60, 60], [70, 70]], "lightgrey"]}
 {"type": "rect", "data": [[[70, 60], [80, 70]], "lightgrey"]}
