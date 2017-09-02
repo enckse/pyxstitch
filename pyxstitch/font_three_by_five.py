@@ -34,7 +34,14 @@ class ThreeByFive(BaseFontFactory):
                          'd',
                          'e',
                          'f',
-                         't'], 2, drops)
+                         't',
+                         'l',
+                         'm',
+                         'w',
+                         'p',
+                         'n',
+                         'o',
+                         'i'], 2, drops)
         self._set_drops(['D',
                          'I',
                          'J',
@@ -49,7 +56,9 @@ class ThreeByFive(BaseFontFactory):
                          'W',
                          'Y',
                          '0',
-                         '1'], 4, drops)
+                         '1',
+                         '"',
+                         "'"], 4, drops)
         for d in drops:
             self._downsize(objs, d, basis, drops[d])
         # new definitions
@@ -123,75 +132,12 @@ class ThreeByFive(BaseFontFactory):
 |0.16|0.16|    |
 |    |    |    |
 """)
-        objs['"'] = self._build_character("""
-|1.00|    |1.00|
-|0.40|    |0.40|
-|    |    |    |
-|    |    |    |
-|    |    |    |
-""")
-        objs["'"] = self._build_character("""
-|    |1.00|    |
-|    |0.40|    |
-|    |    |    |
-|    |    |    |
-|    |    |    |
-""")
         objs['g'] = self._build_character("""
 |    |    |    |
 |    |1.00|    |
 |1.00|    |1.00|
 |    |1.00|1.00|
 |0.02|0.02|1.00|
-""")
-        objs['l'] = self._build_character("""
-|    |1.00|    |
-|    |1.00|    |
-|    |1.00|    |
-|1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['i'] = self._build_character("""
-|    |1.00|    |
-|    |    |    |
-|    |1.00|    |
-|1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['n'] = self._build_character("""
-|    |    |    |
-|1.00|1.00|    |
-|1.00|    |1.00|
-|1.00|    |1.00|
-|    |    |    |
-""")
-        objs['m'] = self._build_character("""
-|    |    |    |
-|1.00|    |1.00|
-|0.04|1.00|0.08|
-|0.04|    |0.08|
-|    |    |    |
-""")
-        objs['w'] = self._build_character("""
-|    |    |    |
-|0.04|    |0.08|
-|0.04|1.00|0.08|
-|1.00|    |1.00|
-|    |    |    |
-""")
-        objs['o'] = self._build_character("""
-|    |    |    |
-|    |1.00|    |
-|1.00|    |1.00|
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['p'] = self._build_character("""
-|    |    |    |
-|1.00|1.00|    |
-|1.00|    |1.00|
-|1.00|1.00|    |
-|1.00|    |    |
 """)
 
         objs[':'] = self._build_character("""
