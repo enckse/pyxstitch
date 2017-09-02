@@ -299,7 +299,7 @@ class TextFormat(Format):
 
     def extras(self, config_values):
         """Store extra information."""
-        self._write("extras", [vers.__version__, config_values])
+        self._write("extras", [[vers.__version__, config_values]])
 
     def meta(self, char_meta, style, char):
         """Character metadata."""
