@@ -99,6 +99,7 @@ def main():
     default_lexer = get_lexer_by_name("text")
     use_lexer = args.lexer
     use_style = args.style
+    is_bw = False
     # Shortcut to black and white is to just use a Text lexer
     if args.theme == _B_AND_W:
         if use_lexer is not None:
@@ -107,6 +108,7 @@ def main():
             print("black & white overrides style")
         use_lexer = "Text"
         use_style = _B_AND_W
+        is_bw = True
     is_auto = use_lexer == _AUTODETECT
     if is_auto:
         use_lexer = None
@@ -152,6 +154,7 @@ def main():
     formatting.file_name = args.output
     formatting.is_multipage = args.multipage
     formatting.is_raw = args.format == _RAW
+    formatting.is_bw = is_bw
     if args.kv is not None and len(args.kv) > 0:
         formatting.config = args.kv
     text = formatting.preprocess(content)

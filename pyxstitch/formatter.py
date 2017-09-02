@@ -100,8 +100,7 @@ class CrossStitchFormatter(Formatter):
         self.as_dmc = True
         self.is_multipage = None
         self.config = None
-        if str(self.style) == "<class 'pygments.styles.bw.BlackWhiteStyle'>":
-            self._default_color = '000000'
+        self.is_bw = False
         for token, style in self.style:
             if style['color']:
                 self._colors[token] = style['color']
@@ -139,6 +138,8 @@ class CrossStitchFormatter(Formatter):
     def _token_color(self, token):
         """We need to get the color for a token."""
         use_color = self._default_color
+        if self.is_bw:
+            use_color = "000000"
         if token in self._colors:
             use_color = self._colors[token]
         use_hex = self._to_hex(use_color)
@@ -218,7 +219,6 @@ class CrossStitchFormatter(Formatter):
         calc_height += 1
         calc_height = (calc_height +
                        (calc_height * max(self.font_factory.height())))
-        default_rgb = self._to_hex(self._default_color)
         mid_height = int(floor(calc_height / 2))
         offset = 10
         cfg = Config(self.config)
@@ -233,7 +233,7 @@ class CrossStitchFormatter(Formatter):
         self._writer.init('RGB',
                           (width_size,
                            (calc_height * offset) + top_pad + legend),
-                          default_rgb,
+                          self._to_hex(self._default_color),
                           self.is_multipage,
                           cfg)
         self._writer.extras(cfg.dump())
