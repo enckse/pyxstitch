@@ -868,7 +868,6 @@
 {"type": "rect", "data": [[[290, 200], [300, 210]], "lightgrey"]}
 {"type": "meta", "data": [[9, 3], ["whitesmoke", "1", "f8f8f2"], "g"]}
 {"type": "rect", "data": [[[300, 200], [310, 210]], "lightgrey"]}
-{"type": "text", "data": [[302, 200], "1", "black"]}
 {"type": "rect", "data": [[[310, 200], [320, 210]], "lightgrey"]}
 {"type": "text", "data": [[312, 200], "1", "black"]}
 {"type": "rect", "data": [[[320, 200], [330, 210]], "lightgrey"]}
@@ -3304,6 +3303,7 @@
 {"type": "rect", "data": [[[270, 620], [280, 630]], "lightgrey"]}
 {"type": "text", "data": [[272, 620], "2", "black"]}
 {"type": "rect", "data": [[[280, 620], [290, 630]], "lightgrey"]}
+{"type": "text", "data": [[282, 620], "2", "black"]}
 {"type": "rect", "data": [[[290, 620], [300, 630]], "lightgrey"]}
 {"type": "meta", "data": [[9, 3], ["deeppink", "3", "f92672"], "%"]}
 {"type": "rect", "data": [[[300, 620], [310, 630]], "lightgrey"]}
@@ -3417,6 +3417,7 @@
 {"type": "rect", "data": [[[250, 640], [260, 650]], "lightgrey"]}
 {"type": "meta", "data": [[9, 3], ["purple", "2", "960050"], "$"]}
 {"type": "rect", "data": [[[260, 640], [270, 650]], "lightgrey"]}
+{"type": "text", "data": [[262, 640], "2", "black"]}
 {"type": "rect", "data": [[[270, 640], [280, 650]], "lightgrey"]}
 {"type": "text", "data": [[272, 640], "2", "black"]}
 {"type": "rect", "data": [[[280, 640], [290, 650]], "lightgrey"]}
@@ -4865,7 +4866,6 @@
 {"type": "line", "data": [[210, 620, 210, 630], "black"]}
 {"type": "line", "data": [[200, 620, 210, 630], "black"]}
 {"type": "line", "data": [[260, 630, 270, 620], "black"]}
-{"type": "line", "data": [[280, 620, 290, 620], "black"]}
 {"type": "line", "data": [[400, 620, 400, 630], "black"]}
 {"type": "line", "data": [[390, 620, 400, 630], "black"]}
 {"type": "line", "data": [[425.0, 620, 420, 630], "black"]}
@@ -4873,7 +4873,6 @@
 {"type": "line", "data": [[260, 630, 270, 640], "black"]}
 {"type": "line", "data": [[280, 630, 290, 640], "black"]}
 {"type": "line", "data": [[100, 650, 110, 640], "black"]}
-{"type": "line", "data": [[260, 650, 270, 650], "black"]}
 {"type": "line", "data": [[280, 650, 290, 640], "black"]}
 {"type": "line", "data": [[360, 640, 365.0, 650], "black"]}
 {"type": "line", "data": [[420, 640, 425.0, 650], "black"]}
@@ -4938,5 +4937,5 @@
 {"type": "text", "data": [[45, 750], "70", "black"]}
 {"type": "text", "data": [[45, 850], "80", "black"]}
 {"type": "text", "data": [[45, 950], "90", "black"]}
-{"type": "legend", "data": [[20, 965.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     80   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    180    209\n                      Plum Dark (820043)      purple (960050)       2     76    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4    110   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    846   3865", "black"]}
+{"type": "legend", "data": [[20, 965.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     80   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    180    209\n                      Plum Dark (820043)      purple (960050)       2     78    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4    110   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    844   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.pyxstitch"]}
