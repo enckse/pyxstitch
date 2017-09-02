@@ -26,6 +26,7 @@ ascii:
 	$(call run-example,"ascii.txt",--theme bw,".bw")
 	$(call run-example,"ascii.txt",--font monospace-ascii-3x7,".3x7")
 	$(call run-example,"ascii.txt",--font monospace-ascii-2x5,".2x5")
+	$(call run-example,"ascii.txt",--font monospace-ascii-2x5,".3x5")
 	cd examples && ./alphabet.sh
 
 fonts:
