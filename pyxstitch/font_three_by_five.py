@@ -1,6 +1,7 @@
 #!/usr/bin/python
 """An ASCII 3x5 (monospace) pattern."""
 from pyxstitch.font import BaseFontFactory
+from pyxstitch.font_three_by_seven import ThreeBySeven
 
 
 class ThreeByFive(BaseFontFactory):
@@ -10,16 +11,37 @@ class ThreeByFive(BaseFontFactory):
         """Height and width of font."""
         return (5, 3)
 
+    def _downsize(self, write_to, ch, chars, mid):
+        self._drop_lines(write_to, ch, chars, [mid, 7])
+
     def _initialize_characters(self):
         """Initialize default characters."""
         objs = {}
-        objs['A'] = self._build_character("""
-|    |1.00|    |
-|1.00|    |1.00|
-|1.00|1.00|1.00|
-|1.00|    |1.00|
-|    |    |    |
-""")
+        basis = ThreeBySeven()._initialize_characters()
+        # drop lines
+        drops = {}
+        drops['A'] = 5
+        drops['G'] = 3
+        drops['P'] = 5
+        drops['R'] = 5
+        drops['V'] = 3
+        for c in ['D',
+                  'I',
+                  'J',
+                  'K',
+                  'L',
+                  'M',
+                  'N',
+                  'O',
+                  'Q',
+                  'T',
+                  'U',
+                  'W',
+                  'Y']:
+            drops[c] = 4
+        for d in drops:
+            self._downsize(objs, d, basis, drops[d])
+        # new definitions
         objs['B'] = self._build_character("""
 |1.00|1.00|0.32|
 |1.00|0.02|1.00|
@@ -32,13 +54,6 @@ class ThreeByFive(BaseFontFactory):
 |1.00|    |    |
 |1.00|    |    |
 |    |1.00|0.17|
-|    |    |    |
-""")
-        objs['D'] = self._build_character("""
-|1.00|1.00|    |
-|1.00|    |1.00|
-|1.00|    |1.00|
-|1.00|1.00|    |
 |    |    |    |
 """)
         objs['E'] = self._build_character("""
@@ -55,87 +70,10 @@ class ThreeByFive(BaseFontFactory):
 |1.00|    |    |
 |    |    |    |
 """)
-        objs['G'] = self._build_character("""
-|    |1.00|1.00|
-|1.00|    |    |
-|1.00|    |1.00|
-|    |1.00|1.00|
-|    |    |    |
-""")
         objs['H'] = self._build_character("""
 |1.00|    |1.00|
 |1.00|0.02|1.00|
 |1.00|    |1.00|
-|1.00|    |1.00|
-|    |    |    |
-""")
-        objs['I'] = self._build_character("""
-|1.00|1.00|1.00|
-|    |1.00|    |
-|    |1.00|    |
-|1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['J'] = self._build_character("""
-|    |    |1.00|
-|    |    |1.00|
-|1.00|    |1.00|
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['K'] = self._build_character("""
-|1.00|    |1.00|
-|1.00|1.00|    |
-|1.00|1.00|    |
-|1.00|    |1.00|
-|    |    |    |
-""")
-        objs['L'] = self._build_character("""
-|1.00|    |    |
-|1.00|    |    |
-|1.00|    |    |
-|1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['M'] = self._build_character("""
-|1.00|    |1.00|
-|1.00|0.3072|1.00|
-|1.00|    |1.00|
-|1.00|    |1.00|
-|    |    |    |
-""")
-        objs['N'] = self._build_character("""
-|1.00|    |1.00|
-|1.00|0.32|1.00|
-|1.00|0.32|1.00|
-|1.00|    |1.00|
-|    |    |    |
-""")
-        objs['O'] = self._build_character("""
-|    |1.00|    |
-|1.00|    |1.00|
-|1.00|    |1.00|
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['P'] = self._build_character("""
-|1.00|1.00|    |
-|1.00|    |1.00|
-|1.00|1.00|    |
-|1.00|    |    |
-|    |    |    |
-""")
-        objs['Q'] = self._build_character("""
-|    |1.00|    |
-|1.00|    |1.00|
-|1.00|    |1.00|
-|    |1.00|0.32|
-|    |    |    |
-""")
-        objs['R'] = self._build_character("""
-|1.00|1.00|    |
-|1.00|    |1.00|
-|1.00|1.00|    |
 |1.00|    |1.00|
 |    |    |    |
 """)
@@ -146,46 +84,11 @@ class ThreeByFive(BaseFontFactory):
 |1.00|1.00|    |
 |    |    |    |
 """)
-        objs['T'] = self._build_character("""
-|1.00|1.00|1.00|
-|    |1.00|    |
-|    |1.00|    |
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['U'] = self._build_character("""
-|1.00|    |1.00|
-|1.00|    |1.00|
-|1.00|    |1.00|
-|1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs['V'] = self._build_character("""
-|1.00|    |1.00|
-|1.00|    |1.00|
-|0.32|    |0.16|
-|    |1.00|    |
-|    |    |    |
-""")
-        objs['W'] = self._build_character("""
-|1.00|    |1.00|
-|1.00|    |1.00|
-|1.00|0.12288|1.00|
-|1.00|    |1.00|
-|    |    |    |
-""")
         objs['X'] = self._build_character("""
 |1.00|    |1.00|
 |0.8192|0.02|0.4096|
 |0.2048|    |0.1024|
 |1.00|    |1.00|
-|    |    |    |
-""")
-        objs['Y'] = self._build_character("""
-|1.00|    |1.00|
-|1.00|    |1.00|
-|    |1.00|    |
-|    |1.00|    |
 |    |    |    |
 """)
         objs['0'] = self._build_character("""

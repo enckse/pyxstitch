@@ -58,6 +58,7 @@ class Character(object):
         self._height = height
         self._width = width
         self._pattern = _empty_grid(width, height)
+        self.raw = None
 
     def cells(self, height):
         """Get stitches for  a specied character and returns them for it."""

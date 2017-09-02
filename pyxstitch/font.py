@@ -118,11 +118,25 @@ class BaseFontFactory(FontFactory):
             height += 1
         return ch
 
+    def _drop_lines(self, write_to, ch, chars, lines):
+        """Drop lines from an existing character."""
+        raw = chars[ch].raw
+        raw_lines = raw.split("\n")
+        idx = 0
+        conv = []
+        for line in raw_lines:
+            idx = idx + 1
+            if idx in lines:
+                continue
+            conv.append(line)
+        write_to[ch] = self._build_character("\n".join(conv))
+
     def _build_character(self, stitching):
         """Build a character into an object definition."""
         ch = Character(self._height, self._width)
         try:
             ch._pattern = self._parse(stitching, ch._pattern)
+            ch.raw = stitching
         except BadCharException as e:
             raise BadCharException("{} -> {}".format(str(e), stitching))
         return ch
