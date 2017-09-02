@@ -26,7 +26,7 @@ class ThreeByFive(BaseFontFactory):
         drops = {}
         self._set_drops(['A', 'P', 'R', ' ', '`', '^'], 5, drops)
         self._set_drops(['G', 'V'], 3, drops)
-        self._set_drops(['+', '-', '=', '*'], 7, drops)
+        self._set_drops(['+', '-', '=', '*', ':', ';'], 7, drops)
         self._set_drops(['a',
                          'c',
                          'h',
@@ -52,6 +52,8 @@ class ThreeByFive(BaseFontFactory):
         self._set_drops(['D',
                          'I',
                          'J',
+                         '(',
+                         ')',
                          'K',
                          'L',
                          'M',
@@ -147,32 +149,11 @@ class ThreeByFive(BaseFontFactory):
 |0.02|0.02|1.00|
 """)
 
-        objs[':'] = self._build_character("""
-|    |    |    |
-|    |1.00|    |
-|    |    |    |
-|    |1.00|    |
-|    |    |    |
-""")
-        objs[';'] = self._build_character("""
-|    |    |    |
-|    |1.00|    |
-|    |    |    |
-|    |1.00|    |
-|    |0.20|    |
-""")
         objs['}'] = self._build_character("""
 |1.00|1.00|    |
 |    |1.00|0.02|
 |    |1.00|    |
 |1.00|1.00|    |
-|    |    |    |
-""")
-        objs[')'] = self._build_character("""
-|0.33|1.00|0.1024|
-|    |1.00|0.8192|
-|    |1.00|0.2048|
-|0.18|1.00|0.4096|
 |    |    |    |
 """)
         objs['s'] = self._build_character("""
@@ -201,13 +182,6 @@ class ThreeByFive(BaseFontFactory):
 |0.02|1.00|    |
 |    |1.00|    |
 |    |1.00|1.00|
-|    |    |    |
-""")
-        objs['('] = self._build_character("""
-|0.2048|1.00|0.17|
-|0.4096|1.00|    |
-|0.1024|1.00|    |
-|0.8192|1.00|0.34|
 |    |    |    |
 """)
         objs['r'] = self._build_character("""
