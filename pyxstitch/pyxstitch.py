@@ -160,6 +160,10 @@ def main():
     text = formatting.preprocess(content)
     if args.output is None:
         formatting.file_name = _create_file_name(file_name, args)
+    else:
+        if args.output.endswith(_RAW) and not formatting.is_raw:
+            print('specify output as {}?'.format(_RAW))
+            exit(1)
     if args.font is not None:
         formatting.font_factory = fnt.Font().new_font_by_name(args.font)
     if args.command:
