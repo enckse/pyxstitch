@@ -16,7 +16,7 @@ class ThreeByFive(BaseFontFactory):
         return (5, 3)
 
     def _downsize(self, write_to, ch, chars, mid):
-        self._drop_lines(write_to, ch, chars, [mid, 7])
+        self._drop_lines(write_to, ch, chars, [mid, 8])
 
     def _initialize_characters(self):
         """Initialize default characters."""
@@ -24,7 +24,7 @@ class ThreeByFive(BaseFontFactory):
         basis = ThreeBySeven()._initialize_characters()
         # drop lines
         drops = {}
-        self._set_drops(['A', 'P', 'R'], 5, drops)
+        self._set_drops(['A', 'P', 'R', ' '], 5, drops)
         self._set_drops(['G', 'V'], 3, drops)
         self._set_drops(['a',
                          'c',
@@ -41,7 +41,10 @@ class ThreeByFive(BaseFontFactory):
                          'p',
                          'n',
                          'o',
-                         'i'], 2, drops)
+                         'i',
+                         '_',
+                         '.',
+                         ','], 2, drops)
         self._set_drops(['D',
                          'I',
                          'J',
@@ -217,39 +220,11 @@ class ThreeByFive(BaseFontFactory):
 |    |1.00|    |
 |    |    |    |
 """)
-        objs['.'] = self._build_character("""
-|    |    |    |
-|    |    |    |
-|    |    |    |
-|    |1.00|    |
-|    |    |    |
-""")
-        objs[','] = self._build_character("""
-|    |    |    |
-|    |    |    |
-|    |    |    |
-|    |1.00|    |
-|    |0.20|    |
-""")
-        objs['_'] = self._build_character("""
-|    |    |    |
-|    |    |    |
-|    |    |    |
-|1.00|1.00|1.00|
-|    |    |    |
-""")
         objs['='] = self._build_character("""
 |    |    |    |
 |1.00|1.00|1.00|
 |    |    |    |
 |1.00|1.00|1.00|
-|    |    |    |
-""")
-        objs[' '] = self._build_character("""
-|    |    |    |
-|    |    |    |
-|    |    |    |
-|    |    |    |
 |    |    |    |
 """)
         objs[']'] = self._build_character("""
