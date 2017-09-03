@@ -75,13 +75,20 @@ class ThreeByFive(BaseFontFactory):
                          'U',
                          'W',
                          'Y',
-                         '0',
                          '1',
                          '"',
                          "'"], 4, drops)
         for d in drops:
             self._downsize(objs, d, basis, drops[d])
         # new definitions
+        objs['0'] = self._build_character("""
+|    |1.00|    |
+|1.00|0.16|1.00|
+|1.00|0.16|1.00|
+|    |1.00|    |
+|    |    |    |
+""")
+
         objs['B'] = self._build_character("""
 |1.00|1.00|0.32|
 |1.00|0.02|1.00|
