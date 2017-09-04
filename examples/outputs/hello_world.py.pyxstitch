@@ -1,5 +1,6 @@
 {"type": "init", "data": ["0.4", "RGB", [1670, 810], [255, 255, 255], "off", [600, 1000, 50, 0, 0]]}
 {"type": "extras", "data": [["__VERSION__", [0, 0]]]}
+{"type": "text", "data": [[10, 10], "__VERSION__", "black"]}
 {"type": "meta", "data": [[11, 5], ["skyblue", "0", "66d9ef"], "d"]}
 {"type": "rect", "data": [[[60, 60], [70, 70]], "lightgrey"]}
 {"type": "rect", "data": [[[70, 60], [80, 70]], "lightgrey"]}

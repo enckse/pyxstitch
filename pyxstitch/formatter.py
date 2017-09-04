@@ -9,6 +9,7 @@ from pygments.formatter import Formatter
 import webcolors as wc
 import pyxstitch.font as ft
 import pyxstitch.symbols as sym
+import pyxstitch.version as vers
 from pyxstitch.output import PILFormat, TextFormat, MULTI_PAGE_OFF
 from pyxstitch.config import Config
 from pyxstitch.floss import Floss
@@ -237,6 +238,7 @@ class CrossStitchFormatter(Formatter):
                           self.is_multipage,
                           cfg)
         self._writer.extras(cfg.dump())
+        self._writer.text((offset, offset), vers.__version__, self._symbols)
         y = -1
         lines = []
         lgd = Legend()
