@@ -59,7 +59,6 @@
 {"type": "rect", "data": [[[90, 70], [100, 80]], "lightgrey"]}
 {"type": "meta", "data": [[7, 3], ["mediumpurple", "0", "ae81ff"], "1"]}
 {"type": "rect", "data": [[[100, 70], [110, 80]], "lightgrey"]}
-{"type": "text", "data": [[102, 70], "0", "black"]}
 {"type": "rect", "data": [[[110, 70], [120, 80]], "lightgrey"]}
 {"type": "text", "data": [[112, 70], "0", "black"]}
 {"type": "rect", "data": [[[120, 70], [130, 80]], "lightgrey"]}
@@ -3781,6 +3780,8 @@
 {"type": "rect", "data": [[[190, 750], [200, 760]], "lightgrey"]}
 {"type": "rect", "data": [[[200, 750], [210, 760]], "lightgrey"]}
 {"type": "rect", "data": [[[210, 750], [220, 760]], "lightgrey"]}
+{"type": "line", "data": [[100, 80, 110, 80], "black"]}
+{"type": "line", "data": [[100, 80, 110, 70], "black"]}
 {"type": "line", "data": [[70, 90, 80, 80], "black"]}
 {"type": "line", "data": [[180, 90, 190, 90], "black"]}
 {"type": "line", "data": [[190, 90, 200, 90], "black"]}
