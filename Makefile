@@ -1,8 +1,18 @@
 SRC=$(shell find . -type f -name "*.py" | grep -v "examples" | grep -v "build" | grep -v "bin")
-VERS=$(shell cat pyxstitch/version.py | grep "__version__" | cut -d "=" -f 2 | sed "s/ //g")
+VERS_PY=pyxstitch/version.py
+VERS=$(shell cat $(VERS_PY) | grep "__version__" | cut -d "=" -f 2 | sed "s/ //g")
 BIN=bin
 FORMAT=pyxstitch
 HW="hello_world."
+TAG=$(shell git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
+TAG_CURRENT=$(shell cat $(VERS_PY) | grep "$(TAG)")
+NO_TAG="na"
+ifdef TRAVIS
+TAG_CURRENT=$(NO_TAG)
+endif
+ifeq ($(TAG_CURRENT),)
+TAG_CURRENT=$(NO_TAG)
+endif
 .PHONY:
 
 handle-version = sed -i "s/$(VERS)/__VERSION__/g" $1
@@ -65,7 +75,12 @@ analyze:
 	pep8 $(SRC)
 	pep257 $(SRC)
 
-test: clean text
+version:
+ifneq ($(TAG_CURRENT),$(NO_TAG))
+	$(error version is not properly set)
+endif
+
+test: clean version text
 	cd tests && ./run.sh
 
 clean:
