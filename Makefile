@@ -29,7 +29,7 @@ ascii:
 	$(call run-example,"ascii.txt",--font monospace-ascii-3x5,".3x5")
 	cd examples && ./alphabet.sh
 
-fonts:
+fonts: clean
 	$(call gen-font,"5x9")
 	$(call gen-font,"3x7")
 	$(call gen-font,"2x5")
