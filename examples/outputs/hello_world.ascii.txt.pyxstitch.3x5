@@ -2242,6 +2242,7 @@
 {"type": "meta", "data": [[7, 3], ["whitesmoke", "1", "f8f8f2"], "X"]}
 {"type": "rect", "data": [[[420, 430], [430, 440]], "lightgrey"]}
 {"type": "rect", "data": [[[430, 430], [440, 440]], "lightgrey"]}
+{"type": "text", "data": [[432, 430], "1", "black"]}
 {"type": "rect", "data": [[[440, 430], [450, 440]], "lightgrey"]}
 {"type": "rect", "data": [[[450, 430], [460, 440]], "lightgrey"]}
 {"type": "meta", "data": [[7, 3], ["whitesmoke", "1", "f8f8f2"], "O"]}
@@ -2306,6 +2307,7 @@
 {"type": "meta", "data": [[7, 3], ["whitesmoke", "1", "f8f8f2"], "X"]}
 {"type": "rect", "data": [[[420, 440], [430, 450]], "lightgrey"]}
 {"type": "rect", "data": [[[430, 440], [440, 450]], "lightgrey"]}
+{"type": "text", "data": [[432, 440], "1", "black"]}
 {"type": "rect", "data": [[[440, 440], [450, 450]], "lightgrey"]}
 {"type": "rect", "data": [[[450, 440], [460, 450]], "lightgrey"]}
 {"type": "meta", "data": [[7, 3], ["whitesmoke", "1", "f8f8f2"], "O"]}
@@ -3824,21 +3826,16 @@
 {"type": "line", "data": [[430, 360, 440, 370], "black"]}
 {"type": "line", "data": [[430, 370, 440, 380], "black"]}
 {"type": "line", "data": [[230, 440, 240, 440], "black"]}
-{"type": "line", "data": [[425.0, 430, 430, 440], "black"]}
-{"type": "line", "data": [[430, 440, 440, 440], "black"]}
-{"type": "line", "data": [[445.0, 430, 440, 440], "black"]}
 {"type": "line", "data": [[340, 440, 350, 450], "black"]}
 {"type": "line", "data": [[360, 450, 370, 440], "black"]}
 {"type": "line", "data": [[395.0, 440, 390, 450], "black"]}
 {"type": "line", "data": [[395.0, 440, 400, 450], "black"]}
-{"type": "line", "data": [[430, 440, 425.0, 450], "black"]}
-{"type": "line", "data": [[440, 440, 445.0, 450], "black"]}
 {"type": "line", "data": [[160, 450, 170, 460], "black"]}
 {"type": "line", "data": [[230, 500, 240, 490], "black"]}
 {"type": "line", "data": [[240, 500, 250, 490], "black"]}
-{"type": "line", "data": [[345.0, 490, 340, 500], "black"]}
+{"type": "line", "data": [[350, 490, 345.0, 500], "black"]}
 {"type": "line", "data": [[350, 490, 360, 490], "black"]}
-{"type": "line", "data": [[365.0, 490, 370, 500], "black"]}
+{"type": "line", "data": [[360, 490, 365.0, 500], "black"]}
 {"type": "line", "data": [[430, 490, 425.0, 500], "black"]}
 {"type": "line", "data": [[440, 490, 450, 490], "black"]}
 {"type": "line", "data": [[440, 500, 450, 490], "black"]}
@@ -3855,9 +3852,9 @@
 {"type": "line", "data": [[280, 500, 290, 500], "black"]}
 {"type": "line", "data": [[280, 510, 290, 510], "black"]}
 {"type": "line", "data": [[320, 500, 315.0, 510], "black"]}
-{"type": "line", "data": [[340, 500, 345.0, 510], "black"]}
+{"type": "line", "data": [[345.0, 500, 350, 510], "black"]}
 {"type": "line", "data": [[350, 510, 360, 510], "black"]}
-{"type": "line", "data": [[370, 500, 365.0, 510], "black"]}
+{"type": "line", "data": [[365.0, 500, 360, 510], "black"]}
 {"type": "line", "data": [[400, 500, 400, 510], "black"]}
 {"type": "line", "data": [[390, 500, 400, 510], "black"]}
 {"type": "line", "data": [[425.0, 500, 420, 510], "black"]}
@@ -3939,5 +3936,5 @@
 {"type": "text", "data": [[45, 550], "50", "black"]}
 {"type": "text", "data": [[45, 650], "60", "black"]}
 {"type": "text", "data": [[45, 750], "70", "black"]}
-{"type": "legend", "data": [[20, 745.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     74   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    137    209\n                      Plum Dark (820043)      purple (960050)       2     67    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4     94   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    750   3865", "black"]}
+{"type": "legend", "data": [[20, 745.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n             Cyclamen Pink Dark (e02876)    deeppink (f92672)       3     74   3804\n                  Lavender Dark (a37ba7) mediumpurple (ae81ff)       0    137    209\n                      Plum Dark (820043)      purple (960050)       2     67    915\n                    Straw Light (f6dc98)       khaki (e6db74)       4     94   3822\n                   Winter White (f9f7f1)  whitesmoke (f8f8f2)       1    749   3865", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.pyxstitch"]}
