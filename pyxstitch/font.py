@@ -154,6 +154,8 @@ def get_all_fonts():
 class Font(object):
     """Create font instance."""
 
+    detect = "detect"
+
     def __init__(self):
         """Init the font creation object."""
         from pyxstitch.font_five_by_nine import FiveByNine
@@ -165,24 +167,41 @@ class Font(object):
                                  TwoByFive,
                                  ThreeByFive]
         self._names = {}
-        self._names["monospace-ascii-5x9"] = 0
-        self._names["monospace-ascii-3x7"] = 1
-        self._names["monospace-ascii-2x5"] = 2
-        self._names["monospace-ascii-3x5"] = 3
+        self._names["monospace-ascii-5x9"] = (0, 25, 10)
+        self._names["monospace-ascii-3x7"] = (1, 30, 15)
+        self._names["monospace-ascii-2x5"] = (2, None, None)
+        self._names["monospace-ascii-3x5"] = (3, 30, 20)
 
     def get_names(self):
         """Get font names."""
         return self._names.keys()
 
-    def new_font_by_name(self, font_name):
+    def new_font_by_name(self, font_name, rows=None, columns=None):
         """Get a font by name."""
-        if font_name in self._names:
-            typed = self._supported_types[self._names[font_name]]
+        use_name = font_name
+        if font_name == self.detect:
+            dflt = None
+            if rows is not None and columns is not None:
+                for detect in sorted(self._names.keys()):
+                    vals = self._names[detect]
+                    c = vals[1]
+                    r = vals[2]
+                    if c is None and r is None:
+                        dflt = detect
+                        continue
+                    if rows < r and columns < c:
+                        use_name = detect
+                if use_name == font_name:
+                    use_name = dflt
+            else:
+                raise FontException("requires dimensions (rows, cols)")
+        if use_name in self._names:
+            typed = self._supported_types[self._names[use_name][0]]
             return self.new_font_object(typed)
         else:
             raise FontException("unknown font name: {}".format(font_name))
 
-    def new_font_object(self, font_type=None):
+    def new_font_object(self, font_type=None, columns=None):
         """Create a new font object."""
         use_type = None
         if font_type is None:

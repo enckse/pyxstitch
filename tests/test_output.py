@@ -31,7 +31,7 @@ class TestTextFormat(unittest.TestCase):
         parts = vals.split("\n")
         self.assertEqual(3, len(parts))
         expect = """
-{\"type\": \"extras\", \"data\": [[\"1.3.1\", [0, 0]]]}"""
+{\"type\": \"extras\", \"data\": [[\"1.3.2\", [0, 0]]]}"""
         self.assertEqual(expect.replace("\n", "").strip(), parts[0])
         self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
                          parts[1])

@@ -25,6 +25,27 @@ class TestDefaultFont(unittest.TestCase):
                 continue
             factory.get(ch)
 
+    def test_detect(self):
+        """Detection on dimensions."""
+        f = ft.Font()
+        with self.assertRaises(ft.FontException) as cm:
+            f.new_font_by_name("detect")
+        self.assertEqual("requires dimensions (rows, cols)", str(cm.exception))
+        with self.assertRaises(ft.FontException) as cm:
+            f.new_font_by_name("detect", rows=100)
+        self.assertEqual("requires dimensions (rows, cols)", str(cm.exception))
+        with self.assertRaises(ft.FontException) as cm:
+            f.new_font_by_name("detect", columns=100)
+        self.assertEqual("requires dimensions (rows, cols)", str(cm.exception))
+        dt = f.new_font_by_name("detect", rows=21, columns=30)
+        self.assertEqual("TwoByFive", str(type(dt).__name__))
+        dt = f.new_font_by_name("detect", rows=14, columns=29)
+        self.assertEqual("ThreeBySeven", str(type(dt).__name__))
+        dt = f.new_font_by_name("detect", rows=19, columns=25)
+        self.assertEqual("ThreeByFive", str(type(dt).__name__))
+        dt = f.new_font_by_name("detect", rows=9, columns=24)
+        self.assertEqual("FiveByNine", str(type(dt).__name__))
+
     def test_height(self):
         """Get height."""
         factory = ft.Font().new_font_object()
