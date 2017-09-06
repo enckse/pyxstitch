@@ -61,7 +61,7 @@ raw:
 	pyxstitch --file examples/hw.py.pyxstitch --output $(BIN)/hw.py.png
 
 bash:
-	pyxstitch --file examples/fizzbuzz.bash --multipage off --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
+	pyxstitch --file examples/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
 	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
 	diff $(BIN)/fb.bash.$(FORMAT) examples/outputs/fb.bash.$(FORMAT)
 

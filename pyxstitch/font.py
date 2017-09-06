@@ -69,7 +69,9 @@ class BaseFontFactory(FontFactory):
         val = value
         for replacing in self._replace:
             val = val.replace(replacing, self._replace[replacing])
-        return val
+        parts = val.split("\n")
+        cols = max([len(x) for x in parts])
+        return (val, len(parts), cols)
 
     def _translate(self, enum_item):
         """Translate stitching types."""
@@ -167,10 +169,11 @@ class Font(object):
                                  TwoByFive,
                                  ThreeByFive]
         self._names = {}
-        self._names["monospace-ascii-5x9"] = (0, 25, 10)
-        self._names["monospace-ascii-3x7"] = (1, 30, 15)
+        # tuple is (index, column threshold, row threshold)
+        self._names["monospace-ascii-5x9"] = (0, 31, 21)
+        self._names["monospace-ascii-3x7"] = (1, 46, 26)
         self._names["monospace-ascii-2x5"] = (2, None, None)
-        self._names["monospace-ascii-3x5"] = (3, 30, 20)
+        self._names["monospace-ascii-3x5"] = (3, 46, 31)
 
     def get_names(self):
         """Get font names."""

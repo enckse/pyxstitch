@@ -52,6 +52,7 @@ def _replay(args, file_name, content):
 
 def main():
     """Main-entry point."""
+    default_font = fnt.Font().detect
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', type=str, default=_TXT)
@@ -81,8 +82,8 @@ def main():
                         default=_DEF_STYLE,
                         choices=list(get_all_styles()))
     parser.add_argument('--font',
-                        default=None,
-                        choices=fnt.get_all_fonts())
+                        default=default_font,
+                        choices=list(fnt.get_all_fonts()) + [default_font])
     parser.add_argument('--version', action="store_true")
     args = parser.parse_args()
     if args.version:
@@ -157,7 +158,10 @@ def main():
     formatting.is_bw = is_bw
     if args.kv is not None and len(args.kv) > 0:
         formatting.config = args.kv
-    text = formatting.preprocess(content)
+    preproc = formatting.preprocess(content)
+    text = preproc[0]
+    rows = preproc[1]
+    cols = preproc[2]
     if args.output is None:
         formatting.file_name = _create_file_name(file_name, args)
     else:
@@ -165,7 +169,9 @@ def main():
             print('specify output as {}?'.format(_RAW))
             exit(1)
     if args.font is not None:
-        formatting.font_factory = fnt.Font().new_font_by_name(args.font)
+        formatting.font_factory = fnt.Font().new_font_by_name(args.font,
+                                                              rows=rows,
+                                                              columns=cols)
     if args.command:
         if can_command:
             try:

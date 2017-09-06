@@ -37,11 +37,11 @@ class TestDefaultFont(unittest.TestCase):
         with self.assertRaises(ft.FontException) as cm:
             f.new_font_by_name("detect", columns=100)
         self.assertEqual("requires dimensions (rows, cols)", str(cm.exception))
-        dt = f.new_font_by_name("detect", rows=21, columns=30)
+        dt = f.new_font_by_name("detect", rows=32, columns=30)
         self.assertEqual("TwoByFive", str(type(dt).__name__))
-        dt = f.new_font_by_name("detect", rows=14, columns=29)
+        dt = f.new_font_by_name("detect", rows=25, columns=45)
         self.assertEqual("ThreeBySeven", str(type(dt).__name__))
-        dt = f.new_font_by_name("detect", rows=19, columns=25)
+        dt = f.new_font_by_name("detect", rows=30, columns=25)
         self.assertEqual("ThreeByFive", str(type(dt).__name__))
         dt = f.new_font_by_name("detect", rows=9, columns=24)
         self.assertEqual("FiveByNine", str(type(dt).__name__))
@@ -66,10 +66,16 @@ class TestDefaultFont(unittest.TestCase):
     def test_preprocess(self):
         """Test preprocess."""
         factory = ft.Font().new_font_object()
-        self.assertEqual("    ", factory.process('\t'))
-        self.assertEqual("\n", factory.process('\r'))
-        self.assertEqual("\n", factory.process('\v'))
-        self.assertEqual("\n", factory.process('\f'))
+        self.assertEqual("    ", factory.process('\t')[0])
+        self.assertEqual("\n", factory.process('\r')[0])
+        self.assertEqual("\n", factory.process('\v')[0])
+        self.assertEqual("\n", factory.process('\f')[0])
+        preproc = factory.process("""test
+        kdlaj; oieja ofij;ajfoiajoij109j
+lkjealk; jaaaa
+kd""")
+        self.assertEqual(4, preproc[1])
+        self.assertEqual(40, preproc[2])
 
     def test_by_type(self):
         """Passing a tyep into construction."""
