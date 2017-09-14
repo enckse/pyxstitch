@@ -5,6 +5,8 @@ import pyxstitch.formatter_layout as fl
 
 
 class Mock(object):
+    """Mock dmc input floss object."""
+
     name = "xyz"
     rgb = "aaaaaa"
     symbol = "1"
