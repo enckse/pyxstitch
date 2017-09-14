@@ -19,15 +19,15 @@ from enum import Enum
 class Style(object):
     """Output/legend formatting."""
 
-    def __init__(self, dmc, symbol, color):
+    def __init__(self, dmc, symbol, original_hex):
         """Init the instance."""
         self.dmc = dmc
         self.symbol = symbol
-        self.color = color
+        self._raw_hex = original_hex
 
     def save(self):
         """Save to metadata format."""
-        return [self.dmc.name, self.symbol, self.color]
+        return [self.dmc.name, self.symbol, self._raw_hex]
 
 
 class Legend(object):
