@@ -83,10 +83,10 @@ class Floss(object):
                          pow((g1 - g2) * 0.587, 2) +
                          pow((b1 - b2) * 0.114, 2))
 
-    def _add(self, number, desc, red, green, blue, code, row):
+    def _add(self, number, desc, red, green, blue, row):
         """Add a color."""
         rgb = (red, green, blue)
-        self._colors[code.lower()] = (number, desc, rgb)
+        self._colors[_to_rgb_string(rgb)] = (number, desc, rgb)
 
     def _load(self):
         """Load all colors."""
@@ -95,7 +95,6 @@ class Floss(object):
                   255,
                   226,
                   226,
-                  'FFE2E2',
                   'row 01-01')
 
         self._add('761',
@@ -103,7 +102,6 @@ class Floss(object):
                   255,
                   201,
                   201,
-                  'FFC9C9',
                   'row 01-02')
 
         self._add('760',
@@ -111,7 +109,6 @@ class Floss(object):
                   245,
                   173,
                   173,
-                  'F5ADAD',
                   'row 01-03')
 
         self._add('3712',
@@ -119,7 +116,6 @@ class Floss(object):
                   241,
                   135,
                   135,
-                  'F18787',
                   'row 01-04')
 
         self._add('3328',
@@ -127,7 +123,6 @@ class Floss(object):
                   227,
                   109,
                   109,
-                  'E36D6D',
                   'row 01-05')
 
         self._add('347',
@@ -135,7 +130,6 @@ class Floss(object):
                   191,
                   45,
                   45,
-                  'BF2D2D',
                   'row 01-06')
 
         self._add('353',
@@ -143,7 +137,6 @@ class Floss(object):
                   254,
                   215,
                   204,
-                  'FED7CC',
                   'row 01-07')
 
         self._add('352',
@@ -159,7 +152,6 @@ class Floss(object):
                   233,
                   106,
                   103,
-                  'E96A67',
                   'row 01-09')
 
         self._add('350',
@@ -167,7 +159,6 @@ class Floss(object):
                   224,
                   72,
                   72,
-                  'E04848',
                   'row 01-10')
 
         self._add('349',
@@ -175,7 +166,6 @@ class Floss(object):
                   210,
                   16,
                   53,
-                  'D21035',
                   'row 01-11')
 
         self._add('817',
@@ -183,7 +173,6 @@ class Floss(object):
                   187,
                   5,
                   31,
-                  'BB051F',
                   'row 01-12')
 
         self._add('3708',
@@ -191,7 +180,6 @@ class Floss(object):
                   255,
                   203,
                   213,
-                  'FFCBD5',
                   'row 01-13')
 
         self._add('3706',
@@ -199,7 +187,6 @@ class Floss(object):
                   255,
                   173,
                   188,
-                  'FFADBC',
                   'row 01-14')
 
         self._add('3705',
@@ -207,7 +194,6 @@ class Floss(object):
                   255,
                   121,
                   146,
-                  'FF7992',
                   'row 01-15')
 
         self._add('3801',
@@ -215,7 +201,6 @@ class Floss(object):
                   231,
                   73,
                   103,
-                  'E74967',
                   'row 01-16')
 
         self._add('666',
@@ -223,7 +208,6 @@ class Floss(object):
                   227,
                   29,
                   66,
-                  'E31D42',
                   'row 01-17')
 
         self._add('321',
@@ -231,7 +215,6 @@ class Floss(object):
                   199,
                   43,
                   59,
-                  'C72B3B',
                   'row 01-18')
 
         self._add('304',
@@ -239,7 +222,6 @@ class Floss(object):
                   183,
                   31,
                   51,
-                  'B71F33',
                   'row 01-19')
 
         self._add('498',
@@ -247,7 +229,6 @@ class Floss(object):
                   167,
                   19,
                   43,
-                  'A7132B',
                   'row 01-20')
 
         self._add('816',
@@ -255,7 +236,6 @@ class Floss(object):
                   151,
                   11,
                   35,
-                  '970B23',
                   'row 01-21')
 
         self._add('815',
@@ -263,7 +243,6 @@ class Floss(object):
                   135,
                   7,
                   31,
-                  '87071F',
                   'row 01-22')
 
         self._add('814',
@@ -271,7 +250,6 @@ class Floss(object):
                   123,
                   0,
                   27,
-                  '7B001B',
                   'row 01-23')
 
         self._add('894',
@@ -279,7 +257,6 @@ class Floss(object):
                   255,
                   178,
                   187,
-                  'FFB2BB',
                   'row 02-01')
 
         self._add('893',
@@ -287,7 +264,6 @@ class Floss(object):
                   252,
                   144,
                   162,
-                  'FC90A2',
                   'row 02-02')
 
         self._add('892',
@@ -295,7 +271,6 @@ class Floss(object):
                   255,
                   121,
                   140,
-                  'FF798C',
                   'row 02-03')
 
         self._add('891',
@@ -303,7 +278,6 @@ class Floss(object):
                   255,
                   87,
                   115,
-                  'FF5773',
                   'row 02-04')
 
         self._add('818',
@@ -311,7 +285,6 @@ class Floss(object):
                   255,
                   223,
                   217,
-                  'FFDFD9',
                   'row 02-05')
 
         self._add('957',
@@ -319,7 +292,6 @@ class Floss(object):
                   253,
                   181,
                   181,
-                  'FDB5B5',
                   'row 02-06')
 
         self._add('956',
@@ -327,7 +299,6 @@ class Floss(object):
                   255,
                   145,
                   145,
-                  'FF9191',
                   'row 02-07')
 
         self._add('309',
@@ -335,7 +306,6 @@ class Floss(object):
                   86,
                   74,
                   74,
-                  'BA4A4A',
                   'row 02-08')
 
         self._add('963',
@@ -343,7 +313,6 @@ class Floss(object):
                   255,
                   215,
                   215,
-                  'FFD7D7',
                   'row 02-09')
 
         self._add('3716',
@@ -351,7 +320,6 @@ class Floss(object):
                   255,
                   189,
                   189,
-                  'FFBDBD',
                   'row 02-10')
 
         self._add('962',
@@ -359,7 +327,6 @@ class Floss(object):
                   230,
                   138,
                   138,
-                  'E68A8A',
                   'row 02-11')
 
         self._add('961',
@@ -367,7 +334,6 @@ class Floss(object):
                   207,
                   115,
                   115,
-                  'CF7373',
                   'row 02-12')
 
         self._add('3833',
@@ -375,7 +341,6 @@ class Floss(object):
                   234,
                   134,
                   153,
-                  'EA8699',
                   'row 02-13')
 
         self._add('3832',
@@ -383,7 +348,6 @@ class Floss(object):
                   219,
                   85,
                   110,
-                  'DB556E',
                   'row 02-14')
 
         self._add('3831',
@@ -391,7 +355,6 @@ class Floss(object):
                   179,
                   47,
                   72,
-                  'B32F48',
                   'row 02-15')
 
         self._add('777',
@@ -399,7 +362,6 @@ class Floss(object):
                   145,
                   53,
                   70,
-                  '913546',
                   'row 02-16')
 
         self._add('819',
@@ -407,7 +369,6 @@ class Floss(object):
                   255,
                   238,
                   235,
-                  'FFEEEB',
                   'row 02-17')
 
         self._add('3326',
@@ -415,7 +376,6 @@ class Floss(object):
                   251,
                   173,
                   180,
-                  'FBADB4',
                   'row 02-18')
 
         self._add('776',
@@ -423,7 +383,6 @@ class Floss(object):
                   252,
                   176,
                   185,
-                  'FCB0B9',
                   'row 02-19')
 
         self._add('899',
@@ -431,7 +390,6 @@ class Floss(object):
                   242,
                   118,
                   136,
-                  'F27688',
                   'row 02-20')
 
         self._add('335',
@@ -439,7 +397,6 @@ class Floss(object):
                   238,
                   84,
                   110,
-                  'EE546E',
                   'row 02-21')
 
         self._add('326',
@@ -447,7 +404,6 @@ class Floss(object):
                   179,
                   59,
                   75,
-                  'B33B4B',
                   'row 02-22')
 
         self._add('151',
@@ -455,7 +411,6 @@ class Floss(object):
                   240,
                   206,
                   212,
-                  'F0CED4',
                   'row 03-01')
 
         self._add('3354',
@@ -463,7 +418,6 @@ class Floss(object):
                   228,
                   166,
                   172,
-                  'E4A6AC',
                   'row 03-02')
 
         self._add('3733',
@@ -471,7 +425,6 @@ class Floss(object):
                   232,
                   135,
                   155,
-                  'E8879B',
                   'row 03-03')
 
         self._add('3731',
@@ -479,7 +432,6 @@ class Floss(object):
                   218,
                   103,
                   131,
-                  'DA6783',
                   'row 03-04')
 
         self._add('3350',
@@ -487,7 +439,6 @@ class Floss(object):
                   188,
                   67,
                   101,
-                  'BC4365',
                   'row 03-05')
 
         self._add('150',
@@ -495,7 +446,6 @@ class Floss(object):
                   171,
                   2,
                   73,
-                  'AB0249',
                   'row 03-06')
 
         self._add('3689',
@@ -503,7 +453,6 @@ class Floss(object):
                   251,
                   191,
                   194,
-                  'FBBFC2',
                   'row 03-07')
 
         self._add('3688',
@@ -511,7 +460,6 @@ class Floss(object):
                   231,
                   169,
                   172,
-                  'E7A9AC',
                   'row 03-08')
 
         self._add('3687',
@@ -527,7 +475,6 @@ class Floss(object):
                   171,
                   51,
                   87,
-                  'AB3357',
                   'row 03-10')
 
         self._add('3685',
@@ -535,7 +482,6 @@ class Floss(object):
                   136,
                   21,
                   49,
-                  '881531',
                   'row 03-11')
 
         self._add('605',
@@ -543,7 +489,6 @@ class Floss(object):
                   255,
                   192,
                   205,
-                  'FFC0CD',
                   'row 03-12')
 
         self._add('604',
@@ -551,7 +496,6 @@ class Floss(object):
                   255,
                   176,
                   190,
-                  'FFB0BE',
                   'row 03-13')
 
         self._add('603',
@@ -559,7 +503,6 @@ class Floss(object):
                   255,
                   164,
                   190,
-                  'FFA4BE',
                   'row 03-14')
 
         self._add('602',
@@ -567,7 +510,6 @@ class Floss(object):
                   226,
                   72,
                   116,
-                  'E24874',
                   'row 03-15')
 
         self._add('601',
@@ -575,7 +517,6 @@ class Floss(object):
                   209,
                   40,
                   106,
-                  'D1286A',
                   'row 03-16')
 
         self._add('600',
@@ -583,7 +524,6 @@ class Floss(object):
                   205,
                   47,
                   99,
-                  'CD2F63',
                   'row 03-17')
 
         self._add('3806',
@@ -591,7 +531,6 @@ class Floss(object):
                   255,
                   140,
                   174,
-                  'FF8CAE',
                   'row 03-18')
 
         self._add('3805',
@@ -599,7 +538,6 @@ class Floss(object):
                   243,
                   71,
                   139,
-                  'F3478B',
                   'row 03-19')
 
         self._add('3804',
@@ -607,7 +545,6 @@ class Floss(object):
                   224,
                   40,
                   118,
-                  'E02876',
                   'row 03-20')
 
         self._add('3609',
@@ -615,7 +552,6 @@ class Floss(object):
                   244,
                   174,
                   213,
-                  'F4AED7',
                   'row 03-21')
 
         self._add('3608',
@@ -623,7 +559,6 @@ class Floss(object):
                   234,
                   156,
                   196,
-                  'EA9CC4',
                   'row 03-22')
 
         self._add('3607',
@@ -631,7 +566,6 @@ class Floss(object):
                   197,
                   73,
                   137,
-                  'C54989',
                   'row 03-23')
 
         self._add('718',
@@ -639,7 +573,6 @@ class Floss(object):
                   156,
                   36,
                   98,
-                  '9C2462',
                   'row 03-24')
 
         self._add('917',
@@ -647,7 +580,6 @@ class Floss(object):
                   155,
                   19,
                   89,
-                  '9B1359',
                   'row 03-25')
 
         self._add('915',
@@ -655,7 +587,6 @@ class Floss(object):
                   130,
                   0,
                   67,
-                  '820043',
                   'row 03-26')
 
         self._add('225',
@@ -663,7 +594,6 @@ class Floss(object):
                   255,
                   223,
                   213,
-                  'FFDFD7',
                   'row 04-01')
 
         self._add('224',
@@ -671,7 +601,6 @@ class Floss(object):
                   235,
                   183,
                   175,
-                  'EBB7AF',
                   'row 04-02')
 
         self._add('152',
@@ -679,7 +608,6 @@ class Floss(object):
                   226,
                   160,
                   153,
-                  'E2A099',
                   'row 04-03')
 
         self._add('223',
@@ -687,7 +615,6 @@ class Floss(object):
                   204,
                   132,
                   124,
-                  'CC847C',
                   'row 04-04')
 
         self._add('3722',
@@ -695,7 +622,6 @@ class Floss(object):
                   188,
                   108,
                   100,
-                  'BC6C64',
                   'row 04-05')
 
         self._add('3721',
@@ -703,7 +629,6 @@ class Floss(object):
                   161,
                   75,
                   81,
-                  'A14B51',
                   'row 04-06')
 
         self._add('221',
@@ -711,7 +636,6 @@ class Floss(object):
                   136,
                   62,
                   67,
-                  '883E43',
                   'row 04-07')
 
         self._add('778',
@@ -719,7 +643,6 @@ class Floss(object):
                   223,
                   179,
                   187,
-                  'DFB3BB',
                   'row 04-08')
 
         self._add('3727',
