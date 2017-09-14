@@ -8,6 +8,11 @@ Sourced from csv:
 import math
 
 
+def _to_rgb_string(rgb):
+    """Convert to rgb string."""
+    return ('%02x%02x%02x' % rgb).lower()
+
+
 class FlossException(Exception):
     """Floss exception."""
 
@@ -19,7 +24,7 @@ class FlossType(object):
         """Init the instance."""
         self.floss_number = dmc[0]
         self.name = dmc[1]
-        self.rgb = ('%02x%02x%02x' % dmc[2]).lower()
+        self.rgb = _to_rgb_string(dmc[2])
 
 
 class Floss(object):
