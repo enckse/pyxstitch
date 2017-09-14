@@ -14,6 +14,11 @@ class TestHex(unittest.TestCase):
         self.assertEqual(17, val[1])
         self.assertEqual(34, val[2])
 
+    def test_rgb_close(self):
+        """Closest rgb check."""
+        val = hu.rgb_close(0, 1, 2, 3, 4, 5)
+        self.assertEqual(2.00567, round(val, 5))
+
     def test_to_string(self):
         """Test tuple to string."""
         self.assertEqual("001122", hu.to_rgb_string((00, 17, 34)))

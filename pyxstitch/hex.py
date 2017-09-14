@@ -1,5 +1,6 @@
 #!/usr/bin/python
 """Hex tooling/utilities for operations."""
+import math
 
 _HEX = '0123456789abcdefABCDEF'
 _HEX_LOOKUP = {x: int(x, 16) for x in (y + z for y in _HEX for z in _HEX)}
@@ -15,6 +16,13 @@ def to_hex(rgb):
 def to_rgb_string(rgb):
     """Convert to rgb string."""
     return ('%02x%02x%02x' % rgb).lower()
+
+
+def rgb_close(r1, g1, b1, r2, g2, b2):
+    """Closest rgb check."""
+    return math.sqrt(pow((r1 - r2) * 0.299, 2) +
+                     pow((g1 - g2) * 0.587, 2) +
+                     pow((b1 - b2) * 0.114, 2))
 
 
 def is_rgb_string(value):

@@ -54,7 +54,7 @@ class Floss(object):
         closest = -1
         for tries in self._colors.keys():
             t = self._colors[tries][2]
-            check = self._close(rgb[0], rgb[1], rgb[2], t[0], t[1], t[2])
+            check = hu.rgb_close(rgb[0], rgb[1], rgb[2], t[0], t[1], t[2])
             if closest == -1 or check < closest:
                 closest = check
                 close = self._colors[tries]
@@ -72,12 +72,6 @@ class Floss(object):
             return True
         raise FlossException("Unknown color(s): {} -> {}".format(from_color,
                                                                  to_color))
-
-    def _close(self, r1, g1, b1, r2, g2, b2):
-        """Closest rgb check."""
-        return math.sqrt(pow((r1 - r2) * 0.299, 2) +
-                         pow((g1 - g2) * 0.587, 2) +
-                         pow((b1 - b2) * 0.114, 2))
 
     def _add(self, number, desc, red, green, blue, row):
         """Add a color."""
