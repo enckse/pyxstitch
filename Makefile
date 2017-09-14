@@ -6,7 +6,7 @@ FORMAT=pyxstitch
 HW="hello_world."
 TAG=$(shell git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
 TAG_CURRENT=$(shell cat $(VERS_PY) | grep "$(TAG)")
-EXAMPLES=examples/outputs/
+EXAMPLE_OUT=examples/outputs/
 NO_TAG="na"
 ifdef TRAVIS
 TAG_CURRENT=$(NO_TAG)
@@ -21,7 +21,7 @@ handle-version = sed -i "s/$(VERS)/__VERSION__/g" $1
 run-example = pyxstitch --file examples/$(HW)$1 --multipage off --format $(FORMAT) --output $(BIN)/$(HW)$1.$(FORMAT) $2 $4 $5 $6; \
 			  pyxstitch --file $(BIN)/$(HW)$1.$(FORMAT) --output $(BIN)/$(HW)$1.png $2; \
 			  $(call handle-version,$(BIN)/$(HW)$1.$(FORMAT)); \
-			  diff $(BIN)/$(HW)$1.$(FORMAT) $(EXAMPLES)$(HW)$1.$(FORMAT)$3;
+			  diff $(BIN)/$(HW)$1.$(FORMAT) $(EXAMPLE_OUT)$(HW)$1.$(FORMAT)$3;
 
 gen-font = pyxstitch --file examples/$(HW)"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font monospace-ascii-$1;
 
@@ -64,17 +64,17 @@ raw:
 bash:
 	pyxstitch --file examples/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
 	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
-	diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLES)fb.bash.$(FORMAT)
+	diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLE_OUT)fb.bash.$(FORMAT)
 
 mapping:
 	pyxstitch --file examples/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)  --map 6c6c6c=ffffff --map 59c7b4=
 	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
-	diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLES)fb.bash.$(FORMAT).map
+	diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLE_OUT)fb.bash.$(FORMAT).map
 
 text:
 	cat examples/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
 	$(call handle-version,$(BIN)/text.test.$(FORMAT))
-	diff $(BIN)/text.test.$(FORMAT) $(EXAMPLES)text.test.$(FORMAT)
+	diff $(BIN)/text.test.$(FORMAT) $(EXAMPLE_OUT)text.test.$(FORMAT)
 
 analyze:
 	pip install pep8 pep257
