@@ -47,7 +47,7 @@ class Legend(object):
 
     def add(self, style):
         """New legend entry."""
-        self._entries.append((style.dmc, style.symbol))
+        self._entries.append(style)
 
     def build(self):
         """Build output legend."""
@@ -60,11 +60,10 @@ class Legend(object):
         headers.append(tuple(delim))
         output = []
         for item in self._entries:
-            dmc = item[0]
-            output.append(("{} ({})".format(dmc.name, dmc.rgb),
-                           item[1],
-                           self._stitches[dmc.name],
-                           dmc.floss_number))
+            output.append(("{} ({})".format(item.dmc.name, item.dmc.rgb),
+                           item.symbol,
+                           self._stitches[item.dmc.name],
+                           item.dmc.floss_number))
         return ["{:>40} {:>7} {:>6} {:>6}".format(x[0],
                                                   x[1],
                                                   x[2],
