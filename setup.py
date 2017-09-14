@@ -16,7 +16,7 @@ setup(
     url='https://github.com/enckse/pyxstitch',
     license='MIT',
     packages=[__pkg_name__],
-    install_requires=['pygments', 'pillow'],
+    install_requires=['webcolors', 'pygments', 'pillow'],
     entry_points={
         'console_scripts': [
             'pyxstitch = pyxstitch.pyxstitch:main',
