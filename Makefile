@@ -72,7 +72,7 @@ mapping:
 	diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLES)fb.bash.$(FORMAT).map
 
 text:
-	cat tests/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
+	cat examples/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
 	$(call handle-version,$(BIN)/text.test.$(FORMAT))
 	diff $(BIN)/text.test.$(FORMAT) $(EXAMPLES)text.test.$(FORMAT)
 
