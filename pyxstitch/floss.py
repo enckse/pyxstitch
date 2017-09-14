@@ -6,11 +6,7 @@ Sourced from csv:
     https://github.com/adrianj/CrossStitchCreator
 """
 import math
-
-
-def _to_rgb_string(rgb):
-    """Convert to rgb string."""
-    return ('%02x%02x%02x' % rgb).lower()
+import pyxstitch.hex as hu
 
 
 class FlossException(Exception):
@@ -24,7 +20,7 @@ class FlossType(object):
         """Init the instance."""
         self.floss_number = dmc[0]
         self.name = dmc[1]
-        self.rgb = _to_rgb_string(dmc[2])
+        self.rgb = hu.to_rgb_string(dmc[2])
 
 
 class Floss(object):
@@ -86,7 +82,7 @@ class Floss(object):
     def _add(self, number, desc, red, green, blue, row):
         """Add a color."""
         rgb = (red, green, blue)
-        self._colors[_to_rgb_string(rgb)] = (number, desc, rgb)
+        self._colors[hu.to_rgb_string(rgb)] = (number, desc, rgb)
 
     def _load(self):
         """Load all colors."""

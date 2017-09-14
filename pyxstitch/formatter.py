@@ -7,6 +7,7 @@ Takes a text stream and converts to a cross stitch output (HTML).
 
 from pygments.formatter import Formatter
 import pyxstitch.font as ft
+import pyxstitch.hex as hu
 import pyxstitch.symbols as sym
 import pyxstitch.version as vers
 from pyxstitch.output import PILFormat, TextFormat, MULTI_PAGE_OFF
@@ -74,13 +75,9 @@ class Legend(object):
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
 
-    _HEX = '0123456789abcdefABCDEF'
-
     def __init__(self, **options):
         """Initialize the instance."""
         Formatter.__init__(self, **options)
-        self._hex = {x: int(x, 16) for x in
-                     (y + z for y in self._HEX for z in self._HEX)}
         self._colors = {}
         self._default_color = "ffffff"
         self.symbol_generator = sym.DefaultSymbolGenerator()
@@ -112,23 +109,8 @@ class CrossStitchFormatter(Formatter):
             mapping = []
             idx = 0
             for p in parts:
-                conv = [x for x in p if x in ['a',
-                                              'b',
-                                              'c',
-                                              'd',
-                                              'e',
-                                              'f',
-                                              '0',
-                                              '1',
-                                              '2',
-                                              '3',
-                                              '4',
-                                              '5',
-                                              '6',
-                                              '7',
-                                              '8',
-                                              '9']]
-                if len(conv) != 6:
+                is_valid = hu.is_rgb_string(p)
+                if not is_valid:
                     if idx == 0:
                         return False
                     else:
@@ -141,10 +123,6 @@ class CrossStitchFormatter(Formatter):
             return self.floss.map(mapping[0], mapping[1])
         return False
 
-    def _to_hex(self, rgb):
-        """Convert a hex string 001122 -> tuple (0, 1, 2)."""
-        return (self._hex[rgb[0:2]], self._hex[rgb[2:4]], self._hex[rgb[4:6]])
-
     def _token_color(self, token):
         """We need to get the color for a token."""
         use_color = self._default_color
@@ -152,7 +130,7 @@ class CrossStitchFormatter(Formatter):
             use_color = "000000"
         if token in self._colors:
             use_color = self._colors[token]
-        use_hex = self._to_hex(use_color)
+        use_hex = hu.to_hex(use_color)
         dmc = self.floss.lookup(use_hex)
         return Style(dmc,
                      self.symbol_generator.next(dmc.name),
@@ -243,7 +221,7 @@ class CrossStitchFormatter(Formatter):
         self._writer.init('RGB',
                           (width_size,
                            (calc_height * offset) + top_pad + legend),
-                          self._to_hex(self._default_color),
+                          hu.to_hex(self._default_color),
                           self.is_multipage,
                           cfg)
         self._writer.extras(cfg.dump())
