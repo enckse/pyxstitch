@@ -110,6 +110,7 @@ class CrossStitchFormatter(Formatter):
         parts = input_color_map.lower().split("=")
         if len(parts) == 2:
             mapping = []
+            idx = 0
             for p in parts:
                 conv = [x for x in p if x in ['a',
                                               'b',
@@ -128,8 +129,15 @@ class CrossStitchFormatter(Formatter):
                                               '8',
                                               '9']]
                 if len(conv) != 6:
-                    return False
+                    if idx == 0:
+                        return False
+                    else:
+                        mapping.append(None)
+                        break
                 mapping.append(p)
+                idx = idx + 1
+            from_color = mapping[0]
+            to_color = mapping[1]
             return self.floss.map(mapping[0], mapping[1])
         return False
 

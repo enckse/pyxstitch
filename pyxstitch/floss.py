@@ -8,6 +8,10 @@ Sourced from csv:
 import math
 
 
+class FlossException(Exception):
+    """Floss exception."""
+
+
 class FlossType(object):
     """Floss type."""
 
@@ -50,11 +54,16 @@ class Floss(object):
 
     def map(self, from_color, to_color):
         """Map one floss rgb to another."""
-        key = self._key_rgb(from_color[0], from_color[1], from_color[2])
-        if to_color in self._colors:
-            self._cache[key] = self._colors[to_color]
+        if (to_color in self._colors or to_color is None) \
+                and from_color in self._colors:
+            if to_color is None:
+                self._colors.pop(from_color, None)
+            else:
+                self._colors[from_color] = self._colors[to_color]
+            self._cache = {}
             return True
-        return False
+        raise FlossException("Unknown color(s): {} -> {}".format(from_color,
+                                                                 to_color))
 
     def _close(self, r1, g1, b1, r2, g2, b2):
         """Closest rgb check."""

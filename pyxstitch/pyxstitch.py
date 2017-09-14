@@ -153,7 +153,9 @@ def main():
     if args.map is not None and len(args.map) > 0:
         for mapped in args.map:
             if not formatting.map_color(mapped):
-                print("color mapping must be: rgb=rbg (e.g. 000000=ffffff")
+                print("color mapping must be: rgb=rbg")
+                print("e.g. to remap directly -> 000000=ffffff")
+                print("e.g. to disable a color -> 000000=")
                 exit(1)
     if args.kv is not None and len(args.kv) > 0:
         formatting.config = args.kv

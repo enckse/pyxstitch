@@ -29,7 +29,7 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: install clean go c py ascii raw bash fonts
+example: install clean go c py ascii raw bash fonts  mapping
 
 ascii:
 	$(call run-example,"ascii.txt")
@@ -64,6 +64,11 @@ bash:
 	pyxstitch --file examples/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
 	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
 	diff $(BIN)/fb.bash.$(FORMAT) examples/outputs/fb.bash.$(FORMAT)
+
+mapping:
+	pyxstitch --file examples/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)  --map 6c6c6c=ffffff --map 59c7b4=
+	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
+	diff $(BIN)/fb.bash.$(FORMAT) examples/outputs/fb.bash.$(FORMAT).map
 
 text:
 	cat tests/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
