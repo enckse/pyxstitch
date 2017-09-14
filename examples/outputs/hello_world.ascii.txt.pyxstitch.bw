@@ -8371,5 +8371,5 @@
 {"type": "text", "data": [[45, 1050], "100", "black"]}
 {"type": "text", "data": [[45, 1150], "110", "black"]}
 {"type": "text", "data": [[45, 1250], "120", "black"]}
-{"type": "legend", "data": [[20, 1185.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n                          Black (000000)       Black (000000)       0   2169    310", "black"]}
+{"type": "legend", "data": [[20, 1185.0], "                                     dmc  symbol  edges  floss\n                                     ---     ---    ---    ---\n                          Black (000000)       0   2169    310", "black"]}
 {"type": "save", "data": ["bin/hello_world.ascii.txt.pyxstitch"]}

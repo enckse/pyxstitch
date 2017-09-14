@@ -45,14 +45,14 @@ class Legend(object):
             self._stitches[raw_color] = 0
         self._stitches[raw_color] += 1
 
-    def add(self, dmc, raw_color, style):
+    def add(self, style, coloring):
         """New legend entry."""
-        self._entries.append((dmc, raw_color, style.symbol, style.color))
+        self._entries.append((style.dmc, style.symbol, coloring))
 
     def build(self):
         """Build output legend."""
         headers = []
-        cols = ("dmc", "color", "symbol", "edges", "floss")
+        cols = ("dmc", "symbol", "edges", "floss")
         delim = []
         for col in cols:
             delim.append("---")
@@ -60,18 +60,16 @@ class Legend(object):
         headers.append(tuple(delim))
         output = []
         for item in self._entries:
-            raw = item[1]
             dmc = item[0]
+            coloring = item[2]
             output.append(("{} ({})".format(dmc.name, dmc.rgb),
-                           "{} ({})".format(raw, item[3]),
-                           item[2],
-                           self._stitches[raw],
+                           item[1],
+                           self._stitches[coloring],
                            dmc.floss_number))
-        return ["{:>40} {:>20} {:>7} {:>6} {:>6}".format(x[0],
-                                                         x[1],
-                                                         x[2],
-                                                         x[3],
-                                                         x[4])
+        return ["{:>40} {:>7} {:>6} {:>6}".format(x[0],
+                                                  x[1],
+                                                  x[2],
+                                                  x[3])
                 for x in headers + sorted(set(output))]
 
 
@@ -244,7 +242,7 @@ class CrossStitchFormatter(Formatter):
                             lgd.add_raw_stitch(coloring)
                             if self.colorize:
                                 color = '#' + dmc.rgb
-                            lgd.add(dmc, coloring, style)
+                            lgd.add(style, coloring)
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
                                               ft.BackStitch.TopLeft,

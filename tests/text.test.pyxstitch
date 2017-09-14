@@ -3662,5 +3662,5 @@
 {"type": "text", "data": [[45, 750], "70", "black"]}
 {"type": "text", "data": [[45, 850], "80", "black"]}
 {"type": "text", "data": [[45, 950], "90", "black"]}
-{"type": "legend", "data": [[20, 965.0], "                                     dmc                color  symbol  edges  floss\n                                     ---                  ---     ---    ---    ---\n                   Winter White (f9f7f1) Winter White (f8f8f2)       0    484   3865", "black"]}
+{"type": "legend", "data": [[20, 965.0], "                                     dmc  symbol  edges  floss\n                                     ---     ---    ---    ---\n                   Winter White (f9f7f1)       0    484   3865", "black"]}
 {"type": "save", "data": ["bin/text.test.pyxstitch"]}
