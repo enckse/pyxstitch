@@ -85,6 +85,16 @@ pyxstitch is **NOT** a build tool but you can run a subprocess command to make p
 pyxstitch --file test.c --command "gcc test.c" --shell
 ```
 
+colors can be remapped or disabled, e.g. to disable a color, set it to map to empty
+```
+pyxstitch --file test.c --map 000000=
+```
+
+or have it replace another color
+```
+pyxstitch --file test.c --map 000000=ffffff
+```
+
 ## advanced
 
 some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed)
