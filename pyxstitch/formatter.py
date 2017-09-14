@@ -19,16 +19,16 @@ from enum import Enum
 class Style(object):
     """Output/legend formatting."""
 
-    def __init__(self, name, symbol, color, hex_vals):
+    def __init__(self, dmc, symbol, color, hex_vals):
         """Init the instance."""
-        self.name = name
+        self.dmc = dmc
         self.symbol = symbol
         self.color = color
         self.hex = hex_vals
 
     def save(self):
         """Save to metadata format."""
-        return [self.name, self.symbol, self.color]
+        return [self.dmc.name, self.symbol, self.color]
 
 
 class Legend(object):
@@ -121,7 +121,7 @@ class CrossStitchFormatter(Formatter):
         if token in self._colors:
             use_color = self._colors[token]
         use_hex = self._to_hex(use_color)
-        return Style(self.floss.lookup(use_hex).name,
+        return Style(self.floss.lookup(use_hex),
                      self.symbol_generator.next(use_color),
                      use_color,
                      use_hex)
@@ -226,7 +226,8 @@ class CrossStitchFormatter(Formatter):
                 grid = []
                 has = False
                 for cur, style, ch in entry:
-                    coloring = style.name
+                    dmc = style.dmc
+                    coloring = dmc.name
                     color = self._symbols
                     self._writer.meta(cur.metadata(), style.save(), ch)
                     if self.colorize:
@@ -241,7 +242,6 @@ class CrossStitchFormatter(Formatter):
                                           outline=self._lines)
                         for stitch in cell:
                             lgd.add_raw_stitch(coloring)
-                            dmc = self.floss.lookup(style.hex)
                             if self.colorize:
                                 color = '#' + dmc.rgb
                             lgd.add(dmc, coloring, style)
