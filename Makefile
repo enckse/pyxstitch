@@ -58,7 +58,7 @@ logo: install
 	pyxstitch --file examples/logo.txt --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output images/logo.png
 
 raw:
-	pyxstitch --file examples/hw.py.pyxstitch --output $(BIN)/hw.py.png
+	cd examples && ./replay.sh
 
 bash:
 	pyxstitch --file examples/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
