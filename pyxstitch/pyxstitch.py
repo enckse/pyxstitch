@@ -21,10 +21,7 @@ _TXT = ".txt"
 _AUTODETECT = "autodetect"
 _LIGHT = "light"
 _DARK = "dark"
-_GEN = "-generic"
 _DMC = "-dmc"
-_LIGHT_GEN = _LIGHT + _GEN
-_DARK_GEN = _DARK + _GEN
 _LIGHT_DMC = _LIGHT + _DMC
 _DARK_DMC = _DARK + _DMC
 _B_AND_W = "bw"
@@ -65,8 +62,6 @@ def main():
                                  _LIGHT,
                                  _DARK_DMC,
                                  _LIGHT_DMC,
-                                 _LIGHT_GEN,
-                                 _DARK_GEN,
                                  _B_AND_W])
     parser.add_argument('--kv', metavar='N', type=str, nargs='+')
     parser.add_argument('--command', type=str)
@@ -148,9 +143,7 @@ def main():
             print('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
     formatting = fmt.CrossStitchFormatter(style=use_style)
-    is_dmc = args.theme.endswith(_DMC)
-    formatting.colorize = args.theme.endswith(_GEN) or is_dmc
-    formatting.as_dmc = is_dmc
+    formatting.colorize = args.theme.endswith(_DMC)
     formatting.dark = args.theme.startswith(_DARK)
     formatting.file_name = args.output
     formatting.is_multipage = args.multipage
