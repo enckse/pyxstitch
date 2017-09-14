@@ -67,7 +67,7 @@ raw:
 	cd $(EXAMPLES) && ./replay.sh
 
 bash:
-	$(call run-bash,"","")
+	$(call run-bash,,)
 
 mapping:
 	$(call run-bash,--map 6c6c6c=ffffff --map 59c7b4=,".map")
