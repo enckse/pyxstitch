@@ -56,10 +56,11 @@ class Floss(object):
         """Map one floss rgb to another."""
         if (to_color in self._colors or to_color is None) \
                 and from_color in self._colors:
-            if to_color is None:
-                self._colors.pop(from_color, None)
-            else:
+            pop_color = from_color
+            if to_color is not None:
                 self._colors[from_color] = self._colors[to_color]
+                pop_color = to_color
+            self._colors.pop(pop_color, None)
             self._cache = {}
             return True
         raise FlossException("Unknown color(s): {} -> {}".format(from_color,

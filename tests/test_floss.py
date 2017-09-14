@@ -22,9 +22,11 @@ class TestFloss(unittest.TestCase):
         mapped = fl.map("000000", "ffffff")
         self.assertTrue(mapped)
         self.assertEqual("Black Brown", fl.lookup((000, 000, 000)).name)
-        # remapped black -> white, now drop white
-        mapped = fl.map("ffffff", None)
         self.assertEqual("Snow White", fl.lookup((255, 255, 255)).name)
+        self.assertTrue(mapped)
+        self.assertEqual("Pewter Gray", fl.lookup((108, 108, 108)).name)
+        mapped = fl.map("6c6c6c", None)
+        self.assertEqual("Fern Green Dark", fl.lookup((108, 108, 108)).name)
         with self.assertRaises(floss.FlossException) as cm:
             mapped = fl.map("000000", "abcdef")
         self.assertEqual("Unknown color(s): 000000 -> abcdef",
