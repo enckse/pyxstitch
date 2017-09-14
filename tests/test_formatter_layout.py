@@ -10,7 +10,9 @@ class Mock(object):
     symbol = "1"
     floss_number = "1234"
     dmc = None
+
     def _init(self):
+        """Init mock dmc object."""
         self.dmc = Mock()
 
 
