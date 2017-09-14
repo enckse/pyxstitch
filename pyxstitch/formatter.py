@@ -38,15 +38,16 @@ class Legend(object):
         self._stitches = {}
         self._entries = []
 
-    def add_raw_stitch(self, raw_color):
+    def add_raw_stitch(self, dmc):
         """Add raw stitch edge."""
+        raw_color = dmc.name
         if raw_color not in self._stitches:
             self._stitches[raw_color] = 0
         self._stitches[raw_color] += 1
 
-    def add(self, style, coloring):
+    def add(self, style):
         """New legend entry."""
-        self._entries.append((style.dmc, style.symbol, coloring))
+        self._entries.append((style.dmc, style.symbol))
 
     def build(self):
         """Build output legend."""
@@ -60,10 +61,9 @@ class Legend(object):
         output = []
         for item in self._entries:
             dmc = item[0]
-            coloring = item[2]
             output.append(("{} ({})".format(dmc.name, dmc.rgb),
                            item[1],
-                           self._stitches[coloring],
+                           self._stitches[dmc.name],
                            dmc.floss_number))
         return ["{:>40} {:>7} {:>6} {:>6}".format(x[0],
                                                   x[1],
@@ -223,11 +223,10 @@ class CrossStitchFormatter(Formatter):
                 has = False
                 for cur, style, ch in entry:
                     dmc = style.dmc
-                    coloring = dmc.name
                     color = self._symbols
                     self._writer.meta(cur.metadata(), style.save(), ch)
                     if self.colorize:
-                        color = coloring
+                        color = dmc.name
                     for cell in cur.cells(height):
                         x += 1
                         x_start = left_pad + offset + 0 + x * offset
@@ -237,10 +236,10 @@ class CrossStitchFormatter(Formatter):
                         self._writer.rect([(x_start, y_start), (x_end, y_end)],
                                           outline=self._lines)
                         for stitch in cell:
-                            lgd.add_raw_stitch(coloring)
+                            lgd.add_raw_stitch(dmc)
                             if self.colorize:
                                 color = '#' + dmc.rgb
-                            lgd.add(style, coloring)
+                            lgd.add(style)
                             if isinstance(stitch, ft.BackStitch):
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
                                               ft.BackStitch.TopLeft,
@@ -328,7 +327,7 @@ class CrossStitchFormatter(Formatter):
                                     stitch_color = color
                                     if self.font_factory.is_backstitched:
                                         stitch_color = self._light_symbol
-                                    lgd.add_raw_stitch(coloring)
+                                    lgd.add_raw_stitch(dmc)
                                     x_pos = left_pad + offset + 2 + x * offset
                                     self._writer.text((x_pos, y_start),
                                                       style.symbol,
