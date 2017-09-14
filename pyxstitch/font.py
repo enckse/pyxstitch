@@ -160,10 +160,10 @@ class Font(object):
 
     def __init__(self):
         """Init the font creation object."""
-        from pyxstitch.font_five_by_nine import FiveByNine
-        from pyxstitch.font_three_by_five import ThreeByFive
-        from pyxstitch.font_three_by_seven import ThreeBySeven
-        from pyxstitch.font_two_by_five import TwoByFive
+        from pyxstitch.fonts.five_by_nine import FiveByNine
+        from pyxstitch.fonts.three_by_five import ThreeByFive
+        from pyxstitch.fonts.three_by_seven import ThreeBySeven
+        from pyxstitch.fonts.two_by_five import TwoByFive
         self._supported_types = [FiveByNine,
                                  ThreeBySeven,
                                  TwoByFive,

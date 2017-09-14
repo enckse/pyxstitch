@@ -1,4 +1,4 @@
 #!/bin/bash
-export PYTHONPATH="../:$PYTHONPATH"
+export PYTHONPATH="../:../fonts/:$PYTHONPATH"
 python -m unittest discover -p "*.py"
 exit $?

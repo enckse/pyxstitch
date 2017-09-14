@@ -3,8 +3,8 @@
 import unittest
 import pyxstitch.font as ft
 import string
-import pyxstitch.font_five_by_nine as fbn
-import pyxstitch.font_three_by_seven as tbs
+import pyxstitch.fonts.five_by_nine as fbn
+import pyxstitch.fonts.three_by_seven as tbs
 
 
 class TestDefaultFont(unittest.TestCase):

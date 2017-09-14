@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """An ASCII 3x5 (monospace) pattern."""
 from pyxstitch.font import BaseFontFactory
-from pyxstitch.font_three_by_seven import ThreeBySeven
+from pyxstitch.fonts.three_by_seven import ThreeBySeven
 
 
 class ThreeByFive(BaseFontFactory):
