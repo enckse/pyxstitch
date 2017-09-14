@@ -90,7 +90,7 @@ colors can be remapped or disabled, e.g. to disable a color, set it to map to em
 pyxstitch --file test.c --map 000000=
 ```
 
-or have it replace another color
+or to map one color to another
 ```
 pyxstitch --file test.c --map 000000=ffffff
 ```

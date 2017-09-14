@@ -30,16 +30,24 @@ class Floss(object):
         self._colors = {}
         self._cache = {}
         self._load()
+        self._map = {}
 
     def _key_rgb(self, red, green, blue):
         """Create a cache key."""
         return "{}.{}.{}".format(red, green, blue)
 
+    def _create_floss(self, dmc):
+        """Create floss, handle any mappings."""
+        floss_type = FlossType(dmc)
+        if floss_type.rgb in self._map:
+            floss_type = FlossType(self._map[floss_type.rgb])
+        return floss_type
+
     def lookup(self, rgb):
         """Lookup a code."""
         rgb_str = self._key_rgb(rgb[0], rgb[1], rgb[2])
         if rgb_str in self._cache:
-            return FlossType(self._cache[rgb_str])
+            return self._create_floss(self._cache[rgb_str])
         # try harder...
         close = None
         closest = -1
@@ -50,17 +58,15 @@ class Floss(object):
                 closest = check
                 close = self._colors[tries]
         self._cache[rgb_str] = close
-        return FlossType(close)
+        return self._create_floss(close)
 
     def map(self, from_color, to_color):
         """Map one floss rgb to another."""
-        if (to_color in self._colors or to_color is None) \
-                and from_color in self._colors:
-            pop_color = from_color
-            if to_color is not None:
-                self._colors[from_color] = self._colors[to_color]
-                pop_color = to_color
-            self._colors.pop(pop_color, None)
+        if to_color in self._colors or to_color is None:
+            if to_color is None:
+                self._colors.pop(from_color, None)
+            else:
+                self._map[from_color] = self._colors[to_color]
             self._cache = {}
             return True
         raise FlossException("Unknown color(s): {} -> {}".format(from_color,
