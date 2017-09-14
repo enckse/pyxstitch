@@ -25,14 +25,14 @@ class CrossStitchFormatter(Formatter):
         """Initialize the instance."""
         Formatter.__init__(self, **options)
         self._colors = {}
-        self._default_color = "ffffff"
+        self._default_color = hu.HEX_WHITE
         self.symbol_generator = sym.DefaultSymbolGenerator()
         self.font_factory = ft.Font().new_font_object()
         self.colorize = False
         self.dark = False
-        self._lines = 'lightgrey'
-        self._symbols = 'black'
-        self._light_symbol = 'lightgrey'
+        self._lines = hu.LIGHT_GREY
+        self._symbols = hu.BLACK
+        self._light_symbol = hu.LIGHT_GREY
         self.file_name = None
         self.is_raw = False
         self._writer = None
@@ -73,7 +73,7 @@ class CrossStitchFormatter(Formatter):
         """We need to get the color for a token."""
         use_color = self._default_color
         if self.is_bw:
-            use_color = "000000"
+            use_color = hu.HEX_BLACK
         if token in self._colors:
             use_color = self._colors[token]
         use_hex = hu.to_hex(use_color)
@@ -98,9 +98,9 @@ class CrossStitchFormatter(Formatter):
     def format(self, tokensource, outfile):
         """Override to format."""
         if self.dark:
-            self._symbols = 'white'
-            self._default_color = '000000'
-            self._light_symbol = 'darkgrey'
+            self._symbols = hu.WHITE
+            self._default_color = hu.HEX_BLACK
+            self._light_symbol = hu.DARK_GREY
         if self.is_raw:
             self._writer = TextFormat()
         else:

@@ -5,6 +5,13 @@ import math
 _HEX = '0123456789abcdefABCDEF'
 _HEX_LOOKUP = {x: int(x, 16) for x in (y + z for y in _HEX for z in _HEX)}
 
+HEX_WHITE = "ffffff"
+HEX_BLACK = "000000"
+LIGHT_GREY = "lightgrey"
+BLACK = "black"
+DARK_GREY = "darkgrey"
+WHITE = "WHITE"
+
 
 def to_hex(rgb):
     """Convert a hex string 001122 -> tuple (0, 1, 2)."""
