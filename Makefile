@@ -26,6 +26,10 @@ run-example = pyxstitch --file $(EXAMPLES)/$(HW)$1 --multipage off --format $(FO
 
 gen-font = pyxstitch --file $(EXAMPLES)/$(HW)"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font monospace-ascii-$1;
 
+run-bash = pyxstitch --file $(EXAMPLES)/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT) $1;  \
+			  $(call handle-version,$(BIN)/fb.bash.$(FORMAT)); \
+			  diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLE_OUT)fb.bash.$(FORMAT)$2;
+
 check: install test example analyze
 
 install:
@@ -63,14 +67,10 @@ raw:
 	cd $(EXAMPLES) && ./replay.sh
 
 bash:
-	pyxstitch --file $(EXAMPLES)/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)
-	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
-	diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLE_OUT)fb.bash.$(FORMAT)
+	$(call run-bash,"","")
 
 mapping:
-	pyxstitch --file $(EXAMPLES)/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT)  --map 6c6c6c=ffffff --map 59c7b4=
-	$(call handle-version,$(BIN)/fb.bash.$(FORMAT))
-	diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLE_OUT)fb.bash.$(FORMAT).map
+	$(call run-bash,--map 6c6c6c=ffffff --map 59c7b4=,".map")
 
 text:
 	cat $(EXAMPLES)/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
