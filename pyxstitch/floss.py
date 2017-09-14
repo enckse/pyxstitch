@@ -24,13 +24,14 @@ class Floss(object):
     def __init__(self):
         """Init the instance."""
         self._colors = {}
+        self._cache = {}
         self._load()
 
-    def lookup(self, code, rgb):
+    def lookup(self, rgb):
         """Lookup a code."""
-        lowered = code.lower()
-        if lowered in self._colors:
-            return FlossType(self._colors[lowered])
+        rgb_str = "{}.{}.{}".format(rgb[0], rgb[1], rgb[2])
+        if rgb_str in self._cache:
+            return FlossType(self._cache[rgb_str])
         # try harder...
         close = None
         closest = -1
@@ -40,7 +41,7 @@ class Floss(object):
             if closest == -1 or check < closest:
                 closest = check
                 close = self._colors[tries]
-        self._colors[lowered] = close
+        self._cache[rgb_str] = close
         return FlossType(close)
 
     def _close(self, r1, g1, b1, r2, g2, b2):

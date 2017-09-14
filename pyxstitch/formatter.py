@@ -6,7 +6,6 @@ Takes a text stream and converts to a cross stitch output (HTML).
 """
 
 from pygments.formatter import Formatter
-import webcolors as wc
 import pyxstitch.font as ft
 import pyxstitch.symbols as sym
 import pyxstitch.version as vers
@@ -101,6 +100,7 @@ class CrossStitchFormatter(Formatter):
         self.is_multipage = None
         self.config = None
         self.is_bw = False
+        self.floss = Floss()
         for token, style in self.style:
             if style['color']:
                 self._colors[token] = style['color']
@@ -108,28 +108,6 @@ class CrossStitchFormatter(Formatter):
     def preprocess(self, text):
         """Process text before lexer."""
         return self.font_factory.process(text)
-
-    def _closest(self, rgb):
-        """We need to find a color approximation."""
-        min_col = {}
-        for key, name in wc.css3_hex_to_names.items():
-            r, g, b = wc.hex_to_rgb(key)
-            r_conv = (r - rgb[0]) ** 2
-            g_conv = (g - rgb[1]) ** 2
-            b_conv = (b - rgb[2]) ** 2
-            min_col[(r_conv + g_conv + b_conv)] = name
-        return min_col[min(min_col.keys())]
-
-    def _get_color(self, rgb):
-        """Get the color name from rgb or the closest name...please."""
-        actua = None
-        try:
-            actual = wc.rgb_to_name(rgb)
-        except ValueError:
-            actual = None
-        if actual is None:
-            return self._closest(rgb)
-        return actual
 
     def _to_hex(self, rgb):
         """Convert a hex string 001122 -> tuple (0, 1, 2)."""
@@ -143,7 +121,7 @@ class CrossStitchFormatter(Formatter):
         if token in self._colors:
             use_color = self._colors[token]
         use_hex = self._to_hex(use_color)
-        return Style(self._get_color(use_hex),
+        return Style(self.floss.lookup(use_hex).name,
                      self.symbol_generator.next(use_color),
                      use_color,
                      use_hex)
@@ -241,7 +219,6 @@ class CrossStitchFormatter(Formatter):
         y = -1
         lines = []
         lgd = Legend()
-        floss = Floss()
         for entry in entries:
             for height in self.font_factory.height():
                 y += 1
@@ -264,7 +241,7 @@ class CrossStitchFormatter(Formatter):
                                           outline=self._lines)
                         for stitch in cell:
                             lgd.add_raw_stitch(coloring)
-                            dmc = floss.lookup(style.color, style.hex)
+                            dmc = self.floss.lookup(style.hex)
                             if self.colorize:
                                 color = '#' + dmc.rgb
                             lgd.add(dmc, coloring, style)
