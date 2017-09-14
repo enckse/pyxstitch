@@ -117,8 +117,9 @@ class CrossStitchFormatter(Formatter):
         if token in self._colors:
             use_color = self._colors[token]
         use_hex = self._to_hex(use_color)
-        return Style(self.floss.lookup(use_hex),
-                     self.symbol_generator.next(use_color),
+        dmc = self.floss.lookup(use_hex)
+        return Style(dmc,
+                     self.symbol_generator.next(dmc.name),
                      use_color)
 
     def _new_entry(self, ch, style):
