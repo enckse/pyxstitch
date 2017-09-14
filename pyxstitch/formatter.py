@@ -105,6 +105,34 @@ class CrossStitchFormatter(Formatter):
         """Process text before lexer."""
         return self.font_factory.process(text)
 
+    def map_color(self, input_color_map):
+        """Map colors."""
+        parts = input_color_map.lower().split("=")
+        if len(parts) == 2:
+            mapping = []
+            for p in parts:
+                conv = [x for x in p if x in ['a',
+                                              'b',
+                                              'c',
+                                              'd',
+                                              'e',
+                                              'f',
+                                              '0',
+                                              '1',
+                                              '2',
+                                              '3',
+                                              '4',
+                                              '5',
+                                              '6',
+                                              '7',
+                                              '8',
+                                              '9']]
+                if len(conv) != 6:
+                    return False
+                mapping.append(p)
+            return self.floss.map(mapping[0], mapping[1])
+        return False
+
     def _to_hex(self, rgb):
         """Convert a hex string 001122 -> tuple (0, 1, 2)."""
         return (self._hex[rgb[0:2]], self._hex[rgb[2:4]], self._hex[rgb[4:6]])

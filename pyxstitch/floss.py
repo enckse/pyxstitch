@@ -27,9 +27,13 @@ class Floss(object):
         self._cache = {}
         self._load()
 
+    def _key_rgb(self, red, green, blue):
+        """Create a cache key."""
+        return "{}.{}.{}".format(red, green, blue)
+
     def lookup(self, rgb):
         """Lookup a code."""
-        rgb_str = "{}.{}.{}".format(rgb[0], rgb[1], rgb[2])
+        rgb_str = self._key_rgb(rgb[0], rgb[1], rgb[2])
         if rgb_str in self._cache:
             return FlossType(self._cache[rgb_str])
         # try harder...
@@ -43,6 +47,14 @@ class Floss(object):
                 close = self._colors[tries]
         self._cache[rgb_str] = close
         return FlossType(close)
+
+    def map(self, from_color, to_color):
+        """Map one floss rgb to another."""
+        key = self._key_rgb(from_color[0], from_color[1], from_color[2])
+        if to_color in self._colors:
+            self._cache[key] = self._colors[to_color]
+            return True
+        return False
 
     def _close(self, r1, g1, b1, r2, g2, b2):
         """Closest rgb check."""
@@ -678,7 +690,7 @@ class Floss(object):
                   136,
                   62,
                   67,
-                  '8.83E+45',
+                  '883E43',
                   'row 04-07')
 
         self._add('778',
@@ -1822,7 +1834,7 @@ class Floss(object):
                   24,
                   126,
                   86,
-                  '1.87E+58',
+                  '187E58',
                   'row 10-06')
 
         self._add('909',
@@ -2022,7 +2034,7 @@ class Floss(object):
                   5,
                   101,
                   23,
-                  '56517',
+                  '056517',
                   'row 11-06')
 
         self._add('907',
@@ -2486,7 +2498,7 @@ class Floss(object):
                   131,
                   94,
                   57,
-                  '8.35E+41',
+                  '835E41',
                   'row 13-14')
 
         self._add('728',
@@ -3278,7 +3290,7 @@ class Floss(object):
                   152,
                   94,
                   51,
-                  '9.85E+35',
+                  '985E35',
                   'row 17-13')
 
         self._add('433',
@@ -3686,5 +3698,5 @@ class Floss(object):
                   0,
                   0,
                   0,
-                  '0',
+                  '000000',
                   'row 19-16')

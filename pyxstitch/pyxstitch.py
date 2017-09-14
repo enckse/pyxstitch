@@ -64,6 +64,7 @@ def main():
                                  _LIGHT_DMC,
                                  _B_AND_W])
     parser.add_argument('--kv', metavar='N', type=str, nargs='+')
+    parser.add_argument('--map', metavar='N', type=str, nargs='+')
     parser.add_argument('--command', type=str)
     parser.add_argument('--shell', action="store_true")
     parser.add_argument('--multipage', type=str,
@@ -149,6 +150,11 @@ def main():
     formatting.is_multipage = args.multipage
     formatting.is_raw = args.format == _RAW
     formatting.is_bw = is_bw
+    if args.map is not None and len(args.map) > 0:
+        for mapped in args.map:
+            if not formatting.map_color(mapped):
+                print("color mapping must be: rgb=rbg (e.g. 000000=ffffff")
+                exit(1)
     if args.kv is not None and len(args.kv) > 0:
         formatting.config = args.kv
     preproc = formatting.preprocess(content)
