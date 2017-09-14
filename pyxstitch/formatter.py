@@ -19,12 +19,11 @@ from enum import Enum
 class Style(object):
     """Output/legend formatting."""
 
-    def __init__(self, dmc, symbol, color, hex_vals):
+    def __init__(self, dmc, symbol, color):
         """Init the instance."""
         self.dmc = dmc
         self.symbol = symbol
         self.color = color
-        self.hex = hex_vals
 
     def save(self):
         """Save to metadata format."""
@@ -121,8 +120,7 @@ class CrossStitchFormatter(Formatter):
         use_hex = self._to_hex(use_color)
         return Style(self.floss.lookup(use_hex),
                      self.symbol_generator.next(use_color),
-                     use_color,
-                     use_hex)
+                     use_color)
 
     def _new_entry(self, ch, style):
         """new entry to process."""
