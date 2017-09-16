@@ -8,6 +8,7 @@ class TestFormatter(unittest.TestCase):
     """Test formatter."""
 
     def test_create(self):
+        """Basic creation."""
         f = fmt.new_formatter("monokai", "test", "off")
         self.assertEqual("test", f.file_name)
         self.assertEqual("off", f.is_multipage)
@@ -18,12 +19,12 @@ class TestFormatter(unittest.TestCase):
         self.assertEqual(None, f.config)
         self.assertEqual("FiveByNine", type(f.font_factory).__name__)
         f = fmt.new_formatter("monokai",
-                               "test",
-                               "off",
-                               dark=True,
-                               colorize=True,
-                               is_raw=True,
-                               is_bw=True)
+                              "test",
+                              "off",
+                              dark=True,
+                              colorize=True,
+                              is_raw=True,
+                              is_bw=True)
         self.assertEqual("test", f.file_name)
         self.assertEqual("off", f.is_multipage)
         self.assertTrue(f.dark)
@@ -34,10 +35,26 @@ class TestFormatter(unittest.TestCase):
         self.assertEqual("FiveByNine", type(f.font_factory).__name__)
 
     def test_map(self):
-        pass
+        """Floss mapping."""
+        with self.assertRaises(fmt.FormatterException) as cm:
+            f = fmt.new_formatter("monokai",
+                                  "test",
+                                  "off",
+                                  map_colors=["abc=xyz"])
+        self.assertEqual("unable to map: abc=xyz", str(cm.exception))
 
     def test_config(self):
-        pass
+        """Config settings."""
+        f = fmt.new_formatter("monokai",
+                              "test",
+                              "off",
+                              config=["page_legend=1"])
+        self.assertFalse(f.config is None)
 
     def test_font(self):
-        pass
+        """Font selection."""
+        f = fmt.new_formatter("monokai",
+                              "test",
+                              "off",
+                              font_name="monospace-ascii-2x5")
+        self.assertEqual("TwoByFive", type(f.font_factory).__name__)

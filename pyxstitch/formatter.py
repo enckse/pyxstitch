@@ -18,6 +18,10 @@ from math import floor
 from enum import Enum
 
 
+class FormatterException(Exception):
+    """Formatter exceptions."""
+
+
 class CrossStitchFormatter(Formatter):
     """Formats output as a cross stitch pattern."""
 
