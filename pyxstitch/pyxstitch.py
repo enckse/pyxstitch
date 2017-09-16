@@ -151,6 +151,10 @@ def main():
         if args.output.endswith(_RAW) and not is_raw:
             print('specify output as {}?'.format(_RAW))
             exit(1)
+    preproc = fnt.preprocess(content)
+    text = preproc[0]
+    rows = preproc[1]
+    cols = preproc[2]
     formatting = fmt.new_formatter(use_style,
                                    output_name,
                                    args.multipage,
@@ -158,15 +162,10 @@ def main():
                                    dark=args.theme.startswith(_DARK),
                                    is_raw=is_raw,
                                    is_bw=is_bw,
-                                   map_colors=args.map)
-    preproc = fnt.preprocess(content)
-    text = preproc[0]
-    rows = preproc[1]
-    cols = preproc[2]
-    if args.font is not None:
-        formatting.font_factory = fnt.Font().new_font_by_name(args.font,
-                                                              rows=rows,
-                                                              columns=cols)
+                                   map_colors=args.map,
+                                   font_name=args.font,
+                                   rows=rows,
+                                   columns=cols)
     if args.command:
         if can_command:
             try:

@@ -20,7 +20,8 @@ class FontFactory(object):
 
 
 def preprocess(content,
-              replace={'\t': '    ', '\r': '\n', '\f': '\n', '\v': '\n'}):
+               replace={'\t': '    ', '\r': '\n', '\f': '\n', '\v': '\n'}):
+    """Preprocess text/content before lexing."""
     val = content
     if replace is not None:
         for replacing in replace:
@@ -28,7 +29,6 @@ def preprocess(content,
     parts = val.split("\n")
     cols = max([len(x) for x in parts])
     return (val, len(parts), cols)
-
 
 
 class BaseFontFactory(FontFactory):

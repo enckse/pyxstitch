@@ -338,7 +338,10 @@ def new_formatter(style,
                   is_bw=False,
                   map_colors=None,
                   config=None,
-                  font=None):
+                  font=None,
+                  font_name=None,
+                  rows=None,
+                  columns=None):
     """Create a new formatter."""
     formatting = CrossStitchFormatter(style=style)
     formatting.colorize = colorize
@@ -353,4 +356,8 @@ def new_formatter(style,
                 raise FormatterException("unable to map: {}".format(mapped))
     if config is not None and len(config) > 0:
         formatting.config = config
+    if font_name is not None:
+        formatting.font_factory = ft.Font().new_font_by_name(font_name,
+                                                             rows=rows,
+                                                             columns=columns)
     return formatting
