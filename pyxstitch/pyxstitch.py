@@ -143,32 +143,26 @@ def main():
         except:
             print('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
-    formatting = fmt.CrossStitchFormatter(style=use_style)
-    formatting.colorize = args.theme.endswith(_DMC)
-    formatting.dark = args.theme.startswith(_DARK)
-    formatting.file_name = args.output
-    formatting.is_multipage = args.multipage
-    formatting.is_raw = args.format == _RAW
-    formatting.is_bw = is_bw
-    if args.map is not None and len(args.map) > 0:
-        for mapped in args.map:
-            if not formatting.map_color(mapped):
-                print("color mapping must be: rgb=rbg")
-                print("e.g. to remap directly -> 000000=ffffff")
-                print("e.g. to disable a color -> 000000=")
-                exit(1)
-    if args.kv is not None and len(args.kv) > 0:
-        formatting.config = args.kv
+    output_name = args.output
+    is_raw = args.format == _RAW
+    if output_name is None:
+        output_name = _create_file_name(file_name, args)
+    else:
+        if args.output.endswith(_RAW) and not is_raw:
+            print('specify output as {}?'.format(_RAW))
+            exit(1)
+    formatting = fmt.new_formatter(use_style,
+                                   output_name,
+                                   args.multipage,
+                                   colorize=args.theme.endswith(_DMC),
+                                   dark=args.theme.startswith(_DARK),
+                                   is_raw=is_raw,
+                                   is_bw=is_bw,
+                                   map_colors=args.map)
     preproc = formatting.preprocess(content)
     text = preproc[0]
     rows = preproc[1]
     cols = preproc[2]
-    if args.output is None:
-        formatting.file_name = _create_file_name(file_name, args)
-    else:
-        if args.output.endswith(_RAW) and not formatting.is_raw:
-            print('specify output as {}?'.format(_RAW))
-            exit(1)
     if args.font is not None:
         formatting.font_factory = fnt.Font().new_font_by_name(args.font,
                                                               rows=rows,

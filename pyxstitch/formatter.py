@@ -331,3 +331,30 @@ class CrossStitchFormatter(Formatter):
                                 self._symbols)
             chunk_idx += 1
         self._writer.save(self.file_name)
+
+
+def new_formatter(style,
+                  file_name,
+                  multipage,
+                  colorize=False,
+                  dark=False,
+                  is_raw=False,
+                  is_bw=False,
+                  map_colors=None,
+                  config=None,
+                  font=None):
+    """Create a new formatter."""
+    formatting = CrossStitchFormatter(style=style)
+    formatting.colorize = colorize
+    formatting.dark = dark
+    formatting.file_name = file_name
+    formatting.is_multipage = multipage
+    formatting.is_raw = is_raw
+    formatting.is_bw = is_bw
+    if map_colors is not None and len(map_colors) > 0:
+        for mapped in map_colors:
+            if not formatting.map_color(mapped):
+                raise FormatterException("unable to map: {}".format(mapped))
+    if config is not None and len(config) > 0:
+        formatting.config = config
+    return formatting
