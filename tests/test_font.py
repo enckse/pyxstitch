@@ -65,12 +65,11 @@ class TestDefaultFont(unittest.TestCase):
 
     def test_preprocess(self):
         """Test preprocess."""
-        factory = ft.Font().new_font_object()
-        self.assertEqual("    ", factory.process('\t')[0])
-        self.assertEqual("\n", factory.process('\r')[0])
-        self.assertEqual("\n", factory.process('\v')[0])
-        self.assertEqual("\n", factory.process('\f')[0])
-        preproc = factory.process("""test
+        self.assertEqual("    ", ft.preprocess('\t')[0])
+        self.assertEqual("\n", ft.preprocess('\r')[0])
+        self.assertEqual("\n", ft.preprocess('\v')[0])
+        self.assertEqual("\n", ft.preprocess('\f')[0])
+        preproc = ft.preprocess("""test
         kdlaj; oieja ofij;ajfoiajoij109j
 lkjealk; jaaaa
 kd""")

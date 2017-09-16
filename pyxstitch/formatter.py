@@ -44,10 +44,6 @@ class CrossStitchFormatter(Formatter):
             if style['color']:
                 self._colors[token] = style['color']
 
-    def preprocess(self, text):
-        """Process text before lexer."""
-        return self.font_factory.process(text)
-
     def map_color(self, input_color_map):
         """Map colors."""
         parts = input_color_map.lower().split("=")

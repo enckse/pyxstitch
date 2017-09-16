@@ -18,9 +18,17 @@ class FontFactory(object):
         """Get a character definition."""
         raise FontException("not implemented.")
 
-    def process(self, string_value):
-        """Process a string before lexing."""
-        raise FontException("not implemented.")
+
+def preprocess(content,
+              replace={'\t': '    ', '\r': '\n', '\f': '\n', '\v': '\n'}):
+    val = content
+    if replace is not None:
+        for replacing in replace:
+            val = val.replace(replacing, replace[replacing])
+    parts = val.split("\n")
+    cols = max([len(x) for x in parts])
+    return (val, len(parts), cols)
+
 
 
 class BaseFontFactory(FontFactory):
@@ -34,7 +42,6 @@ class BaseFontFactory(FontFactory):
         self._top_off = 1
         self._bot_off = 1
         self.is_backstitched = False
-        self._replace = {'\t': '    ', '\r': '\n', '\f': '\n', '\v': '\n'}
         self._characters = self._initialize_characters()
 
     def _height_width(self):
@@ -52,8 +59,6 @@ class BaseFontFactory(FontFactory):
         """Lookup a character in the font."""
         if ch in self._characters:
             return self._characters[ch]
-        if ch in self._replace:
-            raise FontException("Text was not preprocessed")
         raise FontException("No font entry for character {}".format(ch))
 
     def _set_flags(self, val_str, enums, add_to):
@@ -63,15 +68,6 @@ class BaseFontFactory(FontFactory):
             if e & val:
                 for item in self._translate(e):
                     add_to.append(item)
-
-    def process(self, value):
-        """Process before lexer."""
-        val = value
-        for replacing in self._replace:
-            val = val.replace(replacing, self._replace[replacing])
-        parts = val.split("\n")
-        cols = max([len(x) for x in parts])
-        return (val, len(parts), cols)
 
     def _translate(self, enum_item):
         """Translate stitching types."""

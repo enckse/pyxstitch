@@ -159,7 +159,7 @@ def main():
                                    is_raw=is_raw,
                                    is_bw=is_bw,
                                    map_colors=args.map)
-    preproc = formatting.preprocess(content)
+    preproc = fnt.preprocess(content)
     text = preproc[0]
     rows = preproc[1]
     cols = preproc[2]
