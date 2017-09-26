@@ -35,7 +35,7 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: install clean go c py ascii raw bash fonts  mapping
+example: install clean go c py ascii raw bash fonts mapping symbols
 
 ascii:
 	$(call run-example,"ascii.txt")
@@ -71,6 +71,9 @@ bash:
 
 mapping:
 	$(call run-bash,--map 6c6c6c=ffffff --map 59c7b4=,".map")
+
+symbols:
+	$(call run-bash,--symbols "abcdef",".symbol")
 
 text:
 	cat $(EXAMPLES)/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
