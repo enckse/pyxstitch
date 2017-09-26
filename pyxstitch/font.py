@@ -176,17 +176,15 @@ class Font(object):
         self._names = {}
         self._instance_cache = []
         # tuple is (index, column threshold, row threshold)
-        inst = FiveByNine()
-        self._names[inst.display_name] = (0, 31, 21)
-        self._instance_cache.append(inst)
-        inst = ThreeBySeven()
-        self._names[inst.display_name] = (1, 46, 26)
-        self._instance_cache.append(inst)
-        inst = TwoByFive()
-        self._names[inst.display_name] = (2, None, None)
-        self._instance_cache.append(inst)
-        inst = ThreeByFive()
-        self._names[inst.display_name] = (3, 46, 31)
+        self._add_instance(FiveByNine, (0, 31, 21))
+        self._add_instance(ThreeBySeven, (1, 46, 26))
+        self._add_instance(TwoByFive, (2, None, None))
+        self._add_instance(ThreeByFive, (3, 46, 31))
+
+    def _add_instance(self, use_type, auto_settings):
+        """Add a cached instance."""
+        inst = use_type()
+        self._names[inst.display_name] = auto_settings
         self._instance_cache.append(inst)
 
     def get_names(self):
