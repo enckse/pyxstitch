@@ -41,3 +41,22 @@ class DefaultSymbolGenerator(SymbolGenerator):
         self._idx += 1
         self._tracked[color] = c
         return c
+
+
+class InputStringGenerator(DefaultSymbolGenerator):
+    """Input string set of symbols."""
+
+    def __init__(self, char_str):
+        """Create a new instance."""
+        if len(char_str) == 0:
+            raise SymbolError("empty symbol input")
+        if len(char_str) != len(set(char_str)):
+            raise SymbolError("duplicate symbols detected")
+        if len([x for x in char_str if not x.isalnum()]) > 0:
+            raise SymbolError("non-alphanumeric not supported")
+        self._characters = char_str
+        super(InputStringGenerator, self).__init__()
+
+    def _generate(self):
+        """Generate symbols."""
+        return self._characters
