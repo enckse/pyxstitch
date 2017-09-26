@@ -175,9 +175,9 @@ class Font(object):
         self._names = {}
         # tuple is (index, column threshold, row threshold)
         self._names[FiveByNine().display()] = (0, 31, 21)
-        self._names["monospace-ascii-3x7"] = (1, 46, 26)
-        self._names["monospace-ascii-2x5"] = (2, None, None)
-        self._names["monospace-ascii-3x5"] = (3, 46, 31)
+        self._names[ThreeBySeven().display()] = (1, 46, 26)
+        self._names[TwoByFive().display()] = (2, None, None)
+        self._names[ThreeByFive().display()] = (3, 46, 31)
 
     def get_names(self):
         """Get font names."""
