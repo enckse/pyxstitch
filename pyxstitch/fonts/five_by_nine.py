@@ -6,6 +6,10 @@ from pyxstitch.font import BaseFontFactory
 class FiveByNine(BaseFontFactory):
     """Font factory definition."""
 
+    def display(self):
+        """Display name."""
+        return self._monospace_ascii()
+
     def _height_width(self):
         """Font height and width."""
         return (9, 5)

@@ -11,6 +11,10 @@ class TwoByFive(BaseFontFactory):
         super(TwoByFive, self).__init__()
         self.is_backstitched = True
 
+    def display(self):
+        """Display name."""
+        return self._monospace_ascii()
+
     def _height_width(self):
         """Height and width of font."""
         return (5, 2)

@@ -43,7 +43,14 @@ class BaseFontFactory(FontFactory):
         self._bot_off = 1
         self.is_backstitched = False
         self._characters = self._initialize_characters()
-        self.display_name = None
+
+    def display(self):
+        """Get the display name."""
+        raise FontException("font does not declare a display name")
+
+    def _monospace_ascii(self):
+        hw = self._height_width()
+        return "monospace-ascii-{}x{}".format(hw[1], hw[0])
 
     def _height_width(self):
         raise FontException("does not declare font height/width")
