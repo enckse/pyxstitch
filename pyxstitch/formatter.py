@@ -345,7 +345,8 @@ def new_formatter(style,
                   font=None,
                   font_name=None,
                   rows=None,
-                  columns=None):
+                  columns=None,
+                  symbols=None):
     """Create a new formatter."""
     formatting = CrossStitchFormatter(style=style)
     formatting.colorize = colorize
@@ -364,4 +365,6 @@ def new_formatter(style,
         formatting.font_factory = ft.Font().new_font_by_name(font_name,
                                                              rows=rows,
                                                              columns=columns)
+    if symbols is not None:
+        formatting.symbol_generator = sym.InputStringGenerator(symbols)
     return formatting

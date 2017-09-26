@@ -33,6 +33,8 @@ class TestFormatter(unittest.TestCase):
         self.assertTrue(f.is_bw)
         self.assertEqual(None, f.config)
         self.assertEqual("FiveByNine", type(f.font_factory).__name__)
+        self.assertEqual("DefaultSymbolGenerator",
+                         f.symbol_generator.__class__.__name__)
 
     def test_map(self):
         """Floss mapping."""
@@ -42,6 +44,12 @@ class TestFormatter(unittest.TestCase):
                                   "off",
                                   map_colors=["abc=xyz"])
         self.assertEqual("unable to map: abc=xyz", str(cm.exception))
+
+    def test_symbols(self):
+        """Test symbol setting."""
+        f = fmt.new_formatter("monokai", "test", "off", symbols="abc")
+        self.assertEqual("InputStringGenerator",
+                         f.symbol_generator.__class__.__name__)
 
     def test_config(self):
         """Config settings."""

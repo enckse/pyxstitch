@@ -81,6 +81,7 @@ def main():
                         default=default_font,
                         choices=list(fnt.get_all_fonts()) + [default_font])
     parser.add_argument('--version', action="store_true")
+    parser.add_argument('--symbols', type=str)
     args = parser.parse_args()
     if args.version:
         print(vers.__version__)
@@ -165,7 +166,8 @@ def main():
                                    map_colors=args.map,
                                    font_name=args.font,
                                    rows=rows,
-                                   columns=cols)
+                                   columns=cols,
+                                   symbols=args.symbols)
     if args.font == default_font:
         print("font selected: {}".format(formatting.font_factory.display_name))
     if args.command:
