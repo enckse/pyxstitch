@@ -174,11 +174,20 @@ class Font(object):
                                  TwoByFive,
                                  ThreeByFive]
         self._names = {}
+        self._instance_cache = []
         # tuple is (index, column threshold, row threshold)
-        self._names[FiveByNine().display_name] = (0, 31, 21)
-        self._names[ThreeBySeven().display_name] = (1, 46, 26)
-        self._names[TwoByFive().display_name] = (2, None, None)
-        self._names[ThreeByFive().display_name] = (3, 46, 31)
+        inst = FiveByNine()
+        self._names[inst.display_name] = (0, 31, 21)
+        self._instance_cache.append(inst)
+        inst = ThreeBySeven()
+        self._names[inst.display_name] = (1, 46, 26)
+        self._instance_cache.append(inst)
+        inst = TwoByFive()
+        self._names[inst.display_name] = (2, None, None)
+        self._instance_cache.append(inst)
+        inst = ThreeByFive()
+        self._names[inst.display_name] = (3, 46, 31)
+        self._instance_cache.append(inst)
 
     def get_names(self):
         """Get font names."""
@@ -218,6 +227,12 @@ class Font(object):
             use_type = self._supported_types[0]
         if font_type in self._supported_types:
             use_type = font_type
-        if use_type is None:
+        in_error = use_type is None
+        if not in_error:
+            obj = [x for x in self._instance_cache if use_type == x.__class__]
+            if len(obj) == 1:
+                return obj[0]
+            else:
+                in_error = True
+        if in_error:
             raise FontException("unknown font type: {}".format(font_type))
-        return use_type()
