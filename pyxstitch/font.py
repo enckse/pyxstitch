@@ -50,8 +50,13 @@ class BaseFontFactory(FontFactory):
         raise FontException("font does not declare a display name")
 
     def _monospace_ascii(self):
+        """Generate a monospace-ascii name."""
+        return self._create_name("monospace", "ascii")
+
+    def _create_name(self, spacing, charset):
+        """Create a font name."""
         hw = self._height_width()
-        return "monospace-ascii-{}x{}".format(hw[1], hw[0])
+        return "{}-{}-{}x{}".format(spacing, charset, hw[1], hw[0])
 
     def _height_width(self):
         raise FontException("does not declare font height/width")
