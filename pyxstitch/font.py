@@ -174,7 +174,7 @@ class Font(object):
                                  ThreeByFive]
         self._names = {}
         # tuple is (index, column threshold, row threshold)
-        self._names["monospace-ascii-5x9"] = (0, 31, 21)
+        self._names[FiveByNine().display()] = (0, 31, 21)
         self._names["monospace-ascii-3x7"] = (1, 46, 26)
         self._names["monospace-ascii-2x5"] = (2, None, None)
         self._names["monospace-ascii-3x5"] = (3, 46, 31)
