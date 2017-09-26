@@ -43,6 +43,7 @@ class BaseFontFactory(FontFactory):
         self._bot_off = 1
         self.is_backstitched = False
         self._characters = self._initialize_characters()
+        self.display_name = None
 
     def _height_width(self):
         raise FontException("does not declare font height/width")
@@ -196,7 +197,9 @@ class Font(object):
                 raise FontException("requires dimensions (rows, cols)")
         if use_name in self._names:
             typed = self._supported_types[self._names[use_name][0]]
-            return self.new_font_object(typed)
+            inst = self.new_font_object(typed)
+            inst.auto_name = use_name
+            return inst
         else:
             raise FontException("unknown font name: {}".format(font_name))
 
