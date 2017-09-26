@@ -213,7 +213,6 @@ class Font(object):
         if use_name in self._names:
             typed = self._supported_types[self._names[use_name][0]]
             inst = self.new_font_object(typed)
-            inst.auto_name = use_name
             return inst
         else:
             raise FontException("unknown font name: {}".format(font_name))
