@@ -167,7 +167,7 @@ def main():
                                    rows=rows,
                                    columns=cols)
     if args.font == default_font:
-        print("font selected: {}".format(formatting.font_factory.display()))
+        print("font selected: {}".format(formatting.font_factory.display_name))
     if args.command:
         if can_command:
             try:

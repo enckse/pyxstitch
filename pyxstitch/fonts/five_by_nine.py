@@ -6,7 +6,7 @@ from pyxstitch.font import BaseFontFactory
 class FiveByNine(BaseFontFactory):
     """Font factory definition."""
 
-    def display(self):
+    def _display(self):
         """Display name."""
         return self._monospace_ascii()
 

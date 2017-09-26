@@ -11,7 +11,7 @@ class ThreeByFive(BaseFontFactory):
         for c in chars:
             write_to[c] = [size, secondary]
 
-    def display(self):
+    def _display(self):
         """Display name."""
         return self._monospace_ascii()
 
