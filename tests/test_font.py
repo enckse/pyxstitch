@@ -26,6 +26,7 @@ class TestDefaultFont(unittest.TestCase):
             factory.get(ch)
 
     def test_display(self):
+        """Test display names."""
         f = ft.Font()
         factory = f.new_font_object()
         self._check_font(factory)
@@ -34,7 +35,6 @@ class TestDefaultFont(unittest.TestCase):
             hw = fnt._height_width()
             disp_name = "monospace-ascii-{}x{}".format(hw[1], hw[0])
             self.assertEqual(disp_name, fnt.display())
-
 
     def test_detect(self):
         """Detection on dimensions."""
