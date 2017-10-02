@@ -77,6 +77,7 @@ symbols:
 
 kvs:
 	$(call run-bash,--kv page_height=700 page_width=900 page_pad=80 page_no_index=3 page_legend=2 page_font_size=10,".cfg")
+	$(call run-bash,--config tests/test.cfg,".cfg")
 
 text:
 	cat $(EXAMPLES)/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off

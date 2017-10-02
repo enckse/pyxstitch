@@ -11,7 +11,7 @@ class TestTextFormat(unittest.TestCase):
     def test_init(self):
         """Test dump of init object."""
         txt = out.TextFormat(dump=True)
-        txt.init("a", (1,), "b", False, cfg.Config(None))
+        txt.init("a", (1,), "b", False, cfg.Config(None, None))
         vals = txt.save("blah")
         parts = vals.split("\n")
         self.assertEqual(3, len(parts))
@@ -26,7 +26,7 @@ class TestTextFormat(unittest.TestCase):
     def test_extra(self):
         """Test dump of extra config items."""
         txt = out.TextFormat(dump=True)
-        txt.extras(cfg.Config(None).dump())
+        txt.extras(cfg.Config(None, None).dump())
         vals = txt.save("blah")
         parts = vals.split("\n")
         self.assertEqual(3, len(parts))

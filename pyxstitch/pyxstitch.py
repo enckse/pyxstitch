@@ -12,6 +12,7 @@ import argparse
 import os
 import sys
 import subprocess
+from pathlib import Path
 
 _PNG = "png"
 _RAW = out_fmt.RAW_FORMAT
@@ -65,6 +66,7 @@ def main():
                                  _B_AND_W])
     parser.add_argument('--kv', metavar='N', type=str, nargs='+')
     parser.add_argument('--map', metavar='N', type=str, nargs='+')
+    parser.add_argument('--config', type=str)
     parser.add_argument('--command', type=str)
     parser.add_argument('--shell', action="store_true")
     parser.add_argument('--multipage', type=str,
@@ -156,6 +158,14 @@ def main():
     text = preproc[0]
     rows = preproc[1]
     cols = preproc[2]
+    config_file = args.config
+    if config_file is None:
+        home = str(Path.home())
+        conf = os.path.join(home, ".pyxstitch.config")
+        if os.path.exists(conf):
+            config_file = conf
+    if config_file is not None and not os.path.exists(config_file):
+        print("unable to find config file: {}".format(config_file))
     formatting = fmt.new_formatter(use_style,
                                    output_name,
                                    args.multipage,
@@ -168,7 +178,8 @@ def main():
                                    rows=rows,
                                    columns=cols,
                                    symbols=args.symbols,
-                                   config=args.kv)
+                                   config=args.kv,
+                                   config_file=config_file)
     if args.font == default_font:
         print("font selected: {}".format(formatting.font_factory.display_name))
     if args.command:

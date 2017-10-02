@@ -42,6 +42,7 @@ class CrossStitchFormatter(Formatter):
         self._writer = None
         self.is_multipage = None
         self.config = None
+        self.config_file = None
         self.is_bw = False
         self.floss = Floss()
         for token, style in self.style:
@@ -155,7 +156,7 @@ class CrossStitchFormatter(Formatter):
                        (calc_height * max(self.font_factory.height())))
         mid_height = int(floor(calc_height / 2))
         offset = 10
-        cfg = Config(self.config)
+        cfg = Config(self.config, self.config_file)
         legend = 100
         legend_min = 500
         top_pad = 50
@@ -346,7 +347,8 @@ def new_formatter(style,
                   font_name=None,
                   rows=None,
                   columns=None,
-                  symbols=None):
+                  symbols=None,
+                  config_file=None):
     """Create a new formatter."""
     formatting = CrossStitchFormatter(style=style)
     formatting.colorize = colorize
@@ -361,6 +363,7 @@ def new_formatter(style,
                 raise FormatterException("unable to map: {}".format(mapped))
     if config is not None and len(config) > 0:
         formatting.config = config
+    formatting.config_file = config_file
     if font_name is not None:
         formatting.font_factory = ft.Font().new_font_by_name(font_name,
                                                              rows=rows,

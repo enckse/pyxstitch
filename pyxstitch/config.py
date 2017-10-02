@@ -1,7 +1,6 @@
 #!/usr/env/python
 """pyxstitch operating configuration settings."""
 import os
-from pathlib import Path
 
 _PAGE = "page_"
 _NO_IDX = "no_index"
@@ -16,7 +15,7 @@ _DELIMIT = "="
 class Config(object):
     """Configuration definition."""
 
-    def __init__(self, inputs):
+    def __init__(self, inputs, config_file):
         """Init the instance."""
         self.page_height = 600
         self.page_width = 1000
@@ -26,9 +25,13 @@ class Config(object):
         self.legend_hoff = 0
         self.legend_woff = 0
         self.page_font_size = 0
-        if inputs is None or len(inputs) == 0:
-            self._parse_config()
+        no_inputs = inputs is None or len(inputs) == 0
+        if no_inputs:
+            if config_file:
+                self._parse_config(config_file)
         else:
+            if config_file is not None:
+                print("config file ignored when given inputs")
             self._parse(inputs)
 
     def save(self):
@@ -60,12 +63,10 @@ class Config(object):
             inputs.append(Config._create_page_input(_NO_IDX, values[3]))
             inputs.append(Config._create_page_input("legend", values[4]))
             inputs.append(Config._create_page_input("font_size", values[5]))
-        return Config(inputs)
+        return Config(inputs, None)
 
-    def _parse_config(self):
+    def _parse_config(self, conf):
         """Parse and load the config file."""
-        home = str(Path.home())
-        conf = os.path.join(home, ".pyxstitch.config")
         if os.path.exists(conf):
             config_input = []
             with open(conf, 'r') as f:
