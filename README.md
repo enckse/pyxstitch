@@ -97,7 +97,7 @@ pyxstitch --file test.c --map 000000=ffffff
 
 ## advanced
 
-some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed)
+some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed) or pass a `--config` and specify a certain file
 
 ```
 vim $HOME/.pyxstitch.config
