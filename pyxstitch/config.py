@@ -25,6 +25,7 @@ class Config(object):
         self.page_legend = 0
         self.legend_hoff = 0
         self.legend_woff = 0
+        self.page_font_size = 0
         if inputs is None or len(inputs) == 0:
             self._parse_config(inputs)
         else:
@@ -36,7 +37,8 @@ class Config(object):
                 self.page_width,
                 self.page_pad,
                 self.page_no_index,
-                self.page_legend]
+                self.page_legend,
+                self.page_font_size]
 
     def dump(self):
         """dump extraneous settings passed in."""
@@ -51,12 +53,13 @@ class Config(object):
     def load(values):
         """load config from saved type."""
         inputs = []
-        if len(values) == 5:
+        if len(values) == 6:
             inputs.append(Config._create_page_input("height", values[0]))
             inputs.append(Config._create_page_input("width", values[1]))
             inputs.append(Config._create_page_input("pad", values[2]))
             inputs.append(Config._create_page_input(_NO_IDX, values[3]))
             inputs.append(Config._create_page_input("legend", values[4]))
+            inputs.append(Config._create_page_input("font_size", values[5]))
         return Config(inputs)
 
     def _parse_config(self, inputs):

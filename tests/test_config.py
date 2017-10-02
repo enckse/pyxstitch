@@ -26,6 +26,7 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(50, conf.page_pad)
         self.assertEqual(0, conf.page_no_index)
         self.assertEqual(0, conf.page_legend)
+        self.assertEqual(0, conf.page_font_size)
         conf = cfg.Config(["input=0", "page_input=1"])
         self.assertEqual(600, conf.page_height)
         self.assertEqual(1000, conf.page_width)
@@ -40,7 +41,8 @@ class TestConfig(unittest.TestCase):
                            "page_no_index=1",
                            "page_legend=1",
                            "legend_hoff=1000",
-                           "legend_woff=10"])
+                           "legend_woff=10",
+                           "page_font_size=50"])
         self.assertEqual(600, conf.page_height)
         self.assertEqual(2, conf.page_width)
         self.assertEqual(1, conf.page_pad)
@@ -48,6 +50,7 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(1, conf.page_legend)
         self.assertEqual(1000, conf.legend_hoff)
         self.assertEqual(10, conf.legend_woff)
+        self.assertEqual(50, conf.page_font_size)
         conf = cfg.Config(["page_no_index=0"])
         self.assertEqual(0, conf.page_no_index)
         conf = cfg.Config(["page_no_index=-1"])
@@ -58,6 +61,8 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(-100, conf.legend_hoff)
         conf = cfg.Config(["legend_woff=-20"])
         self.assertEqual(-20, conf.legend_woff)
+        conf = cfg.Config(["page_font_size=40"])
+        self.assertEqual(40, conf.page_font_size)
 
     def test_save_load(self):
         """Save and load config."""

@@ -1,6 +1,6 @@
 #!/usr/env/python
 """Output formats."""
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from io import StringIO
 import pyxstitch.config as cfg
 import pyxstitch.version as vers
@@ -104,10 +104,14 @@ class PILFormat(Format):
         """Ignore extras on PIL."""
         pass
 
+    def _calculate_width(self, offset):
+        """Width calculation."""
+        return self._cfg.page_width + offset * 2
+
     def _new_image(self, use_offset):
         """New output image."""
         return Image.new('RGB',
-                         (self._cfg.page_width + use_offset * 2,
+                         (self._calculate_width(use_offset),
                           self._cfg.page_height + use_offset * 2),
                          self._img_color)
 
@@ -154,7 +158,7 @@ class PILFormat(Format):
             lgd_im = self._new_image(use_offset)
             lgd_dr = ImageDraw.Draw(lgd_im)
             use_lgd_pos = (use_offset, use_offset)
-            self._legendize(lgd_dr, position=use_lgd_pos)
+            self._legendize(lgd_im, lgd_dr, position=use_lgd_pos)
             self._save(lgd_im, self._new_page(file_parts,
                                               page,
                                               file_name_outputs))
@@ -166,17 +170,24 @@ class PILFormat(Format):
                                          for x in file_name_outputs])
                     f.write(self._HTML.format(output_img))
         else:
-            self._legendize(self._dr)
+            self._legendize(self._im, self._dr)
             self._save(self._im, file_name)
 
-    def _legendize(self, draw, position=None):
+    def _legendize(self, image, draw, position=None):
         """Create a legend on a drawing."""
         for l in self._legends:
             if self._cfg.page_legend == 0:
+                lgd = self._new_image(0)
+                lgd_dr = ImageDraw.Draw(lgd)
                 use_pos = position
                 if use_pos is None:
                     use_pos = l[0]
-                draw.text(use_pos, l[1], l[2])
+                lgd_dr.text((0, 0), l[1], l[2])
+                basewidth = self._calculate_width(0) + self._cfg.page_font_size
+                wpercent = (basewidth / float(lgd.size[0]))
+                hsize = int((float(lgd.size[1]) * float(wpercent)))
+                lgd = lgd.resize((basewidth,hsize), Image.ANTIALIAS)
+                image.paste(lgd, use_pos)
             else:
                 print()
                 print("legend")
@@ -207,7 +218,7 @@ class TextFormat(Format):
         """Init the instance."""
         self._io = StringIO()
         self._dump = dump
-        self._version = "0.4"
+        self._version = "0.5"
 
     def _unpack(self, args):
         """Unpack lists back to tuples (due to json)."""
