@@ -1,4 +1,4 @@
-{"type": "init", "data": ["0.4", "RGB", [550, 1140], [255, 255, 255], "off", [600, 1000, 50, 0, 0]]}
+{"type": "init", "data": ["0.5", "RGB", [550, 1140], [255, 255, 255], "off", [600, 1000, 50, 0, 0, 0]]}
 {"type": "extras", "data": [["__VERSION__", [0, 0]]]}
 {"type": "text", "data": [[10, 10], "__VERSION__", "black"]}
 {"type": "meta", "data": [[9, 3], ["Lavender Dark", "0", "ae81ff"], "0"]}
