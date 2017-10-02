@@ -27,7 +27,7 @@ class Config(object):
         self.legend_woff = 0
         self.page_font_size = 0
         if inputs is None or len(inputs) == 0:
-            self._parse_config(inputs)
+            self._parse_config()
         else:
             self._parse(inputs)
 
@@ -62,7 +62,7 @@ class Config(object):
             inputs.append(Config._create_page_input("font_size", values[5]))
         return Config(inputs)
 
-    def _parse_config(self, inputs):
+    def _parse_config(self):
         """Parse and load the config file."""
         home = str(Path.home())
         conf = os.path.join(home, ".pyxstitch.config")
