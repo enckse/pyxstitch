@@ -181,12 +181,13 @@ class PILFormat(Format):
                 lgd_dr = ImageDraw.Draw(lgd)
                 use_pos = position
                 if use_pos is None:
-                    use_pos = l[0]
+                    pos = l[0]
+                    use_pos = (int(pos[0]), int(pos[1]))
                 lgd_dr.text((0, 0), l[1], l[2])
-                basewidth = self._calculate_width(0) + self._cfg.page_font_size
-                wpercent = (basewidth / float(lgd.size[0]))
-                hsize = int((float(lgd.size[1]) * float(wpercent)))
-                lgd = lgd.resize((basewidth,hsize), Image.ANTIALIAS)
+                width = self._calculate_width(0) + self._cfg.page_font_size
+                percent = (width / float(lgd.size[0]))
+                height = int((float(lgd.size[1]) * float(percent)))
+                lgd = lgd.resize((width, height), Image.ANTIALIAS)
                 image.paste(lgd, use_pos)
             else:
                 print()
