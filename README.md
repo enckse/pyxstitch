@@ -156,6 +156,13 @@ default is 0, will change legend width placement on an image
 --kv legend_woff=-5
 ```
 
+#### font size
+
+to adjust the font scaling for the legend when in the output
+```
+--kv page_font_size=100
+```
+
 # examples
 
 there are example source code and corresponding output pngs in the `examples` folder
