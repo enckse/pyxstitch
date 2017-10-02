@@ -1,6 +1,6 @@
 #!/usr/env/python
 """Output formats."""
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 from io import StringIO
 import pyxstitch.config as cfg
 import pyxstitch.version as vers
