@@ -119,7 +119,11 @@ def main():
             else:
                 lexer = default_lexer
         else:
-            lexer = get_lexer_for_filename(args.file)
+            try:
+                lexer = get_lexer_for_filename(args.file)
+            except:
+                print(e)
+                exit(1)
     can_command = False
     if os.path.exists(args.file):
         can_command = True
