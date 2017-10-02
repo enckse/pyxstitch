@@ -167,7 +167,8 @@ def main():
                                    font_name=args.font,
                                    rows=rows,
                                    columns=cols,
-                                   symbols=args.symbols)
+                                   symbols=args.symbols,
+                                   config=args.kv)
     if args.font == default_font:
         print("font selected: {}".format(formatting.font_factory.display_name))
     if args.command:
