@@ -52,13 +52,13 @@ fonts: clean
 	$(call gen-font,"3x5")
 
 go:
-	$(call run-example,"go",,,--command,"go build -o $(BIN)/go_hw $(EXAMPLES)/hello_world.go",--shell)
+	$(call run-example,"go",,)
 
 c:
-	$(call run-example,"c",,,--command,"gcc $(EXAMPLES)/hello_world.c -o $(BIN)/c_hw",--shell)
+	$(call run-example,"c",,)
 
 py:
-	$(call run-example,"py",,,--command,"python $(EXAMPLES)/hello_world.py",--shell)
+	$(call run-example,"py",,)
 
 logo: install
 	pyxstitch --file $(EXAMPLES)/logo.txt --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output images/logo.png
