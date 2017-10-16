@@ -66,7 +66,6 @@ def main():
     parser.add_argument('--kv', metavar='N', type=str, nargs='+')
     parser.add_argument('--map', metavar='N', type=str, nargs='+')
     parser.add_argument('--config', type=str)
-    parser.add_argument('--shell', action="store_true")
     parser.add_argument('--multipage', type=str,
                         default=out_fmt.MULTI_PAGE_AUTO,
                         choices=[out_fmt.MULTI_PAGE_AUTO,
@@ -132,8 +131,6 @@ def main():
             exit(1)
         file_name = "output"
         content = "".join(sys.stdin.readlines())
-    if not args.command and args.shell:
-        print("shell setting ignored without command settings")
     if is_raw:
         if args.command:
             print("command settings invalid for raw/replay mode")
