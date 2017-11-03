@@ -134,7 +134,7 @@ page padding (margins) which defaults to 50
 
 #### index
 
-on multipage will produce an html file (by default of 0) to group images into a patter
+on multipage will produce an html file (by default of 0) to group images into a pattern
 ```
 --kv page_no_index=1
 ```
