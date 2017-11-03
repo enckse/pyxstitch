@@ -51,7 +51,7 @@ pyxstitch --file program.py --style monokai
 
 ### output
 
-by default a a png file is created matching the source code file name (e.g. `hello.py` -> `hello.png`), to change this
+by default a png file is created matching the source code file name (e.g. `hello.py` -> `hello.png`), to change this
 ```
 pyxstitch --file program.py --output image.png
 ```
