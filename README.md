@@ -44,14 +44,14 @@ pyxstitch --file program.py
 
 to see actual highlight colors on the pattern use `--theme light-dmc` and if using a high-contrast style you may want to toggle `--theme dark` (or `--theme dark-dmc` for colors on dark backgrounds).
 
-the coloring styles are available as part of the pygments project but can be passed like
+the coloring styles are available as part of the pygments project but can be passed like so
 ```
 pyxstitch --file program.py --style monokai
 ```
 
 ### output
 
-by default a a png file is created matching the source code file name (e.g. `hello.py` -> 'hello.png'), to change this
+by default a a png file is created matching the source code file name (e.g. `hello.py` -> `hello.png`), to change this
 ```
 pyxstitch --file program.py --output image.png
 ```
@@ -65,7 +65,7 @@ by default, pyxstitch will attempt to create multiple pages for easier reading o
 
 ### syntax/lexer
 
-by default it will use just a text (no syntax) if piped/stdin is used, that can be changed, so
+by default pyxstitch will use just a text lexer (no syntax) if piped/stdin is used, that can be changed, so
 ```
 cat test.py | pyxstich
 ```
@@ -78,8 +78,6 @@ cat test.py | pyxstitch --lexer autodetect
 # or tell it which pygments lexer to use
 cat test.py | pyxstitch --lexer python
 ```
-
-will chcek the syntax of the file (or attempt to)
 
 ### fonts
 
@@ -103,7 +101,7 @@ pyxstitch --file test.c --map 000000=ffffff
 
 ### advanced
 
-some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed) or pass a `--config` and specify a certain file
+some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed) or pass a `--config` and specify a different file than the one in $HOME
 
 ```
 vim $HOME/.pyxstitch.config
