@@ -5,7 +5,7 @@ pyxstitch
 
 pyxstitch is an application (and associated library/compenents) that takes source code files and produces syntax-highlighted patterns for cross stitching.
 
-See an example and completed cross stitch pattern [here!](https://enckse.github.io/pyxstitch/)
+See a examples and completed cross stitch patterns [here!](https://enckse.github.io/pyxstitch/)
 
 [![Build Status](https://travis-ci.org/enckse/pyxstitch.svg?branch=master)](https://travis-ci.org/enckse/pyxstitch)
 
@@ -13,7 +13,7 @@ See an example and completed cross stitch pattern [here!](https://enckse.github.
 
 ## source
 
-* Clone this repository and run something to one of the following depending on system configuration:
+* Clone this repo and...
 
 ```
 python setup.py install
@@ -27,7 +27,7 @@ or
 pip install -e .
 ```
 
-## os
+## os packaging
 
 | os | link |
 | -- | ---- |
@@ -40,6 +40,8 @@ to run
 pyxstitch --file program.py
 ```
 
+### styling
+
 to see actual highlight colors on the pattern use `--theme light-dmc` and if using a high-contrast style you may want to toggle `--theme dark` (or `--theme dark-dmc` for colors on dark backgrounds).
 
 the coloring styles are available as part of the pygments project but can be passed like
@@ -47,7 +49,9 @@ the coloring styles are available as part of the pygments project but can be pas
 pyxstitch --file program.py --style monokai
 ```
 
-by default a a png file is created matching the source code name (e.g. `hello.py` -> 'hello.png'), to change this
+### output
+
+by default a a png file is created matching the source code file name (e.g. `hello.py` -> 'hello.png'), to change this
 ```
 pyxstitch --file program.py --output image.png
 ```
@@ -56,6 +60,10 @@ or just pass a file type and type/cat into pyxstitch
 ```
 cat test.py | pyxstitch --file .py --output myimage.png
 ```
+
+by default, pyxstitch will attempt to create multiple pages for easier reading of large patterns, this can be modified via `--multipage`.
+
+### syntax/lexer
 
 by default it will use just a text (no syntax) if piped/stdin is used, that can be changed, so
 ```
@@ -73,17 +81,15 @@ cat test.py | pyxstitch --lexer python
 
 will chcek the syntax of the file (or attempt to)
 
-by default, pyxstitch will attempt to create multiple pages for easier reading of large patterns, this can be modified via `--multipage`.
+### fonts
+
 
 to select a different font (from available)
 ```
 pyxstitch --font <type-charset-size>
 ```
 
-pyxstitch is **NOT** a build tool but you can run a subprocess command to make pyxstitch validate input (e.g. call gcc) before executing
-```
-pyxstitch --file test.c --command "gcc test.c" --shell
-```
+### floss colors
 
 colors can be remapped or disabled, e.g. to disable a color, set it to map to empty
 ```
@@ -95,7 +101,7 @@ or to map one color to another
 pyxstitch --file test.c --map 000000=ffffff
 ```
 
-## advanced
+### advanced
 
 some configuration options are available via the `--kv` input settings. Alternatively set these in a $HOME/.pyxstitch.config file to use different defaults always (unless a `--kv` is passed) or pass a `--config` and specify a certain file
 
