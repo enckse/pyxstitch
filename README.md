@@ -111,35 +111,35 @@ page_height=400
 page_width=300
 ```
 
-### height
+#### height
 
 sets the default page height (600 default)
 ```
 --kv page_height=500
 ```
 
-### width
+#### width
 
 sets the default page width (1000 default)
 ```
 --kv page_width=900
 ```
 
-### padding
+#### padding
 
 page padding (margins) which defaults to 50
 ```
 --kv page_pad=100
 ```
 
-### index
+#### index
 
 on multipage will produce an html file (by default of 0) to group images into a patter
 ```
 --kv page_no_index=1
 ```
 
-### legend
+#### legend
 
 default is 0, will print the legend to console (instead of to output image) when set to 1
 ```
@@ -169,10 +169,10 @@ to adjust the font scaling for the legend when in the output
 
 # examples
 
-there are example source code and corresponding output pngs in the `examples` folder
+there are example source code files and corresponding output pngs in the `examples` folder
 
 # customizing
 
-the library components of the CrossStitchFormatter can be changed to:
+the library components of the CrossStitchFormatter can be changed such that you can:
 * Adjust how symbols for various colors are chosen (replace `DefaultSymbolGenerator` on the formatter)
 * Define a new font for Font creation method by adjusting `Font`
