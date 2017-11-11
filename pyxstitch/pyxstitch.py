@@ -118,7 +118,7 @@ def main():
         else:
             try:
                 lexer = get_lexer_for_filename(args.file)
-            except:
+            except Exception as e:
                 print(e)
                 exit(1)
     if os.path.exists(args.file):
@@ -138,7 +138,7 @@ def main():
         try:
             lexer = guess_lexer(content)
             print('using {} lexer'.format(lexer.name))
-        except:
+        except Exception as e:
             print('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
     output_name = args.output
@@ -179,6 +179,7 @@ def main():
         print("font selected: {}".format(formatting.font_factory.display_name))
     print("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
+
 
 if __name__ == '__main__':
     main()

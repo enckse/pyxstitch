@@ -95,6 +95,6 @@ class Config(object):
                            (int_val <= 0 and key in _OFFSET):
                             setattr(self, key, int_val)
                             continue
-                    except:
+                    except Exception as e:
                         pass
             print("invalid attribute {}".format(item))
