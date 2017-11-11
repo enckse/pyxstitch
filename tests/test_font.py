@@ -7,6 +7,39 @@ import pyxstitch.fonts.five_by_nine as fbn
 import pyxstitch.fonts.three_by_seven as tbs
 
 
+class MockStrip(ft.BaseFontFactory):
+    """Mock stripping font."""
+
+    def _height_width(self):
+        """Override height/width."""
+        return (3, 4)
+
+    def _display(self):
+        """Mock display."""
+        return "mock_strip"
+
+    def _initialize_characters(self):
+        """Char set."""
+        self._can_strip = True
+        objs = {}
+        objs['A'] = self._build_character("""
+|1.00|1.00|    |    |
+|1.00|1.00|    |    |
+|1.00|1.00|    |    |
+""")
+        objs['B'] = self._build_character("""
+|1.00|    |1.00|    |
+|1.00|    |1.00|    |
+|1.00|    |1.00|    |
+""")
+        objs[' '] = self._build_character("""
+|    |    |    |    |
+|    |    |    |    |
+|    |    |    |    |
+""", char_strip=False)
+        return objs
+
+
 class TestDefaultFont(unittest.TestCase):
     """Test character object."""
 
@@ -98,3 +131,16 @@ kd""")
         with self.assertRaises(ft.FontException) as cm:
             f.new_font_by_name("test")
         self.assertEqual("unknown font name: test", str(cm.exception))
+
+    def test_strip(self):
+        """Test stripping blank spaces from fonts."""
+        f = MockStrip()
+        a = f.get('A')
+        self.assertEqual(2, a._width)
+        self.assertEqual(5, a._height)
+        a = f.get('B')
+        self.assertEqual(3, a._width)
+        self.assertEqual(5, a._height)
+        a = f.get(' ')
+        self.assertEqual(4, a._width)
+        self.assertEqual(5, a._height)

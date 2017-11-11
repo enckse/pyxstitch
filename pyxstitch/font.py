@@ -37,10 +37,12 @@ class BaseFontFactory(FontFactory):
     def __init__(self):
         """Initialize the factory."""
         hw = self._height_width()
-        self._height = hw[0] + 2
+        self._height_offset = 2
+        self._height = hw[0] + self._height_offset
         self._width = hw[1]
         self._top_off = 1
         self._bot_off = 1
+        self._can_strip = False
         self.is_backstitched = False
         self._characters = self._initialize_characters()
         self.display_name = self._display()
@@ -96,7 +98,7 @@ class BaseFontFactory(FontFactory):
                 return [BackStitch.TopRight, BackStitch.TopLeftBottomRight]
         return [enum_item]
 
-    def _parse(self, definition, ch):
+    def _parse(self, definition, ch, can_strip):
         """Parse a character definition."""
         if definition is None:
             raise BadCharException("Invalid character definition")
@@ -114,7 +116,10 @@ class BaseFontFactory(FontFactory):
             for x in range(self._bot_off):
                 parts.append(add_line)
         height = 0
+        if can_strip:
+            empty_tracker = {}
         for part in parts:
+            cur_height = height + self._height_offset
             defined = [x for x in part.split("|") if x != '']
             if len(defined) != self._width:
                 raise BadCharException("Definition has an improper width")
@@ -126,9 +131,25 @@ class BaseFontFactory(FontFactory):
                     self._set_flags(section[0], Stitch, adding)
                     self._set_flags(section[1], BackStitch, adding)
                     ch[height][width].stitches = adding
+                else:
+                    if can_strip and height > 0 and cur_height <= self._height:
+                        if width not in empty_tracker:
+                            empty_tracker[width] = []
+                        empty_tracker[width].append(width)
                 width += 1
             height += 1
-        return ch
+        new_width = self._width
+        if can_strip:
+            for w in reversed(range(0, self._width)):
+                if w in empty_tracker:
+                    heights = len(empty_tracker[w])
+                    if heights == self._height - self._height_offset:
+                        new_width -= 1
+                    else:
+                        break
+                else:
+                    break
+        return (ch, new_width)
 
     def _drop_lines(self, write_to, ch, chars, lines):
         """Drop lines from an existing character."""
@@ -143,11 +164,17 @@ class BaseFontFactory(FontFactory):
             conv.append(line)
         write_to[ch] = self._build_character("\n".join(conv))
 
-    def _build_character(self, stitching):
+    def _build_character(self, stitching, char_strip=True):
         """Build a character into an object definition."""
         ch = Character(self._height, self._width)
         try:
-            ch._pattern = self._parse(stitching, ch._pattern)
+            do_strip = self._can_strip and char_strip
+            pattern = self._parse(stitching,
+                                  ch._pattern,
+                                  do_strip)
+            if do_strip:
+                ch = Character(self._height, pattern[1])
+            ch._pattern = pattern[0]
             ch.raw = stitching
         except BadCharException as e:
             raise BadCharException("{} -> {}".format(str(e), stitching))

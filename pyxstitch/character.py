@@ -62,7 +62,7 @@ class Character(object):
 
     def cells(self, height):
         """Get stitches for  a specied character and returns them for it."""
-        if height > self._height:
+        if height > self._height or height < 0:
             return None
         wide = self._pattern[height]
         for width in range(len(wide)):

@@ -11,6 +11,7 @@ class TestCharacter(unittest.TestCase):
         """Cell data retrieval."""
         char = ch.Character(5, 3)
         self.assertEqual(4, len(list(char.cells(3))))
+        self.assertEqual([], list(char.cells(-1)))
         self.assertEqual([], list(char.cells(100)))
 
     def test_meta(self):
