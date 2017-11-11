@@ -85,8 +85,8 @@ text:
 	diff $(BIN)/text.test.$(FORMAT) $(EXAMPLE_OUT)text.test.$(FORMAT)
 
 analyze:
-	pip install pep8 pep257
-	pep8 $(SRC)
+	pip install pycodestyle pep257
+	pycodestyle $(SRC)
 	pep257 $(SRC)
 
 version:
