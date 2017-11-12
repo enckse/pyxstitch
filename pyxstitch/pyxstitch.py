@@ -27,6 +27,23 @@ _DARK_DMC = _DARK + _DMC
 _B_AND_W = "bw"
 
 
+class InputArgs(object):
+    """Input argumentss."""
+
+    def __init__(self, args):
+        """Init the input args."""
+        for attr in dir(args):
+            if attr.startswith("_"):
+                continue
+            setattr(self, attr, getattr(args, attr))
+        self.is_raw = args.format == _RAW
+        self.is_light = args.theme == _LIGHT
+        self.default_style = args.style == _DEF_STYLE
+        self.is_text = args.file == _TXT
+        self.is_dark = args.theme.startswith(_DARK)
+        self.is_dmc = args.theme.endswith(_DMC)
+
+
 def _create_file_name(file_name, args):
     """Create output file names."""
     return "{}.{}".format(file_name, args.format)
@@ -34,10 +51,10 @@ def _create_file_name(file_name, args):
 
 def _replay(args, file_name, content):
     """Do replay."""
-    if args.format == _RAW:
+    if args.is_raw:
         print("can not replay raw to raw")
         exit(1)
-    if args.theme != _LIGHT or args.style != _DEF_STYLE:
+    if not args.is_light or not args.default_style:
         print('style and theme ignored during replay')
     out = args.output
     if args.output is None:
@@ -82,6 +99,11 @@ def main():
     parser.add_argument('--version', action="store_true")
     parser.add_argument('--symbols', type=str)
     args = parser.parse_args()
+    _run(InputArgs(args), default_font)
+
+
+def _run(args, default_font):
+    """Run pyxstitch."""
     if args.version:
         print(vers.__version__)
         exit(0)
@@ -110,7 +132,7 @@ def main():
     if is_auto:
         use_lexer = None
     if not is_raw:
-        if use_lexer or args.file == _TXT:
+        if use_lexer or args.is_text:
             if use_lexer:
                 lexer = get_lexer_by_name(use_lexer)
             else:
@@ -142,7 +164,7 @@ def main():
             print('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
     output_name = args.output
-    is_raw = args.format == _RAW
+    is_raw = args.is_raw
     if output_name is None:
         output_name = _create_file_name(file_name, args)
     else:
@@ -164,8 +186,8 @@ def main():
     formatting = fmt.new_formatter(use_style,
                                    output_name,
                                    args.multipage,
-                                   colorize=args.theme.endswith(_DMC),
-                                   dark=args.theme.startswith(_DARK),
+                                   colorize=args.is_dmc,
+                                   dark=args.is_dark,
                                    is_raw=is_raw,
                                    is_bw=is_bw,
                                    map_colors=args.map,
