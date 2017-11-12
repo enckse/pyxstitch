@@ -65,7 +65,7 @@ class Character(object):
         if height > self._height or height < 0:
             return None
         wide = self._pattern[height]
-        for width in range(len(wide)):
+        for width in range(0, self._width):
             grid = wide[width]
             yield grid.stitches
         yield []
