@@ -3,8 +3,8 @@
 import unittest
 import pyxstitch.font as ft
 import string
-import pyxstitch.fonts.five_by_nine as fbn
-import pyxstitch.fonts.three_by_seven as tbs
+import pyxstitch.fonts.five_by_nine_mono as fbn
+import pyxstitch.fonts.three_by_seven_mono as tbs
 
 
 class MockStrip(ft.BaseFontFactory):
@@ -82,13 +82,13 @@ class TestDefaultFont(unittest.TestCase):
             f.new_font_by_name("detect", columns=100)
         self.assertEqual("requires dimensions (rows, cols)", str(cm.exception))
         dt = f.new_font_by_name("detect", rows=32, columns=30)
-        self.assertEqual("TwoByFive", str(type(dt).__name__))
+        self.assertEqual("TwoByFiveMono", str(type(dt).__name__))
         dt = f.new_font_by_name("detect", rows=25, columns=45)
-        self.assertEqual("ThreeBySeven", str(type(dt).__name__))
+        self.assertEqual("ThreeBySevenMono", str(type(dt).__name__))
         dt = f.new_font_by_name("detect", rows=30, columns=25)
-        self.assertEqual("ThreeByFive", str(type(dt).__name__))
+        self.assertEqual("ThreeByFiveMono", str(type(dt).__name__))
         dt = f.new_font_by_name("detect", rows=9, columns=24)
-        self.assertEqual("FiveByNine", str(type(dt).__name__))
+        self.assertEqual("FiveByNineMono", str(type(dt).__name__))
 
     def test_height(self):
         """Get height."""
@@ -124,7 +124,7 @@ kd""")
         """Passing a tyep into construction."""
         f = ft.Font()
         f.new_font_object()
-        f.new_font_object(fbn.FiveByNine)
+        f.new_font_object(fbn.FiveByNineMono)
         with self.assertRaises(ft.FontException) as cm:
             f.new_font_object(str)
         self.assertEqual("unknown font type: <class 'str'>", str(cm.exception))

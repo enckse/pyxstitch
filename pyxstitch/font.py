@@ -197,21 +197,21 @@ class Font(object):
 
     def __init__(self):
         """Init the font creation object."""
-        from pyxstitch.fonts.five_by_nine import FiveByNine
-        from pyxstitch.fonts.three_by_five import ThreeByFive
-        from pyxstitch.fonts.three_by_seven import ThreeBySeven
-        from pyxstitch.fonts.two_by_five import TwoByFive
-        self._supported_types = [FiveByNine,
-                                 ThreeBySeven,
-                                 TwoByFive,
-                                 ThreeByFive]
+        from pyxstitch.fonts.five_by_nine_mono import FiveByNineMono
+        from pyxstitch.fonts.three_by_five_mono import ThreeByFiveMono
+        from pyxstitch.fonts.three_by_seven_mono import ThreeBySevenMono
+        from pyxstitch.fonts.two_by_five_mono import TwoByFiveMono
+        self._supported_types = [FiveByNineMono,
+                                 ThreeBySevenMono,
+                                 TwoByFiveMono,
+                                 ThreeByFiveMono]
         self._names = {}
         self._instance_cache = []
         # tuple is (index, column threshold, row threshold)
-        self._add_instance(FiveByNine, (0, 31, 21))
-        self._add_instance(ThreeBySeven, (1, 46, 26))
-        self._add_instance(TwoByFive, (2, None, None))
-        self._add_instance(ThreeByFive, (3, 46, 31))
+        self._add_instance(FiveByNineMono, (0, 31, 21))
+        self._add_instance(ThreeBySevenMono, (1, 46, 26))
+        self._add_instance(TwoByFiveMono, (2, None, None))
+        self._add_instance(ThreeByFiveMono, (3, 46, 31))
 
     def _add_instance(self, use_type, auto_settings):
         """Add a cached instance."""

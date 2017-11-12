@@ -3,12 +3,12 @@
 from pyxstitch.font import BaseFontFactory
 
 
-class TwoByFive(BaseFontFactory):
+class TwoByFiveMono(BaseFontFactory):
     """Font factory definition."""
 
     def __init__(self):
         """Init the instance."""
-        super(TwoByFive, self).__init__()
+        super(TwoByFiveMono, self).__init__()
         self.is_backstitched = True
 
     def _display(self):

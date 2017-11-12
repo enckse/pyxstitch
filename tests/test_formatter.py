@@ -17,7 +17,7 @@ class TestFormatter(unittest.TestCase):
         self.assertFalse(f.is_raw)
         self.assertFalse(f.is_bw)
         self.assertEqual(None, f.config)
-        self.assertEqual("FiveByNine", type(f.font_factory).__name__)
+        self.assertEqual("FiveByNineMono", type(f.font_factory).__name__)
         f = fmt.new_formatter("monokai",
                               "test",
                               "off",
@@ -32,7 +32,7 @@ class TestFormatter(unittest.TestCase):
         self.assertTrue(f.is_raw)
         self.assertTrue(f.is_bw)
         self.assertEqual(None, f.config)
-        self.assertEqual("FiveByNine", type(f.font_factory).__name__)
+        self.assertEqual("FiveByNineMono", type(f.font_factory).__name__)
         self.assertEqual("DefaultSymbolGenerator",
                          f.symbol_generator.__class__.__name__)
 
@@ -65,4 +65,4 @@ class TestFormatter(unittest.TestCase):
                               "test",
                               "off",
                               font_name="monospace-ascii-2x5")
-        self.assertEqual("TwoByFive", type(f.font_factory).__name__)
+        self.assertEqual("TwoByFiveMono", type(f.font_factory).__name__)

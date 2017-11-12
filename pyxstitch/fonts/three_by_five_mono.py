@@ -1,10 +1,10 @@
 #!/usr/bin/python
 """An ASCII 3x5 (monospace) pattern."""
 from pyxstitch.font import BaseFontFactory
-from pyxstitch.fonts.three_by_seven import ThreeBySeven
+from pyxstitch.fonts.three_by_seven_mono import ThreeBySevenMono
 
 
-class ThreeByFive(BaseFontFactory):
+class ThreeByFiveMono(BaseFontFactory):
     """Font factory definition."""
 
     def _set_drops(self, chars, size, write_to, secondary=8):
@@ -25,7 +25,7 @@ class ThreeByFive(BaseFontFactory):
     def _initialize_characters(self):
         """Initialize default characters."""
         objs = {}
-        basis = ThreeBySeven()._initialize_characters()
+        basis = ThreeBySevenMono()._initialize_characters()
         # drop lines
         drops = {}
         self._set_drops(['A', 'P', 'R', ' ', '`', '^', '7'], 5, drops)

@@ -3,7 +3,7 @@
 from pyxstitch.font import BaseFontFactory
 
 
-class FiveByNine(BaseFontFactory):
+class FiveByNineMono(BaseFontFactory):
     """Font factory definition."""
 
     def _display(self):

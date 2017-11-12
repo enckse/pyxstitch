@@ -3,7 +3,7 @@
 from pyxstitch.font import BaseFontFactory
 
 
-class ThreeBySeven(BaseFontFactory):
+class ThreeBySevenMono(BaseFontFactory):
     """Font factory definition."""
 
     def _display(self):
