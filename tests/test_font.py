@@ -66,7 +66,11 @@ class TestDefaultFont(unittest.TestCase):
         for fonts in f.get_names():
             fnt = f.new_font_by_name(fonts)
             hw = fnt._height_width()
-            disp_name = "monospace-ascii-{}x{}".format(hw[1], hw[0])
+            if "monospace" in fnt.display_name:
+                typed = "monospace"
+            else:
+                typed = "proportional"
+            disp_name = "{}-ascii-{}x{}".format(typed, hw[1], hw[0])
             self.assertEqual(disp_name, fnt.display_name)
 
     def test_detect(self):

@@ -55,6 +55,10 @@ class BaseFontFactory(FontFactory):
         """Generate a monospace-ascii name."""
         return self._create_name("monospace", "ascii")
 
+    def _proportional_ascii(self):
+        """Generate a proportional-ascii name."""
+        return self._create_name("proportional", "ascii")
+
     def _create_name(self, spacing, charset):
         """Create a font name."""
         hw = self._height_width()
@@ -201,10 +205,12 @@ class Font(object):
         from pyxstitch.fonts.three_by_five_mono import ThreeByFiveMono
         from pyxstitch.fonts.three_by_seven_mono import ThreeBySevenMono
         from pyxstitch.fonts.two_by_five_mono import TwoByFiveMono
+        from pyxstitch.fonts.three_by_six_prop import ThreeBySixProp
         self._supported_types = [FiveByNineMono,
                                  ThreeBySevenMono,
                                  TwoByFiveMono,
-                                 ThreeByFiveMono]
+                                 ThreeByFiveMono,
+                                 ThreeBySixProp]
         self._names = {}
         self._instance_cache = []
         # tuple is (index, column threshold, row threshold)
@@ -212,6 +218,7 @@ class Font(object):
         self._add_instance(ThreeBySevenMono, (1, 46, 26))
         self._add_instance(TwoByFiveMono, (2, None, None))
         self._add_instance(ThreeByFiveMono, (3, 46, 31))
+        self._add_instance(ThreeBySixProp, (4, None))
 
     def _add_instance(self, use_type, auto_settings):
         """Add a cached instance."""
@@ -231,13 +238,14 @@ class Font(object):
             if rows is not None and columns is not None:
                 for detect in sorted(self._names.keys()):
                     vals = self._names[detect]
-                    c = vals[1]
-                    r = vals[2]
-                    if c is None and r is None:
-                        dflt = detect
-                        continue
-                    if rows < r and columns < c:
-                        use_name = detect
+                    if len(vals) > 2:
+                        c = vals[1]
+                        r = vals[2]
+                        if c is None and r is None:
+                            dflt = detect
+                            continue
+                        if rows < r and columns < c:
+                            use_name = detect
                 if use_name == font_name:
                     use_name = dflt
             else:

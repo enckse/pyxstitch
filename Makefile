@@ -24,7 +24,7 @@ run-example = pyxstitch --file $(EXAMPLES)/$(HW)$1 --multipage off --format $(FO
 			  $(call handle-version,$(BIN)/$(HW)$1.$(FORMAT)); \
 			  diff $(BIN)/$(HW)$1.$(FORMAT) $(EXAMPLE_OUT)$(HW)$1.$(FORMAT)$3;
 
-gen-font = pyxstitch --file $(EXAMPLES)/$(HW)"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font monospace-ascii-$1;
+gen-font = pyxstitch --file $(EXAMPLES)/$(HW)"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $(BIN)/$1.png --font $1-ascii-$2;
 
 run-bash = pyxstitch --file $(EXAMPLES)/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT) $1;  \
 			  $(call handle-version,$(BIN)/fb.bash.$(FORMAT)); \
@@ -43,13 +43,15 @@ ascii:
 	$(call run-example,"ascii.txt",--font monospace-ascii-3x7,".3x7")
 	$(call run-example,"ascii.txt",--font monospace-ascii-2x5,".2x5")
 	$(call run-example,"ascii.txt",--font monospace-ascii-3x5,".3x5")
+	$(call run-example,"ascii.txt",--font proportional-ascii-3x6,".3x6")
 	cd $(EXAMPLES) && ./alphabet.sh
 
 fonts: clean
-	$(call gen-font,"5x9")
-	$(call gen-font,"3x7")
-	$(call gen-font,"2x5")
-	$(call gen-font,"3x5")
+	$(call gen-font,"monospace","5x9")
+	$(call gen-font,"monospace","3x7")
+	$(call gen-font,"monospace","2x5")
+	$(call gen-font,"monospace","3x5")
+	$(call gen-font,"proportional","3x6")
 
 go:
 	$(call run-example,"go",,)
