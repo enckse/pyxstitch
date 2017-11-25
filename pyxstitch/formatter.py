@@ -238,10 +238,7 @@ class CrossStitchFormatter(Formatter):
                                     if stitch in [ft.BackStitch.BottomLeftMid,
                                                   ft.BackStitch.TopBottomMid]:
                                         x_st = x_st + (offset / 2)
-                                    newl.append([x_st,
-                                                  y_start,
-                                                  x_en,
-                                                  y_end])
+                                    newl.append([x_st, y_start, x_en, y_end])
                                 if stitch in [ft.BackStitch.Right,
                                               ft.BackStitch.TopRightMid,
                                               ft.BackStitch.BottomRightMid]:
@@ -250,15 +247,12 @@ class CrossStitchFormatter(Formatter):
                                         x_en = x_en - (offset / 2)
                                     if stitch == ft.BackStitch.BottomRightMid:
                                         x_st = x_st - (offset / 2)
-                                    newl.append([x_st,
-                                                  y_start,
-                                                  x_en,
-                                                  y_end])
+                                    newl.append([x_st, y_start, x_en, y_end])
                                 if stitch == ft.BackStitch.Top:
                                     newl.append([x_start,
-                                                  y_start,
-                                                  x_end,
-                                                  y_start])
+                                                 y_start,
+                                                 x_end,
+                                                 y_start])
                                 if stitch == ft.BackStitch.Bottom:
                                     newl.append([x_start, y_end, x_end, y_end])
                                 for line in newl:
