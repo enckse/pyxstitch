@@ -202,13 +202,13 @@ class CrossStitchFormatter(Formatter):
                                 color = '#' + dmc.rgb
                             lgd.add(style)
                             if isinstance(stitch, ft.BackStitch):
+                                x_st = x_start
+                                y_st = y_start
+                                x_en = x_end
+                                y_en = y_end
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
                                               ft.BackStitch.TopLeft,
                                               ft.BackStitch.BottomRight]:
-                                    x_st = x_start
-                                    y_st = y_start
-                                    x_en = x_end
-                                    y_en = y_end
                                     if stitch == ft.BackStitch.TopLeft:
                                         y_en = y_en - (offset / 2)
                                         x_en = x_en - (offset / 2)
@@ -223,10 +223,6 @@ class CrossStitchFormatter(Formatter):
                                 if stitch in [ft.BackStitch.BottomLeftTopRight,
                                               ft.BackStitch.BottomLeft,
                                               ft.BackStitch.TopRight]:
-                                    x_st = x_start
-                                    y_st = y_start
-                                    x_en = x_end
-                                    y_en = y_end
                                     if stitch == ft.BackStitch.BottomLeft:
                                         y_st = y_st + (offset / 2)
                                         x_en = x_en - (offset / 2)
@@ -243,7 +239,6 @@ class CrossStitchFormatter(Formatter):
                                               ft.BackStitch.BottomLeftMid,
                                               ft.BackStitch.TopBottomMid]:
                                     x_en = x_start
-                                    x_st = x_start
                                     if stitch in [ft.BackStitch.TopLeftMid,
                                                   ft.BackStitch.TopBottomMid]:
                                         x_en = x_en + (offset / 2)
@@ -258,7 +253,6 @@ class CrossStitchFormatter(Formatter):
                                 if stitch in [ft.BackStitch.Right,
                                               ft.BackStitch.TopRightMid,
                                               ft.BackStitch.BottomRightMid]:
-                                    x_en = x_end
                                     x_st = x_end
                                     if stitch == ft.BackStitch.TopRightMid:
                                         x_en = x_en - (offset / 2)
