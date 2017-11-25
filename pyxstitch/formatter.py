@@ -49,6 +49,66 @@ class CrossStitchFormatter(Formatter):
             if style['color']:
                 self._colors[token] = style['color']
 
+    def _get_backstitch_lines(self, 
+                              stitch,
+                              x_start,
+                              y_start,
+                              x_end,
+                              y_end,
+                              offset):
+        """Retrieve backstitch lines for a stitch."""
+        x_st = x_start
+        y_st = y_start
+        x_en = x_end
+        y_en = y_end
+        newl = []
+        if stitch in [ft.BackStitch.TopLeftBottomRight,
+                      ft.BackStitch.TopLeft,
+                      ft.BackStitch.BottomRight]:
+            if stitch == ft.BackStitch.TopLeft:
+                y_en = y_en - (offset / 2)
+                x_en = x_en - (offset / 2)
+            if stitch == ft.BackStitch.BottomRight:
+                y_st = y_st + (offset / 2)
+                x_st = x_st + (offset / 2)
+            newl.append([x_st, y_st, x_en, y_en])
+        if stitch in [ft.BackStitch.BottomLeftTopRight,
+                      ft.BackStitch.BottomLeft,
+                      ft.BackStitch.TopRight]:
+            if stitch == ft.BackStitch.BottomLeft:
+                y_st = y_st + (offset / 2)
+                x_en = x_en - (offset / 2)
+            if stitch == ft.BackStitch.TopRight:
+                y_en = y_en - (offset / 2)
+                x_st = x_st + (offset / 2)
+            newl.append([x_st, y_en, x_en, y_st])
+        if stitch in [ft.BackStitch.Left,
+                      ft.BackStitch.TopLeftMid,
+                      ft.BackStitch.BottomLeftMid,
+                      ft.BackStitch.TopBottomMid]:
+            x_en = x_start
+            if stitch in [ft.BackStitch.TopLeftMid,
+                          ft.BackStitch.TopBottomMid]:
+                x_en = x_en + (offset / 2)
+            if stitch in [ft.BackStitch.BottomLeftMid,
+                          ft.BackStitch.TopBottomMid]:
+                x_st = x_st + (offset / 2)
+            newl.append([x_st, y_start, x_en, y_end])
+        if stitch in [ft.BackStitch.Right,
+                      ft.BackStitch.TopRightMid,
+                      ft.BackStitch.BottomRightMid]:
+            x_st = x_end
+            if stitch == ft.BackStitch.TopRightMid:
+                x_en = x_en - (offset / 2)
+            if stitch == ft.BackStitch.BottomRightMid:
+                x_st = x_st - (offset / 2)
+            newl.append([x_st, y_start, x_en, y_end])
+        if stitch == ft.BackStitch.Top:
+            newl.append([x_start, y_start, x_end, y_start])
+        if stitch == ft.BackStitch.Bottom:
+            newl.append([x_start, y_end, x_end, y_end])
+        return newl
+
     def map_color(self, input_color_map):
         """Map colors."""
         parts = input_color_map.lower().split("=")
@@ -202,59 +262,12 @@ class CrossStitchFormatter(Formatter):
                                 color = '#' + dmc.rgb
                             lgd.add(style)
                             if isinstance(stitch, ft.BackStitch):
-                                x_st = x_start
-                                y_st = y_start
-                                x_en = x_end
-                                y_en = y_end
-                                newl = []
-                                if stitch in [ft.BackStitch.TopLeftBottomRight,
-                                              ft.BackStitch.TopLeft,
-                                              ft.BackStitch.BottomRight]:
-                                    if stitch == ft.BackStitch.TopLeft:
-                                        y_en = y_en - (offset / 2)
-                                        x_en = x_en - (offset / 2)
-                                    if stitch == ft.BackStitch.BottomRight:
-                                        y_st = y_st + (offset / 2)
-                                        x_st = x_st + (offset / 2)
-                                    newl.append([x_st, y_st, x_en, y_en])
-                                if stitch in [ft.BackStitch.BottomLeftTopRight,
-                                              ft.BackStitch.BottomLeft,
-                                              ft.BackStitch.TopRight]:
-                                    if stitch == ft.BackStitch.BottomLeft:
-                                        y_st = y_st + (offset / 2)
-                                        x_en = x_en - (offset / 2)
-                                    if stitch == ft.BackStitch.TopRight:
-                                        y_en = y_en - (offset / 2)
-                                        x_st = x_st + (offset / 2)
-                                    newl.append([x_st, y_en, x_en, y_st])
-                                if stitch in [ft.BackStitch.Left,
-                                              ft.BackStitch.TopLeftMid,
-                                              ft.BackStitch.BottomLeftMid,
-                                              ft.BackStitch.TopBottomMid]:
-                                    x_en = x_start
-                                    if stitch in [ft.BackStitch.TopLeftMid,
-                                                  ft.BackStitch.TopBottomMid]:
-                                        x_en = x_en + (offset / 2)
-                                    if stitch in [ft.BackStitch.BottomLeftMid,
-                                                  ft.BackStitch.TopBottomMid]:
-                                        x_st = x_st + (offset / 2)
-                                    newl.append([x_st, y_start, x_en, y_end])
-                                if stitch in [ft.BackStitch.Right,
-                                              ft.BackStitch.TopRightMid,
-                                              ft.BackStitch.BottomRightMid]:
-                                    x_st = x_end
-                                    if stitch == ft.BackStitch.TopRightMid:
-                                        x_en = x_en - (offset / 2)
-                                    if stitch == ft.BackStitch.BottomRightMid:
-                                        x_st = x_st - (offset / 2)
-                                    newl.append([x_st, y_start, x_en, y_end])
-                                if stitch == ft.BackStitch.Top:
-                                    newl.append([x_start,
-                                                 y_start,
-                                                 x_end,
-                                                 y_start])
-                                if stitch == ft.BackStitch.Bottom:
-                                    newl.append([x_start, y_end, x_end, y_end])
+                                newl = self._get_backstitch_lines(stitch,
+                                                                  x_start,
+                                                                  y_start,
+                                                                  x_end,
+                                                                  y_end,
+                                                                  offset)
                                 for line in newl:
                                     lines.append(tuple(line + [color]))
                             if isinstance(stitch, ft.Stitch) or \
