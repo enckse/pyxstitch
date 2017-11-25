@@ -49,7 +49,7 @@ class CrossStitchFormatter(Formatter):
             if style['color']:
                 self._colors[token] = style['color']
 
-    def _get_backstitch_lines(self, 
+    def _get_backstitch_lines(self,
                               stitch,
                               x_start,
                               y_start,
