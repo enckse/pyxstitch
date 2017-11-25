@@ -206,6 +206,7 @@ class CrossStitchFormatter(Formatter):
                                 y_st = y_start
                                 x_en = x_end
                                 y_en = y_end
+                                newl = []
                                 if stitch in [ft.BackStitch.TopLeftBottomRight,
                                               ft.BackStitch.TopLeft,
                                               ft.BackStitch.BottomRight]:
@@ -215,11 +216,7 @@ class CrossStitchFormatter(Formatter):
                                     if stitch == ft.BackStitch.BottomRight:
                                         y_st = y_st + (offset / 2)
                                         x_st = x_st + (offset / 2)
-                                    lines.append((x_st,
-                                                  y_st,
-                                                  x_en,
-                                                  y_en,
-                                                  color))
+                                    newl.append([x_st, y_st, x_en, y_en])
                                 if stitch in [ft.BackStitch.BottomLeftTopRight,
                                               ft.BackStitch.BottomLeft,
                                               ft.BackStitch.TopRight]:
@@ -229,11 +226,7 @@ class CrossStitchFormatter(Formatter):
                                     if stitch == ft.BackStitch.TopRight:
                                         y_en = y_en - (offset / 2)
                                         x_st = x_st + (offset / 2)
-                                    lines.append((x_st,
-                                                  y_en,
-                                                  x_en,
-                                                  y_st,
-                                                  color))
+                                    newl.append([x_st, y_en, x_en, y_st])
                                 if stitch in [ft.BackStitch.Left,
                                               ft.BackStitch.TopLeftMid,
                                               ft.BackStitch.BottomLeftMid,
@@ -245,11 +238,10 @@ class CrossStitchFormatter(Formatter):
                                     if stitch in [ft.BackStitch.BottomLeftMid,
                                                   ft.BackStitch.TopBottomMid]:
                                         x_st = x_st + (offset / 2)
-                                    lines.append((x_st,
+                                    newl.append([x_st,
                                                   y_start,
                                                   x_en,
-                                                  y_end,
-                                                  color))
+                                                  y_end])
                                 if stitch in [ft.BackStitch.Right,
                                               ft.BackStitch.TopRightMid,
                                               ft.BackStitch.BottomRightMid]:
@@ -258,23 +250,19 @@ class CrossStitchFormatter(Formatter):
                                         x_en = x_en - (offset / 2)
                                     if stitch == ft.BackStitch.BottomRightMid:
                                         x_st = x_st - (offset / 2)
-                                    lines.append((x_st,
+                                    newl.append([x_st,
                                                   y_start,
                                                   x_en,
-                                                  y_end,
-                                                  color))
+                                                  y_end])
                                 if stitch == ft.BackStitch.Top:
-                                    lines.append((x_start,
+                                    newl.append([x_start,
                                                   y_start,
                                                   x_end,
-                                                  y_start,
-                                                  color))
+                                                  y_start])
                                 if stitch == ft.BackStitch.Bottom:
-                                    lines.append((x_start,
-                                                  y_end,
-                                                  x_end,
-                                                  y_end,
-                                                  color))
+                                    newl.append([x_start, y_end, x_end, y_end])
+                                for line in newl:
+                                    lines.append(tuple(line + [color]))
                             if isinstance(stitch, ft.Stitch) or \
                                self.font_factory.is_backstitched:
                                 if stitch == ft.Stitch.CrossStitch or \
