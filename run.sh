@@ -9,7 +9,7 @@ EXAMPLE_OUT=${EXAMPLES}outputs/
 NO_TAG="na"
 
 _handle_version() {
-    sed -i "s/$VERS/__VERSION__/g" $1
+    sed -i "s/$VERS/\_\_VERSION\_\_/g" $1
 }
 
 _fail() {
