@@ -1,5 +1,5 @@
 VERS_PY="pyxstitch/version.py"
-VERS=$(cat $VERS_PY | grep "__version__" | cut -d "=" -f 2 | sed 's/ //g;s/"//g')
+VERS=$(cat $VERS_PY | grep "__version__" | cut -d "=" -f 2 | sed 's/ //g;s/"//g' | sed "s#\.#\\\.#g")
 BIN=bin
 FORMAT=pyxstitch
 HW="hello_world."
@@ -9,7 +9,7 @@ EXAMPLE_OUT=${EXAMPLES}outputs/
 NO_TAG="na"
 
 _handle_version() {
-    sed -i "s/$VERS/\_\_VERSION\_\_/g" $1
+    sed -i "s/$VERS/__VERSION__/g" $1
 }
 
 _fail() {
