@@ -39,13 +39,13 @@ fonts: clean
 	./run.sh "fonts" "proportional" "3x6"
 
 go:
-	$(call run-example,"go",,)
+	./run.sh "example" "go"
 
 c:
-	$(call run-example,"c",,)
+	./run.sh "example" "c"
 
 py:
-	$(call run-example,"py",,)
+	./run.sh "example" "py"
 
 logo: install
 	pyxstitch --file $(EXAMPLES)/logo.txt --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output images/logo.png
@@ -54,17 +54,17 @@ raw:
 	cd $(EXAMPLES) && ./replay.sh
 
 bash:
-	$(call run-bash,,)
+	./run.sh "bash"
 
 mapping:
-	$(call run-bash,--map 6c6c6c=ffffff --map 59c7b4=,".map")
+	./run.sh "bash" "--map 6c6c6c=ffffff --map 59c7b4=" ".map"
 
 symbols:
-	$(call run-bash,--symbols "abcdef",".symbol")
+	./run.sh "bash" "--symbols abcdef" ".symbol"
 
 kvs:
-	$(call run-bash,--kv page_height=700 page_width=900 page_pad=80 page_no_index=3 page_legend=2 page_font_size=10,".cfg")
-	$(call run-bash,--config tests/test.cfg,".cfg")
+	./run.sh "bash" "--kv page_height=700 page_width=900 page_pad=80 page_no_index=3 page_legend=2 page_font_size=10" ".cfg"
+	./run.sh "bash" "--config tests/test.cfg" ".cfg"
 
 text:
 	cat $(EXAMPLES)/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off

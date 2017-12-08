@@ -31,14 +31,17 @@ _example() {
 }
 
 _gen_font() {
-    pyxstitch --file $EXAMPLES/$HW"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $BIN/$1.png --font $1-ascii-$2;
+    pyxstitch --file $EXAMPLES/$HW"ascii.txt" --theme bw --kv page_legend=1 --multipage off --output $BIN/$1.png --font $1-ascii-$2
     _fail $?
 }
 
 _run_bash() {
-    pyxstitch --file $(EXAMPLES)/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $(FORMAT) --output $(BIN)/fb.bash.$(FORMAT) $1;  \
-	 $(call handle-version,$(BIN)/fb.bash.$(FORMAT)); \
-			  diff $(BIN)/fb.bash.$(FORMAT) $(EXAMPLE_OUT)fb.bash.$(FORMAT)$2;
+    pyxstitch --file $EXAMPLES/fizzbuzz.bash --multipage off --font monospace-ascii-5x9 --format $FORMAT --output $BIN/fb.bash.$FORMAT $1
+    _fail $?
+    _handle_version "$BIN/fb.bash.$FORMAT"
+    _fail $?
+    diff $BIN/fb.bash.$FORMAT ${EXAMPLE_OUT}fb.bash.$FORMAT$2
+    _fail $?
 }
 
 cmd=""
@@ -51,6 +54,9 @@ case $1 in
         ;;
     "fonts")
         cmd="_gen_font"
+        ;;
+    "bash")
+        cmd="_run_bash"
         ;;
 esac
 
