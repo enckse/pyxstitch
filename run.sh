@@ -1,3 +1,4 @@
+#!/bin/bash
 VERS_PY="pyxstitch/version.py"
 VERS=$(cat $VERS_PY | grep "__version__" | cut -d "=" -f 2 | sed 's/ //g;s/"//g' | sed "s#\.#\\\.#g")
 BIN=bin
