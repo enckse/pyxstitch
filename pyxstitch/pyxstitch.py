@@ -78,7 +78,6 @@ def _print_banner_line(marks, character='X', leading=" ", trailing=""):
 
 def _print_banner():
     """Print the pyxstitch banner."""
-    log.writeln()
     _print_spacer()
     _print_banner_line(_BANNER_ONE)
     _print_banner_line(_BANNER_TWO)
@@ -87,7 +86,6 @@ def _print_banner():
     _print_banner_line(_BANNER_FIVE)
     _print_banner_line(_BANNER_SIX)
     _print_spacer()
-    log.writeln()
 
 
 def _replay(args, file_name, content):
@@ -142,15 +140,16 @@ def main():
     parser.add_argument('--symbols', type=str)
     args = parser.parse_args()
     log.change_verbosity(args.quiet)
-    if not args.quiet:
-        _print_banner()
     _run(InputArgs(args), default_font)
 
 
 def _run(args, default_font):
     """Run pyxstitch."""
     if args.version:
+        log.writeln()
+        _print_banner()
         log.write(vers.__version__)
+        log.writeln()
         exit(0)
     content = None
     file_name = None

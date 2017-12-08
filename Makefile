@@ -20,7 +20,10 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: install clean go c py ascii raw bash fonts mapping symbols kvs
+example: install clean go c py ascii raw bash fonts mapping symbols kvs banner
+
+banner:
+	pyxstitch --version
 
 ascii:
 	./run.sh "example" "ascii.txt"
