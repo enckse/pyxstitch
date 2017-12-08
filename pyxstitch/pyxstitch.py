@@ -26,6 +26,13 @@ _DMC = "-dmc"
 _LIGHT_DMC = _LIGHT + _DMC
 _DARK_DMC = _DARK + _DMC
 _B_AND_W = "bw"
+_BANNER = 35
+_BANNER_ONE = [17, 21, 25, 32]
+_BANNER_TWO = [0, 1, 4, 6, 8, 10, 13, 14, 17, 25, 29, 30, 32]
+_BANNER_THREE = [0, 2, 4, 6, 9, 13, 16, 17, 18, 21, 24, 25, 26, 28, 32, 33, 34]
+_BANNER_FOUR = [0, 1, 5, 6, 8, 10, 12, 13, 17, 20, 21, 22, 25, 29, 30, 32, 34]
+_BANNER_FIVE = [0, 6]
+_BANNER_SIX = [0, 4, 5]
 
 
 class InputArgs(object):
@@ -48,6 +55,39 @@ class InputArgs(object):
 def _create_file_name(file_name, args):
     """Create output file names."""
     return "{}.{}".format(file_name, args.format)
+
+
+def _print_spacer():
+    """Print a spacer line."""
+    _print_banner_line(range(0, _BANNER),
+                       character='=',
+                       leading="=",
+                       trailing="=")
+
+
+def _print_banner_line(marks, character='X', leading=" ", trailing=""):
+    """Print a banner line."""
+    actual = []
+    for i in range(0, _BANNER):
+        char = ' '
+        if i in marks:
+            char = character
+        actual.append(char)
+    log.write(leading + "".join(actual) + trailing)
+
+
+def _print_banner():
+    """Print the pyxstitch banner."""
+    log.writeln()
+    _print_spacer()
+    _print_banner_line(_BANNER_ONE)
+    _print_banner_line(_BANNER_TWO)
+    _print_banner_line(_BANNER_THREE)
+    _print_banner_line(_BANNER_FOUR)
+    _print_banner_line(_BANNER_FIVE)
+    _print_banner_line(_BANNER_SIX)
+    _print_spacer()
+    log.writeln()
 
 
 def _replay(args, file_name, content):
@@ -102,6 +142,8 @@ def main():
     parser.add_argument('--symbols', type=str)
     args = parser.parse_args()
     log.change_verbosity(args.quiet)
+    if not args.quiet:
+        _print_banner()
     _run(InputArgs(args), default_font)
 
 
