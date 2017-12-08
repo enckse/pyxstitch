@@ -201,7 +201,7 @@ def _run(args, default_font):
                                    config=args.kv,
                                    config_file=config_file)
     if args.font == default_font:
-        log.write("font selected: {}".format(formatting.font_factory.display_name))
+        log.write("font: {}".format(formatting.font_factory.display_name))
     log.write("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 
