@@ -6,7 +6,8 @@ IS_VERBOSE = True
 
 def change_verbosity(quiet):
     """Change verbosity."""
-    IS_VERBOSE = quiet
+    if quiet:
+        IS_VERBOSE = False
 
 
 def writeln():

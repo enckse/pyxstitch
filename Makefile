@@ -24,6 +24,7 @@ example: install clean go c py ascii raw bash fonts mapping symbols kvs banner l
 
 banner:
 	pyxstitch --version
+	pyxstitch --version --quiet
 
 ascii:
 	./run.sh "example" "ascii.txt"
