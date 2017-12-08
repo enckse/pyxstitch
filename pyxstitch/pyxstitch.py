@@ -73,7 +73,7 @@ def _print_banner_line(marks, character='X', leading=" ", trailing=""):
         if i in marks:
             char = character
         actual.append(char)
-    log.write(leading + "".join(actual) + trailing)
+    log.Log.write(leading + "".join(actual) + trailing)
 
 
 def _print_banner():
@@ -91,10 +91,10 @@ def _print_banner():
 def _replay(args, file_name, content):
     """Do replay."""
     if args.is_raw:
-        log.write("can not replay raw to raw")
+        log.Log.write("can not replay raw to raw")
         exit(1)
     if not args.is_light or not args.default_style:
-        log.write('style and theme ignored during replay')
+        log.Log.write('style and theme ignored during replay')
     out = args.output
     if args.output is None:
         out = _create_file_name(file_name, args)
@@ -139,17 +139,18 @@ def main():
     parser.add_argument('--quiet', action="store_true")
     parser.add_argument('--symbols', type=str)
     args = parser.parse_args()
-    log.change_verbosity(args.quiet)
+    if args.quiet:
+        log.Log.is_verbose = False
     _run(InputArgs(args), default_font)
 
 
 def _run(args, default_font):
     """Run pyxstitch."""
     if args.version:
-        log.writeln()
+        log.Log.writeln()
         _print_banner()
-        log.write(vers.__version__)
-        log.writeln()
+        log.Log.write(vers.__version__)
+        log.Log.writeln()
         exit(0)
     content = None
     file_name = None
@@ -166,9 +167,9 @@ def _run(args, default_font):
     # Shortcut to black and white is to just use a Text lexer
     if args.theme == _B_AND_W:
         if use_lexer is not None:
-            log.write("black & white overrides lexer input")
+            log.Log.write("black & white overrides lexer input")
         if use_style != _DEF_STYLE:
-            log.write("black & white overrides style")
+            log.Log.write("black & white overrides style")
         use_lexer = "Text"
         use_style = _B_AND_W
         is_bw = True
@@ -185,7 +186,7 @@ def _run(args, default_font):
             try:
                 lexer = get_lexer_for_filename(args.file)
             except Exception as e:
-                log.write(e)
+                log.Log.write(e)
                 exit(1)
     if os.path.exists(args.file):
         file_name = file_ext[0]
@@ -193,19 +194,19 @@ def _run(args, default_font):
             content = f.read()
     else:
         if file_ext[1] is not None and len(file_ext[1]) > 1:
-            log.write("file not found, pass extension for stdin or valid file")
+            log.Log.write("file not found, pass extension for stdin or a file")
             exit(1)
         file_name = "output"
         content = "".join(sys.stdin.readlines())
     if is_raw:
         _replay(args, file_name, content)
     if is_auto:
-        log.write(content)
+        log.Log.write(content)
         try:
             lexer = guess_lexer(content)
-            log.write('using {} lexer'.format(lexer.name))
+            log.Log.write('using {} lexer'.format(lexer.name))
         except Exception as e:
-            log.write('unable to guess a lexer...defaulting to text')
+            log.Log.write('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
     output_name = args.output
     is_raw = args.is_raw
@@ -213,7 +214,7 @@ def _run(args, default_font):
         output_name = _create_file_name(file_name, args)
     else:
         if args.output.endswith(_RAW) and not is_raw:
-            log.write('specify output as {}?'.format(_RAW))
+            log.Log.write('specify output as {}?'.format(_RAW))
             exit(1)
     preproc = fnt.preprocess(content)
     text = preproc[0]
@@ -226,7 +227,7 @@ def _run(args, default_font):
         if os.path.exists(conf):
             config_file = conf
     if config_file is not None and not os.path.exists(config_file):
-        log.write("unable to find config file: {}".format(config_file))
+        log.Log.write("unable to find config file: {}".format(config_file))
     formatting = fmt.new_formatter(use_style,
                                    output_name,
                                    args.multipage,
@@ -242,8 +243,8 @@ def _run(args, default_font):
                                    config=args.kv,
                                    config_file=config_file)
     if args.font == default_font:
-        log.write("font: {}".format(formatting.font_factory.display_name))
-    log.write("Using lexer: {}".format(lexer.name))
+        log.Log.write("font: {}".format(formatting.font_factory.display_name))
+    log.Log.write("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 
 

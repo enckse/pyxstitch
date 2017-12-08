@@ -1,23 +1,17 @@
 #!/usr/bin/python
 """Simple/primitive logging."""
 
-IS_VERBOSE = True
 
+class Log(object):
+    """Logging object."""
 
-def change_verbosity(quiet):
-    """Change verbosity."""
-    global IS_VERBOSE
-    if quiet:
-        IS_VERBOSE = False
+    is_verbose = True
 
+    def writeln():
+        """Write a blank line."""
+        Log.write("")
 
-def writeln():
-    """Write an (empty) message."""
-    write("")
-
-
-def write(message):
-    """Write a message."""
-    global IS_VERBOSE
-    if IS_VERBOSE:
-        print(message)
+    def write(message):
+        """Write a logging line."""
+        if Log.is_verbose:
+            print(message)

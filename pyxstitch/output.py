@@ -98,7 +98,7 @@ class PILFormat(Format):
 
     def _save(self, im, file_name):
         """Save an image."""
-        log.write("saving {}".format(file_name))
+        log.Log.write("saving {}".format(file_name))
         im.save(file_name, quality=100)
 
     def extras(self, config_values):
@@ -165,7 +165,7 @@ class PILFormat(Format):
                                               file_name_outputs))
             if self._cfg.page_no_index == 0:
                 index_page = "{}-index.html".format(file_parts[0])
-                log.write("producing index page {}".format(index_page))
+                log.Log.write("producing index page {}".format(index_page))
                 with open(index_page, 'w') as f:
                     output_img = "".join(["<img src='{}' />".format(x)
                                          for x in file_name_outputs])
@@ -191,11 +191,11 @@ class PILFormat(Format):
                 lgd = lgd.resize((width, height), Image.ANTIALIAS)
                 image.paste(lgd, use_pos)
             else:
-                log.writeln()
-                log.write("legend")
-                log.write("======")
-                log.write(l[1])
-                log.writeln()
+                log.Log.writeln()
+                log.Log.write("legend")
+                log.Log.write("======")
+                log.Log.write(l[1])
+                log.Log.writeln()
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
@@ -234,7 +234,7 @@ class TextFormat(Format):
 
     def _log_replay(self, level, fmt, args):
         """log replay messages."""
-        log.write("{} -> {}".format(level, fmt.format(*args)))
+        log.Log.write("{} -> {}".format(level, fmt.format(*args)))
 
     def replay(self, content, out_file_name):
         """Replay a file into another format."""

@@ -32,7 +32,7 @@ class Config(object):
                 self._parse_config(config_file)
         else:
             if config_file is not None:
-                log.write("config file ignored when given inputs")
+                log.Log.write("config file ignored when given inputs")
             self._parse(inputs)
 
     def save(self):
@@ -84,7 +84,7 @@ class Config(object):
         for item in inputs:
             parts = item.split(_DELIMIT)
             if len(parts) != 2:
-                log.write('unable to parse config input: {}'.format(item))
+                log.Log.write('unable to parse config input: {}'.format(item))
                 continue
             key = parts[0]
             val = parts[1]
@@ -98,4 +98,4 @@ class Config(object):
                             continue
                     except Exception as e:
                         pass
-            log.write("invalid attribute {}".format(item))
+            log.Log.write("invalid attribute {}".format(item))
