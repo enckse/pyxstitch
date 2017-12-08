@@ -20,7 +20,7 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: install clean go c py ascii raw bash fonts mapping symbols kvs banner
+example: install clean go c py ascii raw bash fonts mapping symbols kvs banner logo
 
 banner:
 	pyxstitch --version
@@ -50,7 +50,7 @@ c:
 py:
 	./run.sh "example" "py"
 
-logo: install
+logo: 
 	pyxstitch --file $(EXAMPLES)/logo.txt --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output images/logo.png
 
 raw:
