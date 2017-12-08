@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw
 from io import StringIO
 import pyxstitch.config as cfg
 import pyxstitch.version as vers
+import pyxstitch.log as log
 import json
 import os
 
@@ -97,7 +98,7 @@ class PILFormat(Format):
 
     def _save(self, im, file_name):
         """Save an image."""
-        print("saving {}".format(file_name))
+        log.write("saving {}".format(file_name))
         im.save(file_name, quality=100)
 
     def extras(self, config_values):
@@ -164,7 +165,7 @@ class PILFormat(Format):
                                               file_name_outputs))
             if self._cfg.page_no_index == 0:
                 index_page = "{}-index.html".format(file_parts[0])
-                print("producing index page {}".format(index_page))
+                log.write("producing index page {}".format(index_page))
                 with open(index_page, 'w') as f:
                     output_img = "".join(["<img src='{}' />".format(x)
                                          for x in file_name_outputs])
@@ -190,11 +191,11 @@ class PILFormat(Format):
                 lgd = lgd.resize((width, height), Image.ANTIALIAS)
                 image.paste(lgd, use_pos)
             else:
-                print()
-                print("legend")
-                print("======")
-                print(l[1])
-                print()
+                log.writeln()
+                log.write("legend")
+                log.write("======")
+                log.write(l[1])
+                log.writeln()
 
     def meta(self, char_meta, style, char):
         """Character metadata and style."""
@@ -233,7 +234,7 @@ class TextFormat(Format):
 
     def _log_replay(self, level, fmt, args):
         """log replay messages."""
-        print("{} -> {}".format(level, fmt.format(*args)))
+        log.write("{} -> {}".format(level, fmt.format(*args)))
 
     def replay(self, content, out_file_name):
         """Replay a file into another format."""

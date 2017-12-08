@@ -1,6 +1,7 @@
 #!/usr/env/python
 """pyxstitch operating configuration settings."""
 import os
+import pyxstitch.log as log
 
 _PAGE = "page_"
 _NO_IDX = "no_index"
@@ -31,7 +32,7 @@ class Config(object):
                 self._parse_config(config_file)
         else:
             if config_file is not None:
-                print("config file ignored when given inputs")
+                log.write("config file ignored when given inputs")
             self._parse(inputs)
 
     def save(self):
@@ -83,7 +84,7 @@ class Config(object):
         for item in inputs:
             parts = item.split(_DELIMIT)
             if len(parts) != 2:
-                print('unable to parse config input: {}'.format(item))
+                log.write('unable to parse config input: {}'.format(item))
                 continue
             key = parts[0]
             val = parts[1]
@@ -97,4 +98,4 @@ class Config(object):
                             continue
                     except Exception as e:
                         pass
-            print("invalid attribute {}".format(item))
+            log.write("invalid attribute {}".format(item))

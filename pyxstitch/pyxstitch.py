@@ -53,10 +53,10 @@ def _create_file_name(file_name, args):
 def _replay(args, file_name, content):
     """Do replay."""
     if args.is_raw:
-        print("can not replay raw to raw")
+        log.write("can not replay raw to raw")
         exit(1)
     if not args.is_light or not args.default_style:
-        print('style and theme ignored during replay')
+        log.write('style and theme ignored during replay')
     out = args.output
     if args.output is None:
         out = _create_file_name(file_name, args)
@@ -108,7 +108,7 @@ def main():
 def _run(args, default_font):
     """Run pyxstitch."""
     if args.version:
-        print(vers.__version__)
+        log.write(vers.__version__)
         exit(0)
     content = None
     file_name = None
@@ -125,9 +125,9 @@ def _run(args, default_font):
     # Shortcut to black and white is to just use a Text lexer
     if args.theme == _B_AND_W:
         if use_lexer is not None:
-            print("black & white overrides lexer input")
+            log.write("black & white overrides lexer input")
         if use_style != _DEF_STYLE:
-            print("black & white overrides style")
+            log.write("black & white overrides style")
         use_lexer = "Text"
         use_style = _B_AND_W
         is_bw = True
@@ -144,7 +144,7 @@ def _run(args, default_font):
             try:
                 lexer = get_lexer_for_filename(args.file)
             except Exception as e:
-                print(e)
+                log.write(e)
                 exit(1)
     if os.path.exists(args.file):
         file_name = file_ext[0]
@@ -152,19 +152,19 @@ def _run(args, default_font):
             content = f.read()
     else:
         if file_ext[1] is not None and len(file_ext[1]) > 1:
-            print("file not found, pass extension for stdin or valid file")
+            log.write("file not found, pass extension for stdin or valid file")
             exit(1)
         file_name = "output"
         content = "".join(sys.stdin.readlines())
     if is_raw:
         _replay(args, file_name, content)
     if is_auto:
-        print(content)
+        log.write(content)
         try:
             lexer = guess_lexer(content)
-            print('using {} lexer'.format(lexer.name))
+            log.write('using {} lexer'.format(lexer.name))
         except Exception as e:
-            print('unable to guess a lexer...defaulting to text')
+            log.write('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
     output_name = args.output
     is_raw = args.is_raw
@@ -172,7 +172,7 @@ def _run(args, default_font):
         output_name = _create_file_name(file_name, args)
     else:
         if args.output.endswith(_RAW) and not is_raw:
-            print('specify output as {}?'.format(_RAW))
+            log.write('specify output as {}?'.format(_RAW))
             exit(1)
     preproc = fnt.preprocess(content)
     text = preproc[0]
@@ -185,7 +185,7 @@ def _run(args, default_font):
         if os.path.exists(conf):
             config_file = conf
     if config_file is not None and not os.path.exists(config_file):
-        print("unable to find config file: {}".format(config_file))
+        log.write("unable to find config file: {}".format(config_file))
     formatting = fmt.new_formatter(use_style,
                                    output_name,
                                    args.multipage,
@@ -201,8 +201,8 @@ def _run(args, default_font):
                                    config=args.kv,
                                    config_file=config_file)
     if args.font == default_font:
-        print("font selected: {}".format(formatting.font_factory.display_name))
-    print("Using lexer: {}".format(lexer.name))
+        log.write("font selected: {}".format(formatting.font_factory.display_name))
+    log.write("Using lexer: {}".format(lexer.name))
     highlight(text, lexer, formatting)
 
 
