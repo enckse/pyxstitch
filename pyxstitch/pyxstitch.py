@@ -8,6 +8,7 @@ import pyxstitch.formatter as fmt
 import pyxstitch.output as out_fmt
 import pyxstitch.font as fnt
 import pyxstitch.version as vers
+import pyxstitch.log as log
 import argparse
 import os
 import sys
@@ -97,8 +98,10 @@ def main():
                         default=default_font,
                         choices=list(fnt.get_all_fonts()) + [default_font])
     parser.add_argument('--version', action="store_true")
+    parser.add_argument('--quiet', action="store_true")
     parser.add_argument('--symbols', type=str)
     args = parser.parse_args()
+    log.change_verbosity(args.quiet)
     _run(InputArgs(args), default_font)
 
 
