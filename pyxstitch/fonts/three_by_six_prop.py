@@ -25,6 +25,22 @@ class ThreeBySixProp(BaseFontFactory):
             parts = old.split("\n")
             parts = parts[:len(parts) - 2]
             objs[k] = self._build_character("\n".join(parts))
+        objs[")"] = self._build_character("""
+|1.00|    |    |
+|    |1.00|    |
+|    |1.00|    |
+|    |1.00|    |
+|1.00|    |    |
+|    |    |    |
+""")
+        objs["("] = self._build_character("""
+|    |1.00|    |
+|1.00|    |    |
+|1.00|    |    |
+|1.00|    |    |
+|    |1.00|    |
+|    |    |    |
+""")
         objs["|"] = self._build_character("""
 |1.00|    |    |
 |1.00|    |    |

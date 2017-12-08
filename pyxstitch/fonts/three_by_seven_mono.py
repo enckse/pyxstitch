@@ -722,9 +722,9 @@ class ThreeBySevenMono(BaseFontFactory):
 """)
         objs['Z'] = self._build_character("""
 |1.00|1.00|1.00|
-|    |    |0.16|
-|    |0.16|    |
-|0.16|    |    |
+|    |    |1.00|
+|    |1.00|    |
+|1.00|    |    |
 |1.00|1.00|1.00|
 |    |    |    |
 |    |    |    |
