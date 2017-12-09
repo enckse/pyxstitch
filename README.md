@@ -11,6 +11,13 @@ See a examples and completed cross stitch patterns [here!](https://enckse.github
 
 # install
 
+## pip
+
+Available via pip
+```
+pip install pyxstitch
+```
+
 ## source
 
 * Clone this repo and...
