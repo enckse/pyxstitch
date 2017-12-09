@@ -2,10 +2,19 @@
 """Test config definitions."""
 import unittest
 import pyxstitch.config as cfg
+import pyxstitch.log as log
 
 
 class TestConfig(unittest.TestCase):
     """Test config object."""
+
+    def setUp(self):
+        """Test setup."""
+        log.Log.is_verbose = False
+
+    def tearDown(self):
+        """Test teardown."""
+        log.Log.is_verbose = True
 
     def test_no_ins(self):
         """No inputs defined."""
