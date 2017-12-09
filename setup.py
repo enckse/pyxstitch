@@ -10,8 +10,8 @@ with open(os.path.join(__pkg_name__, "version.py")) as v_file:
     exec(v_file.read())
 
 setup(
-    author = "Sean Enck",
-    author_email = "enckse@gmail.com",
+    author="Sean Enck",
+    author_email="enckse@gmail.com",
     name=__pkg_name__,
     version=__version__,
     description='Convert source code to cross stitch patterns',
