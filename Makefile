@@ -7,6 +7,7 @@ TAG=$(shell git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
 TAG_CURRENT=$(shell cat $(VERS_PY) | grep "$(TAG)")
 EXAMPLES=examples/
 EXAMPLE_OUT=$(EXAMPLES)outputs/
+PYPIRC=$(shell echo $$HOME)/.pypirc
 NO_TAG="na"
 ifdef TRAVIS
 TAG_CURRENT=$(NO_TAG)
@@ -54,6 +55,19 @@ py:
 
 logo: 
 	pyxstitch --file $(EXAMPLES)/logo.txt --quiet --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output $(BIN)/logo.png
+
+pypi-check:
+	pip install twine
+ifeq ($(wildcard $(PYPIRC)),)
+		$(error missing pypirc file $(PYPIRC))
+endif
+	python setup.py sdist
+
+pypi-test: pypi-check
+	./package.sh testpypi
+
+pypi-live: pypi-check
+	./package sh
 
 raw:
 	cd $(EXAMPLES) && ./replay.sh
