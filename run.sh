@@ -34,6 +34,8 @@ _example() {
 _gen_font() {
     pyxstitch --file $EXAMPLES/$HW"ascii.txt" --quiet --theme bw --kv page_legend=1 --multipage off --output $BIN/$1.png --font $1-ascii-$2
     _fail $?
+    cp $BIN/$1.png $BIN/$2.png
+    _fail $?
 }
 
 _run_bash() {
