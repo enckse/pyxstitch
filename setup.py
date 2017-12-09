@@ -15,8 +15,10 @@ setup(
     description='Convert source code to cross stitch patterns',
     url='https://github.com/enckse/pyxstitch',
     license='MIT',
+    python_requires='>=3',
     packages=[__pkg_name__, __pkg_name__ + ".fonts"],
     install_requires=['pygments', 'pillow'],
+    keywords='crossstitch cross stitch',
     entry_points={
         'console_scripts': [
             'pyxstitch = pyxstitch.pyxstitch:main',
