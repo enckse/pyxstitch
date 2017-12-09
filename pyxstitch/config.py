@@ -5,8 +5,10 @@ import pyxstitch.log as log
 
 _PAGE = "page_"
 _NO_IDX = "no_index"
-_BOOLS = [_PAGE + _NO_IDX]
-_LEGEND_ATTR = "legend_"
+_LEGEND = "legend"
+_FONT_SIZE = "font_size"
+_ZEROS = [_PAGE + _NO_IDX, _PAGE + _LEGEND, _PAGE + _FONT_SIZE]
+_LEGEND_ATTR = _LEGEND + "_"
 _LGD_HOFF = _LEGEND_ATTR + "hoff"
 _LGD_WOFF = _LEGEND_ATTR + "woff"
 _OFFSET = [_LGD_HOFF, _LGD_WOFF]
@@ -62,8 +64,8 @@ class Config(object):
             inputs.append(Config._create_page_input("width", values[1]))
             inputs.append(Config._create_page_input("pad", values[2]))
             inputs.append(Config._create_page_input(_NO_IDX, values[3]))
-            inputs.append(Config._create_page_input("legend", values[4]))
-            inputs.append(Config._create_page_input("font_size", values[5]))
+            inputs.append(Config._create_page_input(_LEGEND, values[4]))
+            inputs.append(Config._create_page_input(_FONT_SIZE, values[5]))
         return Config(inputs, None)
 
     def _parse_config(self, conf):
@@ -92,7 +94,7 @@ class Config(object):
                 if key in dir(self):
                     try:
                         int_val = int(val)
-                        if int_val > 0 or (int_val >= 0 and key in _BOOLS) or \
+                        if int_val > 0 or (int_val >= 0 and key in _ZEROS) or \
                            (int_val <= 0 and key in _OFFSET):
                             setattr(self, key, int_val)
                             continue
