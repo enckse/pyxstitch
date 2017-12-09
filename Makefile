@@ -64,10 +64,10 @@ endif
 	python setup.py sdist
 
 pypi-test: pypi-check
-	./package.sh testpypi
+	./package.sh test
 
 pypi-live: pypi-check
-	./package sh
+	./package.sh
 
 raw:
 	cd $(EXAMPLES) && ./replay.sh

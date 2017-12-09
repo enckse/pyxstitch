@@ -2,7 +2,7 @@
 DIST=dist/
 REPO=""
 if [ ! -z "$1" ]; then
-    REPO="-r $1"
+    REPO="-r $1pypi"
 fi
 if [ ! -d $DIST ]; then
     echo "no dist found..."
@@ -19,10 +19,9 @@ if [ $cnt -ne 1 ]; then
     echo "unable to find unique package: $file"
     exit 1
 fi
-echo "going forward with: $DIST$file"
-twine register $DIST$file $REPO
+echo "going forward with: $DIST$file ($REPO)"
+twine upload ${DIST}* $REPO
 if [ $? -ne 0 ]; then
-    echo "unable to register"
+    echo "unable to upload"
     exit 1
 fi
-twine upload ${DIST}* $REPO
