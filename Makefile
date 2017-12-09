@@ -1,4 +1,5 @@
 SRC=$(shell find . -type f -name "*.py" | grep -v "$(EXAMPLES)" | grep -v "build" | grep -v "bin")
+TESTS=$(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!g")
 VERS_PY=pyxstitch/version.py
 BIN=bin
 FORMAT=pyxstitch
@@ -86,7 +87,7 @@ ifneq ($(TAG_CURRENT),$(NO_TAG))
 endif
 
 test: clean version text
-	cd tests && ./run.sh
+	python -m unittest $(TESTS)
 
 clean:
 	mkdir -p $(BIN)
