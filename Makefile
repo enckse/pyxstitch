@@ -31,10 +31,7 @@ banner:
 ascii:
 	./run.sh "example" "ascii.txt"
 	./run.sh "example" "ascii.txt" "--theme bw" ".bw"
-	./run.sh "example" "ascii.txt" "--font monospace-ascii-3x7" ".3x7"
-	./run.sh "example" "ascii.txt" "--font monospace-ascii-2x5" ".2x5"
-	./run.sh "example" "ascii.txt" "--font monospace-ascii-3x5" ".3x5"
-	./run.sh "example" "ascii.txt" "--font proportional-ascii-3x6" ".3x6"
+	./run.sh "ascii"
 	cd $(EXAMPLES) && ./alphabet.sh
 
 fonts: clean

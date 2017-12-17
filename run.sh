@@ -47,6 +47,18 @@ _run_bash() {
     _fail $?
 }
 
+_ascii() {
+    for f in $(_fonts); do
+        ext="."$(echo $f | cut -d "-" -f 3)
+        echo "ascii: $f ($ext)"
+        _example "ascii.txt" "--font $f" $ext
+    done
+}
+
+_fonts() {
+    pyxstitch --help | grep "\-\-font" | head -n 1 | cut -d "{" -f 2 | cut -d "}" -f 1 | sed "s/detect//g;s/,/ /g"
+}
+
 cmd=""
 case $1 in
     "example")
@@ -60,6 +72,9 @@ case $1 in
         ;;
     "bash")
         cmd="_run_bash"
+        ;;
+    "ascii")
+        cmd="_ascii"
         ;;
 esac
 
