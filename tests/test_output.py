@@ -3,6 +3,7 @@
 import unittest
 import pyxstitch.output as out
 import pyxstitch.config as cfg
+import pyxstitch.version as ver
 
 
 class TestTextFormat(unittest.TestCase):
@@ -31,7 +32,8 @@ class TestTextFormat(unittest.TestCase):
         parts = vals.split("\n")
         self.assertEqual(3, len(parts))
         expect = """
-{\"type\": \"extras\", \"data\": [[\"1.6.0\", [0, 0]]]}"""
+{\"type\": \"extras\", \"data\": [[\"VERSION\", [0, 0]]]}
+                 """.replace("VERSION", ver.__version__)
         self.assertEqual(expect.replace("\n", "").strip(), parts[0])
         self.assertEqual("{\"type\": \"save\", \"data\": [\"blah\"]}",
                          parts[1])
