@@ -35,11 +35,7 @@ ascii:
 	cd $(EXAMPLES) && ./alphabet.sh
 
 fonts: clean
-	./run.sh "fonts" "monospace" "5x9"
-	./run.sh "fonts" "monospace" "3x7"
-	./run.sh "fonts" "monospace" "2x5"
-	./run.sh "fonts" "monospace" "3x5"
-	./run.sh "fonts" "proportional" "3x6"
+	./run.sh "fonts"
 
 go:
 	./run.sh "example" "go"

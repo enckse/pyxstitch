@@ -55,6 +55,15 @@ _ascii() {
     done
 }
 
+_build_fonts() {
+    for f in $(_fonts); do
+        t=$(echo "$f" | cut -d "-" -f 1)
+        s=$(echo "$f" | cut -d "-" -f 3)
+        echo "font generation: $f ($t,$s)"
+        _gen_font $t $s
+    done
+}
+
 _fonts() {
     pyxstitch --help | grep "\-\-font" | head -n 1 | cut -d "{" -f 2 | cut -d "}" -f 1 | sed "s/detect//g;s/,/ /g"
 }
@@ -68,7 +77,7 @@ case $1 in
         cmd="_handle_version"
         ;;
     "fonts")
-        cmd="_gen_font"
+        cmd="_build_fonts"
         ;;
     "bash")
         cmd="_run_bash"
