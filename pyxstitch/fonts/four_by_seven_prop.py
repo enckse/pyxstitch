@@ -1,6 +1,7 @@
 #!/usr/bin/python
 """An ASCII 4x7 proportional) pattern."""
 from pyxstitch.font import BaseFontFactory
+from pyxstitch.fonts.three_by_seven_mono import ThreeBySevenMono
 
 
 class FourBySevenProp(BaseFontFactory):
@@ -279,33 +280,6 @@ class FourBySevenProp(BaseFontFactory):
 |    |    |    |    |
 |    |    |    |    |
 """)
-        objs['u'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|1.00|    |1.00|    |
-|1.00|    |1.00|    |
-|1.00|1.00|1.00|    |
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['a'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|    |1.00|    |    |
-|1.00|    |1.00|    |
-|    |1.00|1.00|    |
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['c'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|    |1.00|1.00|    |
-|1.00|    |    |    |
-|    |1.00|1.00|    |
-|    |    |    |    |
-|    |    |    |    |
-""")
         objs['k'] = self._build_character("""
 |1.00|    |    |    |
 |1.00|    |    |    |
@@ -330,15 +304,6 @@ class FourBySevenProp(BaseFontFactory):
 |    |1.00|1.00|1.00|
 |1.00|    |    |1.00|
 |    |1.00|1.00|1.00|
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['e'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|    |1.00|    |    |
-|1.00|0.02|1.00|    |
-|1.00|0.02|0.02|    |
 |    |    |    |    |
 |    |    |    |    |
 """)
@@ -387,15 +352,6 @@ class FourBySevenProp(BaseFontFactory):
 |    |    |    |    |
 |    |    |    |    |
 """)
-        objs['g'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|    |1.00|    |    |
-|1.00|    |1.00|    |
-|    |1.00|1.00|    |
-|    |    |1.00|    |
-|1.00|1.00|    |    |
-""")
         objs['l'] = self._build_character("""
 |    |1.00|    |    |
 |    |1.00|    |    |
@@ -411,42 +367,6 @@ class FourBySevenProp(BaseFontFactory):
 |    |    |    |    |
 |1.00|    |    |    |
 |1.00|    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['n'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|1.00|1.00|1.00|    |
-|1.00|    |    |1.00|
-|1.00|    |    |1.00|
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['m'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|1.00|    |    |1.00|
-|0.04|1.00|1.00|0.08|
-|0.04|    |    |0.08|
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['w'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|0.04|    |    |0.08|
-|0.04|1.00|1.00|0.08|
-|1.00|    |    |1.00|
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['o'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|    |1.00|1.00|    |
-|1.00|    |    |1.00|
-|    |1.00|1.00|    |
 |    |    |    |    |
 |    |    |    |    |
 """)
@@ -495,15 +415,6 @@ class FourBySevenProp(BaseFontFactory):
 |    |    |    |    |
 |    |    |    |    |
 """)
-        objs['s'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|    |1.00|1.00|    |
-|    |1.00|    |    |
-|1.00|1.00|    |    |
-|    |    |    |    |
-|    |    |    |    |
-""")
         objs['>'] = self._build_character("""
 |1.00|    |    |    |
 |    |1.00|    |    |
@@ -537,15 +448,6 @@ class FourBySevenProp(BaseFontFactory):
 |1.00|    |    |    |
 |0.1024|0.32|    |    |
 |0.8192|1.00|0.34|    |
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['r'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|    |1.00|1.00|    |
-|1.00|    |    |    |
-|1.00|    |    |    |
 |    |    |    |    |
 |    |    |    |    |
 """)
@@ -678,11 +580,11 @@ class FourBySevenProp(BaseFontFactory):
         objs['q'] = self._build_character("""
 |    |    |    |    |
 |    |    |    |    |
-|    |1.00|    |    |
-|1.00|    |1.00|    |
 |    |1.00|1.00|    |
-|    |    |1.00|    |
-|    |    |1.00|    |
+|1.00|    |    |1.00|
+|    |1.00|1.00|1.00|
+|    |    |    |1.00|
+|    |    |    |1.00|
 """)
         objs['j'] = self._build_character("""
 |    |    |    |    |
@@ -693,47 +595,11 @@ class FourBySevenProp(BaseFontFactory):
 |1.00|    |1.00|    |
 |    |1.00|    |    |
 """)
-        objs['v'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|1.00|    |1.00|    |
-|1.00|    |1.00|    |
-|    |1.00|    |    |
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['x'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|1.00|    |1.00|    |
-|    |1.00|    |    |
-|1.00|    |1.00|    |
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['y'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|1.00|    |1.00|    |
-|1.00|    |1.00|    |
-|    |1.00|1.00|    |
-|    |    |1.00|    |
-|1.00|1.00|    |    |
-""")
         objs['Z'] = self._build_character("""
 |1.00|1.00|1.00|    |
 |    |    |1.00|    |
 |    |1.00|    |    |
 |1.00|    |    |    |
-|1.00|1.00|1.00|    |
-|    |    |    |    |
-|    |    |    |    |
-""")
-        objs['z'] = self._build_character("""
-|    |    |    |    |
-|    |    |    |    |
-|1.00|1.00|1.00|    |
-|    |0.16|    |    |
 |1.00|1.00|1.00|    |
 |    |    |    |    |
 |    |    |    |    |
@@ -873,4 +739,12 @@ class FourBySevenProp(BaseFontFactory):
 |    |    |    |    |
 |    |    |    |    |
 """)
+        basis = ThreeBySevenMono()._initialize_characters()
+        for k in basis.keys():
+            if k in objs:
+                continue
+            old = basis[k].raw
+            parts = old.split("\n")
+            parts = ["{}    |".format(x) for x in parts if len(x) != 0]
+            objs[k] = self._build_character("\n".join(parts))
         return objs
