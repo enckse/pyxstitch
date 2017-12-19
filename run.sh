@@ -68,8 +68,20 @@ _fonts() {
     pyxstitch --help | grep "\-\-font" | head -n 1 | cut -d "{" -f 2 | cut -d "}" -f 1 | sed "s/detect//g;s/,/ /g"
 }
 
+_zoom() {
+    local zoom
+    zoom="$BIN/zoom.$FORMAT"
+    pyxstitch --file $EXAMPLES/$HW"ascii.txt" --format $FORMAT --hszoom 7 --hezoom 17 --vszoom 12 --vezoom 50 --quiet --theme bw --kv page_legend=1 --multipage off --output $zoom
+    _fail $?
+	diff $zoom ${EXAMPLE_OUT}zoom.$FORMAT
+    _fail $?
+}
+
 cmd=""
 case $1 in
+    "zoom")
+        cmd="_zoom"
+        ;;
     "example")
         cmd="_example"
         ;;

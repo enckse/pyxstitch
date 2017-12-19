@@ -50,6 +50,29 @@ class InputArgs(object):
         self.is_text = args.file == _TXT
         self.is_dark = args.theme.startswith(_DARK)
         self.is_dmc = args.theme.endswith(_DMC)
+        self.invalid = False
+        self._max = sys.maxsize
+        self.hzoom = self._zoom("horizontal", args.hszoom, args.hezoom)
+        self.vzoom = self._zoom("vertical", args.vszoom, args.vezoom)
+
+    def _zoom(self, zoom_type, start, end):
+        """Get zoom tuple for start/end."""
+        u_start = 0
+        u_end = self._max
+        if start > 0:
+            u_start = start
+        if end > 0:
+            u_end = end
+        error_msg = None
+        if start < 0 or end < 0:
+            error_msg = "< 0"
+        elif end < start:
+            error_msg = "end < start"
+        if error_msg:
+            log.Log.write("invalid {} zoom request ({})".format(zoom_type,
+                                                                error_msg))
+            self.invalid = True
+        return (u_start, u_end)
 
 
 def _create_file_name(file_name, args):
@@ -138,10 +161,17 @@ def main():
     parser.add_argument('--version', action="store_true")
     parser.add_argument('--quiet', action="store_true")
     parser.add_argument('--symbols', type=str)
+    parser.add_argument('--hszoom', type=int, default=0)
+    parser.add_argument('--hezoom', type=int, default=0)
+    parser.add_argument('--vszoom', type=int, default=0)
+    parser.add_argument('--vezoom', type=int, default=0)
     args = parser.parse_args()
     if args.quiet:
         log.Log.is_verbose = False
-    _run(InputArgs(args), default_font)
+    inputs = InputArgs(args)
+    if inputs.invalid:
+        exit(1)
+    _run(inputs, default_font)
 
 
 def _run(args, default_font):
@@ -241,7 +271,9 @@ def _run(args, default_font):
                                    columns=cols,
                                    symbols=args.symbols,
                                    config=args.kv,
-                                   config_file=config_file)
+                                   config_file=config_file,
+                                   horizontal=args.hzoom,
+                                   vertical=args.vzoom)
     if args.font == default_font:
         log.Log.write("font: {}".format(formatting.font_factory.display_name))
     log.Log.write("Using lexer: {}".format(lexer.name))

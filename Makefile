@@ -22,7 +22,10 @@ check: install test example analyze
 install:
 	python setup.py install
 
-example: install clean go c py ascii raw bash fonts mapping symbols kvs banner logo
+example: install clean go c py ascii raw bash fonts mapping symbols zoom kvs banner logo
+
+zoom:
+	./run.sh "zoom"
 
 banner:
 	pyxstitch --version

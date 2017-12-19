@@ -174,6 +174,14 @@ to adjust the font scaling for the legend when in the output
 --kv page_font_size=100
 ```
 
+### zoom
+
+you can zoom the pattern in by specifying the vertical and/or horizontal zoom start/end
+```
+pyxstitch --hszoom 20 --hezoom 30 --vszoom 10 --vezoom 40
+```
+will zoom the output to horizontal grid position 20 to 30 and vertical grid position 10 to 40
+
 # examples
 
 there are example source code files and corresponding output pngs in the `examples` folder

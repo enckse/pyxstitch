@@ -44,6 +44,8 @@ class CrossStitchFormatter(Formatter):
         self.config = None
         self.config_file = None
         self.is_bw = False
+        self.vzoom = None
+        self.hzoom = None
         self.floss = Floss()
         for token, style in self.style:
             if style['color']:
@@ -156,6 +158,12 @@ class CrossStitchFormatter(Formatter):
     def _init_output(self, outfile):
         """Init output."""
 
+    def _zoom(self, pos, zoom):
+        """Zoom check."""
+        # we're zero-index before entering
+        pos_one = pos + 1
+        return pos_one < zoom[0] or pos_one > zoom[1]
+
     def format(self, tokensource, outfile):
         """Override to format."""
         if self.dark:
@@ -239,17 +247,24 @@ class CrossStitchFormatter(Formatter):
         for entry in entries:
             for height in self.font_factory.height():
                 y += 1
+                if self._zoom(y, self.vzoom):
+                    continue
                 x = -1
                 grid = []
                 has = False
                 for cur, style, ch in entry:
                     dmc = style.dmc
                     color = self._symbols
-                    self._writer.meta(cur.metadata(), style.save(), ch)
+                    first_write = True
                     if self.colorize:
                         color = dmc.name
                     for cell in cur.cells(height):
                         x += 1
+                        if self._zoom(x, self.hzoom):
+                            continue
+                        if first_write:
+                            self._writer.meta(cur.metadata(), style.save(), ch)
+                            first_write = False
                         x_start = left_pad + offset + 0 + x * offset
                         y_start = top_pad + offset + 0 + y * offset
                         x_end = left_pad + offset + offset + x * offset
@@ -289,9 +304,15 @@ class CrossStitchFormatter(Formatter):
         for l in lines:
             self._writer.line((l[0], l[1], l[2], l[3]), fill=l[4])
         # add labels
+        marked_widths = False
         for h in range(calc_height):
-            if h == 0:
+            if self._zoom(h, self.vzoom):
+                continue
+            if not marked_widths:
+                marked_widths = True
                 for w in range(calc_width):
+                    if self._zoom(w, self.hzoom):
+                        continue
                     if w % 10 == 0 or w == mid_width:
                         char = str(w)
                         if w == mid_width:
@@ -337,7 +358,9 @@ def new_formatter(style,
                   rows=None,
                   columns=None,
                   symbols=None,
-                  config_file=None):
+                  config_file=None,
+                  horizontal=None,
+                  vertical=None):
     """Create a new formatter."""
     formatting = CrossStitchFormatter(style=style)
     formatting.colorize = colorize
@@ -346,6 +369,8 @@ def new_formatter(style,
     formatting.is_multipage = multipage
     formatting.is_raw = is_raw
     formatting.is_bw = is_bw
+    formatting.hzoom = horizontal
+    formatting.vzoom = vertical
     if map_colors is not None and len(map_colors) > 0:
         for mapped in map_colors:
             if not formatting.map_color(mapped):
