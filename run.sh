@@ -71,7 +71,7 @@ _fonts() {
 _zoom() {
     local zoom
     zoom="$BIN/zoom.$FORMAT"
-    pyxstitch --file $EXAMPLES/$HW"ascii.txt" --quiet --format $FORMAT --hszoom 7 --hezoom 17 --vszoom 12 --vezoom 50 --quiet --theme bw --kv page_legend=1 --multipage off --output $zoom
+    pyxstitch --file $EXAMPLES/$HW"ascii.txt" --quiet --format $FORMAT --hszoom 7 --hezoom 17 --vszoom 12 --vezoom 50 --theme bw --kv page_legend=1 --multipage off --output $zoom
     _fail $?
 	diff $zoom ${EXAMPLE_OUT}zoom.$FORMAT
     _fail $?
