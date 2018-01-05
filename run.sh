@@ -73,6 +73,8 @@ _zoom() {
     zoom="$BIN/zoom.$FORMAT"
     pyxstitch --file $EXAMPLES/$HW"ascii.txt" --quiet --format $FORMAT --hszoom 7 --hezoom 17 --vszoom 12 --vezoom 50 --theme bw --kv page_legend=1 --multipage off --output $zoom
     _fail $?
+    _handle_version "$zoom"
+    _fail $?
 	diff $zoom ${EXAMPLE_OUT}zoom.$FORMAT
     _fail $?
 }
