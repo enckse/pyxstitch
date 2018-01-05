@@ -8,6 +8,7 @@ pyxstitch is an application (and associated library/compenents) that takes sourc
 See a examples and completed cross stitch patterns [here!](https://enckse.github.io/pyxstitch/)
 
 [![Build Status](https://travis-ci.org/enckse/pyxstitch.svg?branch=master)](https://travis-ci.org/enckse/pyxstitch)
+[![Build status](https://ci.appveyor.com/api/projects/status/w2mv66xci68k7hw2?svg=true)](https://ci.appveyor.com/project/enckse/pyxstitch)
 
 # install
 
