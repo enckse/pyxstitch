@@ -8,6 +8,8 @@ TAG_CURRENT=$(shell cat $(VERS_PY) | grep "$(TAG)")
 EXAMPLES=examples/
 EXAMPLE_OUT=$(EXAMPLES)outputs/
 PYPIRC=$(shell echo $$HOME)/.pypirc
+APPVEYOR=appveyor.yml
+TMP_APPVEYOR=$(BIN)/$(APPVEYOR)
 NO_TAG="na"
 ifdef TRAVIS
 TAG_CURRENT=$(NO_TAG)
@@ -17,7 +19,7 @@ TAG_CURRENT=$(NO_TAG)
 endif
 .PHONY:
 
-check: install test example analyze
+check: install test example analyze appveyor
 
 install:
 	python setup.py install
@@ -98,6 +100,12 @@ endif
 
 test: clean version text
 	python -m unittest $(TESTS)
+
+appveyor: clean
+	cat $(APPVEYOR) | head -n -2 > $(TMP_APPVEYOR)
+	@echo "test_script:" >> $(TMP_APPVEYOR)
+	@echo "  - python -m unittest $(TESTS)" >> $(TMP_APPVEYOR)
+	mv $(TMP_APPVEYOR) $(APPVEYOR)
 
 clean:
 	mkdir -p $(BIN)
