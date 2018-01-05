@@ -8,6 +8,7 @@ TAG=$(git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
 EXAMPLES=examples/
 EXAMPLE_OUT=${EXAMPLES}outputs/
 NO_TAG="na"
+COMPLETIONS="completions/"
 
 _handle_version() {
     sed -i "s/$VERS/\_\_VERSION\_\_/g" $1
@@ -18,6 +19,33 @@ _fail() {
         echo "failed"
         exit 1
     fi
+}
+
+_completions() {
+    _bash=$COMPLETIONS/bash
+    # bash
+    printf "%s" 'function _pyxstitch()
+{
+    local cur opts 
+    if [ $COMP_CWORD -eq 1 ]; then
+        cur=${COMP_WORDS[COMP_CWORD]}
+        opts=$(echo "' > $_bash
+    first=1
+    for f in $(pyxstitch --help | sed "s/^\s*//g;s/, //g;s/^-h//g" | grep "^\-" | cut -d " " -f 1 | sort); do
+        if [ $first -eq 1 ]; then
+            fmt="%s"
+            first=0
+        else
+            fmt=" %s"
+        fi
+        printf "$fmt" $f >> $_bash
+    done
+    echo '")
+        COMPREPLY=( $(compgen -W "$opts" -- $cur) )
+    fi
+}
+
+complete -F _pyxstitch pyxstitch' >> $_bash
 }
 
 _example() {
@@ -98,6 +126,9 @@ case $1 in
         ;;
     "ascii")
         cmd="_ascii"
+        ;;
+    "completions")
+        cmd="_completions"
         ;;
 esac
 

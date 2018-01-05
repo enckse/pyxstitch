@@ -19,7 +19,7 @@ TAG_CURRENT=$(NO_TAG)
 endif
 .PHONY:
 
-check: install test example analyze appveyor
+check: install test example appveyor completion analyze
 
 install:
 	python setup.py install
@@ -110,3 +110,6 @@ appveyor: clean
 clean:
 	mkdir -p $(BIN)
 	rm -f $(BIN)/*
+
+completion:
+	./run.sh "completions"
