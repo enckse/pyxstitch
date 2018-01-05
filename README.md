@@ -14,7 +14,7 @@ See a examples and completed cross stitch patterns [here!](https://enckse.github
 
 ## pip
 
-Available via pip
+Available via [pip](https://pypi.python.org/pypi/pyxstitch/)
 ```
 pip install pyxstitch
 ```
