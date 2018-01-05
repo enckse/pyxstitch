@@ -8,6 +8,7 @@ install:
   # Prepend chosen Python to the PATH of this build
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - "python --version"
+  - "%PYTHON%\\python.exe -m pip install pygments PIL"
 
 test_script:
   - python -m unittest tests.test_character tests.test_config tests.test_floss tests.test_font tests.test_formatter tests.test_formatter_layout tests.test_hex tests.test_output tests.test_symbols
