@@ -5,4 +5,4 @@ environment:
     - PYTHON: "C:\\Python36-x64"
 
 test_script:
-    - python -m unittest tests/*.py
+    - python -m unittest tests/test_character.py
