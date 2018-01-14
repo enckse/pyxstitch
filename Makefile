@@ -55,7 +55,7 @@ logo:
 	pyxstitch --file $(EXAMPLES)/logo.txt --quiet --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output $(BIN)/logo.png
 
 pypi-check:
-	pip install twine
+	pip install twine docutils
 ifeq ($(wildcard $(PYPIRC)),)
 		$(error missing pypirc file $(PYPIRC))
 endif
