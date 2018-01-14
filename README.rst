@@ -49,6 +49,7 @@ or
 ::
 
     pip install -e .
+
 os packaging
 ------------
 
@@ -59,13 +60,14 @@ os packaging
 +------------+----------------------------------------------------------------+
 
 usage
-=====
+-----
 
 to run
 
 ::
 
     pyxstitch --file program.py
+
 styling
 ~~~~~~~
 
