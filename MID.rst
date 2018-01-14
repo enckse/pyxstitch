@@ -1,32 +1,17 @@
-install
-=======
+os packaging
+------------
 
-pip
----
++------------+----------------------------------------------------------------+
+| os         | link                                                           |
++============+================================================================+
+| arch linux | `aur <https://aur.archlinux.org/packages/python-pyxstitch/>`__ |
++------------+----------------------------------------------------------------+
 
-Available via `pip <https://pypi.python.org/pypi/pyxstitch/>`__
+usage
+=====
 
-::
-
-    pip install pyxstitch
-
-source
-------
-
--  Clone this repo and…
+to run
 
 ::
 
-    python setup.py install
-
-or
-
-::
-
-    pip install .
-
-or
-
-::
-
-    pip install -e .
+    pyxstitch --file program.py
