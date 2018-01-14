@@ -18,10 +18,10 @@ See a examples and completed cross stitch patterns
     :target: https://ci.appveyor.com/project/enckse/pyxstitch
 
 install
-=======
+-------
 
 pip
----
+~~~
 
 Available via `pip <https://pypi.python.org/pypi/pyxstitch/>`__
 
@@ -30,7 +30,7 @@ Available via `pip <https://pypi.python.org/pypi/pyxstitch/>`__
     pip install pyxstitch
 
 source
-------
+~~~~~~
 
 -  Clone this repo and…
 
@@ -51,7 +51,7 @@ or
     pip install -e .
 
 os packaging
-------------
+~~~~~~~~~~~~
 
 +------------+----------------------------------------------------------------+
 | os         | link                                                           |
