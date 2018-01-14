@@ -13,3 +13,6 @@ See a examples and completed cross stitch patterns
 
 .. image:: https://travis-ci.org/enckse/pyxstitch.svg?branch=master
     :target: https://travis-ci.org/enckse/pyxstitch
+
+.. image:: https://ci.appveyor.com/api/projects/status/w2mv66xci68k7hw2?svg=true
+    :target: https://ci.appveyor.com/project/enckse/pyxstitch
