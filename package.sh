@@ -19,6 +19,16 @@ if [ $cnt -ne 1 ]; then
     echo "unable to find unique package: $file"
     exit 1
 fi
+python setup.py check -s
+if [ $? -ne 0 ]; then
+    echo "check failed"
+    exit 1
+fi
+python setup.py check -s --restructuredtext
+if [ $? -ne 0 ]; then
+    echo "rst check failed"
+    exit 1
+fi
 git log -n 1 --decorate | grep -q "tag: v"
 if [ $? -ne 0 ]; then
     echo "need to be on a tag to release a package"

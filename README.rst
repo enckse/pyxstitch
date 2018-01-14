@@ -121,6 +121,7 @@ produces no highlighting but
     cat test.py | pyxstitch --lexer autodetect
     # or tell it which pygments lexer to use
     cat test.py | pyxstitch --lexer python
+
 fonts
 ~~~~~
 
@@ -170,6 +171,7 @@ sets the default page height (600 default)
 ::
 
     --kv page_height=500
+
 width
 ~~~~~
 
