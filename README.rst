@@ -1,7 +1,7 @@
 pyxstitch
 =========
 
-.. image:: https://raw.githubusercontent.com/enckse/pyxstitch/master/images/pyxstitch.pn
+.. image:: https://raw.githubusercontent.com/enckse/pyxstitch/master/images/pyxstitch.png
 
 
 pyxstitch is an application (and associated library/compenents) that
