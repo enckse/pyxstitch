@@ -110,6 +110,7 @@ appveyor: clean
 clean:
 	mkdir -p $(BIN)
 	rm -f $(BIN)/*
+	rm -rf dist/
 
 completion:
 	./run.sh "completions"
