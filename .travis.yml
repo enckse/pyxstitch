@@ -8,3 +8,7 @@ before_install:
 
 script:
     - make
+
+notifications:
+    email:
+        on_failure: change
