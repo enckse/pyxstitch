@@ -18,10 +18,10 @@ See a examples and completed cross stitch patterns
     :target: https://ci.appveyor.com/project/enckse/pyxstitch
 
 install
--------
+=======
 
 pip
-~~~
+---
 
 Available via `pip <https://pypi.python.org/pypi/pyxstitch/>`__
 
@@ -30,7 +30,7 @@ Available via `pip <https://pypi.python.org/pypi/pyxstitch/>`__
     pip install pyxstitch
 
 source
-~~~~~~
+------
 
 -  Clone this repo and…
 
@@ -51,7 +51,7 @@ or
     pip install -e .
 
 os packaging
-~~~~~~~~~~~~
+------------
 
 +------------+----------------------------------------------------------------+
 | os         | link                                                           |
@@ -145,9 +145,8 @@ or to map one color to another
 ::
 
     pyxstitch --file test.c --map 000000=ffffff
-
 advanced
---------
+~~~~~~~~
 
 some configuration options are available via the ``--kv`` input
 settings. Alternatively set these in a $HOME/.pyxstitch.config file to
