@@ -2,6 +2,7 @@ SRC=$(shell find . -type f -name "*.py" | grep -v "$(EXAMPLES)" | grep -v "build
 TESTS=$(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!g")
 VERS_PY=pyxstitch/version.py
 BIN=bin
+MAN1=pyxstitch.1
 FORMAT=pyxstitch
 TAG=$(shell git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
 TAG_CURRENT=$(shell cat $(VERS_PY) | grep "$(TAG)")
@@ -114,3 +115,7 @@ clean:
 
 completion:
 	./run.sh "completions"
+
+man: clean
+	./run.sh "man"
+	cd $(BIN) && gzip $(MAN1)

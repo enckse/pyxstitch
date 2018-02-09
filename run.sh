@@ -9,6 +9,7 @@ EXAMPLES=examples/
 EXAMPLE_OUT=${EXAMPLES}outputs/
 NO_TAG="na"
 COMPLETIONS="completions/"
+MAN1="pyxstitch.1"
 
 _handle_version() {
     sed -i "s/$VERS/\_\_VERSION\_\_/g" $1
@@ -19,6 +20,10 @@ _fail() {
         echo "failed"
         exit 1
     fi
+}
+
+_manpages() {
+    cat $MAN1 | sed "s/<Date>/$(date +"%B %Y")/g;s/<Version>/$VERS/g" > $BIN/$MAN1
 }
 
 _completions() {
@@ -129,6 +134,9 @@ case $1 in
         ;;
     "completions")
         cmd="_completions"
+        ;;
+    "man")
+        cmd="_manpages"
         ;;
 esac
 
