@@ -118,4 +118,3 @@ completion:
 
 man: clean
 	./run.sh "man"
-	cd $(BIN) && gzip $(MAN1)

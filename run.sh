@@ -23,7 +23,8 @@ _fail() {
 }
 
 _manpages() {
-    cat $MAN1 | sed "s/<Date>/$(date +"%B %Y")/g;s/<Version>/$VERS/g" > $BIN/$MAN1
+    cat doc/$MAN1 | sed "s/<Date>/$(date +"%B %Y")/g;s/<Version>/$VERS/g" > $BIN/$MAN1
+    cd $BIN && gzip $MAN1
 }
 
 _completions() {
