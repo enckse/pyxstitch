@@ -133,12 +133,12 @@ def main():
             description='Convert source code files to cross stitch patterns.')
     parser.add_argument('--file', help="""input source code file to create a
 pattern from.""", type=str, default=_TXT)
-    parser.add_argument('--lexer', help="""the source code lexer to use when 
+    parser.add_argument('--lexer', help="""the source code lexer to use when
 reading input and converting input tokens into colors""", type=str)
     parser.add_argument('--output', help="""output name""", type=str)
     parser.add_argument('--theme',
                         help="""pattern theme. indicates the background and
-symbol color outputs for the output pattern"""
+symbol color outputs for the output pattern""",
                         type=str,
                         default=_LIGHT,
                         choices=[_DARK,
@@ -146,30 +146,60 @@ symbol color outputs for the output pattern"""
                                  _DARK_DMC,
                                  _LIGHT_DMC,
                                  _B_AND_W])
-    parser.add_argument('--kv', metavar='N', type=str, nargs='+')
-    parser.add_argument('--map', metavar='N', type=str, nargs='+')
-    parser.add_argument('--config', type=str)
-    parser.add_argument('--multipage', type=str,
+    parser.add_argument('--kv', metavar='N', help="""key/value configuration
+parameters for setting the output format""", type=str, nargs='+')
+    parser.add_argument('--map', help="""when selecting colors will map one
+token color to another color (override)""", metavar='N', type=str, nargs='+')
+    parser.add_argument('--config', help="""configuration file""", type=str)
+    parser.add_argument('--multipage', help="""enable multipage output""",
+                        type=str,
                         default=out_fmt.MULTI_PAGE_AUTO,
                         choices=[out_fmt.MULTI_PAGE_AUTO,
                                  out_fmt.MULTI_PAGE_ON,
                                  out_fmt.MULTI_PAGE_OFF])
-    parser.add_argument('--format', type=str, default=_PNG,
+    parser.add_argument('--format',
+                        help="""output file format""",
+                        type=str,
+                        default=_PNG,
                         choices=[_PNG, _PDF, "jpg", _RAW])
     parser.add_argument('--style',
+                        help="""token color styling (from pygments)""",
                         default=_DEF_STYLE,
                         choices=list(get_all_styles()))
     parser.add_argument('--font',
+                        help="""font to use for the pattern""",
                         default=default_font,
                         choices=list(fnt.get_all_fonts()) + [default_font])
-    parser.add_argument('--version', action="store_true")
-    parser.add_argument('--quiet', action="store_true")
-    parser.add_argument('--symbols', type=str)
-    parser.add_argument('--hszoom', type=int, default=0)
-    parser.add_argument('--hezoom', type=int, default=0)
-    parser.add_argument('--vszoom', type=int, default=0)
-    parser.add_argument('--vezoom', type=int, default=0)
+    parser.add_argument('--version',
+                        action="store_true",
+                        help="""display version""")
+    parser.add_argument('--quiet',
+                        action="store_true",
+                        help="""less verbose output""")
+    parser.add_argument('--symbols',
+                        type=str,
+                        help="""symbol set for stitching symbols""")
+    parser.add_argument('--hszoom',
+                        type=int,
+                        default=0,
+                        help="horizontal start zoom")
+    parser.add_argument('--hezoom',
+                        type=int,
+                        default=0,
+                        help="horizontal end zoom")
+    parser.add_argument('--vszoom', type=int, default=0,
+                        help="vertical start zoom")
+    parser.add_argument('--vezoom', type=int, default=0,
+                        help="vertical end zoom")
     args = parser.parse_args()
+    if args.version:
+        if not args.quiet:
+            log.Log.writeln()
+            _print_banner()
+        log.Log.write(vers.__version__)
+        if not args.quiet:
+            log.Log.writeln()
+        exit(0)
     if args.quiet:
         log.Log.is_verbose = False
     inputs = InputArgs(args)
@@ -180,12 +210,6 @@ symbol color outputs for the output pattern"""
 
 def _run(args, default_font):
     """Run pyxstitch."""
-    if args.version:
-        log.Log.writeln()
-        _print_banner()
-        log.Log.write(vers.__version__)
-        log.Log.writeln()
-        exit(0)
     content = None
     file_name = None
     file_ext = os.path.splitext(args.file)
