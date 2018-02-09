@@ -131,10 +131,14 @@ def main():
     default_font = fnt.Font().detect
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
-    parser.add_argument('--file', type=str, default=_TXT)
-    parser.add_argument('--lexer', type=str)
-    parser.add_argument('--output', type=str)
+    parser.add_argument('--file', help="""input source code file to create a
+pattern from.""", type=str, default=_TXT)
+    parser.add_argument('--lexer', help="""the source code lexer to use when 
+reading input and converting input tokens into colors""", type=str)
+    parser.add_argument('--output', help="""output name""", type=str)
     parser.add_argument('--theme',
+                        help="""pattern theme. indicates the background and
+symbol color outputs for the output pattern"""
                         type=str,
                         default=_LIGHT,
                         choices=[_DARK,
