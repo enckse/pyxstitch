@@ -84,6 +84,9 @@ _run_bash() {
 _ascii() {
     for f in $(_fonts); do
         ext="."$(echo $f | cut -d "-" -f 3)
+        if echo "$f" | grep -q "prop"; then
+            ext="${ext}p"
+        fi
         echo "ascii: $f ($ext)"
         _example "ascii.txt" "--font $f" $ext
     done
