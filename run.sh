@@ -68,7 +68,7 @@ _example() {
 _gen_font() {
     pyxstitch --file $EXAMPLES/$HW"ascii.txt" --quiet --theme bw --kv page_legend=1 --multipage off --output $BIN/$1.png --font $1-ascii-$2
     _fail $?
-    cp $BIN/$1.png $BIN/$2.png
+    cp $BIN/$1.png $BIN/$3.png
     _fail $?
 }
 
@@ -96,8 +96,12 @@ _build_fonts() {
     for f in $(_fonts); do
         t=$(echo "$f" | cut -d "-" -f 1)
         s=$(echo "$f" | cut -d "-" -f 3)
-        echo "font generation: $f ($t,$s)"
-        _gen_font $t $s
+        m=$s
+        if echo $f | grep -q "prop"; then
+            m=${m}p
+        fi
+        echo "font generation: $f ($t,$s,$m)"
+        _gen_font $t $s $m
     done
 }
 
