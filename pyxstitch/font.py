@@ -207,12 +207,14 @@ class Font(object):
         from pyxstitch.fonts.two_by_five_mono import TwoByFiveMono
         from pyxstitch.fonts.three_by_six_prop import ThreeBySixProp
         from pyxstitch.fonts.four_by_seven_prop import FourBySevenProp
+        from pyxstitch.fonts.five_by_nine_prop import FiveByNineProp
         self._supported_types = [FiveByNineMono,
                                  ThreeBySevenMono,
                                  TwoByFiveMono,
                                  ThreeByFiveMono,
                                  ThreeBySixProp,
-                                 FourBySevenProp]
+                                 FourBySevenProp,
+                                 FiveByNineProp]
         self._names = {}
         self._instance_cache = []
         # tuple is (index, column threshold, row threshold)
@@ -222,6 +224,7 @@ class Font(object):
         self._add_instance(ThreeByFiveMono, (3, 46, 31))
         self._add_instance(ThreeBySixProp, (4, None))
         self._add_instance(FourBySevenProp, (5, None))
+        self._add_instance(FiveByNineProp, (6, None))
 
     def _add_instance(self, use_type, auto_settings):
         """Add a cached instance."""
