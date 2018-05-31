@@ -4,21 +4,11 @@ VERS_PY=pyxstitch/version.py
 BIN=bin
 MAN1=pyxstitch.1
 FORMAT=pyxstitch
-TAG=$(shell git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
-TAG_CURRENT=$(shell cat $(VERS_PY) | grep "$(TAG)")
 EXAMPLES=examples/
 EXAMPLE_OUT=$(EXAMPLES)outputs/
 PYPIRC=$(shell echo $$HOME)/.pypirc
 APPVEYOR=appveyor.yml
 TMP_APPVEYOR=$(BIN)/$(APPVEYOR)
-NO_TAG="na"
-ifdef TRAVIS
-TAG_CURRENT=$(NO_TAG)
-endif
-ifeq ($(TAG_CURRENT),)
-TAG_CURRENT=$(NO_TAG)
-endif
-.PHONY:
 
 check: install test example appveyor completion analyze
 
@@ -94,12 +84,7 @@ analyze:
 	pycodestyle $(SRC)
 	pep257 $(SRC)
 
-version:
-ifneq ($(TAG_CURRENT),$(NO_TAG))
-	$(error version is not properly set)
-endif
-
-test: clean version text
+test: clean text
 	python -m unittest $(TESTS)
 
 appveyor: clean
