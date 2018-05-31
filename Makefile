@@ -13,6 +13,7 @@ INSTALL      :=
 INSTALL_OPTS := --root="$(INSTALL)/" --optimize=1
 RUN_SH       := ./run.sh
 PACK_SH      := ./package.sh
+PYPI         := pypi-test pypi-live
 
 # groupings
 all: install check
@@ -51,11 +52,8 @@ ifeq ($(wildcard $(PYPIRC)),)
 endif
 	python setup.py sdist
 
-pypi-test: pypi-check
-	$(PACK_SH) test
-
-pypi-live: pypi-check
-	$(PACK_SH)
+$(PYPI): pypi-check
+	$(PACK_SH) $@
 
 raw:
 	cd $(EXAMPLES) && ./replay.sh

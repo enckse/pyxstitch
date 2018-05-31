@@ -2,7 +2,9 @@
 DIST=dist/
 REPO=""
 if [ ! -z "$1" ]; then
-    REPO="-r $1pypi"
+    if [[ "$1" == "pypi-test" ]]; then
+        REPO="-r testpypi"
+    fi
 fi
 if [ ! -d $DIST ]; then
     echo "no dist found..."
