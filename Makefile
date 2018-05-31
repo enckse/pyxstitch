@@ -10,6 +10,7 @@ TMP_APPVEYOR := $(BIN)/$(APPVEYOR)
 LANGS        := go c py ascii.txt
 RUNS         := zoom fonts bash completions man
 INSTALL      :=
+INSTALL_OPTS := --root="$(INSTALL)/" --optimize=1
 RUN_SH       := ./run.sh
 PACK_SH      := ./package.sh
 
@@ -23,7 +24,7 @@ runs: $(RUNS)
 languages: $(LANGS)
 
 install:
-	python setup.py install --root="$(INSTALL)/" --optimize=1
+	python setup.py install $(INSTALL_OPTS)
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
