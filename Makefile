@@ -1,6 +1,5 @@
 SRC=$(shell find . -type f -name "*.py" | grep -v "$(EXAMPLES)" | grep -v "build" | grep -v "bin")
 TESTS=$(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!g")
-VERS_PY=pyxstitch/version.py
 BIN=bin
 MAN1=pyxstitch.1
 FORMAT=pyxstitch
@@ -9,11 +8,12 @@ EXAMPLE_OUT=$(EXAMPLES)outputs/
 PYPIRC=$(shell echo $$HOME)/.pypirc
 APPVEYOR=appveyor.yml
 TMP_APPVEYOR=$(BIN)/$(APPVEYOR)
+INSTALL :=
 
 check: install test example appveyor completion analyze
 
 install:
-	python setup.py install
+	python setup.py install --root="$(INSTALL)/" --optimize=1
 
 example: install clean go c py ascii raw bash fonts mapping symbols zoom kvs banner logo
 
