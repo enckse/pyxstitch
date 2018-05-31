@@ -11,7 +11,7 @@ install:
     - python setup.py -q install
 
 script:
-    - make
+    - make check
 
 notifications:
     email:
