@@ -15,7 +15,6 @@ PACK_SH      := ./package.sh
 
 # groupings
 check: install test example appveyor analyze
-ci: patch check
 example: install clean ascii raw mapping symbols kvs banner logo runs
 
 # meta
@@ -24,9 +23,6 @@ languages: $(LANGS)
 
 install:
 	python setup.py install --root="$(INSTALL)/" --optimize=1
-
-patch:
-	sed -i "/install_requires/d" setup.py
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
