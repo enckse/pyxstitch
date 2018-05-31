@@ -8,7 +8,7 @@ before_install:
     - sudo pip install pillow pygments
 
 script:
-    - make
+    - make ci
 
 notifications:
     email:
