@@ -5,10 +5,13 @@ python:
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y golang gcc
-    - sudo pip3 install pillow pygments
+
+install:
+    - pip install pillow pygments
+    - python setup.py -q install
 
 script:
-    - make ci
+    - make
 
 notifications:
     email:

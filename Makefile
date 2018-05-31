@@ -14,8 +14,8 @@ RUN_SH       := ./run.sh
 PACK_SH      := ./package.sh
 
 # groupings
-check: install test example appveyor analyze
-ci: patch check
+all: install check
+check: test example appveyor analyze
 example: install clean ascii raw mapping symbols kvs banner logo runs
 
 # meta
@@ -24,9 +24,6 @@ languages: $(LANGS)
 
 install:
 	python setup.py install --root="$(INSTALL)/" --optimize=1
-
-patch:
-	patch -p0 < travis.patch
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
