@@ -1,46 +1,43 @@
-SRC=$(shell find . -type f -name "*.py" | grep -v "$(EXAMPLES)" | grep -v "build" | grep -v "bin")
-TESTS=$(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!g")
-BIN=bin
-MAN1=pyxstitch.1
-FORMAT=pyxstitch
-EXAMPLES=examples/
-EXAMPLE_OUT=$(EXAMPLES)outputs/
-PYPIRC=$(shell echo $$HOME)/.pypirc
-APPVEYOR=appveyor.yml
-TMP_APPVEYOR=$(BIN)/$(APPVEYOR)
-INSTALL :=
+TESTS        := $(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!g")
+BIN          := bin
+FORMAT       := pyxstitch
+EXAMPLES     := examples/
+EXAMPLE_OUT  := $(EXAMPLES)outputs/
+SRC          := $(shell find . -type f -name "*.py" | grep -v "$(EXAMPLES)" | grep -v "build" | grep -v "bin")
+PYPIRC       := $(shell echo $$HOME)/.pypirc
+APPVEYOR     := appveyor.yml
+TMP_APPVEYOR := $(BIN)/$(APPVEYOR)
+LANGS        := go c py ascii.txt
+RUNS         := zoom fonts bash completions man
+INSTALL      :=
+RUN_SH       := ./run.sh
+PACK_SH      := ./package.sh
 
-check: install test example appveyor completion analyze
+# groupings
+check: install test example appveyor analyze
+example: install clean ascii raw mapping symbols kvs banner logo runs
+
+# meta
+runs: $(RUNS)
+languages: $(LANGS)
 
 install:
 	python setup.py install --root="$(INSTALL)/" --optimize=1
 
-example: install clean go c py ascii raw bash fonts mapping symbols zoom kvs banner logo
+$(RUNS): clean
+	$(RUN_SH) "$@"
 
-zoom:
-	./run.sh "zoom"
+$(LANGS):
+	$(RUN_SH) "example" "$@"
 
 banner:
 	pyxstitch --version
 	pyxstitch --version --quiet
 
 ascii:
-	./run.sh "example" "ascii.txt"
-	./run.sh "example" "ascii.txt" "--theme bw" ".bw"
-	./run.sh "ascii"
+	$(RUN_SH) "example" "ascii.txt" "--theme bw" ".bw"
+	$(RUN_SH) "ascii"
 	cd $(EXAMPLES) && ./alphabet.sh
-
-fonts: clean
-	./run.sh "fonts"
-
-go:
-	./run.sh "example" "go"
-
-c:
-	./run.sh "example" "c"
-
-py:
-	./run.sh "example" "py"
 
 logo: 
 	pyxstitch --file $(EXAMPLES)/logo.txt --quiet --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output $(BIN)/logo.png
@@ -53,30 +50,27 @@ endif
 	python setup.py sdist
 
 pypi-test: pypi-check
-	./package.sh test
+	$(PACK_SH) test
 
 pypi-live: pypi-check
-	./package.sh
+	$(PACK_SH)
 
 raw:
 	cd $(EXAMPLES) && ./replay.sh
 
-bash:
-	./run.sh "bash"
-
 mapping:
-	./run.sh "bash" "--map 6c6c6c=ffffff --map 59c7b4=" ".map"
+	$(RUN_SH) "bash" "--map 6c6c6c=ffffff --map 59c7b4=" ".map"
 
 symbols:
-	./run.sh "bash" "--symbols abcdef" ".symbol"
+	$(RUN_SH) "bash" "--symbols abcdef" ".symbol"
 
 kvs:
-	./run.sh "bash" "--kv page_height=700 page_width=900 page_pad=80 page_no_index=3 page_legend=2 page_font_size=10" ".cfg"
-	./run.sh "bash" "--config tests/test.cfg" ".cfg"
+	$(RUN_SH) "bash" "--kv page_height=700 page_width=900 page_pad=80 page_no_index=3 page_legend=2 page_font_size=10" ".cfg"
+	$(RUN_SH) "bash" "--config tests/test.cfg" ".cfg"
 
 text:
 	cat $(EXAMPLES)/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
-	./run.sh "version" "$(BIN)/text.test.$(FORMAT)"
+	$(RUN_SH) "version" "$(BIN)/text.test.$(FORMAT)"
 	diff $(BIN)/text.test.$(FORMAT) $(EXAMPLE_OUT)text.test.$(FORMAT)
 
 analyze:
@@ -97,9 +91,3 @@ clean:
 	mkdir -p $(BIN)
 	rm -f $(BIN)/*
 	rm -rf dist/
-
-completion:
-	./run.sh "completions"
-
-man: clean
-	./run.sh "man"
