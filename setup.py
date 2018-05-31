@@ -24,7 +24,7 @@ setup(
     license='MIT',
     python_requires='>=3',
     packages=[__pkg_name__, __pkg_name__ + ".fonts"],
-    install_requires=['pygments', 'pillow'],
+    install_requires=['pygments', 'Pillow'],
     keywords='crossstitch cross stitch',
     entry_points={
         'console_scripts': [
