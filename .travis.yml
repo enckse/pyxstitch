@@ -4,7 +4,7 @@ python:
 
 before_install:
     - sudo apt-get -qq update
-    - sudo apt-get install -y golang gcc
+    - sudo apt-get install -y golang gcc python3-pil
 
 script:
     - make
