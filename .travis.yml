@@ -5,7 +5,7 @@ python:
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y golang gcc
-    - sudo pip install pillow pygments
+    - sudo pip install pillow
 
 script:
     - make ci

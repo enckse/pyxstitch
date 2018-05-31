@@ -26,7 +26,7 @@ install:
 	python setup.py install --root="$(INSTALL)/" --optimize=1
 
 patch:
-	sed -i "/install_requires/d" setup.py
+	patch -p0 < travis.patch
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
