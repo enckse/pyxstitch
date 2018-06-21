@@ -74,7 +74,6 @@ text:
 	diff $(BIN)/text.test.$(FORMAT) $(EXAMPLE_OUT)text.test.$(FORMAT)
 
 analyze:
-	pip install pycodestyle pep257
 	pycodestyle $(SRC)
 	pep257 $(SRC)
 
