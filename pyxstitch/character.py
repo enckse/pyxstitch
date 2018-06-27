@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """Defines a character for formatting text -> cross stitch character."""
-from enum import IntFlag
+from enum import IntEnum
 
 
 class BadCharException(Exception):
