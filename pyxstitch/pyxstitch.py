@@ -9,6 +9,7 @@ import pyxstitch.output as out_fmt
 import pyxstitch.font as fnt
 import pyxstitch.version as vers
 import pyxstitch.log as log
+import pyxstitch.utils as utils
 import argparse
 import os
 import sys
@@ -128,6 +129,7 @@ def _replay(args, file_name, content):
 
 def main():
     """Main-entry point."""
+    utils.supported()
     default_font = fnt.Font().detect
     parser = argparse.ArgumentParser(
             description='Convert source code files to cross stitch patterns.')
@@ -280,7 +282,7 @@ def _run(args, default_font):
     cols = preproc[2]
     config_file = args.config
     if config_file is None:
-        home = str(Path.home())
+        home = utils.home()
         conf = os.path.join(home, ".pyxstitch.config")
         if os.path.exists(conf):
             config_file = conf

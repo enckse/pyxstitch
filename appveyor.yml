@@ -11,4 +11,4 @@ install:
   - "%PYTHON%\\python.exe -m pip install pygments pillow"
 
 test_script:
-  - python -m unittest tests.test_character tests.test_config tests.test_floss tests.test_font tests.test_formatter tests.test_formatter_layout tests.test_hex tests.test_output tests.test_symbols
+  - python -m unittest tests.test_character tests.test_config tests.test_floss tests.test_font tests.test_formatter tests.test_formatter_layout tests.test_hex tests.test_output tests.test_symbols tests.test_utils
