@@ -1,4 +1,4 @@
-TESTS        := $(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!g")
+TESTS        := $(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!g" | sort)
 BIN          := bin
 FORMAT       := pyxstitch
 EXAMPLES     := examples/
@@ -84,7 +84,7 @@ appveyor: clean
 	cat $(APPVEYOR) | head -n -2 > $(TMP_APPVEYOR)
 	@echo "test_script:" >> $(TMP_APPVEYOR)
 	@echo "  - python -m unittest $(TESTS)" >> $(TMP_APPVEYOR)
-	mv $(TMP_APPVEYOR) $(APPVEYOR)
+	cat $(TMP_APPVEYOR) > $(APPVEYOR)
 
 clean:
 	mkdir -p $(BIN)

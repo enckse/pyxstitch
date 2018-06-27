@@ -23,13 +23,13 @@ class TestCharacter(unittest.TestCase):
         """Test flag as power of 2."""
         flags = list(flag)
         current = 0
-        l = len(flags)
-        self.assertTrue(l > 0)
+        length = len(flags)
+        self.assertTrue(length > 0)
         for f in flags:
             check = pow(2, current)
             self.assertEqual(int(f), check)
             current += 1
-        self.assertEqual(l, current)
+        self.assertEqual(length, current)
 
     def test_flags(self):
         """Test flag definitions."""
