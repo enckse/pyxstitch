@@ -1,5 +1,6 @@
 #!/usr/env/python
 """Output formats."""
+from collections import OrderedDict
 from PIL import Image, ImageDraw
 from io import StringIO
 import pyxstitch.config as cfg
@@ -283,6 +284,7 @@ class TextFormat(Format):
         obj = {}
         obj[self._TYPE] = obj_type
         obj[self._DATA] = values
+        obj = OrderedDict(sorted(obj.items(), reverse=True))
         self._io.write(json.dumps(obj) + "\n")
 
     def legend(self, pos, legend, symbols):
