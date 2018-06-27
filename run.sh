@@ -27,8 +27,8 @@ _fail() {
 _manpages() {
     local dated
     dated=$(git log -1 --date=format:"%B %Y" --format=%cd $DOCMAN1TPLT)
-    cat $DOCMAN1TPLT | sed "s/<Date>/$dated/g" > $DOCMAN1
-    cp $DOCMAN1 $BIN/$MAN1
+    cat $DOCMAN1TPLT | sed "s/<Date>/$dated/g;" > $DOCMAN1
+    cat $DOCMAN1 | sed "s/<Version>/$VERS/g" > $BIN/$MAN1
     cd $BIN && gzip $MAN1
 }
 
