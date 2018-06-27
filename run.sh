@@ -61,7 +61,7 @@ _example() {
     _fail $?
 	_handle_version "$BIN/$HW$1.$FORMAT"
     _fail $?
-	diff $BIN/$HW$1.$FORMAT $EXAMPLE_OUT$HW$1.$FORMAT$3
+	diff -u $BIN/$HW$1.$FORMAT $EXAMPLE_OUT$HW$1.$FORMAT$3
     _fail $?
 }
 
@@ -77,7 +77,7 @@ _run_bash() {
     _fail $?
     _handle_version "$BIN/fb.bash.$FORMAT"
     _fail $?
-    diff $BIN/fb.bash.$FORMAT ${EXAMPLE_OUT}fb.bash.$FORMAT$2
+    diff -u $BIN/fb.bash.$FORMAT ${EXAMPLE_OUT}fb.bash.$FORMAT$2
     _fail $?
 }
 
@@ -116,7 +116,7 @@ _zoom() {
     _fail $?
     _handle_version "$zoom"
     _fail $?
-	diff $zoom ${EXAMPLE_OUT}zoom.$FORMAT
+	diff -u $zoom ${EXAMPLE_OUT}zoom.$FORMAT
     _fail $?
 }
 

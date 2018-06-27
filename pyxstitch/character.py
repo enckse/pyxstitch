@@ -1,13 +1,13 @@
 #!/usr/bin/python
 """Defines a character for formatting text -> cross stitch character."""
-from enum import IntEnum
+from enum import IntFlag
 
 
 class BadCharException(Exception):
     """Character is not defined or not fully defined."""
 
 
-class Stitch(IntEnum):
+class Stitch(IntFlag):
     """Types of stitching."""
 
     CrossStitch = 1
@@ -17,7 +17,7 @@ class Stitch(IntEnum):
     TopRight = 16
 
 
-class BackStitch(IntEnum):
+class BackStitch(IntFlag):
     """Grid-based backstitching."""
 
     Top = 1

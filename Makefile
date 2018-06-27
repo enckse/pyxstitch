@@ -71,7 +71,7 @@ kvs:
 text:
 	cat $(EXAMPLES)/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
 	$(RUN_SH) "version" "$(BIN)/text.test.$(FORMAT)"
-	diff $(BIN)/text.test.$(FORMAT) $(EXAMPLE_OUT)text.test.$(FORMAT)
+	diff -u $(BIN)/text.test.$(FORMAT) $(EXAMPLE_OUT)text.test.$(FORMAT)
 
 analyze:
 	pycodestyle $(SRC)
