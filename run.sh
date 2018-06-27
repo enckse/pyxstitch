@@ -8,9 +8,9 @@ TAG=$(git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
 EXAMPLES=examples/
 EXAMPLE_OUT=${EXAMPLES}outputs/
 NO_TAG="na"
-COMPLETIONS="completions/"
+RESOURCES="resources/"
 MAN1="pyxstitch.1"
-DOCMAN1="doc/$MAN1"
+DOCMAN1="$RESOURCES$MAN1"
 DOCMAN1TPLT="$DOCMAN1.template"
 
 _handle_version() {
@@ -33,7 +33,7 @@ _manpages() {
 }
 
 _completions() {
-    _bash=$COMPLETIONS/bash
+    _bash=$RESOURCES/bash.completions
     # bash
     printf "%s" 'function _pyxstitch()
 {
