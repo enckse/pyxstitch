@@ -10,6 +10,8 @@ EXAMPLE_OUT=${EXAMPLES}outputs/
 NO_TAG="na"
 COMPLETIONS="completions/"
 MAN1="pyxstitch.1"
+DOCMAN1="doc/$MAN1"
+DOCMAN1TPLT="$DOCMAN1.template"
 
 _handle_version() {
     sed -i "s/$VERS/\_\_VERSION\_\_/g" $1
@@ -23,7 +25,10 @@ _fail() {
 }
 
 _manpages() {
-    cat doc/$MAN1 | sed "s/<Date>/$(date +"%B %Y")/g;s/<Version>/$VERS/g" > $BIN/$MAN1
+    local dated
+    dated=$(git log -1 --date=format:"%B %Y" --format=%cd $DOCMAN1TPLT)
+    cat $DOCMAN1TPLT | sed "s/<Date>/$dated/g" > $DOCMAN1
+    cp $DOCMAN1 $BIN/$MAN1
     cd $BIN && gzip $MAN1
 }
 
