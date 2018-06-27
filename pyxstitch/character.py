@@ -7,7 +7,7 @@ class BadCharException(Exception):
     """Character is not defined or not fully defined."""
 
 
-class Stitch(IntFlag):
+class Stitch(IntEnum):
     """Types of stitching."""
 
     CrossStitch = 1
@@ -17,7 +17,7 @@ class Stitch(IntFlag):
     TopRight = 16
 
 
-class BackStitch(IntFlag):
+class BackStitch(IntEnum):
     """Grid-based backstitching."""
 
     Top = 1
