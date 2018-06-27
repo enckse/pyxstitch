@@ -22,7 +22,7 @@ setup(
     long_description=long_description,
     url='https://github.com/enckse/pyxstitch',
     license='MIT',
-    python_requires='>=3.6',
+    python_requires='>=3.5',
     packages=[__pkg_name__, __pkg_name__ + ".fonts"],
     install_requires=['pygments', 'Pillow'],
     keywords='crossstitch cross stitch',
