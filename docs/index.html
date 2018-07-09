@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>pyxstitch</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/enckse/pyxstitch">View on GitHub</a>
+          <h1 id="project_title">pyxstitch</h1>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/enckse/pyxstitch/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/enckse/pyxstitch/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+          <h2>pyxstitch</h2>
+        pyxstitch is an application (and associated library/compenents) that takes source code files/text and can produce syntax-highlighted patterns for cross stitching 
+        <hr />
+        <p>
+        <h4>How does it work?</h4><br />
+        pyxstitch receives input (via file or stdin) and uses the awesome <a href="http://pygments.org">pygments</a> library to get syntax/coloring information. From there it reads through the input token stream and uses <a href="https://python-pillow.org/">pillow</a> to handle image generation. Color codes are then passed off to a "closest" match RGB against the DMC floss colors (in 'floss.py').
+        This results in a grid-layout of stitching symbols and associated legend with color/symbol mappings.
+        </p>
+        <p>
+        <h4>Why?</h4></br>
+        There are some very useful applications (e.g. <a href="https://www.kde.org/applications/graphics/kxstitch/">kxstitch</a>) that can be used to generate patterns from images and even produce text blocks. But how do you take code/syntax highlighting and convert it? A screenshot of your editor and sending that into the application?
+        Why not skip the clunky step and just pass code/flat files (with whitespace preservation) and have it handle the text layout for you without any strange mangling and some amount of consistency!
+        This is a melding of 2 generalized hobbies for me. Besides the examples below you can see more outputs <a href="https://crossstitch.info">here</a> (as well as the fonts pyxstitch uses).
+        </p>
+        <h3>Examples!</h3>
+        <h4>Hello World (python)</h4>
+        The following code fragment in python
+        <pre><code>vim hello_world.py
+---
+def main():
+&nbsp;&nbsp;&nbsp;&nbsp;print("hello world")
+
+if __name__ == "__main__":
+&nbsp;&nbsp;&nbsp;&nbsp;main()</code></pre><br />
+        Just pass this into pyxstitch
+        <pre><code>pyxstitch --file hello_world.py</code></pre><br />
+        Which produces a pattern that can be cross stitched into this!
+        <img src="images/hw_py.jpg" alt="hwpy" />
+        <h4>Hello World (C)</h4>
+        The following code fragment in C
+        <pre><code>vim hello_world.c
+---
+#include &lt;stdio.h&gt;
+
+int main()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;printf("hello world");
+}</code></pre><br />
+        Passed into pyxstitch
+        <pre><code>pyxstitch --file hello_world.c</code></pre><br />
+        Which produces a pattern that can be cross stitched into this!
+        <img src="images/hw_c.jpg" alt="hwc" />
+        <h4>Tiny Encryption Algorithm (C)</h4>
+        The following algorithm in C
+        <pre><code>vim tea.c
+---
+#include &lt;stdint.h&gt;
+void encrypt (uint32_t* v, uint32_t* k) {
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t v0=v[0], v1=v[1], sum=0, i;
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t delta=0x9e3779b9;
+&nbsp;&nbsp;&nbsp;&nbsp;uint32_t k0=k[0], k1=k[1], k2=k[2], k3=k[3];
+&nbsp;&nbsp;&nbsp;&nbsp;for (i=0; i&lt;32; i++) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum+=delta;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v0+=((v1&lt;&lt;4)+k0)^(v1+sum)^((v1&gt;&gt;5)+k1);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v1+=((v0&lt;&lt;4)+k2)^(v0+sum)^((v0&gt;&gt;5)+k3);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;v[0]=v0; v[1]=v1;
+}</code></pre><br />
+        Pass into pyxstitch
+        <pre><code>pyxstitch --file tea.c --font monospace-ascii-3x7</code></pre><br />
+        Which produces a pattern that can be cross stitched into this!
+        <img src="images/tea.jpg" alt="tea" />
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">pyxstitch maintained by <a href="https://github.com/enckse">enckse</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
