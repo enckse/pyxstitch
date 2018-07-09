@@ -75,7 +75,7 @@ text:
 
 analyze:
 	pycodestyle $(SRC)
-	pep257 $(SRC)
+	pydocstyle $(SRC)
 
 test: clean text
 	python -m unittest $(TESTS)

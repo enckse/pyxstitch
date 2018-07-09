@@ -47,17 +47,17 @@ class Config(object):
                 self.page_font_size]
 
     def dump(self):
-        """dump extraneous settings passed in."""
+        """Dump extraneous settings passed in."""
         return [self.legend_hoff, self.legend_woff]
 
     @staticmethod
     def _create_page_input(key, value):
-        """create an input."""
+        """Create an input."""
         return "{}{}{}{}".format(_PAGE, key, _DELIMIT, value)
 
     @staticmethod
     def load(values):
-        """load config from saved type."""
+        """Load config from saved type."""
         inputs = []
         if len(values) == 6:
             inputs.append(Config._create_page_input("height", values[0]))
@@ -82,7 +82,7 @@ class Config(object):
                 self._parse(config_input)
 
     def _parse(self, inputs):
-        """parse inputs."""
+        """Parse inputs."""
         for item in inputs:
             parts = item.split(_DELIMIT)
             if len(parts) != 2:

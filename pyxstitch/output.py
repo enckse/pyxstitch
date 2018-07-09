@@ -24,7 +24,7 @@ class Format(object):
     """Base format output."""
 
     def init(self, style, dims, color, multipage, config):
-        """init the instance."""
+        """Init the instance."""
         raise FormatError("not implemented.")
 
     def rect(self, dims, outline=None):
@@ -111,7 +111,7 @@ class PILFormat(Format):
         return self._cfg.page_width + offset * 2
 
     def _new_image(self, use_offset):
-        """New output image."""
+        """Create new output image."""
         return Image.new('RGB',
                          (self._calculate_width(use_offset),
                           self._cfg.page_height + use_offset * 2),
@@ -234,7 +234,7 @@ class TextFormat(Format):
         return unpacked
 
     def _log_replay(self, level, fmt, args):
-        """log replay messages."""
+        """Log replay messages."""
         log.Log.write("{} -> {}".format(level, fmt.format(*args)))
 
     def replay(self, content, out_file_name):

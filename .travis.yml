@@ -19,7 +19,7 @@ before_install:
     - sudo apt-get install -y golang gcc
 
 install:
-    - pip install pillow pygments pycodestyle pep257
+    - pip install pillow pygments pycodestyle pydocstyle
     - python setup.py -q install
 
 script:

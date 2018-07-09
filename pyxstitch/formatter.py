@@ -146,7 +146,7 @@ class CrossStitchFormatter(Formatter):
                         use_color)
 
     def _new_entry(self, ch, style):
-        """new entry to process."""
+        """Create an entry to process."""
         char = self.font_factory.get(ch)
         return (char, style, ch)
 

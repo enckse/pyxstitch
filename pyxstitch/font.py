@@ -68,11 +68,11 @@ class BaseFontFactory(FontFactory):
         raise FontException("does not declare font height/width")
 
     def height(self):
-        """get the font factory range of height for characters."""
+        """Get the font factory range of height for characters."""
         return range(self._height)
 
     def width(self):
-        """get the font width."""
+        """Get the font width."""
         return range(self._width)
 
     def get(self, ch):

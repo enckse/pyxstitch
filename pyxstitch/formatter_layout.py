@@ -32,7 +32,7 @@ class Legend(object):
         self._stitches[raw_color] += 1
 
     def add(self, style):
-        """New legend entry."""
+        """Create legend entry."""
         self._entries.append(style)
 
     def build(self):
