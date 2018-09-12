@@ -35,8 +35,7 @@ _manpages() {
 _completions() {
     _bash=$RESOURCES/bash.completions
     # bash
-    printf "%s" 'function _pyxstitch()
-{
+    printf "%s" '_pyxstitch() {
     local cur opts 
     if [ $COMP_CWORD -eq 1 ]; then
         cur=${COMP_WORDS[COMP_CWORD]}
@@ -87,6 +86,7 @@ _run_bash() {
 }
 
 _ascii() {
+    local f ext
     for f in $(_fonts); do
         ext="."$(echo $f | cut -d "-" -f 3)
         if echo "$f" | grep -q "prop"; then
@@ -98,6 +98,7 @@ _ascii() {
 }
 
 _build_fonts() {
+    local f t s m
     for f in $(_fonts); do
         t=$(echo "$f" | cut -d "-" -f 1)
         s=$(echo "$f" | cut -d "-" -f 3)
