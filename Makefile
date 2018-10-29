@@ -26,7 +26,7 @@ install:
 	python3 setup.py install $(INSTALL_OPTS)
 
 deps:
-	apt-get install python3 python3-pil python3-pycodestyle python3-pydocstyle python3-pygments python3-setuptools git
+	apt-get install python3 python3-pil python3-pycodestyle python3-pydocstyle python3-pygments python3-setuptools git pydocstyle pycodestyle
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
