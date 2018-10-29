@@ -15,7 +15,7 @@ with open("README.rst", 'r') as f:
 
 setup(
     author="Sean Enck",
-    author_email="enckse@gmail.com",
+    author_email="enckse@voidedtech.com",
     name=__pkg_name__,
     version=__version__,
     description='Convert source code to cross stitch patterns',

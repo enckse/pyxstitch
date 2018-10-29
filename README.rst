@@ -26,7 +26,7 @@ Available via `pip <https://pypi.python.org/pypi/pyxstitch/>`__
 source
 ~~~~~~
 
--  Clone this repo and…
+-  Clone the source repo and…
 
 ::
 

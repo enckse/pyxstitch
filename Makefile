@@ -26,7 +26,17 @@ install:
 	python3 setup.py install $(INSTALL_OPTS)
 
 deps:
-	apt-get install python3 python3-pil python3-pycodestyle python3-pydocstyle python3-pygments python3-setuptools git pydocstyle pycodestyle
+	apt-get install python3 \
+					python3-pil \
+					python3-pycodestyle \
+					python3-pydocstyle \
+					python3-pygments \
+					python3-setuptools \
+					git \
+					pydocstyle \
+					pycodestyle \
+					twine \
+					python3-docutils
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
@@ -47,7 +57,6 @@ logo:
 	pyxstitch --file $(EXAMPLES)/logo.txt --quiet --multipage off --kv page_legend=1 --font monospace-ascii-3x7 --output $(BIN)/logo.png
 
 pypi-check:
-	pip install twine docutils
 ifeq ($(wildcard $(PYPIRC)),)
 		$(error missing pypirc file $(PYPIRC))
 endif
