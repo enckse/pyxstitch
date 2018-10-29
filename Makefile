@@ -5,8 +5,6 @@ EXAMPLES     := examples/
 EXAMPLE_OUT  := $(EXAMPLES)outputs/
 SRC          := $(shell find . -type f -name "*.py" | grep -v "$(EXAMPLES)" | grep -v "build" | grep -v "bin")
 PYPIRC       := $(shell echo $$HOME)/.pypirc
-APPVEYOR     := appveyor.yml
-TMP_APPVEYOR := $(BIN)/$(APPVEYOR)
 LANGS        := go c py ascii.txt
 RUNS         := zoom fonts bash completions man
 INSTALL      :=
@@ -17,7 +15,7 @@ PYPI         := pypi-test pypi-live
 
 # groupings
 all: install check
-check: test example appveyor analyze
+check: test example analyze
 example: install clean ascii raw mapping symbols kvs banner logo runs
 
 # meta
@@ -25,7 +23,10 @@ runs: $(RUNS)
 languages: $(LANGS)
 
 install:
-	python setup.py install $(INSTALL_OPTS)
+	python3 setup.py install $(INSTALL_OPTS)
+
+deps:
+	apt-get install python3 python3-pil python3-pycodestyle python3-pydocstyle python3-pygments python3-setuptools git
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
@@ -50,7 +51,7 @@ pypi-check:
 ifeq ($(wildcard $(PYPIRC)),)
 		$(error missing pypirc file $(PYPIRC))
 endif
-	python setup.py sdist
+	python3 setup.py sdist
 
 $(PYPI): pypi-check
 	$(PACK_SH) $@
@@ -78,13 +79,7 @@ analyze:
 	pydocstyle $(SRC)
 
 test: clean text
-	python -m unittest $(TESTS)
-
-appveyor: clean
-	cat $(APPVEYOR) | head -n -2 > $(TMP_APPVEYOR)
-	@echo "test_script:" >> $(TMP_APPVEYOR)
-	@echo "  - python -m unittest $(TESTS)" >> $(TMP_APPVEYOR)
-	cat $(TMP_APPVEYOR) > $(APPVEYOR)
+	python3 -m unittest $(TESTS)
 
 clean:
 	mkdir -p $(BIN)

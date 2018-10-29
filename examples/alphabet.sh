@@ -1,6 +1,6 @@
 #!/bin/bash
 file_names=".alphabet.py"
-python -c "import string
+python3 -c "import string
 
 def write_file(name, sets):
     with open('../bin/' + name + '$file_names', 'w') as f:
