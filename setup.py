@@ -1,4 +1,4 @@
-#!/usb/bin/python
+#!/usr/bin/python
 
 """Setup for pyxstitch."""
 
