@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Test output definition."""
 import unittest
 import pyxstitch.output as out

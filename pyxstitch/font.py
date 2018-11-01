@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Defines the default font functionality to get char -> stitch mappings."""
 from pyxstitch.character import Character, BackStitch, Stitch, BadCharException
 

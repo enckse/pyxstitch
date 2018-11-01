@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """App for pyxstitch."""
 from pygments import highlight
 from pygments.lexers import get_lexer_for_filename, guess_lexer

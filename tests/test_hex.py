@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Test hex helpers."""
 import unittest
 import pyxstitch.hex as hu

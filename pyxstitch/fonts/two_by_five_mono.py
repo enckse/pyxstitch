@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """An ASCII 2x5 (monospace) backstitch pattern."""
 from pyxstitch.font import BaseFontFactory
 

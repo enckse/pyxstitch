@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Test config definitions."""
 import unittest
 import pyxstitch.config as cfg

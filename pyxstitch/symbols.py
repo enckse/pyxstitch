@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Supports generating unique(ish) symbols for colors."""
 import string
 

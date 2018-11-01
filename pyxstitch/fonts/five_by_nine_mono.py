@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """An ASCII 5x9 (monospace) pattern."""
 from pyxstitch.font import BaseFontFactory
 

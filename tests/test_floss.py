@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Floss testing."""
 import unittest
 import pyxstitch.floss as floss

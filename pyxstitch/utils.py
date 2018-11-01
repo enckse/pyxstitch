@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Utilities for dealing with any python requirements."""
 import sys
 import pyxstitch.log as log

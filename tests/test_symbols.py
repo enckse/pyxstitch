@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Test symbol generator(s)."""
 import unittest
 import pyxstitch.symbols as symb

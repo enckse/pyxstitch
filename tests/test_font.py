@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Test default font factory settings."""
 import unittest
 import pyxstitch.font as ft

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Tests character object definitions."""
 import unittest
 import pyxstitch.utils as utils

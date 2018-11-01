@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Defines a character for formatting text -> cross stitch character."""
 from enum import IntEnum
 

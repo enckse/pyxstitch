@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Test formatter."""
 import unittest
 import pyxstitch.formatter as fmt

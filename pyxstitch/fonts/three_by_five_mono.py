@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """An ASCII 3x5 (monospace) pattern."""
 from pyxstitch.font import BaseFontFactory
 from pyxstitch.fonts.three_by_seven_mono import ThreeBySevenMono

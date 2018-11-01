@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Formatter layout tests."""
 import unittest
 import pyxstitch.formatter_layout as fl
