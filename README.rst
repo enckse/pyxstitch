@@ -1,8 +1,8 @@
 pyxstitch
 =========
 
-.. image:: https://gitlab.com/enckse/pyxstitch/raw/master/resources/pyxstitch.png
-    :target: https://gitlab.com/enckse/pyxstitch
+.. image:: https://github.com/enckse/pyxstitch/raw/master/resources/pyxstitch.png
+    :target: https://github.com/enckse/pyxstitch
 
 pyxstitch is an application (and associated library/compenents) that
 takes source code files and produces syntax-highlighted patterns for

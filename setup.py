@@ -20,7 +20,7 @@ setup(
     version=__version__,
     description='Convert source code to cross stitch patterns',
     long_description=long_description,
-    url='https://gitlab.com/enckse/pyxstitch',
+    url='https://github.com/enckse/pyxstitch',
     license='MIT',
     python_requires='>=3.4',
     packages=[__pkg_name__, __pkg_name__ + ".fonts"],
