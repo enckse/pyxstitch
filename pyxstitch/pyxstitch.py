@@ -163,7 +163,7 @@ token color to another color (override)""", metavar='N', type=str, nargs='+')
                         help="""output file format""",
                         type=str,
                         default=_PNG,
-                        choices=list(sorted([_PNG, _PDF, "jpg", _RAW])))
+                        choices=["jpg", _PDF, _PNG, _RAW])
     parser.add_argument('--style',
                         help="""token color styling (from pygments)""",
                         default=_DEF_STYLE,
