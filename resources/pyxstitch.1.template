@@ -5,12 +5,12 @@ pyxstitch \- code to cross stitch
 .SH DESCRIPTION
 usage: pyxstitch [\-h] [\-\-file FILE] [\-\-lexer LEXER] [\-\-output OUTPUT]
 .IP
-[\-\-theme {dark,light,dark\-dmc,light\-dmc,bw}] [\-\-kv N [N ...]]
+[\-\-theme THEME] [\-\-kv N [N ...]]
 [\-\-map N [N ...]] [\-\-config CONFIG]
-[\-\-multipage {auto,on,off}]
-[\-\-format {png,pdf,jpg,pyxstitch}]
-[\-\-style {default,emacs,friendly,colorful,autumn,murphy,manni,monokai,perldoc,pastie,borland,trac,native,fruity,bw,vim,vs,tango,rrt,xcode,igor,paraiso\-light,paraiso\-dark,lovelace,algol,algol_nu,arduino,rainbow_dash,abap}]
-[\-\-font {monospace\-ascii\-5x9,monospace\-ascii\-3x7,monospace\-ascii\-2x5,monospace\-ascii\-3x5,proportional\-ascii\-3x6,proportional\-ascii\-4x7,proportional\-ascii\-5x9,detect}]
+[\-\-multipage MULTIPAGE]
+[\-\-format FORMAT]
+[\-\-style STYLE]
+[\-\-font FONT]
 [\-\-version] [\-\-quiet] [\-\-symbols SYMBOLS] [\-\-hszoom HSZOOM]
 [\-\-hezoom HEZOOM] [\-\-vszoom VSZOOM] [\-\-vezoom VEZOOM]
 .PP
@@ -30,9 +30,19 @@ converting input tokens into colors
 \fB\-\-output\fR OUTPUT
 output name
 .TP
-\fB\-\-theme\fR {dark,light,dark\-dmc,light\-dmc,bw}
+\fB\-\-theme\fR THEME
 pattern theme. indicates the background and symbol
 color outputs for the output pattern
+.br
+\- bw
+.br
+\- dark
+.br
+\- dark\-dmc
+.br
+\- light
+.br
+\- light\-dmc
 .TP
 \fB\-\-kv\fR N [N ...]
 key/value configuration parameters for setting the
@@ -45,17 +55,85 @@ another color (override)
 \fB\-\-config\fR CONFIG
 configuration file
 .TP
-\fB\-\-multipage\fR {auto,on,off}
+\fB\-\-multipage\fR MULTIPAGE
 enable multipage output
+.br
+\- auto
+.br
+\- off
+.br
+\- on
 .TP
-\fB\-\-format\fR {png,pdf,jpg,pyxstitch}
+\fB\-\-format\fR FORMAT
 output file format
+.br
+\- jpg
+.br
+\- pdf
+.br
+\- png
+.br
+\- pyxstitch
 .TP
-\fB\-\-style\fR {default,emacs,friendly,colorful,autumn,murphy,manni,monokai,perldoc,pastie,borland,trac,native,fruity,bw,vim,vs,tango,rrt,xcode,igor,paraiso\-light,paraiso\-dark,lovelace,algol,algol_nu,arduino,rainbow_dash,abap}
-token color styling (from pygments)
+\fB\-\-style\fR STYLE
+token color styling (from pygments), examples:
+.br
+\- default (uses the default styling)
+.br
+\- abap
+.br
+\- algol
+.br
+\- algol_nu
+.br
+\- arduino
+.br
+\- autumn
+.br
+\- borland
+.br
+\- colorful
+.br
+\- emacs
+.br
+\- friendly
+.br
+\- lovelace
+.br
+\- manni
+.br
+\- monokai
+.br
+\- murphy
+.br
+\- paraiso\-dark
+.br
+\- paraiso\-light
+.br
+\- pastie
+.br
+\- perldoc
+.br
+\- trac
+.br
+\- rainbow_dash
 .TP
-\fB\-\-font\fR {monospace\-ascii\-5x9,monospace\-ascii\-3x7,monospace\-ascii\-2x5,monospace\-ascii\-3x5,proportional\-ascii\-3x6,proportional\-ascii\-4x7,detect}
-font to use for the pattern
+\fB\-\-font\fR FONT
+font to use for the pattern, available fonts
+.br
+\- detect (default, attempt to auto-detect font-size)
+.br
+\- monospace\-ascii\-2x5
+.br
+\- monospace\-ascii\-3x5
+.br
+\- monospace\-ascii\-3x7
+.br
+\- monospace\-ascii\-5x9
+.br
+\- proportional\-ascii\-3x6
+.br
+\- proportional\-ascii\-4x7
 .TP
 \fB\-\-version\fR
 display version
