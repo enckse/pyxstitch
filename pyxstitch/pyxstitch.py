@@ -143,11 +143,11 @@ reading input and converting input tokens into colors""", type=str)
 symbol color outputs for the output pattern""",
                         type=str,
                         default=_LIGHT,
-                        choices=[_DARK,
-                                 _LIGHT,
+                        choices=[_B_AND_W,
+                                 _DARK,
                                  _DARK_DMC,
-                                 _LIGHT_DMC,
-                                 _B_AND_W])
+                                 _LIGHT,
+                                 _LIGHT_DMC])
     parser.add_argument('--kv', metavar='N', help="""key/value configuration
 parameters for setting the output format""", type=str, nargs='+')
     parser.add_argument('--map', help="""when selecting colors will map one
@@ -157,21 +157,22 @@ token color to another color (override)""", metavar='N', type=str, nargs='+')
                         type=str,
                         default=out_fmt.MULTI_PAGE_AUTO,
                         choices=[out_fmt.MULTI_PAGE_AUTO,
-                                 out_fmt.MULTI_PAGE_ON,
-                                 out_fmt.MULTI_PAGE_OFF])
+                                 out_fmt.MULTI_PAGE_OFF,
+                                 out_fmt.MULTI_PAGE_ON])
     parser.add_argument('--format',
                         help="""output file format""",
                         type=str,
                         default=_PNG,
-                        choices=[_PNG, _PDF, "jpg", _RAW])
+                        choices=list(sorted([_PNG, _PDF, "jpg", _RAW])))
     parser.add_argument('--style',
                         help="""token color styling (from pygments)""",
                         default=_DEF_STYLE,
-                        choices=list(get_all_styles()))
+                        choices=list(sorted(get_all_styles())))
+    font_choices = list(sorted(list(fnt.get_all_fonts()) + [default_font]))
     parser.add_argument('--font',
                         help="""font to use for the pattern""",
                         default=default_font,
-                        choices=list(fnt.get_all_fonts()) + [default_font])
+                        choices=font_choices)
     parser.add_argument('--version',
                         action="store_true",
                         help="""display version""")
