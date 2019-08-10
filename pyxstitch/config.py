@@ -1,4 +1,4 @@
-#!/usr/env/python
+#!/usr/bin/python3
 """pyxstitch operating configuration settings."""
 import os
 import pyxstitch.log as log

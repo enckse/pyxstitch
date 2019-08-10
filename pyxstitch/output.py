@@ -1,4 +1,4 @@
-#!/usr/env/python
+#!/usr/bin/python3
 """Output formats."""
 from collections import OrderedDict
 from PIL import Image, ImageDraw
