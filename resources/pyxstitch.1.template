@@ -40,7 +40,7 @@ color outputs for the output pattern
 .br
 \- dark\-dmc
 .br
-\- light
+\- light (default)
 .br
 \- light\-dmc
 .TP
@@ -58,7 +58,7 @@ configuration file
 \fB\-\-multipage\fR MULTIPAGE
 enable multipage output
 .br
-\- auto
+\- auto (default)
 .br
 \- off
 .br
@@ -71,14 +71,14 @@ output file format
 .br
 \- pdf
 .br
-\- png
+\- png (default)
 .br
 \- pyxstitch
 .TP
 \fB\-\-style\fR STYLE
 token color styling (from pygments), examples:
 .br
-\- default (uses the default styling)
+\- default (default, uses the default styling)
 .br
 \- abap
 .br
