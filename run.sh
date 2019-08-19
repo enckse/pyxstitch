@@ -11,7 +11,6 @@ NO_TAG="na"
 RESOURCES="resources/"
 MAN1="pyxstitch.1"
 DOCMAN1="$RESOURCES$MAN1"
-DOCMAN1TPLT="$DOCMAN1.template"
 
 _handle_version() {
     sed -i "s/$VERS/\_\_VERSION\_\_/g" $1
@@ -26,9 +25,8 @@ _fail() {
 
 _manpages() {
     local dated
-    dated=$(git log -1 --date=format:"%B %Y" --format=%cd $DOCMAN1TPLT)
-    cat $DOCMAN1TPLT | sed "s/<Date>/$dated/g;" > $DOCMAN1
-    cat $DOCMAN1 | sed "s/<Version>/$VERS/g" > $BIN/$MAN1
+    dated=$(git log -1 --date=format:"%B %Y" --format=%cd $DOCMAN1)
+    cat $DOCMAN1 | sed "s/<Version>/$VERS/g" | sed "s/<Date>/$dated/g" > $BIN/$MAN1
     cd $BIN && gzip $MAN1
 }
 
