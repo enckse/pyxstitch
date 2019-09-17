@@ -2,41 +2,20 @@ TESTS        := $(shell find tests/ -type f -name "*.py" | sed "s!/!.!g;s!\.py!!
 BIN          := bin
 FORMAT       := pyxstitch
 EXAMPLES     := examples/
-EXAMPLE_OUT  := $(EXAMPLES)outputs/
-SRC          := $(shell find . -type f -name "*.py" | grep -v "$(EXAMPLES)" | grep -v "build" | grep -v "bin")
+SRC          := $(shell find tests/ -type f -name "*.py") setup.py $(shell find pyxstitch/ -type f -name "*.py")
 PYPIRC       := $(shell echo $$HOME)/.pypirc
 LANGS        := go c py ascii.txt
 RUNS         := zoom fonts bash completions man
-INSTALL      :=
-INSTALL_OPTS := --root="$(INSTALL)/" --optimize=1
 RUN_SH       := ./run.sh
-PACK_SH      := ./package.sh
 PYPI         := pypi-test pypi-live
+DEPS         := python3 python3-pil python3-pycodestyle python3-pydocstyle python3-pygments python3-setuptools git pydocstyle pycodestyle twine python3-docutils
 
-# groupings
-all: install check
-check: test example analyze
-example: install clean ascii raw mapping symbols kvs banner logo runs
-
-# meta
-runs: $(RUNS)
+all: test example analyze
+example: clean ascii raw mapping symbols kvs banner logo $(RUNS)
 languages: $(LANGS)
 
-install:
-	python3 setup.py install $(INSTALL_OPTS)
-
 deps:
-	apt-get install python3 \
-					python3-pil \
-					python3-pycodestyle \
-					python3-pydocstyle \
-					python3-pygments \
-					python3-setuptools \
-					git \
-					pydocstyle \
-					pycodestyle \
-					twine \
-					python3-docutils
+	apt-get install $(DEPS)
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
@@ -63,7 +42,7 @@ endif
 	python3 setup.py sdist
 
 $(PYPI): pypi-check
-	$(PACK_SH) $@
+	./package.sh $@
 
 raw:
 	cd $(EXAMPLES) && ./replay.sh
@@ -79,9 +58,9 @@ kvs:
 	$(RUN_SH) "bash" "--config tests/test.cfg" ".cfg"
 
 text:
-	cat $(EXAMPLES)/test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
+	cat $(EXAMPLES)test.txt | pyxstitch --format $(FORMAT) --output $(BIN)/text.test.$(FORMAT) --multipage off
 	$(RUN_SH) "version" "$(BIN)/text.test.$(FORMAT)"
-	diff -u $(BIN)/text.test.$(FORMAT) $(EXAMPLE_OUT)text.test.$(FORMAT)
+	diff -u $(BIN)/text.test.$(FORMAT) $(EXAMPLES)outputs/text.test.$(FORMAT)
 
 analyze:
 	pycodestyle $(SRC)
