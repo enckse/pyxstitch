@@ -8,14 +8,10 @@ LANGS        := go c py ascii.txt
 RUNS         := zoom fonts bash completions man
 RUN_SH       := ./run.sh
 PYPI         := pypi-test pypi-live
-DEPS         := python3 python3-pil python3-pycodestyle python3-pydocstyle python3-pygments python3-setuptools git pydocstyle pycodestyle twine python3-docutils
 
 all: test example analyze
 example: clean ascii raw mapping symbols kvs banner logo $(RUNS)
 languages: $(LANGS)
-
-deps:
-	apt-get install $(DEPS)
 
 $(RUNS): clean
 	$(RUN_SH) "$@"
