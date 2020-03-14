@@ -57,7 +57,7 @@ complete -F _pyxstitch pyxstitch' >> $_bash
 }
 
 _example() {
-    pyxstitch --file ${EXAMPLES}/${HW}$1 --multipage off --format ${FORMAT} --output ${BIN}/${HW}$1.${FORMAT} $2 $4 $5 $6
+    pyxstitch --file ${EXAMPLES}/${HW}$1 --lexer typoscript --multipage off --format ${FORMAT} --output ${BIN}/${HW}$1.${FORMAT} $2 $4 $5 $6
     _fail $?
 	pyxstitch --file ${BIN}/$HW$1.$FORMAT --output $BIN/$HW$1.png $2
     _fail $?
