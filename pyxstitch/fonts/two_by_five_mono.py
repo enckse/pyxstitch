@@ -460,8 +460,8 @@ class TwoByFiveMono(BaseFontFactory):
         objs['_'] = self._build_character("""
 |    |    |
 |    |    |
-|0.02|0.02|
 |    |    |
+|0.02|0.02|
 |    |    |
 """)
         objs['='] = self._build_character("""
