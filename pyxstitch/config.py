@@ -73,8 +73,8 @@ class Config(object):
         if os.path.exists(conf):
             config_input = []
             with open(conf, 'r') as f:
-                for l in f:
-                    line = l.strip()
+                for entry in f:
+                    line = entry.strip()
                     if line.startswith("#") or len(line) == 0:
                         continue
                     config_input.append(line)

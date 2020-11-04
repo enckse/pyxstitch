@@ -301,8 +301,12 @@ class CrossStitchFormatter(Formatter):
                 if not has:
                     y -= 1
         # NOTE: we draw backstitch lines LAST to prevent overwrite
-        for l in lines:
-            self._writer.line((l[0], l[1], l[2], l[3]), fill=l[4])
+        for entry in lines:
+            self._writer.line((entry[0],
+                               entry[1],
+                               entry[2],
+                               entry[3]),
+                              fill=entry[4])
         # add labels
         marked_widths = False
         for h in range(calc_height):

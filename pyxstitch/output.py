@@ -177,15 +177,15 @@ class PILFormat(Format):
 
     def _legendize(self, image, draw, position=None):
         """Create a legend on a drawing."""
-        for l in self._legends:
+        for entry in self._legends:
             if self._cfg.page_legend == 0:
                 lgd = self._new_image(0)
                 lgd_dr = ImageDraw.Draw(lgd)
                 use_pos = position
                 if use_pos is None:
-                    pos = l[0]
+                    pos = entry[0]
                     use_pos = (int(pos[0]), int(pos[1]))
-                lgd_dr.text((0, 0), l[1], l[2])
+                lgd_dr.text((0, 0), entry[1], entry[2])
                 width = self._calculate_width(0) + self._cfg.page_font_size
                 percent = (width / float(lgd.size[0]))
                 height = int((float(lgd.size[1]) * float(percent)))
@@ -195,7 +195,7 @@ class PILFormat(Format):
                 log.Log.writeln()
                 log.Log.write("legend")
                 log.Log.write("======")
-                log.Log.write(l[1])
+                log.Log.write(entry[1])
                 log.Log.writeln()
 
     def meta(self, char_meta, style, char):
