@@ -68,4 +68,11 @@ test: clean text
 clean:
 	mkdir -p $(BIN)
 	rm -f $(BIN)/*
+
+integration: setup distclean
+
+setup:
+	python setup.py install
+
+distclean:
 	rm -rf dist/
