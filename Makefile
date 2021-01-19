@@ -74,4 +74,4 @@ integration:
 	pycodestyle --version
 	pydocstyle --version
 	python setup.py install
-	rm -rf dist/
+	rm -rf dist/ build/
