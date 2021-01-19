@@ -78,4 +78,4 @@ integration:
 	pycodestyle --version
 	pydocstyle --version
 	python setup.py install
-	rm -rf dist/ build/
+	rm -rf dist/ build/ pyxstitch/pyxstitch.egg-info/
