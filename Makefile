@@ -69,10 +69,9 @@ clean:
 	mkdir -p $(BIN)
 	rm -f $(BIN)/*
 
-integration: setup distclean
-
-setup:
+integration:
+	python -c "import pygments; import PIL; import setuptools"
+	pycodestyle --version
+	pydocstyle --version
 	python setup.py install
-
-distclean:
 	rm -rf dist/
