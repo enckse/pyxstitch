@@ -38,6 +38,7 @@ endif
 	python3 setup.py sdist
 
 $(PYPI): pypi-check
+	python -c "import docutils; import twine"
 	./package.sh $@
 
 raw:
@@ -74,7 +75,7 @@ check:
 	make
 
 integration:
-	python -c "import pygments; import PIL; import setuptools; import docutils"
+	python -c "import pygments; import PIL; import setuptools"
 	pycodestyle --version
 	pydocstyle --version
 	python setup.py install
