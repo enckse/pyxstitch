@@ -74,7 +74,7 @@ check:
 	make
 
 integration:
-	python -c "import pygments; import PIL; import setuptools"
+	python -c "import pygments; import PIL; import setuptools; import docutils"
 	pycodestyle --version
 	pydocstyle --version
 	python setup.py install
