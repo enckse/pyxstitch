@@ -10,7 +10,7 @@ RUN_SH       := ./run.sh
 PYPI         := pypi-test pypi-live
 PYTHON_BIN   := python3
 
-export $(PYTHON_BIN)
+export PYTHON_BIN
 
 all: test example analyze
 example: clean ascii raw mapping symbols kvs banner logo $(RUNS)
