@@ -3,11 +3,8 @@
 """Setup for pyxstitch."""
 
 from setuptools import setup
-import os
 
 __pkg_name__ = "pyxstitch"
-with open(os.path.join(__pkg_name__, "version.py")) as v_file:
-    exec(v_file.read())
 
 long_description = ""
 with open("README.rst", 'r') as f:
