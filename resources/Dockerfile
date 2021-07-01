@@ -1,8 +1,7 @@
-FROM debian:unstable
+FROM alpine:3.14
 
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y python3 git flake8 pydocstyle pycodestyle build-essential python3-pygments python3-pil sudo
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 100
+RUN apk add --no-cache python3 git py3-pillow py3-pygments py3-pycodestyle py3-pydocstyle py3-flake8 sudo make py3-setuptools bash
+RUN ln -sf /usr/bin/python3 /usr/bin/python
 RUN mkdir /workdir
 WORKDIR /workdir
 RUN git clone git://cgit.voidedtech.com/pyxstitch
