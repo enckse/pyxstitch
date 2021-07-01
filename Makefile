@@ -7,6 +7,7 @@ PYPIRC       := $(shell echo $$HOME)/.pypirc
 LANGS        := go c py ascii.txt
 RUNS         := srcver zoom fonts bash completions man
 RUN_SH       := ./resources/build.sh
+PACK_SH      := ./resources/package.sh
 PYPI         := pypi-test pypi-live
 PYTHON_BIN   := python3
 
@@ -42,7 +43,7 @@ endif
 
 $(PYPI): pypi-check
 	$(PYTHON_BIN) -c "import docutils; import twine"
-	./package.sh $@
+	$(PACK_SH) $@
 
 raw:
 	cd $(EXAMPLES) && ./replay.sh
