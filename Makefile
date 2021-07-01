@@ -74,10 +74,6 @@ clean:
 	mkdir -p $(BIN)
 	rm -f $(BIN)/*
 
-check:
-	sudo make integration
-	make
-
 integration:
 	$(PYTHON_BIN) -c "import pygments; import PIL; import setuptools"
 	pycodestyle --version
