@@ -1,5 +1,5 @@
 #!/bin/bash
-VERS=$(grep "version=" setup.py | cut -d "=" -f 2 | sed 's/ //g;s/"//g' | sed "s#\.#\\\.#g")
+VERS=$(grep "version=" setup.py | cut -d "=" -f 2 | sed 's/,//g;s/"//g' | sed "s#\.#\\\.#g")
 BIN=bin
 FORMAT=pyxstitch
 HW="hello_world."
@@ -121,6 +121,11 @@ _zoom() {
     _fail $?
 }
 
+_source_version() {
+    cat pyxstitch/version.py | grep '^__version__ = "'$VERS'"$'
+    _fail $?
+}
+
 cmd=""
 case $1 in
     "zoom")
@@ -146,6 +151,9 @@ case $1 in
         ;;
     "man")
         cmd="_manpages"
+        ;;
+    "srcver")
+        cmd="_source_version"
         ;;
 esac
 
