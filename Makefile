@@ -8,6 +8,9 @@ LANGS        := go c py ascii.txt
 RUNS         := zoom fonts bash completions man
 RUN_SH       := ./run.sh
 PYPI         := pypi-test pypi-live
+PYTHON_BIN   := python3
+
+export $(PYTHON_BIN)
 
 all: test example analyze
 example: clean ascii raw mapping symbols kvs banner logo $(RUNS)
@@ -35,10 +38,10 @@ pypi-check:
 ifeq ($(wildcard $(PYPIRC)),)
 		$(error missing pypirc file $(PYPIRC))
 endif
-	python3 setup.py sdist
+	$(PYTHON_BIN) setup.py sdist
 
 $(PYPI): pypi-check
-	python -c "import docutils; import twine"
+	$(PYTHON_BIN) -c "import docutils; import twine"
 	./package.sh $@
 
 raw:
@@ -65,7 +68,7 @@ analyze:
 	flake8 $(SRC)
 
 test: clean text
-	python3 -m unittest $(TESTS)
+	$(PYTHON_BIN) -m unittest $(TESTS)
 
 clean:
 	mkdir -p $(BIN)
@@ -76,9 +79,9 @@ check:
 	make
 
 integration:
-	python -c "import pygments; import PIL; import setuptools"
+	$(PYTHON_BIN) -c "import pygments; import PIL; import setuptools"
 	pycodestyle --version
 	pydocstyle --version
 	flake8 --version
-	python setup.py install
+	$(PYTHON_BIN) setup.py install
 	rm -rf dist/ build/ pyxstitch/pyxstitch.egg-info/

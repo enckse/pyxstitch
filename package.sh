@@ -21,12 +21,12 @@ if [ $cnt -ne 1 ]; then
     echo "unable to find unique package: $file"
     exit 1
 fi
-python3 setup.py check -s
+$PYTHON_BIN setup.py check -s
 if [ $? -ne 0 ]; then
     echo "check failed"
     exit 1
 fi
-python3 setup.py check -s --restructuredtext
+$PYTHON_BIN setup.py check -s --restructuredtext
 if [ $? -ne 0 ]; then
     echo "rst check failed"
     exit 1
