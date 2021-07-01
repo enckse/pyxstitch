@@ -1,6 +1,5 @@
 #!/bin/bash
-VERS_PY="pyxstitch/version.py"
-VERS=$(cat $VERS_PY | grep "__version__" | cut -d "=" -f 2 | sed 's/ //g;s/"//g' | sed "s#\.#\\\.#g")
+VERS=$(grep "version=" setup.py | cut -d "=" -f 2 | sed 's/ //g;s/"//g' | sed "s#\.#\\\.#g")
 BIN=bin
 FORMAT=pyxstitch
 HW="hello_world."

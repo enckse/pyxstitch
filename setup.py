@@ -17,7 +17,7 @@ setup(
     author="Sean Enck",
     author_email="enckse@voidedtech.com",
     name=__pkg_name__,
-    version=__version__,  # noqa: F821
+    version="1.9.3",
     description='Convert source code to cross stitch patterns',
     long_description=long_description,
     url='https://cgit.voidedtech.com/pyxstitch',
