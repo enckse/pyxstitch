@@ -62,6 +62,7 @@ text:
 analyze:
 	pycodestyle $(SRC)
 	pydocstyle $(SRC)
+	flake8 $(SRC)
 
 test: clean text
 	python3 -m unittest $(TESTS)
@@ -78,5 +79,6 @@ integration:
 	python -c "import pygments; import PIL; import setuptools"
 	pycodestyle --version
 	pydocstyle --version
+	flake8 --version
 	python setup.py install
 	rm -rf dist/ build/ pyxstitch/pyxstitch.egg-info/

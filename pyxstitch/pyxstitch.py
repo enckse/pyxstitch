@@ -13,7 +13,6 @@ import pyxstitch.utils as utils
 import argparse
 import os
 import sys
-from pathlib import Path
 
 _PNG = "png"
 _RAW = out_fmt.RAW_FORMAT
@@ -266,7 +265,7 @@ def _run(args, default_font):
         try:
             lexer = guess_lexer(content)
             log.Log.write('using {} lexer'.format(lexer.name))
-        except Exception as e:
+        except Exception as e:  # noqa: F841
             log.Log.write('unable to guess a lexer...defaulting to text')
             lexer = default_lexer
     output_name = args.output

@@ -4,7 +4,6 @@ import unittest
 import pyxstitch.font as ft
 import string
 import pyxstitch.fonts.five_by_nine_mono as fbn
-import pyxstitch.fonts.three_by_seven_mono as tbs
 
 
 class MockStrip(ft.BaseFontFactory):

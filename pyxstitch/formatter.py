@@ -15,7 +15,6 @@ from pyxstitch.output import PILFormat, TextFormat, MULTI_PAGE_OFF
 from pyxstitch.config import Config
 from pyxstitch.floss import Floss
 from math import floor
-from enum import Enum
 
 
 class FormatterException(Exception):
@@ -127,8 +126,6 @@ class CrossStitchFormatter(Formatter):
                         break
                 mapping.append(p)
                 idx = idx + 1
-            from_color = mapping[0]
-            to_color = mapping[1]
             return self.floss.map(mapping[0], mapping[1])
         return False
 
@@ -250,7 +247,6 @@ class CrossStitchFormatter(Formatter):
                 if self._zoom(y, self.vzoom):
                     continue
                 x = -1
-                grid = []
                 has = False
                 for cur, style, ch in entry:
                     dmc = style.dmc

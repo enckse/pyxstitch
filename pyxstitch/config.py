@@ -98,6 +98,6 @@ class Config(object):
                            (int_val <= 0 and key in _OFFSET):
                             setattr(self, key, int_val)
                             continue
-                    except Exception as e:
+                    except Exception as e:  # noqa: F841
                         pass
             log.Log.write("invalid attribute {}".format(item))

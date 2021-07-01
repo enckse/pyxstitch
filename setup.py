@@ -2,7 +2,7 @@
 
 """Setup for pyxstitch."""
 
-from setuptools import setup, find_packages
+from setuptools import setup
 import os
 
 __pkg_name__ = "pyxstitch"
@@ -17,7 +17,7 @@ setup(
     author="Sean Enck",
     author_email="enckse@voidedtech.com",
     name=__pkg_name__,
-    version=__version__,
+    version=__version__,  # noqa: F821
     description='Convert source code to cross stitch patterns',
     long_description=long_description,
     url='https://cgit.voidedtech.com/pyxstitch',

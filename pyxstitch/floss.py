@@ -5,7 +5,6 @@ DMC floss mapping.
 Sourced from csv:
     https://github.com/adrianj/CrossStitchCreator
 """
-import math
 import pyxstitch.hex as hu
 
 

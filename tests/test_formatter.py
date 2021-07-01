@@ -39,10 +39,10 @@ class TestFormatter(unittest.TestCase):
     def test_map(self):
         """Floss mapping."""
         with self.assertRaises(fmt.FormatterException) as cm:
-            f = fmt.new_formatter("monokai",
-                                  "test",
-                                  "off",
-                                  map_colors=["abc=xyz"])
+            fmt.new_formatter("monokai",
+                              "test",
+                              "off",
+                              map_colors=["abc=xyz"])
         self.assertEqual("unable to map: abc=xyz", str(cm.exception))
 
     def test_symbols(self):
