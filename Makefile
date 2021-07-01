@@ -6,7 +6,7 @@ SRC          := $(shell find tests/ -type f -name "*.py") setup.py $(shell find 
 PYPIRC       := $(shell echo $$HOME)/.pypirc
 LANGS        := go c py ascii.txt
 RUNS         := srcver zoom fonts bash completions man
-RUN_SH       := ./run.sh
+RUN_SH       := ./resources/build.sh
 PYPI         := pypi-test pypi-live
 PYTHON_BIN   := python3
 
