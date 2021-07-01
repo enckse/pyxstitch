@@ -122,8 +122,13 @@ _zoom() {
 }
 
 _source_version() {
-    cat pyxstitch/version.py | grep '^__version__ = "'$VERS'"$'
-    _fail $?
+    local vers clean
+    vers=$(cat pyxstitch/version.py | grep '^__version__ = "' | cut -d '=' -f 2 | sed 's/ //g;s/"//g')
+    clean=$(echo $VERS | sed 's#\\##g')
+    echo "$vers == $clean (was $VERS)"
+    if [[ "$vers" != "$clean" ]]; then
+        _fail 1
+    fi
 }
 
 cmd=""
