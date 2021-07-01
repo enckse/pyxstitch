@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Tests character object definitions."""
+"""Tests utility functions."""
 import unittest
 import pyxstitch.utils as utils
 
