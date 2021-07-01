@@ -3,10 +3,8 @@ VERS=$(grep "version=" setup.py | cut -d "=" -f 2 | sed 's/ //g;s/"//g' | sed "s
 BIN=bin
 FORMAT=pyxstitch
 HW="hello_world."
-TAG=$(git tag -l | sort -r | head -n 1 | sed "s/v//g" | sed "s/\./\\./g")
 EXAMPLES=examples/
 EXAMPLE_OUT=${EXAMPLES}outputs/
-NO_TAG="na"
 RESOURCES="resources/"
 MAN1="pyxstitch.1"
 DOCMAN1="$RESOURCES$MAN1"
